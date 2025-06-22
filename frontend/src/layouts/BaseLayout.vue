@@ -1,6 +1,6 @@
 <template>
   <BaseHeader />
-  <main class="container mx-auto">
+  <main class="container mx-auto ">
     <slot />
   </main>
 </template>

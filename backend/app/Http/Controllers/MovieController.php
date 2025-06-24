@@ -4,47 +4,40 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
+use App\Http\Resources\MovieResource;
 use App\Models\Movie;
 
 class MovieController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return MovieResource::collection(Movie::all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreMovieRequest $request)
+    public function store(StoreMovieRequest $request, Movie $movie)
     {
-        //
+        $data = $request->validated();
+        $movie = Movie::create($data);
+
+        return new MovieResource($movie);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Movie $movie)
     {
-        //
+        return new MovieResource($movie);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateMovieRequest $request, Movie $movie)
     {
-        //
+        $data = $request->validated();
+        $movie->update($data);
+
+        return new MovieResource($movie);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Movie $movie)
     {
-        //
+        $movie->delete();
+        return response()->json(null, 204);
     }
 }

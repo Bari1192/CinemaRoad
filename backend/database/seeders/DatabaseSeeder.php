@@ -9,11 +9,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
-
+        $this->call(MovieSeeder::class);
         $this->call(DriveInCinemaSeeder::class);
         $this->call(ScreeningSeeder::class);
     }

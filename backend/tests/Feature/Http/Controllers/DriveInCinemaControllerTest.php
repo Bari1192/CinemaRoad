@@ -11,14 +11,14 @@ class DriveInCinemaControllerTest extends TestCase
 
     public function test_can_get_all_DriveInCinemas(): void
     {
-        $response = $this->get('/api/DriveInCinemas');
+        $response = $this->get('/api/drive_in_cinemas');
 
         $response->assertStatus(200);
     }
 
     public function test_can_create_DriveInCinema() {
 
-        $response = $this->postJson("/api/DriveInCinemas", [
+        $response = $this->postJson("/api/drive_in_cinemas", [
             "name" => "TestName",
             "location" => "TestLocation",
             "description" => "TestDescription"
@@ -35,10 +35,10 @@ class DriveInCinemaControllerTest extends TestCase
             "description" => "TestDescription"
         ];
 
-        $mockDataresponse = $this->postJson('/api/DriveInCinemas', $mockData);
+        $mockDataresponse = $this->postJson('/api/drive_in_cinemas', $mockData);
         $id = $mockDataresponse->json('data.id');
 
-        $response = $this->getJson("/api/DriveInCinemas/$id");
+        $response = $this->getJson("/api/drive_in_cinemas/$id");
 
         $response->assertStatus(200);
     }
@@ -50,7 +50,7 @@ class DriveInCinemaControllerTest extends TestCase
             "location" => "TestLocation",
             "description" => "TestDescription"
         ];
-        $mockDataresponse = $this->postJson('/api/DriveInCinemas', $mockData);
+        $mockDataresponse = $this->postJson('/api/drive_in_cinemas', $mockData);
         $id = $mockDataresponse->json('data.id');
 
 
@@ -60,7 +60,7 @@ class DriveInCinemaControllerTest extends TestCase
             "description" => "UpdatedTestDescription"
         ];
 
-        $updateResponse = $this->putJson("/api/DriveInCinemas/{$id}", $updateData);
+        $updateResponse = $this->putJson("/api/drive_in_cinemas/{$id}", $updateData);
         $updateResponse->assertStatus(200);
     }
 
@@ -72,10 +72,10 @@ class DriveInCinemaControllerTest extends TestCase
             "description" => "TestDescription"
         ];
 
-        $mockDataResponse = $this->postJson('/api/DriveInCinemas', $mockData);
+        $mockDataResponse = $this->postJson('/api/drive_in_cinemas', $mockData);
         $id = $mockDataResponse->json('data.id');
 
-        $response = $this->deleteJson("/api/DriveInCinemas/{$id}");
+        $response = $this->deleteJson("/api/drive_in_cinemas/{$id}");
 
         $response->assertStatus(204);
     }

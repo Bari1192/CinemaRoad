@@ -4,9 +4,8 @@ namespace Tests\Unit\Models;
 
 use App\Models\DriveInCinema;
 use App\Models\Screening;
-use PHPUnit\Framework\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-
+use Tests\TestCase;
 
 class DriveInCinemaTest extends TestCase
 {
@@ -23,7 +22,7 @@ class DriveInCinemaTest extends TestCase
         
         $screening = Screening::create([
             'movie_id'         => 1,
-            'DriveInCinema_id' => $cinema->id,
+            'drive_in_cinema_id' => $cinema->id,
             'start_time'       => "2025-06-24 18:00:00"
         ]);
         $this->assertEquals($cinema->id, $screening->DriveInCinema->id);
@@ -32,7 +31,7 @@ class DriveInCinemaTest extends TestCase
     public function it_uses_the_correct_table_name(): void
     {
         $DriveInCinema = new DriveInCinema;
-        $this->assertSame('DriveInCinemas', $DriveInCinema->getTable());
+        $this->assertSame('drive_in_cinemas', $DriveInCinema->getTable());
     }
 
     public function it_has_fillable_attributes(): void

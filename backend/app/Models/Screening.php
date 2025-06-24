@@ -13,19 +13,20 @@ class Screening extends Model
 
     protected $fillable = [
         "movie_id",
-        "DriveInCinema_id",
+        "drive_in_cinema_id",
         "start_time"
     ];
 
     public $timestamps = false;
-
     public $table = "screenings";
 
-    // public function movie():BelongsTo {
-    //     return $this->belongsTo(Movie::class);
-    // }
+    public function movie(): BelongsTo
+    {
+        return $this->belongsTo(Movie::class);
+    }
 
-    public function DriveInCinema():BelongsTo {
-        return $this->belongsTo(DriveInCinema::class, "DriveInCinema_id");
+    public function DriveInCinema(): BelongsTo
+    {
+        return $this->belongsTo(DriveInCinema::class, "drive_in_cinema_id");
     }
 }

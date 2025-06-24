@@ -6,25 +6,17 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateScreeningRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
-        return [
-            "movie_id" => ["required", "integer", "min:0", "exists:movies,id"],
-            "DriveInCinema_id" => ["required", "integer", "min:0", "exists:DriveInCinemas,id"],
-            "start_time" => ["required", "date"],
+      return [
+            'movie_id' => ['integer', 'exists:movies,id'],
+            'drive_in_cinema_id' => ['integer', 'exists:drive_in_cinemas,id'],
+            'start_time' => ['required', 'date_format:Y-m-d H:i:s'],
         ];
     }
 }

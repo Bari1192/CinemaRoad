@@ -5,7 +5,7 @@ namespace Tests\Unit\Models;
 use App\Models\Movie;
 use App\Models\Screening;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class MovieTest extends TestCase
 {
@@ -35,7 +35,7 @@ class MovieTest extends TestCase
 
         $screening = Screening::create([
             'movie_id' => $movie->id,
-            'DriveInCinema_id' => 1,
+            'drive_in_cinema_id' => 1,
             'start_time' => "2025-06-24 18:00:00",
             'end_time' => "2025-06-24 20:00:00",
         ]);
@@ -51,7 +51,7 @@ class MovieTest extends TestCase
         ]);
         $screening = Screening::create([
             'movie_id' => $movie->id,
-            'DriveInCinema_id' => 1,
+            'drive_in_cinema_id' => 1,
             'start_time' => "2025-06-25 10:00:00",
             'end_time' => "2025-06-25 12:00:00",
         ]);

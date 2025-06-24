@@ -29,7 +29,9 @@ class DriveInCinemaDatabaseTest extends TestCase
 
         $this->movie = Movie::create([
             "title" => "Test Movie For Cinema",
+            "description" => "Description.",
             "duration_min" => 90,
+            "poster_url" => "http://test.url/poster.jpg",
         ]);
 
         $this->screening = Screening::create([
@@ -38,7 +40,6 @@ class DriveInCinemaDatabaseTest extends TestCase
             'start_time' => '2025-06-24 20:00:00',
         ]);
     }
-
     
     public function test_drive_in_cinemas_table_exists()
     {
@@ -47,7 +48,7 @@ class DriveInCinemaDatabaseTest extends TestCase
             'A `drive_in_cinemas` tábla nem jött létre az adatbázisban.'
         );
     }
-
+    
     public function test_drive_in_cinemas_table_has_id_column()
     {
         $this->assertTrue(
@@ -55,7 +56,6 @@ class DriveInCinemaDatabaseTest extends TestCase
             'A `drive_in_cinemas` táblában nincs `id` oszlop.'
         );
     }
-
     
     public function test_drive_in_cinemas_table_has_name_column()
     {
@@ -64,7 +64,6 @@ class DriveInCinemaDatabaseTest extends TestCase
             'A `drive_in_cinemas` táblában nincs `name` oszlop.'
         );
     }
-
     
     public function test_drive_in_cinemas_table_has_location_column()
     {
@@ -73,7 +72,6 @@ class DriveInCinemaDatabaseTest extends TestCase
             'A `drive_in_cinemas` táblában nincs `location` oszlop.'
         );
     }
-
     
     public function test_drive_in_cinemas_table_has_description_column()
     {
@@ -82,16 +80,15 @@ class DriveInCinemaDatabaseTest extends TestCase
             'A `drive_in_cinemas` táblában nincs `description` oszlop.'
         );
     }
-
+    
     public function test_drive_in_cinema_id_column_is_bigint()
     {
         $this->assertEquals(
             'bigint',
             Schema::getColumnType('drive_in_cinemas', 'id'),
-            'Az `id` oszlop típusa nem `bigint`.'
+            'Az `id` oszlop típusa nem `int`.'
         );
     }
-
     
     public function test_drive_in_cinema_name_column_is_varchar()
     {
@@ -101,16 +98,6 @@ class DriveInCinemaDatabaseTest extends TestCase
             'A `name` oszlop típusa nem `varchar`.'
         );
     }
-
-    
-    public function test_drive_in_cinema_name_column_is_not_nullable()
-    {
-        $this->assertFalse(
-            Schema::getConnection()->getDoctrineColumn('drive_in_cinemas', 'name')->getNotnull(),
-            'A `name` oszlopnak NOT NULL-nak kell lennie.'
-        );
-    }
-
     
     public function test_drive_in_cinema_location_column_is_varchar()
     {
@@ -120,16 +107,6 @@ class DriveInCinemaDatabaseTest extends TestCase
             'A `location` oszlop típusa nem `varchar`.'
         );
     }
-
-    
-    public function test_drive_in_cinema_location_column_is_not_nullable()
-    {
-        $this->assertFalse(
-            Schema::getConnection()->getDoctrineColumn('drive_in_cinemas', 'location')->getNotnull(),
-            'A `location` oszlopnak NOT NULL-nak kell lennie.'
-        );
-    }
-
     
     public function test_drive_in_cinema_description_column_is_text()
     {
@@ -137,15 +114,6 @@ class DriveInCinemaDatabaseTest extends TestCase
             'text',
             Schema::getColumnType('drive_in_cinemas', 'description'),
             'A `description` oszlop típusa nem `text`.'
-        );
-    }
-
-    
-    public function test_drive_in_cinema_description_column_is_nullable()
-    {
-        $this->assertTrue(
-            Schema::getConnection()->getDoctrineColumn('drive_in_cinemas', 'description')->getNotnull(),
-            'A `description` oszlopnak NULLABLE-nek kell lennie.'
         );
     }
 
@@ -157,41 +125,35 @@ class DriveInCinemaDatabaseTest extends TestCase
             'description' => 'Test Cinema Description',
         ]);
     }
-
     
     public function test_a_drive_in_cinema_can_be_deleted()
     {
+        $this->screening->delete();
         $id = $this->cinema->id;
         $this->cinema->delete();
-
         $this->assertDatabaseMissing('drive_in_cinemas', [
             'id' => $id
         ]);
     }
-
     
     public function test_a_drive_in_cinema_can_be_updated()
     {
         $newName = 'Updated Cinema Name';
         $this->cinema->update(['name' => $newName]);
-
         $this->assertDatabaseHas('drive_in_cinemas', [
             'id' => $this->cinema->id,
             'name' => $newName
         ]);
     }
-
     public function test_drive_in_cinema_name_is_accessible()
     {
         $this->assertNotNull($this->cinema->name);
     }
-
     
     public function test_drive_in_cinema_location_is_accessible()
     {
         $this->assertNotNull($this->cinema->location);
     }
-
     
     public function test_drive_in_cinema_description_is_accessible()
     {

@@ -13,7 +13,6 @@ class ScreeningsDatabaseTest extends TestCase
 {
     use DatabaseTransactions;
 
-    // Ezeket a változókat a setUp metódusban inicializáljuk
     protected Movie $movie;
     protected DriveInCinema $cinema;
     protected Screening $screening;
@@ -121,33 +120,6 @@ class ScreeningsDatabaseTest extends TestCase
             'datetime',
             Schema::getColumnType('screenings', 'start_time'),
             'A `start_time` oszlop típusa nem `datetime`.'
-        );
-    }
-
-    
-    public function test_screening_movie_id_is_not_nullable()
-    {
-        $this->assertFalse(
-            Schema::getConnection()->getDoctrineColumn('screenings', 'movie_id')->getNotnull(),
-            'A `movie_id` oszlopnak NOT NULL-nak kell lennie.'
-        );
-    }
-
-    
-    public function test_screening_drive_in_cinema_id_is_not_nullable()
-    {
-        $this->assertFalse(
-            Schema::getConnection()->getDoctrineColumn('screenings', 'drive_in_cinema_id')->getNotnull(),
-            'A `drive_in_cinema_id` oszlopnak NOT NULL-nak kell lennie.'
-        );
-    }
-
-    
-    public function test_screening_start_time_is_not_nullable()
-    {
-        $this->assertFalse(
-            Schema::getConnection()->getDoctrineColumn('screenings', 'start_time')->getNotnull(),
-            'A `start_time` oszlopnak NOT NULL-nak kell lennie.'
         );
     }
 

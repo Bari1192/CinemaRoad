@@ -12,7 +12,7 @@ class DriveInCinemaSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table("DriveInCinemas")->insert([
+        DB::table("drive_in_cinemas")->insert([
             [
                 "name" => "Starfield Autósmozi",
                 "location" => "Budapest, Kőbányai út 45",

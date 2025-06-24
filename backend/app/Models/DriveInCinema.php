@@ -18,13 +18,13 @@ class DriveInCinema extends Model
 
     public $timestamps = false;
 
-    public $table = "DriveInCinemas";
+    public $table = "drive_in_cinemas";
 
     public function screenings():HasMany {
         return $this->hasMany(Screening::class);
     }
 
-    public function parkingSpots():HasMany {
-        return $this->hasMany(Parkingspot::class);
-    }
+    // public function parkingSpots():HasMany {
+    //     return $this->hasMany(Parkingspot::class);
+    // }
 }

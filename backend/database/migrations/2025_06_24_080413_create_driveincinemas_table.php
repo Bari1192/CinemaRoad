@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('screenings', function (Blueprint $table) {
+        Schema::create('driveincinemas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("movie_id");
-            $table->foreignId("driveincinema_id");
-            $table->dateTime("start_time");
+            $table->string("name", 100);
+            $table->string("location", 100);
+            $table->text("description");
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('screenings');
+        Schema::dropIfExists('driveincinemas');
     }
 };

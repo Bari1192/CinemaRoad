@@ -6,7 +6,6 @@ use App\Http\Requests\StoreScreeningRequest;
 use App\Http\Requests\UpdateScreeningRequest;
 use App\Http\Resources\ScreeningResource;
 use App\Models\Screening;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
@@ -17,7 +16,7 @@ class ScreeningController extends Controller
      */
     public function index():JsonResource
     {
-        $data = Screening::all();
+        $data = Screening::with(["driveinCinema"])->get();
 
         return ScreeningResource::collection($data);
     }
@@ -39,9 +38,7 @@ class ScreeningController extends Controller
      */
     public function show(Screening $screening):JsonResource
     {
-        $data = Screening::findOrFail($screening->id);
-
-        return new ScreeningResource($data);
+        return new ScreeningResource($screening->load("driveinCinema"));
     }
 
     /**

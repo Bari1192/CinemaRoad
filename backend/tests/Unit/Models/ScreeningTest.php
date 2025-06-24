@@ -1,8 +1,9 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Models;
 
 use App\Models\DriveInCinema;
+use App\Models\Movie;
 use App\Models\Screening;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use PHPUnit\Framework\TestCase;

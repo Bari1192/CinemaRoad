@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Models\Driveincinema;
+use App\Models\DriveInCinema;
 use App\Models\Screening;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use PHPUnit\Framework\TestCase;
@@ -15,7 +15,7 @@ class ScreeningTest extends TestCase
     {
         $mockScreening = new Screening([
             "movie_id" => 2,
-            "driveincinema_id" => 2,
+            "DriveInCinema_id" => 2,
             "start_time" => "2025-06-23 16:00:00"
         ]);
 
@@ -33,7 +33,7 @@ class ScreeningTest extends TestCase
 
         $screening = new Screening([
             "movie_id" => 2,
-            "driveincinema_id" => 2,
+            "DriveInCinema_id" => 2,
             "start_time" => "2025-06-23 16:00:00"
         ]);
 
@@ -43,19 +43,19 @@ class ScreeningTest extends TestCase
 
     public function test_screening_belongs_to_drivein_cinema()
     {
-        $cinema = new DriveinCinema([
-            "name" => "TestDriveinCinemaName",
-            "location" => "TestDriveinCinemaLocation",
-            "description" => "TestDriveinCinemaDescription"
+        $cinema = new DriveInCinema([
+            "name" => "TestDriveInCinemaName",
+            "location" => "TestDriveInCinemaLocation",
+            "description" => "TestDriveInCinemaDescription"
         ]);
 
         $screening = new Screening([
             "movie_id" => 2,
-            "driveincinema_id" => 2,
+            "DriveInCinema_id" => 2,
             "start_time" => "2025-06-23 16:00:00"
         ]);
 
-        $this->assertInstanceOf(Driveincinema::class, $screening->driveinCinema);
-        $this->assertEquals($cinema->id, $screening->driveinCinema->id);
+        $this->assertInstanceOf(DriveInCinema::class, $screening->DriveInCinema);
+        $this->assertEquals($cinema->id, $screening->DriveInCinema->id);
     }
 }

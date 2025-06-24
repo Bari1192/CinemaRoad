@@ -1,16 +1,14 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Http\Controllers;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
-class ScreeningApiTest extends TestCase
+class ScreeningControllerTest extends TestCase
 {
     use DatabaseTransactions;
-    /**
-     * A basic feature test example.
-     */
+
     public function test_can_get_all_screening(): void
     {
         $response = $this->get('/api/screenings');
@@ -22,7 +20,7 @@ class ScreeningApiTest extends TestCase
 
         $response = $this->postJson("/api/screenings", [
             'movie_id' => 2,
-            'driveincinema_id' => 2,
+            'DriveInCinema_id' => 2,
             'start_time' => "2025-06-24 18:00:00"
         ]);
 
@@ -33,7 +31,7 @@ class ScreeningApiTest extends TestCase
 
         $mockData = [
             "movie_id" => 2,
-            "driveincinema_id" => 2,
+            "DriveInCinema_id" => 2,
             "start_time" => "2025-06-23 16:00:00",
         ];
         $mockDataresponse = $this->postJson('/api/screenings', $mockData);
@@ -48,7 +46,7 @@ class ScreeningApiTest extends TestCase
 
         $mockData = [
             "movie_id" => 2,
-            "driveincinema_id" => 2,
+            "DriveInCinema_id" => 2,
             "start_time" => "2025-06-23 16:00:00",
         ];
         $mockDataresponse = $this->postJson('/api/screenings', $mockData);
@@ -57,7 +55,7 @@ class ScreeningApiTest extends TestCase
 
         $updateData = [
             "movie_id" => 2,
-            "driveincinema_id" => 2,
+            "DriveInCinema_id" => 2,
             "start_time" => "2025-06-23 17:00:00"
         ];
 
@@ -69,7 +67,7 @@ class ScreeningApiTest extends TestCase
 
         $mockData = [
             "movie_id" => 2,
-            "driveincinema_id" => 2,
+            "DriveInCinema_id" => 2,
             "start_time" => "2025-06-23 16:00:00",
         ];
         $mockDataResponse = $this->postJson('/api/screenings', $mockData);

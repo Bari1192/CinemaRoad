@@ -17,9 +17,9 @@ class ScreeningResource extends JsonResource
         return [
             "id" => $this->id,
             "movie_id"=>$this->movie_id,
-            "driveincinema_id"=>$this->driveincinema_id,
+            "DriveInCinema_id"=>$this->DriveInCinema_id,
             "start_time"=>$this->start_time,
-            "drivein_cinema" => new DriveinCinemaResource($this->whenLoaded("driveinCinema"))
+            "drivein_cinema" => new DriveInCinemaResource($this->whenLoaded("DriveInCinema"))
         ];
     }
 }

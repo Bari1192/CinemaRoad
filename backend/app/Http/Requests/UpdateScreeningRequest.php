@@ -23,7 +23,7 @@ class UpdateScreeningRequest extends FormRequest
     {
         return [
             "movie_id" => ["required", "integer", "min:0", "exists:movies,id"],
-            "driveincinema_id" => ["required", "integer", "min:0", "exists:driveincinemas,id"],
+            "DriveInCinema_id" => ["required", "integer", "min:0", "exists:DriveInCinemas,id"],
             "start_time" => ["required", "date"],
         ];
     }

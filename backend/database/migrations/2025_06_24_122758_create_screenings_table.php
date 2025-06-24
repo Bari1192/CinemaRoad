@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('screenings', function (Blueprint $table) {
             $table->id();
             $table->foreignId("movie_id");
-            $table->foreignId("driveincinema_id")->constrained();
+            $table->foreignId("DriveInCinema_id")->constrained();
             $table->dateTime("start_time");
         });
     }

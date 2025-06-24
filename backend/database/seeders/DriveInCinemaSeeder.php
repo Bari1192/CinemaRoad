@@ -5,14 +5,14 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class DriveincinemaSeeder extends Seeder
+class DriveInCinemaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table("driveincinemas")->insert([
+        DB::table("DriveInCinemas")->insert([
             [
                 "name" => "Starfield Autósmozi",
                 "location" => "Budapest, Kőbányai út 45",

@@ -2,7 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\Driveincinema;
+use App\Models\DriveInCinema;
+use App\Models\Movie;
 use App\Models\Screening;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Schema;
@@ -22,7 +23,7 @@ class ScreeningsDatabaseTest extends TestCase
         $expected = [
             'id',
             'movie_id',
-            'driveincinema_id',
+            'DriveInCinema_id',
             'start_time',
         ];
 
@@ -43,7 +44,7 @@ class ScreeningsDatabaseTest extends TestCase
             "posterUrl" => "TestPosterUrl"
         ]);
 
-        $cinema = new Driveincinema([
+        $cinema = new DriveInCinema([
             "name" => "TestName",
             "location" => "TestLocation",
             "description" => "TestDescription"
@@ -51,13 +52,13 @@ class ScreeningsDatabaseTest extends TestCase
 
         $screening = new Screening([
             'movie_id' => $movie->id,
-            'driveincinema_id' => $cinema->id,
+            'DriveInCinema_id' => $cinema->id,
             'start_time' => '2025-06-24 20:00:00',
         ]);
 
         $this->assertDatabaseHas('screenings', [
             'movie_id' => $movie->id,
-            'driveincinema_id' => $cinema->id,
+            'DriveInCinema_id' => $cinema->id,
             'start_time' => '2025-06-24 20:00:00',
         ]);
     }
@@ -66,7 +67,7 @@ class ScreeningsDatabaseTest extends TestCase
     {
         $screening = new Screening([
             'movie_id' => $movie->id,
-            'driveincinema_id' => $cinema->id,
+            'DriveInCinema_id' => $cinema->id,
             'start_time' => '2025-06-24 20:00:00',
         ]);
 
@@ -81,12 +82,12 @@ class ScreeningsDatabaseTest extends TestCase
     {
         $screening = new Screening([
             'movie_id' => $movie->id,
-            'driveincinema_id' => $cinema->id,
+            'DriveInCinema_id' => $cinema->id,
             'start_time' => '2025-06-24 20:00:00',
         ]);
 
         $this->assertNotNull($screening->movie_id);
-        $this->assertNotNull($screening->driveincinema_id);
+        $this->assertNotNull($screening->DriveInCinema_id);
         $this->assertNotNull($screening->start_time);
     }
 }

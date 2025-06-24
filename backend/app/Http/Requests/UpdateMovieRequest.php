@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreDriveincinemaRequest extends FormRequest
+class UpdateMovieRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,9 +22,7 @@ class StoreDriveincinemaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => ["required", "string", "min:5"],
-            "location" => ["required", "string", "max:100"],
-            "description" => ["required", "string"],
+            //
         ];
     }
 }

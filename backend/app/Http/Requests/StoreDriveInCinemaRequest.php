@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreScreeningRequest extends FormRequest
+class StoreDriveInCinemaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,9 @@ class StoreScreeningRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "movie_id" => ["required", "integer", "min:0", "exists:movies,id"],
-            "DriveInCinema_id" => ["required", "integer", "min:0", "exists:DriveInCinemas,id"],
-            "start_time" => ["required", "date"],
+            "name" => ["required", "string", "min:5"],
+            "location" => ["required", "string", "max:100"],
+            "description" => ["required", "string"],
         ];
     }
 }

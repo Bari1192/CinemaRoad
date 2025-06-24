@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\DriveinCinemaController;
+use App\Http\Controllers\DriveInCinemaController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,7 +13,7 @@ class Screening extends Model
 
     protected $fillable = [
         "movie_id",
-        "driveincinema_id",
+        "DriveInCinema_id",
         "start_time"
     ];
 
@@ -25,7 +25,7 @@ class Screening extends Model
     //     return $this->belongsTo(Movie::class);
     // }
 
-    public function driveinCinema():BelongsTo {
-        return $this->belongsTo(DriveinCinema::class, "driveincinema_id");
+    public function DriveInCinema():BelongsTo {
+        return $this->belongsTo(DriveInCinema::class, "DriveInCinema_id");
     }
 }

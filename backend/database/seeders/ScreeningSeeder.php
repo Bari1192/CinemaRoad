@@ -16,7 +16,7 @@ class ScreeningSeeder extends Seeder
         DB::table("screenings")->insert([
             [
                 "movie_id" => 1,
-                "driveincinema_id" => 1,
+                "DriveInCinema_id" => 1,
                 "start_time" => "2025-06-23 16:30:00"
             ]
         ]);

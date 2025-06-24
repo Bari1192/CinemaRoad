@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class DriveinCinemaSeeder extends Seeder
+class DriveincinemaSeeder extends Seeder
 {
     /**
      * Run the database seeds.

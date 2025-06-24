@@ -4,45 +4,34 @@ namespace Tests\Feature;
 
 use App\Models\Driveincinema;
 use App\Models\Screening;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
-class ScreeningsDatabaseTest extends TestCase
+class DriveincinemaDatabaseTest extends TestCase
 {
-    use DatabaseTransactions;
-
-    public function test_screenings_table_exists()
+    public function test_driveincinemas_table_exists()
     {
-        $this->assertTrue(Schema::hasTable('screenings'));
+        $this->assertTrue(Schema::hasTable('driveincinemas'));
     }
 
-    public function test_screenings_table_has_expected_columns()
+    public function test_driveincinemas_table_has_expected_columns()
     {
         $expected = [
-            'id',
-            'movie_id',
-            'driveincinema_id',
-            'start_time',
+            'name',
+            'location',
+            'description',
         ];
 
         foreach ($expected as $column) {
             $this->assertTrue(
-                Schema::hasColumn('screenings', $column),
+                Schema::hasColumn('driveincinemas', $column),
                 "Missing column: {$column}"
             );
         }
     }
-    
-    public function test_screening_is_saved_to_database()
-    {
-        $movie = new Movie([
-            "title" => "TestTitle",
-            "description" => "TestDescription",
-            "duration_min" => 90,
-            "posterUrl" => "TestPosterUrl"
-        ]);
 
+    public function test_driveincinema_is_saved_to_database()
+    {
         $cinema = new Driveincinema([
             "name" => "TestName",
             "location" => "TestLocation",
@@ -62,7 +51,7 @@ class ScreeningsDatabaseTest extends TestCase
         ]);
     }
 
-    public function test_screening_can_be_deleted()
+    public function test_driveincinema_can_be_deleted()
     {
         $screening = new Screening([
             'movie_id' => $movie->id,
@@ -77,16 +66,16 @@ class ScreeningsDatabaseTest extends TestCase
         ]);
     }
 
-    public function test_screening_all_fields_not_null()
+    public function test_driveincinemas_all_fields_not_null()
     {
-        $screening = new Screening([
-            'movie_id' => $movie->id,
-            'driveincinema_id' => $cinema->id,
-            'start_time' => '2025-06-24 20:00:00',
+        $driveinCinema = new Driveincinema([
+            "name" => "TestName",
+            "location" => "TestLocation",
+            "description" => "TestDescription"
         ]);
 
-        $this->assertNotNull($screening->movie_id);
-        $this->assertNotNull($screening->driveincinema_id);
-        $this->assertNotNull($screening->start_time);
+        $this->assertNotNull($driveinCinema->name);
+        $this->assertNotNull($driveinCinema->location);
+        $this->assertNotNull($driveinCinema->description);
     }
 }

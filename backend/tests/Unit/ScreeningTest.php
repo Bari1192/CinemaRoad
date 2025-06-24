@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Models\Driveincinema;
 use App\Models\Screening;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use PHPUnit\Framework\TestCase;
@@ -54,7 +55,7 @@ class ScreeningTest extends TestCase
             "start_time" => "2025-06-23 16:00:00"
         ]);
 
-        $this->assertInstanceOf(DriveinCinema::class, $screening->driveinCinema);
+        $this->assertInstanceOf(Driveincinema::class, $screening->driveinCinema);
         $this->assertEquals($cinema->id, $screening->driveinCinema->id);
     }
 }

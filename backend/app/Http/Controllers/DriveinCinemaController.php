@@ -2,68 +2,67 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreDriveinCinemaRequest;
-use App\Http\Requests\UpdateDriveinCinemaRequest;
-use App\Http\Resources\DriveinCinemaResource;
-use App\Models\DriveinCinema;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreDriveincinemaRequest;
+use App\Http\Requests\UpdateDriveincinemaRequest;
+use App\Http\Resources\DriveincinemaResource;
+use App\Models\Driveincinema;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
-class DriveinCinemaController extends Controller
+class DriveincinemaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index():JsonResource
     {
-        $data = DriveinCinema::all();
+        $data = Driveincinema::all();
 
-        return DriveinCinemaResource::collection($data);
+        return DriveincinemaResource::collection($data);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDriveinCinemaRequest $request)
+    public function store(StoreDriveincinemaRequest $request)
     {
         $data = $request->validated();
 
-        $newData = DriveinCinema::create($data);
+        $newData = Driveincinema::create($data);
 
-        return new DriveinCinemaResource($newData);
+        return new DriveincinemaResource($newData);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(DriveinCinema $driveincinema):JsonResource
+    public function show(Driveincinema $driveincinema):JsonResource
     {
-        $data = DriveinCinema::findOrFail($driveincinema->id);
+        $data = Driveincinema::findOrFail($driveincinema->id);
 
-        return new DriveinCinemaResource($data);
+        return new DriveincinemaResource($data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDriveinCinemaRequest $request, DriveinCinema $driveincinema)
+    public function update(UpdateDriveincinemaRequest $request, Driveincinema $driveincinema)
     {
         $newData = $request->validated();
 
-        $data = DriveinCinema::findOrFail($driveincinema->id);
+        $data = Driveincinema::findOrFail($driveincinema->id);
 
         $data->update($newData);
 
-        return new DriveinCinemaResource($data);
+        return new DriveincinemaResource($data);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DriveinCinema $driveincinema):Response
+    public function destroy(Driveincinema $driveincinema):Response
     {
-        $data = DriveinCinema::findOrFail($driveincinema->id);
+        $data = Driveincinema::findOrFail($driveincinema->id);
 
         return ($data->delete()) ? response()->noContent() : abort(500);
     }

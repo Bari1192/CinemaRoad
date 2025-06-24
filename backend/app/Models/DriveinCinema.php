@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class DriveinCinema extends Model
+class Driveincinema extends Model
 {
     use HasFactory;
 
@@ -22,5 +22,9 @@ class DriveinCinema extends Model
 
     public function screenings():HasMany {
         return $this->hasMany(Screening::class);
+    }
+
+    public function parkingSpots():HasMany {
+        return $this->hasMany(Parkingspot::class);
     }
 }

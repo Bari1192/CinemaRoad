@@ -1,0 +1,52 @@
+.card {
+  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.custom-scrollbar-family::-webkit-scrollbar,
+.custom-scrollbar-action::-webkit-scrollbar,
+.custom-scrollbar-horror::-webkit-scrollbar {
+  height: 16px;
+  background: #334155;
+  border-radius: 10px;
+}
+
+/* Adott néző/kor-csoportokhoz a színek */
+/* Családi */
+.custom-scrollbar-family::-webkit-scrollbar-thumb {
+  background: rgb(210, 210, 9);
+  border-radius: 10px;
+}
+
+.custom-scrollbar-family::-webkit-scrollbar-thumb:hover {
+  background: rgb(183, 183, 5);
+  cursor: pointer;
+}
+
+/* Akció */
+.custom-scrollbar-action::-webkit-scrollbar-thumb {
+  background: #d2d1d1;
+  border-radius: 10px;
+}
+
+.custom-scrollbar-action::-webkit-scrollbar-thumb:hover {
+  background: #a2a1a1;
+  cursor: pointer;
+}
+
+/* Horror */
+.custom-scrollbar-horror::-webkit-scrollbar-thumb {
+  background: #db2727;
+  border-radius: 10px;
+}
+
+.custom-scrollbar-horror::-webkit-scrollbar-thumb:hover {
+  background: #af0b0b;
+  cursor: pointer;
+}

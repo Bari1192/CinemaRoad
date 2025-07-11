@@ -48,7 +48,6 @@ import BaseFooter from "@components/layout/BaseFooter.vue";
 </script>
 
 <style>
-@import url('../assets/css/MainPage.css');
 
 .card {
   position: relative;

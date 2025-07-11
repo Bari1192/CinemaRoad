@@ -2,18 +2,16 @@
     <footer class="bg-gray-900 text-gray-300 py-10">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                <!-- Oszlop 1: Logó és rövid leírás -->
                 <div class="col-span-1">
-                    <h3 class="text-6xl text-pink-500 mb-4 tracking-wider"
-                              style="font-family: 'Cookie','Arial','Times New Roman', Times, serif;">Cinema Road</h3>
+                    <h3 class="text-6xl text-pink-500 mb-4 text-center lg:text-start tracking-wider"
+                        style="font-family: 'Cookie','Arial','Times New Roman', Times, serif;">Cinema Road</h3>
                     <p class="text-sm leading-relaxed text-justify">
                         Éld át a klasszikus drive-in mozi élményét modern technológiával!
                         A legjobb filmek, a legnagyobb vászon, a saját autód kényelméből.
                     </p>
                 </div>
 
-                <!-- Oszlop 2: Gyorslinkek -->
-                <div class="col-span-1 w-1/2 mx-auto">
+                <div class="col-span-1 w-full lg:w-1/2 mx-auto">
                     <h4 class="text-xl font-semibold text-white mb-4">Gyorslinkek</h4>
                     <ul>
                         <li class="mb-2">
@@ -34,7 +32,6 @@
                     </ul>
                 </div>
 
-                <!-- Oszlop 3: Elérhetőségek -->
                 <div class="col-span-1">
                     <h4 class="text-xl font-semibold text-white mb-4">Elérhetőségek</h4>
                     <p class="mb-2">
@@ -51,7 +48,6 @@
                     </p>
                 </div>
 
-                <!-- Oszlop 4: Közösségi média és hírlevél -->
                 <div class="col-span-1">
                     <h4 class="text-xl font-semibold text-white mb-4">Kövess Minket!</h4>
                     <div class="flex space-x-4 mb-6">
@@ -68,20 +64,21 @@
                             <i class="fab fa-youtube text-2xl"></i>
                         </a>
                     </div>
-                    <!-- Hírlevél feliratkozás (opcionális) -->
-                    <h4 class="text-xl font-semibold text-white mb-3">Hírlevél</h4>
-                    <form class="flex">
-                        <input type="email" placeholder="E-mail címed"
-                            class="flex-grow p-2 rounded-l-md bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-pink-500" />
-                        <button type="submit"
-                            class="bg-pink-600 hover:bg-pink-700 text-white p-2 rounded-r-md transition-colors duration-200">
-                            Feliratkozom
-                        </button>
-                    </form>
+
+                    <div class="mt-6 mb-4 lg:my-2">
+                        <h4 class="text-xl font-semibold text-white mb-3">Feliratkozás</h4>
+                        <form class="flex">
+                            <input type="email" placeholder="E-mail címed"
+                                class="flex-grow p-2 rounded-l-md bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-pink-500" />
+                            <button type="submit"
+                                class="bg-pink-600 hover:bg-pink-700 text-white p-2 rounded-r-md transition-colors duration-200">
+                                Feliratkozom
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
 
-            <!-- Copyright rész -->
             <div class="border-t border-gray-700 mt-10 pt-8 text-center text-gray-500 text-sm">
                 &copy; {{ currentYear }} Cinema Road. Minden jog fenntartva.
             </div>

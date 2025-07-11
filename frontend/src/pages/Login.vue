@@ -18,8 +18,14 @@
                 </div>
 
                 <div class="w-full md:w-1/2 mx-auto">
-                    <FormKit type="password" name="password" label="Jelszó" label-class="text-xl"
-                    input-class="rounded-lg p-2 w-full" />
+                    <FormKit
+                        type="password"
+                        name="password"
+                        label="Jelszó"
+                        label-class="text-xl"
+                        input-class="rounded-lg p-2 w-full"
+                        validation="alpha"
+                        />
 
                     <RouterLink :to="'/Registration'">
                         Még nem regisztrált? Kattintson ide!

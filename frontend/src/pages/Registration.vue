@@ -13,6 +13,7 @@
                 label="Teljes Név"
                 label-class="text-xl"
                 input-class="rounded-lg p-2 w-full"
+                validation="alpha"
               />
             </div>
             <div class="w-full md:w-1/2">
@@ -22,6 +23,7 @@
                 label="E-mail"
                 label-class="text-xl"
                 input-class="rounded-lg p-2 w-full"
+                validation="email"
               />
             </div>
           </div>

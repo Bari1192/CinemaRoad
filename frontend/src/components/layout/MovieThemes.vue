@@ -1,9 +1,7 @@
 <template>
-    <div class="container mx-auto w-full my-12 p-8 bg-slate-900 rounded-lg shadow-xl">
-        <h2 class="text-5xl text-white font-bold mb-8 text-center">Családi filmek</h2>
+    <div class="mx-auto w-full max-w-[1980px] my-12 p-8 bg-slate-900 rounded-lg shadow-xl mb-20">
+        <h2 class="text-5xl text-white font-bold mb-8 text-start">Családi filmek</h2>
         <div class="flex overflow-x-auto -mx-4 px-4 custom-scrollbar-family pb-8">
-            <!-- Ide jöhetnek a családi filmek kártyái, a már meglévő .card stílussal -->
-            <!-- Példa kártya -->
             <div
                 class="card overflow-hidden relative flex-shrink-0 m-2 gap-2 flex justify-center items-center w-[300px] border-4 border-yellow-400">
                 <img src="https://media.posterstore.com/site_images/67a5dd135d8e0ac409209fac_WB0101-8.jpg?auto=compress%2Cformat&fit=max&w=3840"
@@ -64,8 +62,8 @@
         </div>
     </div>
 
-    <div class="container mx-auto w-full my-12 p-8 bg-slate-900 rounded-lg shadow-xl">
-        <h2 class="text-5xl text-white font-bold mb-8 text-center">Akciófilmek</h2>
+    <div class="mx-auto w-full max-w-[1980px] my-12 p-8 bg-slate-900 rounded-lg shadow-xl mb-20">
+        <h2 class="text-5xl font-bold mb-8 text-start ml-6 text-slate-200 uppercase">Akciófilmek</h2>
         <div class="flex overflow-x-auto pb-8 -mx- px-4 custom-scrollbar-action">
              
             <!-- 1. -->
@@ -122,13 +120,23 @@
                     class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-700 via-slate-900/95 to-transparent p-4 text-white text-xl font-semibold tracking-wide">
                     Mission: Impossible – A végső leszámolás 2. rész</span>
             </div>
+
+
+             <!-- 7 -->
+            <div
+                class="card overflow-hidden relative flex-shrink-0 m-2 gap-2 flex justify-center items-center w-[300px] border-4 border-slate-400">
+                <img src="https://dp8ij3ml0f16h.cloudfront.net/s3_files/styles/facebook/s3/film/plakat/halalos_iramban_hobbs_shaw_intl_pl_hun_m.jpg.webp?itok=F01ohnrI"
+                    class="h-[400px] w-full object-cover" alt="Film plakát">
+                <span
+                    class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-700 via-slate-900/95 to-transparent p-4 text-white text-xl font-semibold tracking-wide">
+                    Halálos Iramban</span>
+            </div>
         </div>
-        
     </div>
     
 
-   <div class="container mx-auto w-full my-12 p-8 bg-slate-900 rounded-lg shadow-xl">
-        <h2 class="text-5xl text-white font-bold mb-8 text-center">Horror</h2>
+    <div class="mx-auto w-full max-w-[1980px] my-12 p-8 bg-slate-900 rounded-lg shadow-xl mb-20">
+        <h2 class="text-5xl text-white font-bold mb-8 text-start ml-6">Horror</h2>
         <div class="flex overflow-x-auto pb-8 -mx- px-4 custom-scrollbar-horror">
              
              <div
@@ -150,6 +158,14 @@
             </div>
              <div
                 class="card overflow-hidden relative flex-shrink-0 m-2 gap-2 flex justify-center items-center w-[300px] border-4 border-red-800">
+                <img src="https://www.mafab.hu/static/2017/248/15/279655_1504704859.7754.jpg"
+                    class="h-[400px] w-full object-cover" alt="Film plakát">
+                <span
+                    class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-red-800/75 via-slate-900/95 to-transparent p-4 text-white text-xl font-semibold tracking-wide">
+                    AZ</span>
+            </div>
+             <div
+                class="card overflow-hidden relative flex-shrink-0 m-2 gap-2 flex justify-center items-center w-[300px] border-4 border-red-800">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBHhj4F8R6vG5nH2Rd3Dhp5gcg4rgQEE2pIw&s"
                     class="h-[400px] w-full object-cover" alt="Film plakát">
                 <span
@@ -163,6 +179,14 @@
                 <span
                     class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-red-800/75 via-slate-900/95 to-transparent p-4 text-white text-xl font-semibold tracking-wide">
                     Krampus</span>
+            </div>
+             <div
+                class="card overflow-hidden relative flex-shrink-0 m-2 gap-2 flex justify-center items-center w-[300px] border-4 border-red-800">
+                <img src="https://i.ytimg.com/vi/cBlQiIEm7SY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDsspgDmVUGo6eBSS7gmskR2cOFIQ"
+                    class="h-[400px] w-full object-cover" alt="Film plakát">
+                <span
+                    class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-red-800/75 via-slate-900/95 to-transparent p-4 text-white text-xl font-semibold tracking-wide">
+                    Az Ördögűző</span>
             </div>
              <div
                 class="card overflow-hidden relative flex-shrink-0 m-2 gap-2 flex justify-center items-center w-[300px] border-4 border-red-800">

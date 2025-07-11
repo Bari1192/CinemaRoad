@@ -16,8 +16,8 @@
 
             <div
               class="w-full h-full text-center items-center min-h-[400px] flex justify-center mx-auto font-extrabold text-3xl text-white bg-slate-500">
-              SZÖVEG HELYE</div>
-
+              [Jobb kép] AI kép autóból kitekintés Mozivászon irányába. Popcorn evés, férfi + nő. nézőpont a hátuk mögül.</div>
+              [Bal szöveg] "Retro élmény, modern környezet"
             <div
               class="w-full text-center items-center mx-auto min-h-[400px] flex justify-center font-extrabold text-3xl text-white bg-pink-800">
               <img
@@ -32,9 +32,7 @@
     </div>
 
 
-    <MovieThemes />
-
-    <Calendar  class="mb-36"/>
+    <MovieThemes class="my-32" />
 
   </div>
 
@@ -43,7 +41,6 @@
 
 <script setup>
 import BaseHeader from "@components/layout/BaseHeader.vue";
-import Calendar from "@components/layout/Calendar.vue";
 import MovieThemes from "@components/layout/MovieThemes.vue";
 import ClickBanner from "@components/layout/ClickBanner.vue";
 import MovieSlides from "@components/layout/MovieSlides.vue";

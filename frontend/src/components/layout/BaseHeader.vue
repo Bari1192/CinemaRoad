@@ -12,26 +12,22 @@
         </svg>
       </button>
       <div class="w-full md:block md:w-auto" :class="{ hidden: !menuOpen }">
-        <ul class="flex flex-col p-4 md:flex-row md:p-0 md:space-x-8 tracking-wide" style="font-family: 'Noto Serif';">
+        <ul class="flex flex-col p-4 md:flex-row md:p-0 md:space-x-8 tracking-wide" style="font-family: 'Cookie','Arial','Times New Roman', Times, serif;">
           <li
-            class="md:text-xl block py-2 px-3 text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-500 has-[.active]:hover:text-white tracking-wide">
-            <RouterLink to="#">Aloldal_1</RouterLink>
+            class="md:text-3xl block py-2 px-3 text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-600 has-[.active]:hover:text-white tracking-wide">
+            <RouterLink to="#">Special Week</RouterLink>
           </li>
           <li
-            class="md:text-xl block py-2 px-3 text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-500 has-[.active]:hover:text-white tracking-wide">
-            <RouterLink to="#">Aloldal_2</RouterLink>
+            class="md:text-3xl block py-2 px-3 text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-600 has-[.active]:hover:text-white tracking-wide">
+            <RouterLink to="#">Jegyfoglalás</RouterLink>
           </li>
           <li
-            class="md:text-xl block py-2 px-3 text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-500 has-[.active]:hover:text-white tracking-wide">
-            <RouterLink to="#">Aloldal_3</RouterLink>
+            class="md:text-3xl block py-2 px-3 text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-600 has-[.active]:hover:text-white tracking-wide">
+            <RouterLink to="#">Helyszínek</RouterLink>
           </li>
           <li
-            class="md:text-xl block py-2 px-3 text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-500 has-[.active]:hover:text-white tracking-wide">
-            <RouterLink to="#">Aloldal_4</RouterLink>
-          </li>
-          <li
-            class="md:text-xl block py-2 px-3 text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-500 has-[.active]:hover:text-white tracking-wide">
-            <RouterLink to="#">Aloldal_5</RouterLink>
+            class="md:text-3xl block py-2 px-3 text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-600 has-[.active]:hover:text-white tracking-wide">
+            <RouterLink to="/Login">Bejelentkezés</RouterLink>
           </li>
         </ul>
       </div>

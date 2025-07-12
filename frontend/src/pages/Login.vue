@@ -24,7 +24,6 @@
                         label="Jelszó"
                         label-class="text-xl"
                         input-class="rounded-lg p-2 w-full"
-                        validation="alpha"
                         />
 
                     <RouterLink :to="'/Registration'">

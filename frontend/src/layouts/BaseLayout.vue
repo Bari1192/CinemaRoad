@@ -3,12 +3,11 @@
   <main class="container mx-auto ">
     <slot />
   </main>
+  <BaseFooter/>
 </template>
-<script>
+
+<script setup>
 import BaseHeader from '@components/layout/BaseHeader.vue'
-export default {
-  components: {
-    BaseHeader
-  }
-}
+import BaseFooter from '@components/layout/BaseFooter.vue';
+
 </script>

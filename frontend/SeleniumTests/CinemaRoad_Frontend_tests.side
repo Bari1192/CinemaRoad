@@ -1,0 +1,533 @@
+{
+  "id": "3d3a6918-894a-4312-a947-8afcd960e5bf",
+  "version": "3.0",
+  "name": "Cinema Road",
+  "url": "http://www.google.com",
+  "urls": [
+    "http://www.google.com"
+  ],
+  "plugins": [],
+  "suites": [
+    {
+      "id": "715e3032-01d9-45c4-a8cf-46f3a737152a",
+      "name": "MainPage_Tests",
+      "parallel": false,
+      "persistSession": false,
+      "tests": [
+        "2a459913-99fc-4bf1-9130-ce197b0b5502",
+        "18bb064a-801d-4282-af06-74d81b77a5f6",
+        "c5e78e2b-f799-4212-9c29-488ce8c0a44f"
+      ],
+      "timeout": 30000
+    },
+    {
+      "id": "4a4e0519-276e-46f5-82bc-dd553b71fe82",
+      "name": "Footer_Tests",
+      "persistSession": false,
+      "parallel": false,
+      "tests": [],
+      "timeout": 30000
+    },
+    {
+      "id": "a21506cc-cd81-46f4-8409-1da326bec7fa",
+      "name": "MoviePage_Tests",
+      "persistSession": false,
+      "parallel": false,
+      "tests": [
+        "38e47ec8-aaf7-45e1-8f31-8853fd3f7118",
+        "7b04635a-7579-41d8-acba-307e2610c7f8",
+        "b9039ff7-8cd0-4c8d-b238-07d3989409a8",
+        "b59e92ce-f600-4346-9d78-6dc04b25e65b",
+        "cdd327f7-b3b2-4bba-b78c-ef15c51b6c18",
+        "4cb0aa4d-0315-4461-93b9-e358d07864d1",
+        "8fc05b7e-19d8-4532-ab41-d79629c6a5c6",
+        "7e22eddc-e993-490c-90bc-e14184db055c",
+        "65354e60-dec3-494c-b3f1-7eee01fcb184",
+        "67d55bbf-cd46-423e-a0f6-db9a95d5d45e"
+      ],
+      "timeout": 30000
+    }
+  ],
+  "tests": [
+    {
+      "id": "2a459913-99fc-4bf1-9130-ce197b0b5502",
+      "name": "01.Can_Open_MainPage_And_See_Core_Sections",
+      "commands": [
+        {
+          "id": "c23f8da1-88a0-4e19-b98a-67a5fb623e61",
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "comment": "A főoldal betöltésére kísérletet tesz a http://frontend.vm1.test/ címen. "
+        },
+        {
+          "command": "pause",
+          "target": "3000",
+          "value": "",
+          "id": "1cbb8d03-9f19-4a8f-bc11-c5e519b5e055",
+          "comment": "Várakoztatás, amíg az oldal elemei betöltődnek."
+        },
+        {
+          "command": "verifyElementPresent",
+          "target": "css=body",
+          "value": "",
+          "id": "db1a520f-6a0b-4647-862a-d3283dedd061",
+          "comment": " Ellenőrizve lesz, hogy a <main> blokkelem elérhetővé válik a DOM-ban."
+        },
+        {
+          "command": "pause",
+          "target": "1000",
+          "value": "",
+          "comment": "Rövid várakozás, hogy a vizsgálat biztosan teljesüljön.",
+          "id": "f15a4f93-cb05-4b1d-a711-2bbf23e73a56"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "09307b2c-e8fe-4018-898b-3ef73e08d28f",
+          "comment": "A böngésző bezárásra kerül. "
+        }
+      ]
+    },
+    {
+      "id": "18bb064a-801d-4282-af06-74d81b77a5f6",
+      "name": "02.Can_Find_BaseHeader_Component",
+      "commands": [
+        {
+          "id": "2f6cee1e-146a-49b6-a946-a808b415ef59",
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": ""
+        },
+        {
+          "command": "pause",
+          "target": "3000",
+          "value": "",
+          "id": "135632b5-a9a2-49fe-86bb-add08f93d695",
+          "comment": "Várakoztatás, amíg az oldal elemei betöltődnek."
+        },
+        {
+          "command": "verifyElementPresent",
+          "target": "css=nav",
+          "value": "",
+          "id": "eb9ff848-4efa-413c-9426-bb9586cb6b13",
+          "comment": "Ellenőrizve lesz, hogy a <body> blokkelem elérhetővé válik a DOM-ban."
+        },
+        {
+          "command": "pause",
+          "target": "1000",
+          "value": "",
+          "comment": "Rövid várakozás, hogy a vizsgálat biztosan teljesüljön. ",
+          "id": "82a5cbcb-0369-487a-a481-64507b5c5476"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "3633adbf-8554-4a15-90b3-f82eb7123348",
+          "comment": "A böngésző bezárásra kerül. "
+        }
+      ]
+    },
+    {
+      "id": "c5e78e2b-f799-4212-9c29-488ce8c0a44f",
+      "name": "03.Can_Find_BaseFooter_Component",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "8c2a571e-8c98-4774-9a1a-9c5c6fe898b3"
+        },
+        {
+          "command": "pause",
+          "target": "3000",
+          "value": "",
+          "comment": "Várakoztatás, amíg az oldal elemei betöltődnek.",
+          "id": "c439b81d-f1c7-4a08-9ee6-ec666860282a"
+        },
+        {
+          "command": "verifyElementPresent",
+          "target": "css=footer",
+          "value": "",
+          "comment": " Ellenőrizve lesz, hogy a BaseFooter komponens létezik az oldalon.",
+          "id": "767c68d0-b369-4ff1-81ae-e35f47fb6d91"
+        },
+        {
+          "command": "pause",
+          "target": "1000",
+          "value": "",
+          "comment": "Rövid várakozás, hogy a vizsgálat biztosan teljesüljön. ",
+          "id": "4266cdf7-3bb3-4485-beee-a6b3f35b7a34"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "comment": "A böngésző bezárásra kerül. ",
+          "id": "aa867bd6-94db-49c1-99e1-f4570ba84c7d"
+        }
+      ]
+    },
+    {
+      "id": "38e47ec8-aaf7-45e1-8f31-8853fd3f7118",
+      "name": "01.Open_FilmDetail_Page",
+      "commands": [
+        {
+          "id": "37ba673c-655c-419c-a991-2518a2e78a0c",
+          "command": "open",
+          "target": "http://frontend.vm1.test/movies/movie",
+          "value": ""
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=body",
+          "value": "3000",
+          "id": "2c55f7ad-5f95-47a1-afb5-3582860afdd9",
+          "comment": ""
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=body",
+          "value": "",
+          "id": "d197f389-d3cf-4069-8b8f-922d98a94087"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "7f25bc5d-59e9-4366-b94e-28ed658c172f"
+        }
+      ]
+    },
+    {
+      "id": "7b04635a-7579-41d8-acba-307e2610c7f8",
+      "name": "02.Verify_Film_Image_Displayed",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/movies/movie",
+          "value": "",
+          "id": "06c01a58-c3d1-4a2d-97b0-461d8c9f423d"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=img",
+          "value": "3000",
+          "comment": "",
+          "id": "361463cc-5821-485a-9455-52ecd69f8a03"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=img",
+          "value": "",
+          "id": "a9fb756a-a2cf-4249-bf58-04f581ee515d"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "f26bed79-24cf-45f6-b825-e2affd23ab78"
+        }
+      ]
+    },
+    {
+      "id": "b9039ff7-8cd0-4c8d-b238-07d3989409a8",
+      "name": "03.Verify_Main_Title_Displayed",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/movies/movie",
+          "value": "",
+          "id": "733ee9fd-efbc-4d8f-9a14-9c1d4ff7f9b0"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=h1.text-pink-500",
+          "value": "2000",
+          "comment": "",
+          "id": "530a7c4e-91cc-4c74-910f-e43f5746a7ed"
+        },
+        {
+          "command": "assertText",
+          "target": "css=h1.text-pink-500",
+          "value": "A Cinema Road Bemutatja",
+          "id": "15dbec39-7042-4222-a938-a6fb1ed4eb0d",
+          "comment": "Ellenőrizni, hogy a főcím, \"A Cinema Road Bemutatja\" látható, a megfelelő helyen."
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "20549204-109f-4ef5-8341-8fce2541e0b6"
+        }
+      ]
+    },
+    {
+      "id": "b59e92ce-f600-4346-9d78-6dc04b25e65b",
+      "name": "04.Verify_Subtitle_Displayed",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/movies/movie",
+          "value": "",
+          "id": "088f49cb-3484-4a68-87c2-609860f34041"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=h2.w-5\\\\/6",
+          "value": "2000",
+          "comment": "",
+          "id": "c3278135-286a-4927-9af1-59616194dcc6"
+        },
+        {
+          "command": "assertText",
+          "target": "css=h2.w-5\\\\/6",
+          "value": "Itt vagyok, de hol vagyok?!",
+          "comment": " Ellenőrizni, hogy az alcím (h2), „Itt vagyok, de hol vagyok?!” megjelenik a megfelelő helyen.",
+          "id": "7e0f295d-68b7-44ef-9cd0-978e93ab8e59"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "bbcaf52f-6a45-478c-9856-61a2650ad9b2"
+        }
+      ]
+    },
+    {
+      "id": "cdd327f7-b3b2-4bba-b78c-ef15c51b6c18",
+      "name": "05.Verify_Detail_Labels_Displayed",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/movies/movie",
+          "value": "",
+          "id": "baf815da-0f0d-4e14-b45f-847d60410613"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=div.text-pink-500.uppercase",
+          "value": "2000",
+          "comment": "",
+          "id": "3acde448-a57c-4669-9966-fce4cbe95eb0"
+        },
+        {
+          "command": "assertText",
+          "target": "xpath=(//div[contains(@class,'text-pink-500') and contains(@class,'uppercase')])[1]",
+          "value": "KÉSZÜLT",
+          "comment": "",
+          "id": "c5a6a926-a862-427c-a7e3-1d0ca56069d4"
+        },
+        {
+          "command": "assertText",
+          "target": "xpath=(//div[contains(@class,'text-pink-500') and contains(@class,'uppercase')])[2]",
+          "value": "TÍPUS",
+          "comment": "",
+          "id": "84065f36-e4b0-4694-8854-8ef7e2164812"
+        },
+        {
+          "command": "assertText",
+          "target": "xpath=(//div[contains(@class,'text-pink-500') and contains(@class,'uppercase')])[3]",
+          "value": "RENDEZŐ",
+          "comment": "",
+          "id": "3ab3f886-8b76-40f3-9003-2dad51a25912"
+        },
+        {
+          "command": "assertText",
+          "target": "xpath=(//div[contains(@class,'text-pink-500') and contains(@class,'uppercase')])[4]",
+          "value": "JÁTÉKIDŐ",
+          "comment": "",
+          "id": "1adc9965-9d60-478e-91be-8d3045ee41b2"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "81030033-a3a7-4874-ac14-ce1f8b4a87d9"
+        }
+      ]
+    },
+    {
+      "id": "4cb0aa4d-0315-4461-93b9-e358d07864d1",
+      "name": "06.Verify_Detail_Values_Displayed",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/movies/movie",
+          "value": "",
+          "id": "c0be679f-0fd3-4fcf-8aa6-471e2fe5f5c9"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "xpath=(//div[contains(@class,'font-semibold')])[1]",
+          "value": "2000",
+          "comment": "",
+          "id": "0c8b9be7-9e56-4e9c-9944-2fbc70d181ac"
+        },
+        {
+          "command": "assertText",
+          "target": "xpath=(//div[contains(@class,'font-semibold')])[1]",
+          "value": "2025",
+          "comment": "",
+          "id": "bc9dc5f6-db70-4f99-9ee4-ee9915be079f"
+        },
+        {
+          "command": "assertText",
+          "target": "xpath=(//div[contains(@class,'font-semibold')])[2]",
+          "value": "Dráma",
+          "comment": "",
+          "id": "cedf930b-b13e-492f-b3c8-1863051e492a"
+        },
+        {
+          "command": "assertText",
+          "target": "xpath=(//div[contains(@class,'font-semibold')])[3]",
+          "value": "Kovács Anna",
+          "comment": "",
+          "id": "da8f2bc6-3e31-481c-9452-41e7b862d5a4"
+        },
+        {
+          "command": "assertText",
+          "target": "xpath=(//div[contains(@class,'font-semibold')])[4]",
+          "value": "120 perc",
+          "comment": "",
+          "id": "525744da-6580-46b2-bc81-f4f37fc47280"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "73bd67e5-d358-446a-adca-83b9f42331ab"
+        }
+      ]
+    },
+    {
+      "id": "8fc05b7e-19d8-4532-ab41-d79629c6a5c6",
+      "name": "07.Verify_Cast_Label_Displayed",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/movies/movie",
+          "value": "",
+          "id": "66f66867-1371-4e08-83a9-6b53098954be"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "xpath=//div[contains(text(),'Szereplők')]",
+          "value": "2000",
+          "id": "0245be47-1456-42c4-b355-659eda540ae5"
+        },
+        {
+          "command": "assertText",
+          "target": "xpath=//div[contains(text(),'Szereplők')]",
+          "value": "SZEREPLŐK",
+          "id": "8c6ef03d-cc07-4c87-a20f-e914a47cbf5b"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "a669069b-62a3-43ba-b296-92ccdde72b4d"
+        }
+      ]
+    },
+    {
+      "id": "65354e60-dec3-494c-b3f1-7eee01fcb184",
+      "name": "09.Verify_Description_Label_Displayed",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/movies/movie",
+          "value": "",
+          "id": "369f036d-996b-45ff-923f-22fd1b2693b1"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "xpath=//div[contains(text(),'Rövid leírás')]",
+          "value": "2000",
+          "id": "c6524f11-5e58-4b0d-8151-0e8cb953dd10"
+        },
+        {
+          "command": "assertText",
+          "target": "xpath=//div[contains(text(),'Rövid leírás')]",
+          "value": "RÖVID LEÍRÁS",
+          "id": "6f9391ac-4c6a-4905-aa28-41e1862d68bf"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "1f5009c2-6bdb-496b-bd7e-896621e83980"
+        }
+      ]
+    },
+    {
+      "id": "7e22eddc-e993-490c-90bc-e14184db055c",
+      "name": "08.Verify_Cast_List_Displayed",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/movies/movie",
+          "value": "",
+          "id": "97801191-ae99-4a71-991d-d74a834ffe25"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "xpath=(//div[contains(@class,'text-pink-50') and contains(@class,'italic')])[1]",
+          "value": "2000",
+          "id": "2dc2af4a-6a71-442e-a41c-cbe385a11a4a"
+        },
+        {
+          "command": "assertText",
+          "target": "xpath=(//div[contains(@class,'text-pink-50') and contains(@class,'italic')])[1]",
+          "value": "Nagy Péter, Kiss Liza, Tóth Márton",
+          "id": "53c81431-0892-447a-ae28-1677aa379ab3"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "229f6454-65c0-4b65-9b71-ba1bbecdc4da"
+        }
+      ]
+    },
+    {
+      "id": "67d55bbf-cd46-423e-a0f6-db9a95d5d45e",
+      "name": "10.Verify_Description_Text_Displayed",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/movies/movie",
+          "value": "",
+          "id": "c395b6f5-273c-447e-add5-594761f76e3f"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "xpath=(//div[contains(@class,'font-semibold') and contains(@class,'text-pink-50') and contains(@class,'leading-5')])[1]",
+          "value": "2000",
+          "id": "43da1bb8-9877-4727-b489-d10e0561aaad"
+        },
+        {
+          "command": "assertText",
+          "target": "xpath=(//div[contains(@class,'font-semibold') and contains(@class,'text-pink-50') and contains(@class,'leading-5')])[1]",
+          "value": "Egy rövid filmleírás, ahol a főszereplők váratlan utazásra indulnak az ismeretlenbe. Reális és átérezhető történet a bizonytalanságról és önkeresésről.",
+          "id": "667b0d84-98ee-4770-aa1c-8dcb2ff51b47"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "b1898fb9-b067-44ef-82db-cdf734e7ef8a"
+        }
+      ]
+    }
+  ],
+  "snapshot": {
+    "dependencies": {},
+    "tests": [],
+    "jest": {
+      "extraGlobals": []
+    }
+  }
+}

@@ -9,7 +9,7 @@ export const useDriveInCinemaStore = defineStore("driveInCinemas", () => {
 
   async function getDriveInCinemas(params = {}) {
     try {
-      const { data } = await http.get("/driveInCinemas", { params });
+      const { data } = await http.get("/drive_in_cinemas", { params });
       driveInCinemas.value = data;
     } catch (err) {
       console.error("Hiba az autók lekérdezésekor", err);
@@ -19,7 +19,7 @@ export const useDriveInCinemaStore = defineStore("driveInCinemas", () => {
 
   async function getDriveInCinema(id) {
     try {
-      const { data } = await http.get(`/driveInCinemas/${id}`);
+      const { data } = await http.get(`/drive_in_cinemas/${id}`);
       driveInCinema.value = data;
     } catch (err) {
       console.error("Hiba az autó lekérdezésekor", err);
@@ -29,7 +29,7 @@ export const useDriveInCinemaStore = defineStore("driveInCinemas", () => {
 
   async function createDriveInCinema(data) {
     try {
-      await http.post("/driveInCinemas", data);
+      await http.post("/drive_in_cinemas", data);
       driveInCinemas.value.push(data);
       return driveInCinema;
     } catch (err) {
@@ -40,7 +40,7 @@ export const useDriveInCinemaStore = defineStore("driveInCinemas", () => {
 
   async function updateDriveInCinema(id, data) {
     try {
-      await http.put(`/driveInCinemas/${id}`, data);
+      await http.put(`/drive_in_cinemas/${id}`, data);
       const idx = driveInCinemas.value.findIndex((c) => c.id === id);
       if (idx !== -1) driveInCinemas.value[idx] = data;
       if (driveInCinema.value?.id === id) driveInCinema.value = data;
@@ -53,7 +53,7 @@ export const useDriveInCinemaStore = defineStore("driveInCinemas", () => {
 
   async function deleteDriveInCinema(id) {
     try {
-      await http.delete(`/driveInCinemas/${id}`);
+      await http.delete(`/drive_in_cinemas/${id}`);
       driveInCinemas.value = driveInCinemas.value.filter((c) => c.id !== id);
       if (driveInCinema.value?.id === id) driveInCinema.value = null;
     } catch (err) {

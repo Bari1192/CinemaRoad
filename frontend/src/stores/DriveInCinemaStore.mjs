@@ -2,27 +2,26 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 import { http } from "@utils/http.mjs";
 
-
 export const useDriveInCinemaStore = defineStore("driveInCinemas", () => {
   const driveInCinemas = ref([]);
   const driveInCinema = ref(null);
 
-  async function getDriveInCinemas(params = {}) {
+  async function getDriveInCinemas() {
     try {
-      const { data } = await http.get("/drive_in_cinemas", { params });
-      driveInCinemas.value = data;
+      const resp = await http.get("/drive_in_cinemas");
+      driveInCinemas.value = resp.data.data;
     } catch (err) {
-      console.error("Hiba az autók lekérdezésekor", err);
+      console.error("Hiba az autósmozi lekérdezésekor", err);
       throw err;
     }
   }
 
   async function getDriveInCinema(id) {
     try {
-      const { data } = await http.get(`/drive_in_cinemas/${id}`);
-      driveInCinema.value = data;
+      const resp = await http.get(`/drive_in_cinemas/${id}`);
+      driveInCinema.value = resp.data.data;
     } catch (err) {
-      console.error("Hiba az autó lekérdezésekor", err);
+      console.error("Hiba az autósmozi lekérdezésekor", err);
       throw err;
     }
   }
@@ -33,7 +32,7 @@ export const useDriveInCinemaStore = defineStore("driveInCinemas", () => {
       driveInCinemas.value.push(data);
       return driveInCinema;
     } catch (err) {
-      console.error("Hiba az autó létrehozásakor", err);
+      console.error("Hiba az autósmozi létrehozásakor", err);
       throw err;
     }
   }
@@ -46,7 +45,7 @@ export const useDriveInCinemaStore = defineStore("driveInCinemas", () => {
       if (driveInCinema.value?.id === id) driveInCinema.value = data;
       return data;
     } catch (err) {
-      console.error("Hiba az autó frissítésekor", err);
+      console.error("Hiba az autósmozi frissítésekor", err);
       throw err;
     }
   }
@@ -57,7 +56,7 @@ export const useDriveInCinemaStore = defineStore("driveInCinemas", () => {
       driveInCinemas.value = driveInCinemas.value.filter((c) => c.id !== id);
       if (driveInCinema.value?.id === id) driveInCinema.value = null;
     } catch (err) {
-      console.error("Hiba az autó törlésekor", err);
+      console.error("Hiba az autósmozi törlésekor", err);
       throw err;
     }
   }

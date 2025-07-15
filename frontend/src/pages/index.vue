@@ -16,8 +16,7 @@ import BaseCard from "@components/layout/BaseCard.vue";
     <div class="container mx-auto w-full h-full">
 
       <div
-        class="card mx-auto w-full lg:w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-center gap-6 lg:gap-12">
-
+        class="card mx-auto px-6 lg:px-0 w-full lg:w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-center gap-6 md:gap-8 lg:gap-6 xl:gap-10">
         <BaseCard :title="'Autós üldözés'" :type="'action'"
           :description="'Lélegzetelállító kocsis üldözések, menekülés és adrenalin—csak a legbátrabbaknak.'"
           :src="'https://d32qys9a6wm9no.cloudfront.net/images/movies/poster/d6/20249e4b290423cd14d4fbb932faa88a_500x735.jpg?t=1725823421'"

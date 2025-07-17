@@ -1,5 +1,6 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 
 const movies = ref([
   { imageUrl: 'https://ocdn.eu/images/pulscms/ZjE7MDA_/f875191280dab9906f44e247ebae3dca.jpeg', title: 'A galaxis őrzői vol. 3' },
@@ -12,8 +13,13 @@ let autoplayInterval = null;
 const autoplayDelay = 4000;
 let direction = 1;
 
+const isPrevDisabled = computed(() => activeIndex.value === 0);
+const isNextDisabled = computed(() => activeIndex.value === movies.value.length - 1);
 
 const nextSlide = () => {
+  if (activeIndex.value == 3) {
+    return;
+  }
   activeIndex.value += direction;
   if (activeIndex.value >= movies.value.length - 1) {
     activeIndex.value = movies.value.length - 1;
@@ -33,6 +39,11 @@ const goToSlide = (index) => {
   activeIndex.value = index;
   if (activeIndex.value === movies.value.length - 1) direction = -1;
   else if (activeIndex.value === 0) direction = 1;
+  stopAutoplay();
+  
+  setTimeout(() => {
+    startAutoplay()
+  }, 8000);
 };
 
 const startAutoplay = () => {
@@ -82,32 +93,36 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <button @click="prevSlide" class="carousel-control-btn absolute left-4 top-1/2 -translate-y-1/2 rounded-full hover:bg-opacity-75 transition-all duration-300 z-10 
+    <button @click="!isPrevDisabled && prevSlide()" class="carousel-control-btn absolute left-4 top-1/2 -translate-y-1/2 rounded-full hover:bg-opacity-75 transition-all duration-300 z-10 
       bg-gray-800 border-2 border-gray-900 shadow-md shadow-gray-900/55 text-white
       p-1.5 bg-opacity-90 
       md:p-1.5 md:bg-opacity-80 
       lg:p-2.5
       xl:p-3
-      hidden lg:block">
+      hidden lg:block" :class="{ 'opacity-40 pointer-events-none cursor-not-allowed': isPrevDisabled }">
+
       <svg class="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12" fill="none" stroke="currentColor"
         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
       </svg>
     </button>
 
-    <button @click="nextSlide" class="carousel-control-btn absolute right-4 top-1/2 -translate-y-1/2 bg-gray-800 text-white rounded-full hover:bg-opacity-75 transition-all duration-300 z-10
+    <button @click="!isNextDisabled && nextSlide()" class="carousel-control-btn absolute right-4 top-1/2 -translate-y-1/2
+     bg-gray-800 text-white rounded-full hover:bg-opacity-75 transition-all duration-300 z-10 
+      border-2 border-gray-900 shadow-md shadow-gray-900/55 
       p-1.5 bg-opacity-90 
       md:p-1.5 md:bg-opacity-80 
       lg:p-2.5
       xl:p-3
-      hidden lg:block">
+      hidden lg:block" :class="{ 'opacity-40 pointer-events-none cursor-not-allowed': isNextDisabled }">
       <svg class="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12" fill="none" stroke="currentColor"
         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
       </svg>
     </button>
 
-    <div class="lg:hidden carousel-indicators absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-2 z-10 bg-gray-400/70 rounded-lg p-1">
+    <div
+      class="lg:hidden carousel-indicators absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-2 z-10 bg-gray-400/70 rounded-lg p-1">
       <button v-for="(movie, index) in movies" :key="'indicator-' + index" @click="goToSlide(index)"
         :class="['w-4 h-4 rounded-full bg-gray-400 border border-white/25 shadow-sm shadow-black/50 hover:bg-pink-100 transition-colors duration-300', { 'bg-pink-500': index === activeIndex }]"></button>
     </div>

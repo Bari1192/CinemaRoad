@@ -18,8 +18,6 @@ import RetroCTA from "@components/layout/RetroCTA.vue";
 
     <RetroCTA />
 
-
-
     <MovieThemes class="my-32" />
 
   </div>

@@ -15,24 +15,27 @@ import BaseCard from "@components/layout/BaseCard.vue";
 
     <div class="container mx-auto w-full h-full">
 
+
       <div
         class="card mx-auto px-6 lg:px-0 w-full lg:w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-center gap-6 md:gap-8 lg:gap-6 xl:gap-10">
-        <BaseCard :title="'Autós üldözés'" :type="'action'"
-          :description="'Lélegzetelállító kocsis üldözések, menekülés és adrenalin—csak a legbátrabbaknak.'"
-          :src="'https://d32qys9a6wm9no.cloudfront.net/images/movies/poster/d6/20249e4b290423cd14d4fbb932faa88a_500x735.jpg?t=1725823421'"
-          :alt="'Autós üldözés'" />
+        <BaseCard :title="'Steel Horizon'" :type="'action'"
+          :description="'Lélegzetelállító harci jelenetek, robbanások, hősök és egy mindenre elszánt harcos.'"
+          :src="'src/assets/img/action.png'" :alt="'Autós üldözés'" />
+
         <BaseCard :title="'Autós üldözés'" :type="'family'"
-          :description="'Lélegzetelállító kocsis üldözések, menekülés és adrenalin—csak a legbátrabbaknak.'"
-          :src="'https://d32qys9a6wm9no.cloudfront.net/images/movies/poster/d6/20249e4b290423cd14d4fbb932faa88a_500x735.jpg?t=1725823421'"
-          :alt="'Autós üldözés'" />
-        <BaseCard :title="'Autós üldözés'" :type="'family'"
-          :description="'Lélegzetelállító kocsis üldözések, menekülés és adrenalin—csak a legbátrabbaknak.'"
-          :src="'https://d32qys9a6wm9no.cloudfront.net/images/movies/poster/d6/20249e4b290423cd14d4fbb932faa88a_500x735.jpg?t=1725823421'"
-          :alt="'Autós üldözés'" />
-        <BaseCard :title="'Autós üldözés'" :type="'horror'"
-          :description="'Lélegzetelállító kocsis üldözések, menekülés és adrenalin—csak a legbátrabbaknak.'"
-          :src="'https://d32qys9a6wm9no.cloudfront.net/images/movies/poster/d6/20249e4b290423cd14d4fbb932faa88a_500x735.jpg?t=1725823421'"
-          :alt="'Autós üldözés'" />
+          :description="'A természet lágy ölén a gondtalan gyermekek új kalandra hívnak a varázslatos elemek világába!'"
+          :src="'src/assets/img/family.png'"
+          :alt="'The Magical Meadow'" />
+        
+        <BaseCard :title="'A nevetés főútján'" :type="'comedy'"
+          :description="'Egészestés vígjáték a 90-es évek mindennapjaiból, melyek napjainkra is kihatással vannak.'"
+          :src="'src/assets/img/comedy.png'"
+          :alt="'Egészestés vígjáték - A nevetés főútján'" />
+        
+          <BaseCard :title="'Baljós árnyak'" :type="'horror'"
+          :description="'A sötétség magányában csak magadra számíthatsz. A hangok a fejedből, vagy az éj lepléből szállnak?'"
+          :src="'src/assets/img/horror.png'"
+          :alt="'Baljós árnyak - horrofilm, kizárólag felnőtteknek.'" />
       </div>
 
       <h1 class="text-6xl my-10 text-white">Welcome banner</h1>
@@ -77,5 +80,4 @@ import BaseCard from "@components/layout/BaseCard.vue";
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 </style>

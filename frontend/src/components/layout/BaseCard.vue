@@ -45,6 +45,11 @@ const props = defineProps({
         md:px-6 md:py-2 lg:px-4 lg:py-1.5">
         Horror
       </span>
+      <span v-if="props.type && props.type=='comedy'"
+        class="text-purple-600 absolute right-0 top-0 text-sm md:text-base font-bold tracking-widest rounded-bl-xl rounded-tr-xl shadow-md shadow-gray-800 uppercase bg-gray-200 py-2.5 px-6
+        md:px-6 md:py-2 lg:px-4 lg:py-1.5">
+        Vígjáték
+      </span>
     </div>
     <div class="flex-1 flex flex-col justify-between px-4 py-3">
       <h3 class="text-lg font-semibold text-white mb-1 truncate">{{ props.title }}</h3>

@@ -2,8 +2,8 @@
 import BaseHeader from "@components/layout/BaseHeader.vue";
 import MovieThemes from "@components/layout/MovieThemes.vue";
 import ClickBanner from "@components/layout/ClickBanner.vue";
-import MovieSlides from "@components/layout/MovieSlides.vue";
 import BaseFooter from "@components/layout/BaseFooter.vue";
+import BaseCard from "@components/layout/BaseCard.vue";
 import RetroCTA from "@components/layout/RetroCTA.vue";
 </script>
 
@@ -14,9 +14,33 @@ import RetroCTA from "@components/layout/RetroCTA.vue";
 
     <ClickBanner />
 
-    <MovieSlides />
-
     <RetroCTA />
+    <div class="container mx-auto w-full h-full">
+      
+      
+      <div
+        class="card mx-auto px-6 lg:px-0 w-full lg:w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-center gap-6 md:gap-8 
+        lg:gap-6 xl:gap-10">
+        <BaseCard :title="'Steel Horizon'" :type="'action'"
+          :description="'Lélegzetelállító harci jelenetek, robbanások, hősök és egy mindenre elszánt harcos.'"
+          :src="'src/assets/img/action.png'" :alt="'Autós üldözés'" />
+
+        <BaseCard :title="'Autós üldözés'" :type="'family'"
+          :description="'A természet lágy ölén a gondtalan gyermekek új kalandra hívnak a varázslatos elemek világába!'"
+          :src="'src/assets/img/family.png'" :alt="'The Magical Meadow'" />
+
+        <BaseCard :title="'A nevetés főútján'" :type="'comedy'"
+          :description="'Egészestés vígjáték a 90-es évek mindennapjaiból, melyek napjainkra is kihatással vannak.'"
+          :src="'src/assets/img/comedy.png'" :alt="'Egészestés vígjáték - A nevetés főútján'" />
+
+        <BaseCard :title="'Baljós árnyak'" :type="'horror'"
+          :description="'A sötétség magányában csak magadra számíthatsz. A hangok a fejedből, vagy az éj lepléből szállnak?'"
+          :src="'src/assets/img/horror.png'" :alt="'Baljós árnyak - horrofilm, kizárólag felnőtteknek.'" />
+      </div>
+
+
+    </div>
+
 
     <MovieThemes class="my-32" />
 
@@ -24,19 +48,3 @@ import RetroCTA from "@components/layout/RetroCTA.vue";
 
   <BaseFooter />
 </template>
-
-
-
-<style>
-.card {
-  position: relative;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-}
-</style>

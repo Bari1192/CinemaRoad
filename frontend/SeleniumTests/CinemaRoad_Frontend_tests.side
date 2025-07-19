@@ -46,6 +46,23 @@
         "67d55bbf-cd46-423e-a0f6-db9a95d5d45e"
       ],
       "timeout": 30000
+    },
+    {
+      "id": "c3ce0641-8fdf-4706-818c-c720912e6391",
+      "name": "BaseCard_Tests",
+      "persistSession": false,
+      "parallel": false,
+      "tests": [
+        "4fedc4fb-2552-46bc-84fb-91e662748ad9",
+        "cc88459c-32eb-438c-9166-5cc9b561a0ca",
+        "17fd9b1b-2e10-46df-a733-2ea711c9076f",
+        "642a6b6d-9312-4130-b189-b689754ca5f8",
+        "139afff5-1acd-40cc-9e82-90f4094bee2a",
+        "01c3c7d2-127c-4903-8b9f-92e10b693123",
+        "e48fadff-e5ad-4f17-a818-b7098bdff296",
+        "1bdb46cb-66e5-4a20-a0c6-4c53e6f5348e"
+      ],
+      "timeout": 30000
     }
   ],
   "tests": [
@@ -519,6 +536,264 @@
           "target": "",
           "value": "",
           "id": "b1898fb9-b067-44ef-82db-cdf734e7ef8a"
+        }
+      ]
+    },
+    {
+      "id": "4fedc4fb-2552-46bc-84fb-91e662748ad9",
+      "name": "01.HomePage_Loads",
+      "commands": [
+        {
+          "id": "10324cb6-f3a2-44ca-a8ca-80218328fd28",
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": ""
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=div.card",
+          "value": "3000",
+          "id": "47962459-6bb3-4dca-b2c6-34f0db699631"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=div.card",
+          "value": "3000",
+          "id": "d39a64c3-4537-4889-97ca-dde1bd0da945",
+          "comment": "Feltételezzük, hogy ténylegesen meg is jelenik."
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "9b0acc48-1527-4f0b-87a6-c4c4c8718a90"
+        }
+      ]
+    },
+    {
+      "id": "cc88459c-32eb-438c-9166-5cc9b561a0ca",
+      "name": "02.Card_Component_Displayed",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "376c758f-2e15-4127-9d77-3ad4ed9afc5a"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=div.card",
+          "value": "2000",
+          "id": "1fc5d715-121f-4d63-adf6-c2a5dc4ad465"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=div.card",
+          "value": "",
+          "id": "d6f8f9e2-768a-4e2d-97f6-cf52728cf4d6"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "d4c37569-24db-47fe-b83b-c7cba93819b6"
+        }
+      ]
+    },
+    {
+      "id": "17fd9b1b-2e10-46df-a733-2ea711c9076f",
+      "name": "03.Card_Image_Displayed",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "760ac719-025d-4d1f-b485-de1f08434d7e"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=div.card img",
+          "value": "2000",
+          "id": "866e4597-b391-45c6-8302-a1fa06048aeb"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=div.card img[alt='Autós üldözés']",
+          "value": "",
+          "id": "557f5dca-b1d0-453b-b76a-60da88e8c5c1"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "041568ad-1619-44ca-aca4-cf843323025f"
+        }
+      ]
+    },
+    {
+      "id": "642a6b6d-9312-4130-b189-b689754ca5f8",
+      "name": " 04.Card_Title_And_Description",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "659a08cd-95f2-4bd1-b029-9fda71e9ffad"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=div.card h3",
+          "value": "2000",
+          "id": "b219f2c3-1ead-4ab4-9279-767aa550b069"
+        },
+        {
+          "command": "assertText",
+          "target": "css=div.card h3",
+          "value": "Autós üldözés",
+          "id": "2ffd619f-c3b5-4b31-acb3-fc2875193382"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=div.card p",
+          "value": "1000",
+          "id": "9a09a76d-4ec7-4df7-be7b-5671be5d0fea"
+        },
+        {
+          "command": "assertText",
+          "target": "css=div.card p",
+          "value": "Lélegzetelállító kocsis üldözések, menekülés és adrenalin—csak a legbátrabbaknak.",
+          "id": "2a2f9033-d8d3-41cd-9da7-2186d6263323"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "d86311d5-7029-4585-b393-475a75f71f89"
+        }
+      ]
+    },
+    {
+      "id": "139afff5-1acd-40cc-9e82-90f4094bee2a",
+      "name": "05.Card_Type_Badge_Action",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "799c0abb-4768-45c7-b5e2-50447e5159d2"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "xpath=(//span[contains(text(),'Akció')])[1]",
+          "value": "2000",
+          "id": "6da94cff-69ca-41bf-bd41-b94377ae804d",
+          "comment": "Az első elemére xpath-szal keresünk mert az :nth-of-type -ot nem fogadja el."
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "xpath=(//span[contains(text(),'Akció')])[1]",
+          "value": "Akció",
+          "comment": "",
+          "id": "86ce74c0-9111-44fe-b844-fbbc8cd18c0c"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "7e1be906-d19a-4f97-98e0-e06670043752"
+        }
+      ]
+    },
+    {
+      "id": "01c3c7d2-127c-4903-8b9f-92e10b693123",
+      "name": "06.Card_Megnezem_Button_Displayed",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "04a2e32b-dae2-4ca8-a13a-40499fd7a8a8"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=div.card button",
+          "value": "1000",
+          "comment": "",
+          "id": "6950216a-6a78-43a0-a601-06e03b76dde2"
+        },
+        {
+          "command": "assertText",
+          "target": "css=div.card button",
+          "value": "Megnézem",
+          "comment": "",
+          "id": "34452118-9f2b-4c2f-8a53-a0cd442d40b2"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "426be8fd-ca8d-4d7d-aefb-50a3853733aa"
+        }
+      ]
+    },
+    {
+      "id": "e48fadff-e5ad-4f17-a818-b7098bdff296",
+      "name": "07.Card_Megnezem_Button_Click_Redirect",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "78ae19ca-6d44-4354-8f9f-3a2ea6c9e017"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=div.card button",
+          "value": "1000",
+          "comment": "",
+          "id": "26d0e5f7-a3fc-4e98-936f-177b7ccaecb7"
+        },
+        {
+          "command": "click",
+          "target": "css=div.card button",
+          "value": "",
+          "id": "31db8477-256a-4910-9be7-6d07104202a4"
+        },
+        {
+          "command": "pause",
+          "target": "2000",
+          "value": "",
+          "id": "a7bf6e0f-3876-48af-aaca-902b1cac292f"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "fb5a98d4-920c-43c2-b7b4-cd8bdc58811b"
+        }
+      ]
+    },
+    {
+      "id": "1bdb46cb-66e5-4a20-a0c6-4c53e6f5348e",
+      "name": "08.Browser_Close",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "7f1031cd-e8c3-4098-ae36-6c618b3335f7"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=div.card",
+          "value": "1000",
+          "id": "d201fd6c-c57b-4bb2-8486-f36e316c3a6b"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "14edd3dc-f8db-466a-9f56-e76d9a3c95d8"
         }
       ]
     }

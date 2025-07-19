@@ -11,9 +11,6 @@ use Illuminate\Http\Response;
 
 class ScreeningController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index():JsonResource
     {
         $data = Screening::with(["DriveInCinema"])->get();
@@ -21,9 +18,6 @@ class ScreeningController extends Controller
         return ScreeningResource::collection($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreScreeningRequest $request)
     {
         $data = $request->validated();
@@ -33,17 +27,11 @@ class ScreeningController extends Controller
         return new ScreeningResource($newScreening);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Screening $screening):JsonResource
     {
         return new ScreeningResource($screening->load("DriveInCinema"));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateScreeningRequest $request, Screening $screening)
     {
         $newData = $request->validated();
@@ -55,9 +43,6 @@ class ScreeningController extends Controller
         return new ScreeningResource($data);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Screening $screening):Response
     {
         $data = Screening::findOrFail($screening->id);

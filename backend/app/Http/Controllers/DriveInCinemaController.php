@@ -11,9 +11,6 @@ use Illuminate\Http\Response;
 
 class DriveInCinemaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index():JsonResource
     {
         $data = DriveInCinema::all();
@@ -21,9 +18,6 @@ class DriveInCinemaController extends Controller
         return DriveInCinemaResource::collection($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreDriveInCinemaRequest $request)
     {
         $data = $request->validated();
@@ -33,9 +27,6 @@ class DriveInCinemaController extends Controller
         return new DriveInCinemaResource($newData);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(DriveInCinema $DriveInCinema):JsonResource
     {
         $data = DriveInCinema::findOrFail($DriveInCinema->id);
@@ -43,9 +34,6 @@ class DriveInCinemaController extends Controller
         return new DriveInCinemaResource($data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateDriveInCinemaRequest $request, DriveInCinema $DriveInCinema)
     {
         $newData = $request->validated();
@@ -57,9 +45,6 @@ class DriveInCinemaController extends Controller
         return new DriveInCinemaResource($data);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(DriveInCinema $DriveInCinema):Response
     {
         $data = DriveInCinema::findOrFail($DriveInCinema->id);

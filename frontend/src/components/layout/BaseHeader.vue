@@ -18,6 +18,10 @@
             <RouterLink to="#">Special Week</RouterLink>
           </li>
           <li
+            class="md:text-xl block py-2 px-3 text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-500 has-[.active]:hover:text-white tracking-wide">
+            <router-link to="/movies/movie">Movie aloldal</router-link>
+          </li>
+          <li
             class="md:text-3xl block py-2 px-3 text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-600 has-[.active]:hover:text-white tracking-wide">
             <RouterLink to="#">Jegyfoglalás</RouterLink>
           </li>

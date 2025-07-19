@@ -13,11 +13,12 @@ import RetroCTA from "@components/layout/RetroCTA.vue";
   <div class="mx-auto w-full min-h-screen">
 
     <ClickBanner />
-
+    
+    
+    <div class="container mx-auto w-full h-full mb-20"> <!-- MY 20!!! -->
     <RetroCTA />
-    <div class="container mx-auto w-full h-full">
-      
-      
+    </div>
+    <div class="container mx-auto w-full h-full my-20"> <!-- MY 20!!! -->
       <div
         class="card mx-auto px-6 lg:px-0 w-full lg:w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-center gap-6 md:gap-8 
         lg:gap-6 xl:gap-10">
@@ -42,7 +43,9 @@ import RetroCTA from "@components/layout/RetroCTA.vue";
     </div>
 
 
-    <MovieThemes class="my-32" />
+    <div class="my-40">
+      <MovieThemes />
+    </div>
 
   </div>
 

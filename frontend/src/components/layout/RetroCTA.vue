@@ -3,8 +3,8 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-48 items-center lg:w-7xl xl:w-full mx-auto">
 
       <div class="order-2 lg:order-1 text-center lg:text-left space-y-6 lg:space-y-8">
-        <div class="space-y-4">
-          <h2 class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight
+        <div class="space-y-6">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-relaxed
             pb-1">
             <span class="block text-pink-400">Retro élmény,</span>
             <span class="block bg-gradient-to-r from-slate-200 to-slate-400 bg-clip-text text-transparent">

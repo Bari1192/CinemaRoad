@@ -26,7 +26,7 @@ const props = defineProps({
 
 
 <template>
-  <div class="card w-full h-full bg-slate-900 shadow-xl overflow-hidden border border-slate-700 transition-all duration-200 hover:scale-105
+  <div class="card w-full h-full bg-slate-900 shadow-xl overflow-hidden rounded-xl border border-slate-700 transition-all duration-200 hover:scale-105
         hover:cursor-pointer">
     <div class="relative">
       <img :src="props.src" :alt="props.alt" class="w-full h-full object-cover" />

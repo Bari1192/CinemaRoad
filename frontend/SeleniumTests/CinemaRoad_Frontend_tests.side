@@ -63,6 +63,42 @@
         "1bdb46cb-66e5-4a20-a0c6-4c53e6f5348e"
       ],
       "timeout": 30000
+    },
+    {
+      "id": "2c4f2a14-b61a-4ac9-ab77-a5c3636142cf",
+      "name": "ClickBanner_Tests",
+      "persistSession": false,
+      "parallel": false,
+      "tests": [
+        "867e5563-37b5-4dfd-859d-7dc85f11517e",
+        "3cf16835-b6c6-4b2e-841c-5e39595d554e",
+        "4b1a3726-9e61-4284-8eb8-86cdf30408e4",
+        "8ab06118-ee74-4003-9c59-3e9255828285",
+        "2cd72f06-eede-4ab8-b8f5-c0210f7bd77b",
+        "8cd1b4cd-2e84-41df-9d96-1fccd8bc3681",
+        "60e12de8-e0d9-43ed-9db9-013573c41bd2",
+        "6233f52d-e481-49be-a241-da0f757a7c3e"
+      ],
+      "timeout": 30000
+    },
+    {
+      "id": "6a42e641-0810-4f98-8ba7-187cba915f36",
+      "name": "RetroCTA_Tests",
+      "persistSession": false,
+      "parallel": false,
+      "tests": [
+        "5fb9b474-d183-49c4-a2c5-34e69520fc97",
+        "a746f230-b51d-4bd3-885d-0db0bee78cab",
+        "97cb4239-f045-4066-815c-cbad228862e1",
+        "875a0dba-c8c5-4e5f-8085-475172e0a0b7",
+        "d6ba9d13-7ea1-47f0-9f45-6d308eb326d3",
+        "8df8fe41-383a-4d46-80dc-2204aec54a6f",
+        "16d2bc8a-db6c-4fef-9e64-f0462b415ae1",
+        "9f0929e8-f34e-40e2-9c7a-bb88db813027",
+        "9f27c0ba-3d8a-4290-83e3-4e00e97d09bc",
+        "ad615047-8974-4144-8461-f4266551787e"
+      ],
+      "timeout": 30000
     }
   ],
   "tests": [
@@ -794,6 +830,581 @@
           "target": "",
           "value": "",
           "id": "14edd3dc-f8db-466a-9f56-e76d9a3c95d8"
+        }
+      ]
+    },
+    {
+      "id": "867e5563-37b5-4dfd-859d-7dc85f11517e",
+      "name": "01.Can_Open_Slider_Component",
+      "commands": [
+        {
+          "id": "bdf340e7-28a2-4c8e-94bc-95f353ecc758",
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": ""
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=.carousel-container",
+          "value": "3000",
+          "id": "d728a594-a2c7-4359-8841-4b59fdc911f5"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=.carousel-container",
+          "value": "",
+          "id": "338506a6-b0c3-40ef-9dee-990425fdf606",
+          "comment": "assert true"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "5d371825-04bc-4bd3-bbd4-74e5a7f0fc12"
+        }
+      ]
+    },
+    {
+      "id": "3cf16835-b6c6-4b2e-841c-5e39595d554e",
+      "name": "02.Verify_First_Slide_Image_And_Title",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "16148dc5-03d7-4371-92a0-1d9fc929bbc8"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=.carousel-item.active-slide img",
+          "value": "2000",
+          "id": "2abb8891-5359-49db-a250-45137f515052"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=.carousel-item.active-slide img",
+          "value": "",
+          "id": "2aecd1d9-a8e2-4434-9c03-d1d47339206f"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=.carousel-item.active-slide h3",
+          "value": "1000",
+          "id": "8fe4b505-4891-4460-9b1b-4803da2530ff"
+        },
+        {
+          "command": "assertText",
+          "target": "css=.carousel-item.active-slide h3",
+          "value": "A galaxis őrzői vol. 3",
+          "id": "c1a3e41f-f617-4ee4-8b7e-a8af0ef88b7f"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "1fe6164e-c905-4fb2-a416-cf7d605150e2"
+        }
+      ]
+    },
+    {
+      "id": "4b1a3726-9e61-4284-8eb8-86cdf30408e4",
+      "name": "03.Verify_First_Slide_Description",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "a32b297d-fbdc-4230-b0ff-f4d61b6e4c08"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=.carousel-item.active-slide p",
+          "value": "1000",
+          "id": "4e70c0a9-af8f-4037-96d4-f7fd4cacd48e"
+        },
+        {
+          "command": "assertText",
+          "target": "css=.carousel-item.active-slide p",
+          "value": "Premier előtti vetítés!",
+          "id": "3c9af09e-3248-4b20-9292-885897346ece"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "45a154eb-6b56-48be-95bf-f6915f1e12d1"
+        }
+      ]
+    },
+    {
+      "id": "8ab06118-ee74-4003-9c59-3e9255828285",
+      "name": "04.Prev_Button_Disabled_On_First_Slide",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "0ddb2e00-d730-4c01-b55d-875e00153159"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=.carousel-control-btn.left-4",
+          "value": "2000",
+          "id": "59e4f8c8-c169-480a-8d11-efea431d5ad1"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=.carousel-control-btn.left-4.opacity-40",
+          "value": "Premier előtti vetítés!",
+          "id": "61894d7d-ba23-4377-9135-2a7f7dd0f051"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "3758b6cb-1018-487f-9e9b-d77ac950b591"
+        }
+      ]
+    },
+    {
+      "id": "2cd72f06-eede-4ab8-b8f5-c0210f7bd77b",
+      "name": "05.Next_Slide_Click_By_ExecuteScript",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "36e79e31-43bd-4006-99f0-2d84f60cb640"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=button.carousel-control-btn.right-4",
+          "value": "2000",
+          "id": "73b692d9-e787-49e0-bfdf-5407627e6b20"
+        },
+        {
+          "command": "executeScript",
+          "target": "document.querySelector('.carousel-control-btn.right-4').click();",
+          "value": "",
+          "id": "e1f5d1da-3f00-490a-99ee-1339596594ee"
+        },
+        {
+          "command": "pause",
+          "target": "1000",
+          "value": "",
+          "id": "d4593bc7-72f0-4e97-9b80-66191c25eae0"
+        },
+        {
+          "command": "assertText",
+          "target": "css=.carousel-item.active-slide h3",
+          "value": "Dűne",
+          "id": "45a43082-f3dc-4b24-afe0-22094a179bd3"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "37e6d755-1632-420f-b8ec-2ce0f6b800fe"
+        }
+      ]
+    },
+    {
+      "id": "8cd1b4cd-2e84-41df-9d96-1fccd8bc3681",
+      "name": "06.Dot_Indicator_Navigation",
+      "commands": [
+        {
+          "id": "466922a4-81d4-4a93-a7cc-9812240dd167",
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": ""
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=div.carousel-indicators button:nth-child(3)",
+          "value": "1000",
+          "id": "aebcec76-bc7f-4ecf-a764-1b78ae9b2753"
+        },
+        {
+          "command": "executeScript",
+          "target": "document.querySelectorAll('div.carousel-indicators button')[2].click();",
+          "value": "",
+          "id": "17b8ed58-79a8-4508-8174-615cc0592ee4"
+        },
+        {
+          "command": "pause",
+          "target": "1200",
+          "value": "",
+          "id": "a292070b-daa9-46a2-b6fa-ec8ae42edd35"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=.carousel-item.active-slide h3",
+          "value": "1000",
+          "id": "0c7ca3ee-3688-4c66-ab68-01ee16169747"
+        },
+        {
+          "command": "assertText",
+          "target": "css=.carousel-item.active-slide h3",
+          "value": "Star Wars: Az ébredő Erő",
+          "id": "834b07fb-fd21-4484-be5b-444c17a20e1f"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "a90c4299-7824-43e0-9a38-8a9c224dc073"
+        }
+      ]
+    },
+    {
+      "id": "60e12de8-e0d9-43ed-9db9-013573c41bd2",
+      "name": "07.Autoplay_Slide_Change",
+      "commands": [
+        {
+          "id": "f9b3005b-3771-4359-8719-79a58dc34cd4",
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": ""
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=.carousel-item.active-slide h3",
+          "value": "1000",
+          "id": "2351d94f-eade-4b47-90c2-b9e1ef501102"
+        },
+        {
+          "command": "assertText",
+          "target": "css=.carousel-item.active-slide h3",
+          "value": "A galaxis őrzői vol. 3",
+          "id": "ff016ee4-f39e-49f7-90a8-4033a2c69f68"
+        },
+        {
+          "command": "pause",
+          "target": "4500",
+          "value": "",
+          "id": "84e33e44-f061-47aa-92c3-ada9d8902a4d"
+        },
+        {
+          "command": "assertText",
+          "target": "css=.carousel-item.active-slide h3",
+          "value": "Dűne",
+          "id": "55ba36a5-f0e0-4db0-8a4a-df976e8e7e21"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "114776fe-eabd-45ce-845a-c92bbf0dd305"
+        }
+      ]
+    },
+    {
+      "id": "6233f52d-e481-49be-a241-da0f757a7c3e",
+      "name": "08.User_Can_Close_The_Window",
+      "commands": [
+        {
+          "id": "42eb9cda-3669-4e05-a048-cc22a1464e8b",
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": ""
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=.carousel-container",
+          "value": "1000",
+          "id": "fe3a51e3-3716-470b-97e6-c5b551c4d3b9"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "664ff659-4369-4e97-9050-47e8f2882fcd"
+        }
+      ]
+    },
+    {
+      "id": "5fb9b474-d183-49c4-a2c5-34e69520fc97",
+      "name": "01.Can_Load_RetroCTA_Section",
+      "commands": [
+        {
+          "id": "0bb04a75-b2ca-45bd-bf6b-716407731915",
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": ""
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=.container ",
+          "value": "2000",
+          "id": "73966c09-2a90-4d5b-acd5-827aa11365ff"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=.container",
+          "value": "",
+          "id": "4e2e0c94-333d-46f2-88c7-0c430a58600f"
+        }
+      ]
+    },
+    {
+      "id": "a746f230-b51d-4bd3-885d-0db0bee78cab",
+      "name": "02.Can_Display_Hero_Image",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "443b4726-93cd-4ed7-915b-485cf00e2438"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "css=img[alt*=\"popcornt eszik\"]",
+          "value": "",
+          "comment": "",
+          "id": "cfc85632-7b3b-4bc9-9a05-fbe522fbef77"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=img[alt*=\"popcornt eszik\"]",
+          "value": "",
+          "comment": "",
+          "id": "c02fe9f6-9b7a-44a8-904e-df6675c83892"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "comment": "A böngésző bezárásra kerül. ",
+          "id": "6f83fe6a-ebc3-4606-b433-ec4c228c39fc"
+        }
+      ]
+    },
+    {
+      "id": "97cb4239-f045-4066-815c-cbad228862e1",
+      "name": "03.Can_Display_Headings",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "b209b9cb-a8be-4f70-a3bd-7e888a002656"
+        },
+        {
+          "command": "assertText",
+          "target": "css=h2 > span.text-pink-400",
+          "value": "Retro élmény,",
+          "comment": "",
+          "id": "e9df7df2-96d4-4990-85c3-d01fe976a8f6"
+        },
+        {
+          "command": "assertText",
+          "target": "css=h2 > span.bg-gradient-to-r ",
+          "value": "Modern környezet",
+          "comment": "",
+          "id": "3ac254a8-22e8-4e62-b4ae-d6540147df3c"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "comment": "A böngésző bezárásra kerül. ",
+          "id": "fc32a01b-653a-439d-ae2e-8e2d335c757e"
+        }
+      ]
+    },
+    {
+      "id": "875a0dba-c8c5-4e5f-8085-475172e0a0b7",
+      "name": "04.Can_Display_DescriptionText",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "09b5876c-ec1e-439e-a1ee-64d403f93fad"
+        },
+        {
+          "command": "assertText",
+          "target": "xpath=//p[contains(.,'autósmozi hangulatának találkozását')] ",
+          "value": "Élvezd a klasszikus autósmozi hangulatának találkozását a 21. század kényelmével",
+          "comment": "",
+          "id": "749cb0b3-e46a-47b7-9c4d-1b8a83957559"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "comment": "A böngésző bezárásra kerül. ",
+          "id": "2fd813b1-85c7-4a6b-a88a-40ce9f80d6ea"
+        }
+      ]
+    },
+    {
+      "id": "d6ba9d13-7ea1-47f0-9f45-6d308eb326d3",
+      "name": "05. Can_Display_Overlay_InfoBar",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "25bc2fa3-10fe-4f50-a17a-0cee7f330b45"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "xpath=//p[contains(.,'Randi ötlet')]",
+          "value": " 🍿 Randi ötlet keresel? Ez tuti beválik, csekkold!",
+          "comment": "",
+          "id": "f5c82c66-f195-4f95-a49b-df8fe813445a"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "comment": "A böngésző bezárásra kerül. ",
+          "id": "f61876e6-dfb9-40db-b562-353224490508"
+        }
+      ]
+    },
+    {
+      "id": "8df8fe41-383a-4d46-80dc-2204aec54a6f",
+      "name": "06. Can_Display_CTALinks_And_Buttons",
+      "commands": [
+        {
+          "id": "c5b589d3-4910-42f8-a94e-d8cee815198a",
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": ""
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "xpath=//button[contains(.,'Jegyvásárlás')] ",
+          "value": "",
+          "id": "a00f7f50-3224-43cd-bd76-c16a69f8ae1b"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "xpath=//button[contains(.,'Heti vetítések')] ",
+          "value": "",
+          "id": "c11b9f04-c56f-44e2-b0ab-8215f6b1f242"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "xpath=//div[contains(@class, 'absolute') and contains(@class, 'bottom-2')]//a",
+          "value": "",
+          "id": "4b78d407-0019-4f4b-b9b1-1bb187aab8eb"
+        }
+      ]
+    },
+    {
+      "id": "16d2bc8a-db6c-4fef-9e64-f0462b415ae1",
+      "name": "07. Can_Click_Tickets_CTA_And_Redirect",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "6af8cdb1-a32e-4d38-9a71-33081f423f90"
+        },
+        {
+          "command": "click",
+          "target": " xpath=//button[contains(.,'Jegyvásárlás')]",
+          "value": "",
+          "id": "3da43943-a450-404a-9074-eea61cfd0c0f"
+        },
+        {
+          "command": "pause",
+          "target": "1000",
+          "value": "",
+          "id": "25de2c3e-b54e-4b16-a171-e690d9b0428f"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "08dada1c-b919-494d-8311-6a5f1977c0ca"
+        }
+      ]
+    },
+    {
+      "id": "9f0929e8-f34e-40e2-9c7a-bb88db813027",
+      "name": "08. Can_Click_Movies_CTA_And_Redirect",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": "",
+          "id": "6efd3322-5f62-4e16-abbb-5e5edb1159dc"
+        },
+        {
+          "command": "click",
+          "target": "xpath=//button[contains(.,'Heti vetítések')]",
+          "value": "",
+          "id": "468d79ec-fa28-45c5-b253-86af7fbaf7de"
+        },
+        {
+          "command": "pause",
+          "target": "1000",
+          "value": "",
+          "id": "faaef5e2-fce4-4c39-938c-c96400c89cc9"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "6133ce0b-2d17-4a8c-a1e3-e16d655537a1"
+        }
+      ]
+    },
+    {
+      "id": "9f27c0ba-3d8a-4290-83e3-4e00e97d09bc",
+      "name": "09. Can_Click_Overlay_Link_And_Redirect",
+      "commands": [
+        {
+          "id": "ebb0d457-85f3-49da-8ce8-469aaecf7779",
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": ""
+        },
+        {
+          "command": "click",
+          "target": " xpath=//div[contains(@class, 'absolute') and contains(@class, 'bottom-2')]//a",
+          "value": "",
+          "id": "7c1de399-929c-4f31-988b-551af490666f"
+        },
+        {
+          "command": "pause",
+          "target": "1000",
+          "value": "",
+          "id": "2caa7303-b443-46fd-b6af-01100c6b1fab"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "e98e5fa7-7ac7-4c7d-a6a6-91d321b90377"
+        }
+      ]
+    },
+    {
+      "id": "ad615047-8974-4144-8461-f4266551787e",
+      "name": "10. Can_Close_Browser_At_End",
+      "commands": [
+        {
+          "id": "1897fad2-b94e-48c1-96b3-28859248987f",
+          "command": "open",
+          "target": "http://frontend.vm1.test/",
+          "value": ""
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=body",
+          "value": "2000",
+          "id": "11a6e163-e2c3-42f5-a6e6-e8e39d8e766e"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "237feebf-a466-4d9f-8a6f-09dae94e140a"
         }
       ]
     }

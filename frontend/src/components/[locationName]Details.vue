@@ -27,17 +27,17 @@
 
             <button
                 class="p-2 rounded-lg"
-                :class="selectedGenre === 'Horror' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
-                @click="selectedGenre='Horror'">Horror</button>
+                :class="selectedGenre === 'Adventure' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
+                @click="selectedGenre='Adventure'">Kaland</button>
 
             <button
                 class="p-2 rounded-lg"
-                :class="selectedGenre === 'Romantikus' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
-                @click="selectedGenre='Romantikus'">Romantikus</button>
+                :class="selectedGenre === 'Comedy' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
+                @click="selectedGenre='Comedy'">Vígjáték</button>
         </div>
         <div v-if="screenings.length > 0" class="grid grid-cols-1 md:grid-cols-5 gap-6 mt-10">
             <BaseCard
-                v-for="screening in enrichedScreenings"
+                v-for="screening in filteredMoviesByType"
                 :key="screening.id"
                 :title="screening.movie?.title"
                 :type="screening.movie?.type"
@@ -67,7 +67,7 @@ const cinema = ref(null);
 const route = useRoute();
 const screenings = ref([]);
 const movies = ref([]);
-const selectedGenre = ref('');
+const selectedGenre = ref('Mind');
 
 function slugify(text) {
     return text
@@ -114,5 +114,15 @@ const enrichedScreenings = computed(() => {
     };
   });
 });
+
+const filteredMoviesByType = computed(() => {
+    if(selectedGenre.value === 'Mind') {
+        return enrichedScreenings.value;
+    }
+
+    return enrichedScreenings.value.filter(screening =>
+        screening.movie?.type === selectedGenre.value
+    )
+})
 
 </script>

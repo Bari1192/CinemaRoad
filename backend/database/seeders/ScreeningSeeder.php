@@ -14,7 +14,17 @@ class ScreeningSeeder extends Seeder
                 "movie_id" => 1,
                 "drive_in_cinema_id" => 1,
                 "start_time" => "2025-06-23 16:30:00"
-            ]
+            ],
+            [
+                "movie_id" => 2,
+                "drive_in_cinema_id" => 1,
+                "start_time" => "2025-06-24 16:30:00"
+            ],
+            [
+                "movie_id" => 3,
+                "drive_in_cinema_id" => 1,
+                "start_time" => "2025-06-25 16:30:00"
+            ],
         ]);
     }
 }

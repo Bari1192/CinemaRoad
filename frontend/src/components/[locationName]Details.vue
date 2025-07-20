@@ -40,7 +40,7 @@
                 v-for="screening in enrichedScreenings"
                 :key="screening.id"
                 :title="screening.movie?.title"
-                :type="screening.movie?.genre"
+                :type="screening.movie?.type"
                 :src="`https://d32qys9a6wm9no.cloudfront.net/images/movies/poster/d6/20249e4b290423cd14d4fbb932faa88a_500x735.jpg?t=1725823421`"
                 :alt="screening.movie?.title"
                 :description="screening.description"

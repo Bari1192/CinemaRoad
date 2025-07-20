@@ -43,7 +43,7 @@ import RetroCTA from "@components/layout/RetroCTA.vue";
     </div>
 
 
-    <div class="my-40">
+    <div class="my-40 mx-4">
       <MovieThemes />
     </div>
 

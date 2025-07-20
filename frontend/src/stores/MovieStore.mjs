@@ -1,9 +1,10 @@
 import { ref } from "vue";
 import { http } from "@utils/http.mjs";
+import { defineStore } from "pinia";
 
 export const useMovieStore = defineStore("movies", () => {
   const movies = ref([]);
-  const movie = ref(null);
+  const movie = ref();
 
   async function getMovies() {
     try {
@@ -52,7 +53,7 @@ export const useMovieStore = defineStore("movies", () => {
   async function deleteMovie(id) {
     try {
       await http.delete(`/movies/${id}`);
-      movies.value = movies.value.filter((m) => m.id !== id); //frissítés
+      movies.value = movies.value.filter((m) => m.id !== id);
     } catch (err) {
       console.error("Hiba a film törlésekor", err);
       throw err;
@@ -60,8 +61,8 @@ export const useMovieStore = defineStore("movies", () => {
   }
 
   return {
-    cars,
-    car,
+    movies,
+    movie,
 
     getMovies,
     getMovie,

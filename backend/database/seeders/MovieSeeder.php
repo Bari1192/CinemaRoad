@@ -13,14 +13,14 @@ class MovieSeeder extends Seeder
             [
                 'title' => 'The Grand Adventure',
                 'description' => 'A thrilling journey across lands unknown.',
-                'type' => 'Adventure',
+                'type' => 'family',
                 'duration_min' => 150,
                 'poster_url' => 'https://example.com/adventure_poster.jpg',
             ],
             [
                 'title' => 'Comedy Night Live',
                 'description' => 'Laugh out loud with stand-up comedians.',
-                'type' => 'Comedy',
+                'type' => 'action',
                 'duration_min' => 90,
                 'poster_url' => 'https://example.com/comedy_poster.jpg',
             ],
@@ -28,7 +28,7 @@ class MovieSeeder extends Seeder
                 'title' => 'Comedy Rage Night',
                 'description' => 'Laugh out loud with stand-up comedians.',
                 'duration_min' => 90,
-                'type' => 'Comedy',
+                'type' => 'horror',
                 'poster_url' => 'https://example.com/comedy_poster.jpg',
             ]
         ]);

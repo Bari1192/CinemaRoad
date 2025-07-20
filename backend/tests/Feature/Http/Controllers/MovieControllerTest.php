@@ -15,6 +15,7 @@ class MovieControllerTest extends TestCase
         Movie::create([
             'title' => 'Sample Movie',
             'duration_min' => 90,
+            'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/poster1.jpg',
         ]);
         $response = $this->getJson('/api/movies');
@@ -104,6 +105,7 @@ class MovieControllerTest extends TestCase
         $movieData = [
             'title' => 'Movie for Duration Check',
             'description' => 'Description for duration check',
+            'type' => 'Action',
             'duration_min' => 135,
             'poster_url' => 'http://pelda-default-url.com/duration_poster.png',
         ];
@@ -116,6 +118,7 @@ class MovieControllerTest extends TestCase
         $movie = Movie::create([
             'title' => 'Specific Movie',
             'duration_min' => 100,
+            'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/show_poster.jpg',
         ]);
         $response = $this->getJson("/api/movies/{$movie->id}");
@@ -128,6 +131,7 @@ class MovieControllerTest extends TestCase
         $movie = Movie::create([
             'title' => 'Specific Movie Title',
             'duration_min' => 100,
+            'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/show_title_poster.jpg',
         ]);
         $response = $this->getJson("/api/movies/{$movie->id}");
@@ -140,6 +144,7 @@ class MovieControllerTest extends TestCase
         $movie = Movie::create([
             'title' => 'Specific Movie for Structure',
             'duration_min' => 100,
+            'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/show_structure_poster.jpg',
         ]);
         $response = $this->getJson("/api/movies/{$movie->id}");
@@ -160,6 +165,7 @@ class MovieControllerTest extends TestCase
         $movie = Movie::create([
             'title' => 'Original Movie',
             'duration_min' => 100,
+            'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/update_poster.jpg',
         ]);
         $updatedData = [
@@ -176,6 +182,7 @@ class MovieControllerTest extends TestCase
         $movie = Movie::create([
             'title' => 'Original Movie for DB Update',
             'duration_min' => 100,
+            'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/db_update_poster.jpg',
         ]);
         $updatedData = [
@@ -192,13 +199,31 @@ class MovieControllerTest extends TestCase
             'title' => 'Original Movie for Structure Update',
             'duration_min' => 100,
             'poster_url' => 'http://pelda-default-url.com/update_structure_poster.jpg',
+            'type' => 'Action',
+            'description' => 'Test Description'
         ]);
+
         $updatedData = [
             'title' => 'Updated Title Again',
+            'type' => 'Action',
+            'description' => 'Updated description',
+            'duration_min' => 100,
+            'poster_url' => 'http://pelda-default-url.com/update_structure_poster.jpg',
         ];
+
         $response = $this->putJson("/api/movies/{$movie->id}", $updatedData);
+
         $response->assertJsonStructure([
-            'data' => ['id', 'title', 'description', 'duration_min', 'poster_url', 'created_at', 'updated_at']
+            'data' => [
+                'id',
+                'title',
+                'type',
+                'description',
+                'duration_min',
+                'poster_url',
+                'created_at',
+                'updated_at',
+            ]
         ]);
     }
 
@@ -208,10 +233,12 @@ class MovieControllerTest extends TestCase
         $movie = Movie::create([
             'title' => 'Original Movie for Data Update',
             'duration_min' => 100,
+            'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/update_data_poster.jpg',
         ]);
         $updatedData = [
             'title' => 'Finally Updated Data',
+            'type' => 'Action'
         ];
         $response = $this->putJson("/api/movies/{$movie->id}", $updatedData);
         $response->assertJsonFragment(['title' => 'Finally Updated Data']);
@@ -232,6 +259,7 @@ class MovieControllerTest extends TestCase
     {
         $movie = Movie::create([
             'title' => 'Movie to Delete',
+            'type' => 'Action',
             'duration_min' => 100,
             'poster_url' => 'http://pelda-default-url.com/delete_poster.jpg',
         ]);
@@ -244,6 +272,7 @@ class MovieControllerTest extends TestCase
     {
         $movie = Movie::create([
             'title' => 'Movie to be removed',
+            'type' => 'Action',
             'duration_min' => 100,
             'poster_url' => 'http://pelda-default-url.com/remove_poster.jpg',
         ]);
@@ -262,6 +291,7 @@ class MovieControllerTest extends TestCase
     {
         $movieData = [
             'description' => 'Test description',
+            'type' => 'Action',
             'duration_min' => 100,
             'poster_url' => 'http://pelda-default-url.com/validation_no_title.jpg',
         ];
@@ -275,6 +305,7 @@ class MovieControllerTest extends TestCase
         $movieData = [
             'title' => str_repeat('A', 256),
             'description' => 'Test description',
+            'type' => 'Action',
             'duration_min' => 100,
             'poster_url' => 'http://pelda-default-url.com/validation_long_title.jpg',
         ];
@@ -288,6 +319,7 @@ class MovieControllerTest extends TestCase
         $movieData = [
             'title' => 'Valid Title',
             'description' => 'Test description',
+            'type' => 'Action',
             'duration_min' => -10,
             'poster_url' => 'http://pelda-default-url.com/validation_negative_duration.jpg',
         ];
@@ -300,6 +332,7 @@ class MovieControllerTest extends TestCase
         $movie = Movie::create([
             'title' => 'Original Movie',
             'duration_min' => 100,
+            'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/update_validation_long_title_original.jpg',
         ]);
         $updatedData = [
@@ -315,6 +348,7 @@ class MovieControllerTest extends TestCase
         $movie = Movie::create([
             'title' => 'Original Movie',
             'duration_min' => 100,
+            'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/update_validation_negative_duration_original.jpg',
         ]);
         $updatedData = [
@@ -330,6 +364,7 @@ class MovieControllerTest extends TestCase
         $movie = Movie::create([
             'title' => 'Original Movie',
             'duration_min' => 100,
+            'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/update_validation_missing_title_original.jpg',
         ]);
         $updatedData = [

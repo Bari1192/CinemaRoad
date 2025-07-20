@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
             $table->string('title', 255)->required();
+            $table->string("type", 20)->nullable();
             $table->text('description')->nullable();
             $table->unsignedInteger('duration_min')->nullable();
             $table->string('poster_url')->nullable();

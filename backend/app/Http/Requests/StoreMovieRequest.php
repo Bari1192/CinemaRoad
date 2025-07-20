@@ -16,6 +16,7 @@ class StoreMovieRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
+            'type' => ['nullable', 'string', 'max:20'],
             'duration_min' => ['nullable', 'integer', 'min:0'],
             'poster_url' => ['nullable', 'string', 'url'],
         ];

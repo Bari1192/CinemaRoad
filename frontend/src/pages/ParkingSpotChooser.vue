@@ -1,5 +1,8 @@
 <template>
     <BaseLayout>
+        <Stepper :currentStep="3" />
+
+
         <!-- Hely csekk -->
         <h1 v-if="!ticketStore.location">Hely: <span class="text-4xl text-red-500">NINCS KIVÁLASZTVA</span></h1>
         <h1 v-else>Hely: <span class="text-4xl text-green-500">KI VAN VÁLASZTVA</span></h1>
@@ -40,6 +43,7 @@
 import BaseLayout from '@layouts/BaseLayout.vue';
 import { useRouter } from 'vue-router';
 import { useTicketStore } from '@stores/TicketStore.js';
+import Stepper from '@components/layout/Stepper.vue';
 
 const ticketStore = useTicketStore();
 const router = useRouter();

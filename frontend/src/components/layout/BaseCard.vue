@@ -1,4 +1,5 @@
 <script setup>
+import { RouterLink } from 'vue-router';
 
 const props = defineProps({
   title: {
@@ -21,7 +22,12 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  cinema:{
+    type: Object,
+    default: null
+  }
 })
+
 </script>
 
 
@@ -30,23 +36,19 @@ const props = defineProps({
         hover:cursor-pointer">
     <div class="relative">
       <img :src="props.src" :alt="props.alt" class="w-full h-full object-cover" />
-      <span v-if="props.type && props.type=='action'"
-        class="text-sky-700 absolute right-0 top-0 text-sm md:text-base font-bold tracking-widest rounded-bl-xl rounded-tr-xl shadow-md shadow-gray-800 uppercase bg-gray-200 py-2.5 px-6
+      <span v-if="props.type && props.type == 'action'" class="text-sky-700 absolute right-0 top-0 text-sm md:text-base font-bold tracking-widest rounded-bl-xl rounded-tr-xl shadow-md shadow-gray-800 uppercase bg-gray-200 py-2.5 px-6
         md:px-6 md:py-2 lg:px-4 lg:py-1.5">
         Akció
       </span>
-      <span v-if="props.type && props.type=='family'"
-        class="text-yellow-700 absolute right-0 top-0 text-sm md:text-base font-bold tracking-widest rounded-bl-xl rounded-tr-xl shadow-md shadow-gray-800 uppercase bg-gray-200 py-2.5 px-6
+      <span v-if="props.type && props.type == 'family'" class="text-yellow-700 absolute right-0 top-0 text-sm md:text-base font-bold tracking-widest rounded-bl-xl rounded-tr-xl shadow-md shadow-gray-800 uppercase bg-gray-200 py-2.5 px-6
         md:px-6 md:py-2 lg:px-4 lg:py-1.5">
         Családi
       </span>
-      <span v-if="props.type && props.type=='horror'"
-        class="text-red-700 absolute right-0 top-0 text-sm md:text-base font-bold tracking-widest rounded-bl-xl rounded-tr-xl shadow-md shadow-gray-800 uppercase bg-gray-200 py-2.5 px-6
+      <span v-if="props.type && props.type == 'horror'" class="text-red-700 absolute right-0 top-0 text-sm md:text-base font-bold tracking-widest rounded-bl-xl rounded-tr-xl shadow-md shadow-gray-800 uppercase bg-gray-200 py-2.5 px-6
         md:px-6 md:py-2 lg:px-4 lg:py-1.5">
         Horror
       </span>
-      <span v-if="props.type && props.type=='comedy'"
-        class="text-purple-600 absolute right-0 top-0 text-sm md:text-base font-bold tracking-widest rounded-bl-xl rounded-tr-xl shadow-md shadow-gray-800 uppercase bg-gray-200 py-2.5 px-6
+      <span v-if="props.type && props.type == 'comedy'" class="text-purple-600 absolute right-0 top-0 text-sm md:text-base font-bold tracking-widest rounded-bl-xl rounded-tr-xl shadow-md shadow-gray-800 uppercase bg-gray-200 py-2.5 px-6
         md:px-6 md:py-2 lg:px-4 lg:py-1.5">
         Vígjáték
       </span>
@@ -54,10 +56,11 @@ const props = defineProps({
     <div class="flex-1 flex flex-col justify-between px-4 py-3">
       <h3 class="text-lg font-semibold text-white mb-1 truncate">{{ props.title }}</h3>
       <p class="text-sm text-slate-200 mb-3 line-clamp-3">{{ props.description }}</p>
-      <button
-        class="mt-auto w-full bg-pink-700 hover:bg-pink-600 text-white font-semibold rounded-xl py-2 transition-all">
+      <RouterLink :to="''"
+        class="block text-center mt-auto w-full bg-pink-700 hover:bg-pink-600 text-white font-semibold rounded-xl py-2 transition-all">
         Megnézem
-      </button>
+      </RouterLink>
+
     </div>
   </div>
 </template>

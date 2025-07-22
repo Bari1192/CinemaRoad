@@ -1,5 +1,6 @@
 import { ref } from "vue";
 import { http } from "@utils/http.mjs";
+import { defineStore } from "pinia";
 
 export const useScreeningStore = defineStore("screenings", () => {
   const screenings = ref([]);

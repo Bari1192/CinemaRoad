@@ -6,8 +6,8 @@ export const useTicketStore = defineStore('ticketstore', {
         location: JSON.parse(localStorage.getItem('location')) || null,
         locationName: JSON.parse(localStorage.getItem('locationName')) || null,
         movie: JSON.parse(localStorage.getItem('movie')) || null,
-        time: false,
-        parkingSpot: false
+        time: JSON.parse(localStorage.getItem('time')) || null,
+        parkingSpot: JSON.parse(localStorage.getItem('parkingSpot')) || null
     }),
     actions: {
         setLocation(location) {
@@ -23,6 +23,16 @@ export const useTicketStore = defineStore('ticketstore', {
         setMovie(movie) {
             this.movie = movie;
             localStorage.setItem('movie', JSON.stringify(movie));
+        },
+
+        setTime(time) {
+            this.time = time;
+            localStorage.setItem('time', JSON.stringify(time));
+        },
+
+        setParkingSpot(parkingSpot) {
+            this.parkingSpot = parkingSpot;
+            localStorage.setItem('parkingSpot', JSON.stringify(parkingSpot));
         },
 
         clearLocation() {

@@ -1,47 +1,36 @@
 <template>
-    <div class="w-full flex justify-center my-8">
-      <div class="relative flex items-center w-2/3 h-2 bg-gray-800 rounded-full">
-        <div
-          v-for="(step, index) in steps"
-          :key="index"
-          class="absolute top-1/2 -translate-y-1/2 flex flex-col items-center"
-          :style="{ left: `${index * 28 + 5}%` }"
-        >
-          <span class="mb-2 md:text-lg text-sm text-white select-none whitespace-nowrap">
-            {{ step.label }}
-          </span>
-  
-          <div
-            class="flex items-center justify-center w-8 h-8 rounded-full border-2 transition-all"
-            :class="getStepClass(index)"
-          >
-            <font-awesome-icon :icon="step.icon" />
+  <div class="w-10/12 mx-auto md:w-full flex justify-center mt-12 mb-20">
+    <div class="w-full max-w-2xl px-4 relative">
+
+      <div class="absolute top-1/2 left-0 w-full h-1.5 lg:h-1 bg-slate-400 rounded-full -z-10"></div>
+
+      <div :class="`grid grid-cols-${steps.length} w-full relative`">
+        <div v-for="(step, i) in steps" :key="i" class="flex flex-col items-center">
+          <div :class="circleClass(i)"
+            class="w-5 h-5 -top-2  lg:w-8 lg:h-8 absolute lg:-top-4 rounded-full border-4 flex items-center justify-center transition-all duration-300 z-10">
+            <i class="fa fa-solid circle"></i>
           </div>
+          <span class="mt-2 absolute top-4 text-center text-xs md:text-base text-white select-none">{{ step.label
+            }}</span>
         </div>
       </div>
     </div>
-  </template>
-
+  </div>
+</template>
 <script setup>
-import { ref } from 'vue';
-const steps = ref([
-  { label: 'Helyszín', icon: 'circle' },
-  { label: 'Film', icon: 'circle' },
-  { label: 'Időpont', icon: 'circle' },
-  { label: 'Parkoló', icon: 'circle' },
-]);
-//const currentStep = ref(0);
-
-function getStepClass(index) {
-  if (index < props.currentStep) return 'bg-pink-500 border-pink-500'
-  if (index === props.currentStep) return 'bg-white border-pink-500'
-  return 'bg-white border-gray-500'
-}
 
 const props = defineProps({
-  currentStep: {
-    type: Number,
-    required: true,
-  }
+  currentStep: { type: Number, required: true }
 });
+const steps = [
+  { label: 'Helyszín' },
+  { label: 'Film' },
+  { label: 'Időpont' },
+  { label: 'Parkoló' },
+];
+function circleClass(index) {
+  if (index < props.currentStep) return "bg-pink-700 border-pink-700";
+  if (index === props.currentStep) return "bg-pink-700 border-white";
+  return "bg-pink-300 border-slate-100";
+}
 </script>

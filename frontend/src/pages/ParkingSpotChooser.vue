@@ -1,19 +1,62 @@
+<script setup>
+import BaseLayout from '@layouts/BaseLayout.vue';
+import { useRouter } from 'vue-router';
+import { useTicketStore } from '@stores/TicketStore.js';
+import Stepper from '@components/layout/Stepper.vue';
+
+const ticketStore = useTicketStore();
+const router = useRouter();
+
+if (!ticketStore.location && localStorage.getItem('location')) {
+    ticketStore.location = JSON.parse(localStorage.getItem('location'));
+}
+if (!ticketStore.locationName && localStorage.getItem('locationName')) {
+    ticketStore.locationName = JSON.parse(localStorage.getItem('locationName'));
+}
+if (!ticketStore.movie && localStorage.getItem('movie')) {
+    ticketStore.movie = JSON.parse(localStorage.getItem('movie'));
+}
+if (!ticketStore.time && localStorage.getItem('time')) {
+    ticketStore.time = JSON.parse(localStorage.getItem('time'));
+}
+if (!ticketStore.parkingSpot && localStorage.getItem('parkingSpot')) {
+    ticketStore.parkingSpot = JSON.parse(localStorage.getItem('parkingSpot'));
+}
+
+
+function handleSelect(spot) {
+    ticketStore.setParkingSpot(spot);
+    router.push('/Summary');
+}
+
+const [selected_date, selected_time] = ticketStore.time.split(' ');
+const selectedStartTime = selected_time.slice(0, 5);
+</script>
+
+
 <template>
     <BaseLayout>
         <Stepper :currentStep="3" />
 
 
         <!-- Hely csekk -->
-        <h1 v-if="!ticketStore.location">Hely: <span class="text-4xl text-red-500">NINCS KIVÁLASZTVA</span></h1>
-        <h1 v-else>Hely: <span class="text-4xl text-green-500">KI VAN VÁLASZTVA</span></h1>
+        <div class="w-full mx-auto flex flex-col justify-center align-middle items-center m-auto text-2xl mb-4"
+            v-if="ticketStore.location != null">Hely: <span class="text-4xl text-green-500">{{ ticketStore.locationName
+            }}</span></div>
 
-        <!-- Film csekk-->
-        <h1 v-if="!ticketStore.movie">Film: <span class="text-4xl text-red-500">NINCS KIVÁLASZTVA</span></h1>
-        <h1 v-else>Film: <span class="text-4xl text-green-500">KI VAN VÁLASZTVA</span></h1>
+        <div class="w-full mx-auto flex flex-col justify-center align-middle items-center m-auto text-2xl mb-4"
+            v-if="ticketStore.movie != null">Film: <span class="text-4xl text-green-500">{{ ticketStore.movie.title
+            }}</span></div>
 
-        <!-- Időpont csekk-->
-        <h1 v-if="!ticketStore.time">Időpont: <span class="text-4xl text-red-500">NINCS KIVÁLASZTVA</span></h1>
-        <h1 v-else>Időpont: <span class="text-4xl text-green-500">KI VAN VÁLASZTVA</span></h1>
+        <div class="w-full mx-auto flex flex-col justify-center align-middle items-center m-auto text-2xl mb-4"
+            v-if="ticketStore.time != null">Vetítés napja: <span class="text-green-500">{{
+                selected_date
+            }}</span></div>
+        <div class="w-full mx-auto flex flex-col justify-center align-middle items-center m-auto text-2xl mb-4"
+            v-if="ticketStore.time != null">Vetítés időpontja: <span class="text-4xl text-green-500 text-center">{{
+                selectedStartTime
+            }}</span></div>
+
 
 
         <div class="flex gap-4">
@@ -38,18 +81,3 @@
     </BaseLayout>
 
 </template>
-
-<script setup>
-import BaseLayout from '@layouts/BaseLayout.vue';
-import { useRouter } from 'vue-router';
-import { useTicketStore } from '@stores/TicketStore.js';
-import Stepper from '@components/layout/Stepper.vue';
-
-const ticketStore = useTicketStore();
-const router = useRouter();
-
-function handleSelect(spot) {
-  ticketStore.setParkingSpot(spot);
-  router.push('/Summary');
-}
-</script>

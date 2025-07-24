@@ -4,13 +4,13 @@
 
       <div class="absolute top-1/2 left-0 w-full h-1.5 lg:h-1 bg-slate-400 rounded-full -z-10"></div>
 
-      <div :class="`grid grid-cols-${steps.length} w-full relative`">
-        <div v-for="(step, i) in steps" :key="i" class="flex flex-col items-center">
+      <div class="grid w-full grid-cols-4">
+        <div v-for="(step, i) in steps" :key="i" class="relative flex flex-col items-center">
           <div :class="circleClass(i)"
-            class="w-5 h-5 -top-2  lg:w-8 lg:h-8 absolute lg:-top-4 rounded-full border-4 flex items-center justify-center transition-all duration-300 z-10">
+            class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-7 h-7 lg:w-8 lg:h-8 rounded-full border-4 flex items-center justify-center transition-all duration-300 z-10">
             <i class="fa fa-solid circle"></i>
           </div>
-          <span class="mt-2 absolute top-4 text-center text-xs md:text-base text-white select-none">{{ step.label
+          <span class="pt-14 text-center text-xs md:text-base text-white select-none">{{ step.label
             }}</span>
         </div>
       </div>

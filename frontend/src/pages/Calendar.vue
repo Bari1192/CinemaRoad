@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { useLocalStorage, useNow } from '@vueuse/core'
+import { useNow } from '@vueuse/core'
 import { useTicketStore } from '@stores/TicketStore';
 
 const ticketStore = useTicketStore();
@@ -32,9 +32,9 @@ const screeningsByDate = computed(() => {
     return map;
 });
 
-const currentDate = useNow() // Ahhoz majd, hogy csak a MAI-TÓL mutassa majd!
+const currentDate = useNow() 
 const year = currentDate.value.getFullYear()
-const month = currentDate.value.getMonth() // ha majd csak a kövi hónap VAGY hét kell, akkor '+1'-et ide kell vágni a végére!
+const month = currentDate.value.getMonth()
 
 const daysWithScreenings = computed(() => {
     const days = []

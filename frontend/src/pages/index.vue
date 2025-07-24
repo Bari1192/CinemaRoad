@@ -38,11 +38,7 @@ import RetroCTA from "@components/layout/RetroCTA.vue";
           :description="'A sötétség magányában csak magadra számíthatsz. A hangok a fejedből, vagy az éj lepléből szállnak?'"
           :src="'src/assets/img/horror.png'" :alt="'Baljós árnyak - horrofilm, kizárólag felnőtteknek.'" />
       </div>
-
-
     </div>
-
-
     <div class="my-40 mx-4">
       <MovieThemes />
     </div>

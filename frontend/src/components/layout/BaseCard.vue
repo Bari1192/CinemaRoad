@@ -8,7 +8,6 @@ const props = defineProps({
   },
   type: {
     type: String,
-    // nem (required) szükséges, mert ha lokációként használjuk a kártyát, akkor furán nézne ki.
   },
   src: {
     type: String,
@@ -20,7 +19,6 @@ const props = defineProps({
   },
   description: {
     type: String,
-    required: true,
   },
   cinema:{
     type: Object,

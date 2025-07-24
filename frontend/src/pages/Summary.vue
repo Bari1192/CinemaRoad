@@ -1,53 +1,117 @@
+<script setup>
+import BaseLayout from '@layouts/BaseLayout.vue'
+import Stepper from '@components/layout/Stepper.vue'
+import { useTicketStore } from '@stores/TicketStore'
+import { computed } from 'vue'
+
+const ticketStore = useTicketStore()
+
+const locationName = computed(() =>
+    ticketStore.location?.name || ticketStore.locationName || '–'
+)
+const locationDesc = computed(() =>
+    ticketStore.location?.description || ''
+)
+
+const movieTitle = computed(() =>
+    ticketStore.movie?.title || (typeof ticketStore.movie === 'string' ? ticketStore.movie : '–')
+)
+const movieDesc = computed(() =>
+    ticketStore.movie?.description || ''
+)
+const moviePoster = computed(() =>
+    ticketStore.movie?.poster_url || ''
+)
+const parkings = computed(() =>
+    Array.isArray(ticketStore.parkingSpot)
+        ? ticketStore.parkingSpot
+        : ticketStore.parkingSpot
+            ? [ticketStore.parkingSpot]
+            : []
+)
+const formattedTime = computed(() => {
+    if (!ticketStore.time) return '–'
+    const input = typeof ticketStore.time === 'string'
+        ? ticketStore.time
+        : (ticketStore.time.start_time || ticketStore.time.date || '')
+    if (!input) return '–'
+    const dateObj = new Date(input)
+    if (isNaN(dateObj)) return input
+    return `${dateObj.toLocaleDateString('hu-HU', { year: 'numeric', month: '2-digit', day: '2-digit' })} (${dateObj.toLocaleDateString('hu-HU', { weekday: "long" })}) ${dateObj.toLocaleTimeString('hu-HU', { hour: '2-digit', minute: '2-digit' })}`
+});
+</script>
+
 <template>
     <BaseLayout>
-
         <Stepper :currentStep="4" />
-
-        <!-- Hely csekk.  ticketStore => location -->
-        <div v-if="!ticketStore.location">
-            <h1 class="text-3xl">Hely: <span class="text-4xl text-red-500">NINCS KIVÁLASZTVA</span></h1>
+        <div class="flex justify-center mt-20">
+            <div
+                class=" via-white pink-600 shadow-xl border-[3px] border-dashed border-slate-500/75 rounded-3xl w-full max-w-lg relative py-8 px-6 ticket overflow-hidden">
+                <!-- Jegy perforáció -->
+                <div
+                    class="absolute left-0 top-16 h-32 w-6 bg-white border-r-4 border-dashed border-indigo-300 rounded-r-2xl -z-10">
+                </div>
+                <div
+                    class="absolute right-0 bottom-16 h-32 w-6 bg-white border-l-4 border-dashed border-pink-300 rounded-l-2xl -z-10">
+                </div>
+                <!-- Mozi neve -->
+                <div class="text-lg text-black/75 font-bold mb-1 uppercase text-center">Drive-in mozi foglalás
+                    megerősítése</div>
+                <div class="text-3xl font-bold text-pink-600 mb-2">{{ locationName }}</div>
+                <!-- Film -->
+                <div class="flex items-center gap-4 py-5  border-pink-100 mb-6">
+                    <img v-if="moviePoster" :src="moviePoster"
+                        class="w-20 h-28 object-cover rounded-lg border border-gray-200 shadow-md" />
+                    <div>
+                        <div class="text-xl font-extrabold text-gray-800">{{ movieTitle }}</div>
+                        <div class="text-xs text-pink-900 font-bold uppercase opacity-60 tracking-wider mb-2">
+                            Kiválasztott film</div>
+                        <div class="text-gray-500">{{ movieDesc }}</div>
+                    </div>
+                </div>
+                <!-- Időpont -->
+                <div class="flex flex-col my-6 gap-2 px-2">
+                    <div class="font-semibold text-gray-500 text-xl tracking-wider">Vetítés időpontja</div>
+                    <div class="text-lg font-extrabold tracking-wider text-pink-900"
+                        style="font-family: 'Nunito','Arial','Times New Roman', Times, serif;">
+                        {{ formattedTime }}
+                    </div>
+                </div>
+                <!-- Parkolóhely(ek) -->
+                <div class="flex flex-col gap-2 mt-2 px-2">
+                    <div class="font-semibold text-gray-500 text-xl tracking-wider">Foglalásod a következő hely(ek)re
+                        szól:</div>
+                    <div class="flex gap-2 flex-wrap mt-1">
+                        <span v-for="(place, i) in parkings" :key="i"
+                            class="inline-flex items-center gap-1 px-4 py-2 rounded-full border font-bold bg-gradient-to-br from-pink-100 to-pink-300 border-pink-300 text-pink-900 shadow-sm tracking-wide">
+                            <span class="material-icons text-lg text-pink-500"></span> {{ place }} <!-- sor / oszlop -->
+                        </span>
+                    </div>
+                </div>
+                <!-- Jegy “aláírás"/footer” sáv -->
+                <div
+                    class="border-t-4 border-dashed border-slate-400 mt-10 pt-7 text-center text-lg font-medium text-gray-700">
+                    Jó szórakozást kívánunk a Cinema Road csapata!
+                </div>
+            </div>
         </div>
-        <div v-else class="p-3">
-            <h1 class="text-3xl">Hely: <span class="text-3xl rounded-lg text-green-500">KI VAN VÁLASZTVA</span></h1>
-            <p>{{ ticketStore.location }}</p>
+        <div class="flex justify-center my-6">
+            <button class="px-10 py-3 bg-pink-700 text-white font-bold rounded-xl shadow hover:bg-pink-600 transition"
+                @click="ticketStore.$reset()">
+                Új foglalás
+            </button>
         </div>
-
-        <!-- Film csekk.  ticketStore => movie-->
-        <div v-if="!ticketStore.movie">
-            <h1 class="text-3xl">Film: <span class="text-4xl text-red-500">NINCS KIVÁLASZTVA</span></h1>
-        </div>
-        <div v-else class="p-3">
-            <h1 class="text-3xl">Film: <span class="text-3xl rounded-lg text-green-500">KI VAN VÁLASZTVA</span></h1>
-            <p>{{ ticketStore.movie }}</p>
-        </div>
-
-        <!-- Időpont csekk. ticketStore => time -->
-        <div v-if="!ticketStore.time">
-            <h1 class="text-3xl">Időpont: <span class="text-4xl text-red-500">NINCS KIVÁLASZTVA</span></h1>
-        </div>
-        <div v-else class="p-3">
-            <h1 class="text-3xl">Időpont: <span class="text-4xl text-green-500">KI VAN VÁLASZTVA</span></h1>
-            <p>{{ ticketStore.time }}</p>
-        </div>
-
-        <!-- Parkolóhely csekk.  ticketStore => parkingSpot-->
-        <div v-if="!ticketStore.time">
-            <h1 class="text-3xl">Parkolóhely: <span class="text-4xl text-red-500">NINCS KIVÁLASZTVA</span></h1>
-        </div>
-        <div v-else class="p-3">
-            <h1 class="text-3xl">Parkolóhely: <span class="text-4xl text-green-500">KI VAN VÁLASZTVA</span></h1>
-            <p>{{ ticketStore.parkingSpot }}</p>
-        </div>
-
-
-
     </BaseLayout>
 </template>
 
-<script setup>
-import BaseLayout from '@layouts/BaseLayout.vue';
-import { useTicketStore } from '@stores/TicketStore';
-import Stepper from '@components/layout/Stepper.vue';
+<style scoped>
+.ticket {
+    background-color: #f3edef;
+    box-shadow: 0 6px 30px 0 #e91e6333, 0 0 0 3px #f8bbd0;
+    position: relative;
+}
 
-const ticketStore = useTicketStore();
-</script>
+.material-icons {
+    font-family: 'Material Symbols Outlined', Arial, sans-serif !important;
+}
+</style>

@@ -1,100 +1,129 @@
 <script setup>
-import { computed } from 'vue'
-import { useNow } from '@vueuse/core'
-import { useTicketStore } from '@stores/TicketStore';
-
-const ticketStore = useTicketStore();
+import { computed, ref } from 'vue'
 
 const props = defineProps({
-    screenings: {
-        type: Array,
-        required: true,
-    }
+    screenings: { type: Array, required: true }
 })
-const emit = defineEmits(['select-screening']);
-function selectScreening(id) {
-    const screening = props.screenings.find(s => s.id === id)
-    emit('select-screening', id)
-    ticketStore.setTime(screening.start_time);
-}
+const emit = defineEmits(['select-screening'])
 
+const daysOfWeek = ['Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat', 'Vasárnap']
+const selectedScreeningId = ref(null);
+
+// Map: dátum → { napIndex, localDate, vetítések[] }
 const screeningsByDate = computed(() => {
-    const map = {};
-    for (const screening of props.screenings) {
-        const [date, time] = screening.start_time.split(' ');
-        if (!map[date]) map[date] = [];
-        map[date].push({
-            time: time.slice(0, 5),
-            id: screening.id,
-            obj: screening
-        });
+    const groups = {}
+    for (const vetitesi_idopont of props.screenings) {
+        const dateObj = new Date(vetitesi_idopont.start_time)
+        // ISO napra (YYYY-MM-DD)
+        const dateKey = dateObj.toISOString().split('T')[0]
+        if (!groups[dateKey]) groups[dateKey] = {
+            dayIndex: (dateObj.getDay() + 6) % 7, // 0=vasárnap, 1=hétfő (magyar), ezért +6%7
+            localDate: dateObj,
+            vets: []
+        }
+        groups[dateKey].vets.push(vetitesi_idopont)
     }
-    return map;
-});
+    return groups
+})
+// Hány hét jelenik meg (lehet csak a legközelebbi hét, vagy az összes adott hónapban)
+const weekRows = computed(() => {
+    const allDates = Object.entries(screeningsByDate.value).map(([dateKey, obj]) => ({
+        dateKey, ...obj
+    }))
+    if (!allDates.length) return []
 
-const currentDate = useNow() 
-const year = currentDate.value.getFullYear()
-const month = currentDate.value.getMonth()
+    // A legkorábbi start-dátum
+    const minDate = allDates.reduce((min, d) => d.localDate < min ? d.localDate : min, allDates[0].localDate)
+    const maxDate = allDates.reduce((max, d) => d.localDate > max ? d.localDate : max, allDates[0].localDate)
 
-const daysWithScreenings = computed(() => {
-    const days = []
-    const totalDays = new Date(year, month, 0).getDate()
+    // Hány hétig tart (pl. aug 1 - aug 14 = 2 hét)
+    const startOfWeek = (date) => {
+        const n = (date.getDay() + 6) % 7
+        const d = new Date(date)
+        d.setDate(d.getDate() - n)
+        d.setHours(0, 0, 0, 0)
+        return d
+    }
+    const endOfWeek = (date) => {
+        const n = 6 - ((date.getDay() + 6) % 7)
+        const d = new Date(date)
+        d.setDate(d.getDate() + n)
+        d.setHours(23, 59, 59, 999)
+        return d
+    }
 
-    for (let day = 1; day <= totalDays; day++) {
-        const paddedDay = String(day).padStart(2, '0')
-        const paddedMonth = String(month).padStart(2, '0')
-        const date = `${year}-${paddedMonth}-${paddedDay}`
-        const times = screeningsByDate.value[date]
-
-        if (times) {
+    const rows = []
+    let from = startOfWeek(minDate)
+    let to = endOfWeek(maxDate)
+    let weekStart = new Date(from)
+    while (weekStart <= to) {
+        const days = []
+        for (let i = 0; i < 7; i++) {
+            const d = new Date(weekStart)
+            d.setDate(d.getDate() + i)
+            const dateKey = d.toISOString().slice(0, 10)
             days.push({
-                day,
-                date,
-                times
+                dateKey,
+                dayName: daysOfWeek[i],
+                localDate: d,
+                screenings: (screeningsByDate.value[dateKey]?.vets) || []
             })
         }
+        rows.push(days)
+        weekStart.setDate(weekStart.getDate() + 7)
     }
-
-    return days
+    return rows
 })
+
+function magyarDatum(d) {
+    return d.toLocaleDateString('hu-HU', { month: '2-digit', day: '2-digit' })
+}
+function magyarIdo(s) {
+    return new Date(s).toLocaleTimeString('hu-HU', { hour: '2-digit', minute: '2-digit', hour12: false })
+}
+function clickScreening(vetitesi_idopont) {
+    selectedScreeningId.value = vetitesi_idopont.start_time;
+    emit('select-screening', vetitesi_idopont.id)
+}
 </script>
 
 <template>
-    <div class="container mx-auto w-full my-12 p-8 bg-slate-800 rounded-lg shadow-xl">
-        <h2 class="text-5xl text-white font-bold mb-8 text-center">{{ ticketStore.locationName }}</h2>
-        <h2 class="text-4xl text-pink-400 font-semibold mb-8 text-center">{{ ticketStore.movie.title }} Vetítések</h2>
-        <div class="w-[95%] mx-auto h-1.5 rounded-full bg-pink-100/65 mb-12"></div>
-
-        <div class="grid grid-cols-7 gap-4 text-center">
-            <div class="text-pink-600 font-semibold text-2xl border-l-4 border-gray-500 py-2">Hétfő</div>
-            <div class="text-pink-600 font-semibold text-2xl border-l-4 border-gray-500 py-2">Kedd</div>
-            <div class="text-pink-600 font-semibold text-2xl border-l-4 border-gray-500 py-2">Szerda</div>
-            <div class="text-pink-600 font-semibold text-2xl border-l-4 border-gray-500 py-2">Csütörtök</div>
-            <div class="text-pink-600 font-semibold text-2xl border-l-4 border-gray-500 py-2">Péntek</div>
-            <div class="text-pink-600 font-semibold text-2xl border-l-4 border-gray-500 py-2">Szombat</div>
-            <div class="text-pink-600 font-semibold text-2xl border-x-4 border-gray-500 py-2">Vasárnap</div>
-
-            <div v-for="day in daysWithScreenings" :key="day.date"
-                class="mt-1 w-11/12 mx-auto calendar-day p-2 bg-slate-700 
-            rounded-lg cursor-pointer border-x-4 border-gray-500 flex flex-col justify-center items-center group h-fit">
-                <span class="text-white text-3xl font-bold mx-auto w-full h-full">
-                    {{ month <= '10' ? '0' + month + '.' + day.day : month + '.' + day.day }} <div
-                        class="w-4/5 rounded-full h-1 my-2 bg-amber-300 mx-auto">
-            </div>
-
-            <div class="w-full h-fit flex flex-col gap-2 justify-center lg:w-10/12 mx-auto">
-
-                <div v-for="screen in day.times" :key="screen.id"
-                    class="text-white font-medium w-full text-xl mt-1 hover:bg-pink-700 transition-colors duration-200 px-3 py-2 bg-pink-600 rounded-lg">
-                    <button class="idopont-btn" @click="selectScreening(screen.id)">
-                        {{ screen.time }}
-                    </button>
-                </div>
-            </div>
-            </span>
-        </div>
-    </div>
-
-    <div class="w-full mx-auto h-[3px] bg-pink-100/65 mt-12"></div>
+    <div class="w-full overflow-x-auto">
+        <table class="min-w-full bg-slate-800 rounded-xl shadow-xl select-none">
+            <thead>
+                <tr>
+                    <th v-for="d in daysOfWeek" :key="d"
+                        class="py-4  tracking-wide px-1 text-lg md:text-2xl font-bold text-white border-b-4 border-pink-600 text-center">
+                        {{ d }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(week, wi) in weekRows" :key="wi">
+                    <td v-for="(day, di) in week" :key="day.dateKey"
+                        class="align-top p-2 bg-slate-900 border-x-slate-700 border-x-2">
+                        <div class="flex flex-col items-center min-h-[60px] ">
+                            <div
+                                class="font-bold text-pink-800 text-[1.2rem] min-w-fit w-full text-center bg-white rounded-md mx-auto mt-1">
+                                {{ magyarDatum(day.localDate) }}
+                            </div>
+                            <div class="flex flex-col gap-3 w-full my-4">
+                                <template v-if="day.screenings.length">
+                                    <button v-for="vetitesi_idopont in day.screenings" :key="vetitesi_idopont.id"
+                                        @click="clickScreening(vetitesi_idopont)"
+                                        :class="selectedScreeningId=== vetitesi_idopont.start_time? 'bg-pink-600':'bg-slate-400/70'"
+                                        class="max-w-full w-2/3 mx-auto rounded-md  text-xl text-white font-medium px-2 py-2 mb-1transition duration-150">
+                                        {{ magyarIdo(vetitesi_idopont.start_time) }}
+                                    </button>
+                                </template>
+                                <template v-else >
+                                    <span class="text-gray-400/90 text-sm italic text-center">Vetítés Szünet</span>
+                                </template>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </template>

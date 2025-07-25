@@ -34,14 +34,18 @@ function toggleSeat(seatID) {
 const ticketStore = useTicketStore()
 const router = useRouter()
 function handleNext() {
-    if (!selectedSeats.value) return
-    ticketStore.setParkingSpot([...selectedSeats.value])
-    router.push('/Summary')
+    if (selectedSeats == null) {
+        alert("Nem választott ki parkolóhelyet a nézőtéren!")
+    } else {
+        ticketStore.setParkingSpot([...selectedSeats.value])
+        router.push('/Summary')
+    }
 }
 </script>
 
 <template>
-    <div class="container w-full h-full lg:max-w-3xl xl:max-w-5xl mx-auto my-12 bg-gray-800/80 rounded-3xl shadow-xl">
+    <div
+        class="container w-full h-full lg:max-w-3xl xl:max-w-5xl mx-auto my-12 lg:my-0 bg-gray-800/80 rounded-3xl shadow-xl">
         <h2 class="text-3xl text-slate-400 font-bold mb-8 text-center uppercase"></h2>
 
 
@@ -49,10 +53,13 @@ function handleNext() {
             <div> <!-- Üres direkt --> </div>
             <div
                 class="col-span-7 w-[95%] mx-auto h-[80px] border-t-8 border-t-gray-950/30 shadow-md shadow-gray-500/45 bg-gray-900 mb-12 rounded-t-full border-b-4 border-pink-900/90 text-4xl text-center text-slate-200 text-opacity-50 uppercase">
-                <div class="w-full h-4/5 relative bg-white -bottom-16 right-50 blur-lg bg-opacity-10 rounded-t-3xl">
+                <div class="w-full h-4/5 relative bg-white -bottom-16 right-50 blur-lg bg-opacity-10 rounded-t-3xl
+                xl:-bottom-18">
                 </div>
-                <div
-                    class="block -mt-9 w-full h-full mx-auto justify-center items-center text-2xl font-extrabold tracking-wider">
+                <div class="block -mt-9 w-full h-full mx-auto justify-center text-white/70 items-center 
+                    text-2xl font-extrabold tracking-wider
+                    xl:text-3xl xl:tracking-widest
+                    ">
                     Mozivászon
                 </div>
             </div>
@@ -61,7 +68,7 @@ function handleNext() {
 
         <div class="mx-auto w-full h-full px-8">
             <div
-                class="container mx-auto w-full h-full my-12  bg-gray-800/80 shadow-slate-900/65 border-t-4 border-t-slate-900/65 rounded-3xl shadow-2xl">
+                class="container mx-auto w-full h-ful my-12 lg:mb-12 lg:mt-0 bg-gray-800/80 shadow-slate-900/65 border-t-4 border-t-slate-900/65 rounded-3xl shadow-2xl">
                 <!-- Header -->
                 <div class="grid grid-cols-11 justify-center text-center mb-2 md:mb-4">
                     <div class="text-xs lg:text-base xl:text-lg"></div>
@@ -148,7 +155,7 @@ function handleNext() {
       md:bg-[url('../assets/img/car_80x50.webp')] md:bg-no-repeat md:bg-center md:bg-contain
     " :class="{
         'cursor-not-allowed bg-red-600 border-red-700': seats.find(s => s.id === `${row}${col}`)?.occupied,
-        'border-lime-600 bg-lime-950/45': selectedSeats.includes(`${row}${col}`) && !seats.find(s => s.id === `${row}${col}`)?.occupied,
+        'border-lime-500/45 bg-lime-700/45': selectedSeats.includes(`${row}${col}`) && !seats.find(s => s.id === `${row}${col}`)?.occupied,
         'border-gray-400 bg-slate-400/15': !selectedSeats.includes(`${row}${col}`) && !seats.find(s => s.id === `${row}${col}`)?.occupied
     }">
                             <span
@@ -163,12 +170,16 @@ function handleNext() {
                         </div>
                     </template>
                 </div>
-                <div class="w-full flex justify-center flex-col mx-auto text-center mt-10 gap-8 pb-12">
-                    <div v-if="selectedSeats" class="text-white mt-4 font-semibold underline underline-offset-2 text-lg">Kiválasztott helyek:
-                        <p class="text-lime-500" >{{ selectedSeats.join(', ') }}</p>
+                <div class="w-full flex h-32 justify-center flex-col mx-auto text-center my-10 gap-8 pb-12">
+                    <div v-if="selectedSeats"
+                        class="text-white h-16 mt-4 font-semibold underline underline-offset-2 text-lg">
+                        Kiválasztott
+                        helyek:
+                        <p class="text-lime-500">{{ selectedSeats.join(', ') }}</p>
                     </div>
-                    <button @click="handleNext" :disabled="!selectedSeats"
-                        class="bg-pink-700 text-white w-1/5 mx-auto font-bold text-lg rounded-xl px-8 py-3 disabled:opacity-60 disabled:cursor-not-allowed">
+                    <button @click="handleNext" :disabled="!selectedSeats || selectedSeats.length === 0"
+                        :class="selectedSeats && selectedSeats.length > 0 ? 'bg-pink-700 cursor-pointer' : 'bg-gray-400 cursor-not-allowed opacity-60'"
+                        class="text-white w-1/5 mx-auto font-bold text-lg rounded-xl px-8 py-3 transition duration-150 hover:bg-pink-800 border border-white/65">
                         Tovább
                     </button>
                 </div>

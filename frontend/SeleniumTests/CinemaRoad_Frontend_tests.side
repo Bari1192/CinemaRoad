@@ -99,6 +99,18 @@
         "ad615047-8974-4144-8461-f4266551787e"
       ],
       "timeout": 30000
+    },
+    {
+      "id": "8532a42b-43de-4fc3-b6a4-e352d490e168",
+      "name": "TimeSelector_Tests",
+      "persistSession": false,
+      "parallel": false,
+      "tests": [
+        "5dbf2acf-4d0d-4b0f-89da-8b93fde3c3ee",
+        "c3f4cc95-65a6-4d5a-9ca6-d6d7dd2996ef",
+        "8b014195-7135-45c2-a7d3-0f682291faa8"
+      ],
+      "timeout": 30000
     }
   ],
   "tests": [
@@ -1405,6 +1417,542 @@
           "target": "",
           "value": "",
           "id": "237feebf-a466-4d9f-8a6f-09dae94e140a"
+        }
+      ]
+    },
+    {
+      "id": "8b014195-7135-45c2-a7d3-0f682291faa8",
+      "name": "01.LocationChoose_StarfieldCard_And_Button",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/LocationChoose",
+          "value": "",
+          "comment": "A főoldal betöltésére kísérletet tesz a http://frontend.vm1.test/ címen. ",
+          "id": "ee7f1d03-e2a9-4218-9df3-d65f50b3a047"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "css=.card.w-full.h-full.bg-slate-900.shadow-xl.rounded-xl.border.border-slate-700.cursor-pointer",
+          "value": "3000",
+          "comment": "Várakoztatás, amíg az oldal mozi helyszínek elemei betöltődnek.",
+          "id": "057bee06-4bc8-45b7-b77b-a37ba2140d6d"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=img[alt=\"Starfield Autósmozi\"]",
+          "value": "",
+          "comment": "",
+          "id": "6df663c9-0d52-40ba-a976-5041c7e3d382"
+        },
+        {
+          "command": "assertText",
+          "target": "css=h3.text-lg.font-semibold.text-white.mb-1.truncate",
+          "value": "Starfield Autósmozi",
+          "comment": "",
+          "id": "0c735b33-06e8-4ace-a118-3cf3b3792ef1"
+        },
+        {
+          "command": "assertText",
+          "target": "css=button.block.text-center.mt-auto.w-full.bg-pink-700",
+          "value": "Megnézem",
+          "id": "e855900c-8cd7-4268-935e-40a94146e424"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "comment": "A böngésző bezárásra kerül. ",
+          "id": "b4d8e9bb-13d6-4d3c-b9d3-8e76cafa3e0d"
+        }
+      ]
+    },
+    {
+      "id": "c3f4cc95-65a6-4d5a-9ca6-d6d7dd2996ef",
+      "name": "02.Can_Navigate_From_Location_To_Movie",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/LocationChoose",
+          "value": "",
+          "comment": "A főoldal betöltésére kísérletet tesz a http://frontend.vm1.test/ címen. ",
+          "id": "f8b4d87c-07de-4cae-b303-3942e24d102a"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "css=div.relative.max-w-md.my-40.mx-auto.group.inline-black",
+          "value": "2000",
+          "comment": "Várakoztatás, amíg az oldal mozi helyszínek elemei betöltődnek.",
+          "id": "d1cf07e1-8330-46c1-aac8-5ee3a9096dea"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "css=div.max-w-xs.md\\\\:max-w-md.my-40.mx-auto",
+          "value": "2000",
+          "comment": "Várakoztatás, amíg az oldal mozi helyszínek elemei betöltődnek.",
+          "id": "40d35650-fbac-4e88-bebf-826869d48f6c"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "css=div.max-w-xs.md\\\\:max-w-md.my-40.mx-auto button.block.text-center.mt-auto.w-full.bg-pink-700",
+          "value": "2000",
+          "id": "826bb69d-2dac-4f19-b2c4-55a59783014c"
+        },
+        {
+          "command": "click",
+          "target": "css=div.max-w-xs.md\\\\:max-w-md",
+          "value": "",
+          "id": "5e7a8281-4e40-46c4-af5d-7c6aa8869b4e"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "css=div.grid.grid-cols-1.md\\\\:grid-cols-5.gap-6.mt-10",
+          "value": "2000",
+          "id": "b23b4608-fa7a-46f0-95d5-b39a1d00a496"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=div.grid.grid-cols-1.md\\\\:grid-cols-5.gap-6.mt-10 > div:first-child",
+          "value": "",
+          "id": "18c2996d-95fd-49db-be1e-a12515932771",
+          "comment": "Ellenőrizzük, hogy legalább egy film-kártya látszik (selector gridben)"
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "2d351b67-53e1-4efb-96dd-d2c4c59b77a4"
+        }
+      ]
+    },
+    {
+      "id": "5dbf2acf-4d0d-4b0f-89da-8b93fde3c3ee",
+      "name": "03.E2E_Foglalasi_Folyamat_Frontend_Tesztje",
+      "commands": [
+        {
+          "command": "open",
+          "target": "http://frontend.vm1.test/LocationChoose",
+          "value": "",
+          "comment": "A főoldal betöltésére kísérletet tesz a http://frontend.vm1.test/ címen. ",
+          "id": "9513d689-b669-4154-a56c-9c8532c25116"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "css=div.relative.max-w-md.my-40.mx-auto.group.inline-black",
+          "value": "2000",
+          "comment": "Várakoztatás, amíg az oldal mozi helyszínek elemei betöltődnek.",
+          "id": "dd06ad2b-7358-4798-a520-68957c1d0dd6"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "css=div.max-w-xs.md\\:max-w-md.my-40.mx-auto",
+          "value": "2000",
+          "comment": "Várakoztatás, amíg az oldal mozi helyszínek elemei betöltődnek.",
+          "id": "1142e213-085a-4803-8466-4720cadb73b8"
+        },
+        {
+          "command": "assertText",
+          "target": "css=div.max-w-xs.md\\:max-w-md.my-40.mx-auto h3.text-lg.font-semibold.text-white.mb-1.truncate",
+          "value": "Starfield Autósmozi",
+          "id": "03f08d93-8338-45ae-b367-4684cdc24255"
+        },
+        {
+          "command": "click",
+          "target": "css=div.max-w-xs.md\\:max-w-md.my-40.mx-auto",
+          "value": "",
+          "id": "6098e07b-5b8d-433f-b72b-deaa6caf75dd"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=div.grid.grid-cols-1.md\\:grid-cols-5.gap-6.mt-10 > div",
+          "value": "",
+          "id": "85371007-4ee8-4ffe-8226-4636ef3b3a4b"
+        },
+        {
+          "command": "click",
+          "target": "css=div.grid.grid-cols-1.md\\:grid-cols-5.gap-6.mt-10 > div:first-child",
+          "value": "",
+          "id": "2441a7a3-4fe3-4c07-b57f-86e5875dd695"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "css=.align-top:nth-child(2)",
+          "value": "9000",
+          "id": "8d490cb2-1f07-4a65-9d58-784d6bb36c42",
+          "fallbackTargets": [
+            [
+              "css=.align-top:nth-child(2)",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/main/div[2]/table/tbody/tr/td[2])[1]",
+              "xpath:idRelative"
+            ],
+            [
+              "xpath=//button[contains(.,'16:30')]",
+              "xpath:innerText"
+            ]
+          ]
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "css=.bg-slate-400\\/70",
+          "value": "",
+          "id": "8033d83e-09b2-4b3e-b787-e9aa13b5bd8b",
+          "fallbackTargets": [
+            [
+              "css=.bg-slate-400\\/70",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/main/div[2]/table/tbody/tr/td[2]/div/div[2]/button)[1]",
+              "xpath:idRelative"
+            ],
+            [
+              "xpath=//button[contains(.,'16:30')]",
+              "xpath:innerText"
+            ]
+          ]
+        },
+        {
+          "command": "click",
+          "target": "css=.bg-slate-400\\/70",
+          "value": "",
+          "id": "3e1a5ad9-ec2b-48d1-b9fa-83c68f8c080e",
+          "fallbackTargets": [
+            [
+              "css=.bg-slate-400\\/70",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/main/div[2]/table/tbody/tr/td[2]/div/div[2]/button)[1]",
+              "xpath:idRelative"
+            ],
+            [
+              "xpath=//button[contains(.,'16:30')]",
+              "xpath:innerText"
+            ]
+          ]
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "css=.text-pink-700",
+          "value": "",
+          "id": "c102ac09-08a4-4a0f-822c-113471af1604",
+          "fallbackTargets": [
+            [
+              "css=.text-pink-700",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/main/div[3]/button)[1]",
+              "xpath:idRelative"
+            ],
+            [
+              "xpath=//button[contains(.,'Következő')]",
+              "xpath:innerText"
+            ]
+          ]
+        },
+        {
+          "command": "click",
+          "target": "css=.text-pink-700",
+          "value": "",
+          "id": "98196bae-190f-4710-acef-7797084ce4cd",
+          "fallbackTargets": [
+            [
+              "css=.text-pink-700",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/main/div[3]/button)[1]",
+              "xpath:idRelative"
+            ],
+            [
+              "xpath=//button[contains(.,'Következő')]",
+              "xpath:innerText"
+            ]
+          ],
+          "comment": "Időpont kiválasztása után a \"Tovább\" gombra kattintunk. Átdob a helyválasztóra!"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=[data-v-inspector=\"src/pages/BaseSeats.vue:54:13\"]",
+          "value": "3000",
+          "id": "d152a58d-80b2-49f9-aa68-878060b5cb2b",
+          "fallbackTargets": [
+            [
+              "css=[data-v-inspector=\"src/pages/BaseSeats.vue:54:13\"]",
+              "css:data-attr"
+            ],
+            [
+              "css=.col-span-7",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/div[2]/div/div/div[2])[1]",
+              "xpath:idRelative"
+            ]
+          ],
+          "comment": "Mozivászon \"képe\" + felirat megjelenik"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=[data-v-inspector=\"src/pages/BaseSeats.vue:54:13\"]",
+          "value": "",
+          "id": "bbd8d772-6af7-47d8-80eb-1d1bb4b627ec",
+          "fallbackTargets": [
+            [
+              "css=[data-v-inspector=\"src/pages/BaseSeats.vue:54:13\"]",
+              "css:data-attr"
+            ],
+            [
+              "css=.col-span-7",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/div[2]/div/div/div[2])[1]",
+              "xpath:idRelative"
+            ]
+          ]
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=.h-ful",
+          "value": "3000",
+          "id": "7ff3c663-c6b1-4a3f-95e5-5ef3e0b5c5f5",
+          "fallbackTargets": [
+            [
+              "css=.h-ful",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/div[2]/div/div[2]/div)[1]",
+              "xpath:idRelative"
+            ]
+          ],
+          "comment": "Az \"Ülőhelyek\" megjelennek táblázatosan"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=.h-ful",
+          "value": "",
+          "id": "9d4de899-f2a2-40ba-a137-af6f31405ba9",
+          "fallbackTargets": [
+            [
+              "css=.h-ful",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/div[2]/div/div[2]/div)[1]",
+              "xpath:idRelative"
+            ]
+          ]
+        },
+        {
+          "command": "click",
+          "target": "css=.grid:nth-child(3) > .flex:nth-child(3)",
+          "value": "",
+          "id": "c3e9de0f-75fb-4048-8fa9-7fea015cebf9",
+          "fallbackTargets": [
+            [
+              "css=.grid:nth-child(3) > .flex:nth-child(3)",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/div[2]/div/div[2]/div/div[3]/div[3])[1]",
+              "xpath:idRelative"
+            ],
+            [
+              "xpath=//span[contains(.,'C1')]",
+              "xpath:innerText"
+            ]
+          ]
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=.w-1\\/5",
+          "value": "2000",
+          "id": "b5125efe-f43b-42ad-884f-130827011903"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=.w-1\\/5",
+          "value": "",
+          "id": "6d9e9a79-c144-4984-a176-844605c22102",
+          "fallbackTargets": [
+            [
+              "css=.w-1\\/5",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/div[2]/div/div[2]/div/div[12]/button)[1]",
+              "xpath:idRelative"
+            ],
+            [
+              "xpath=//button[contains(.,'Tovább')]",
+              "xpath:innerText"
+            ]
+          ]
+        },
+        {
+          "command": "click",
+          "target": "css=.w-1\\/5",
+          "value": "",
+          "id": "60f275ae-706a-4950-933f-256db4d936b0",
+          "fallbackTargets": [
+            [
+              "css=.w-1\\/5",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/div[2]/div/div[2]/div/div[12]/button)[1]",
+              "xpath:idRelative"
+            ],
+            [
+              "xpath=//button[contains(.,'Tovább')]",
+              "xpath:innerText"
+            ]
+          ]
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=.via-white",
+          "value": "3000",
+          "id": "864112dd-e095-419d-9308-778cec077cfb",
+          "fallbackTargets": [
+            [
+              "css=.via-white",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/main/div[2]/div)[1]",
+              "xpath:idRelative"
+            ]
+          ],
+          "comment": "Megjelenik a teljes foglalás összegzője"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=.via-white",
+          "value": "",
+          "id": "3d2bdef8-8fbe-4ebd-8aad-984d950b6871",
+          "fallbackTargets": [
+            [
+              "css=.via-white",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/main/div[2]/div)[1]",
+              "xpath:idRelative"
+            ]
+          ]
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=.text-black\\/75",
+          "value": "",
+          "fallbackTargets": [
+            [
+              "css=.text-black\\/75",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/main/div[2]/div/div[3])[1]",
+              "xpath:idRelative"
+            ]
+          ],
+          "comment": "Megjelenik a \"DRIVE-IN MOZI FOGLALÁS MEGERŐSÍTÉSE\" felirat",
+          "id": "97528605-32ca-4654-9ef2-a0982afbe72e"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=.text-black\\/75",
+          "value": "",
+          "fallbackTargets": [
+            [
+              "css=.text-black\\/75",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/main/div[2]/div/div[3])[1]",
+              "xpath:idRelative"
+            ]
+          ],
+          "id": "0b99ba75-2196-4f67-bbc6-297a9c742009",
+          "comment": "Megjelenik a \"DRIVE-IN MOZI FOGLALÁS MEGERŐSÍTÉSE\" felirat"
+        },
+        {
+          "command": "assertText",
+          "target": "css=.text-black\\/75",
+          "value": "DRIVE-IN MOZI FOGLALÁS MEGERŐSÍTÉSE",
+          "id": "6d3b47d4-3388-47cb-9f76-782d66b96f66",
+          "fallbackTargets": [
+            [
+              "css=.text-black\\/75",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/main/div[2]/div/div[3])[1]",
+              "xpath:idRelative"
+            ]
+          ]
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=.text-lg:nth-child(2)",
+          "value": "2000",
+          "id": "01488f81-2171-4c2b-9745-1dffad471dc9"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=.text-lg:nth-child(2)",
+          "value": "",
+          "id": "2b97fe3b-e8cf-41f9-bc90-93446c519550",
+          "fallbackTargets": [
+            [
+              "css=.text-lg:nth-child(2)",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/main/div[2]/div/div[6]/div[2])[1]",
+              "xpath:idRelative"
+            ]
+          ],
+          "comment": "A vetítés időpontja megjelenik a kártyán."
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=.inline-flex",
+          "value": "2000",
+          "id": "76bb639d-68af-4901-8ffb-b8676942d245"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=.inline-flex",
+          "value": "",
+          "id": "1d574191-9808-414b-a2d9-e4c3c6372d99",
+          "fallbackTargets": [
+            [
+              "css=.inline-flex",
+              "css:finder"
+            ],
+            [
+              "xpath=(//div[@id='app']/main/div[2]/div/div[7]/div[2]/span)[1]",
+              "xpath:idRelative"
+            ],
+            [
+              "xpath=//span[contains(.,'A1')]",
+              "xpath:innerText"
+            ]
+          ],
+          "comment": "Megjelenik, mely helszín(ek)re foglalt a felhasználó/vendég."
+        },
+        {
+          "command": "close",
+          "target": "",
+          "value": "",
+          "id": "4eac508f-ecfb-41a1-8a2a-b2e0e5e11023"
         }
       ]
     }

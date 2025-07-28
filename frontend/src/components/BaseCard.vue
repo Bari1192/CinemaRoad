@@ -24,7 +24,6 @@ const props = defineProps({
 })
 </script>
 
-
 <template>
   <div class="card w-full h-full bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-700 min-h-[24rem] transition-all duration-200 hover:scale-105
         hover:cursor-pointer">

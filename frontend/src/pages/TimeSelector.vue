@@ -1,10 +1,8 @@
 <template>
   <BaseLayout>
 
-  <!-- csúszka -->
     <Stepper :currentStep="2" />
 
-    <!-- időpontválasztó naptár ITTEN! -->
     <Calendar :screenings="filteredScreenings" @select-screening="onVetítésVálaszt" />
 
     <div class="w-full flex justify-end items-center align-middle ">

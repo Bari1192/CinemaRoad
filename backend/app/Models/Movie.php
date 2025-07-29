@@ -20,7 +20,6 @@ class Movie extends Model
         'duration_min',
         'poster_url',
     ];
-
     public function screenings(): HasMany
     {
         return $this->hasMany(Screening::class);

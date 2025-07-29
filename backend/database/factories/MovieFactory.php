@@ -14,8 +14,8 @@ class MovieFactory extends Factory
         return [
             // 'title' => fake()->text(),
             // 'type' => $movieTypes,
-            'description' => fake()->paragraph(),
-            'duration_min' => fake()->numberBetween(60, 90),
+            // 'description' => fake()->paragraph(),
+            // 'duration_min' => fake()->numberBetween(60, 90),
             // 'poster_url' => "https://example.com/%7B$movieTypes%7D_poster.jpg"
         ];
     }

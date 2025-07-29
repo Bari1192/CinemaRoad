@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DriveInCinemaController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ScreeningController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,3 +17,8 @@ Route::apiResource("screenings", ScreeningController::class);
 Route::apiResource("drive_in_cinemas", DriveInCinemaController::class);
 
 Route::apiResource('movies', MovieController::class);
+
+// Auth
+Route::post("/register", [RegisterController::class, "store"]);
+Route::post("/authenticate", [AuthController::class, "authenticate"]);
+Route::apiResource('/users', UserController::class);

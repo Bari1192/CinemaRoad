@@ -17,11 +17,14 @@
                     :class="selectedGenre === 'Mind' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
                     @click="selectedGenre = 'Mind'">Mind</button>
                 <button class="p-2 rounded-lg"
-                    :class="selectedGenre === 'Adventure' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
-                    @click="selectedGenre = 'Adventure'">Kaland</button>
+                    :class="selectedGenre === 'action' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
+                    @click="selectedGenre = 'action'">Akció</button>
                 <button class="p-2 rounded-lg"
-                    :class="selectedGenre === 'Comedy' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
-                    @click="selectedGenre = 'Comedy'">Vígjáték</button>
+                    :class="selectedGenre === 'family' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
+                    @click="selectedGenre = 'family'">Családi</button>
+                <button class="p-2 rounded-lg"
+                    :class="selectedGenre === 'horror' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
+                    @click="selectedGenre = 'horror'">Horror</button>
             </div>
             <div v-if="filteredMoviesByType.length > 0" class="grid grid-cols-1 md:grid-cols-5 gap-6 mt-10 h-fit">
                 <BaseCardSelector v-for="screening in filteredMoviesByType" @click="selectMovie(screening.movie)"
@@ -46,6 +49,7 @@ import BaseLayout from '@layouts/BaseLayout.vue';
 import Stepper from '@components/layout/Stepper.vue';
 import BaseSpinner from '@components/layout/BaseSpinner.vue';
 import BaseCardSelector from '@components/layout/BaseCard.vue';
+import { set } from 'zod';
 const router = useRouter();
 const movieStore = useMovieStore();
 const screeningStore = useScreeningStore();
@@ -68,8 +72,21 @@ const enrichedScreenings = computed(() => {
         });
 });
 const filteredMoviesByType = computed(() => {
-    if (selectedGenre.value === 'Mind') return enrichedScreenings.value;
-    return enrichedScreenings.value.filter(screening => screening.movie?.type === selectedGenre.value);
+    const seenMovieIds = new Set();
+    const filtered = [];
+    
+    for (const screening of enrichedScreenings.value) {
+        if (!screening.movie) continue;
+
+        if (selectedGenre.value === 'Mind' || screening.movie.type === selectedGenre.value) {
+            if (!seenMovieIds.has(screening.movie.id)) {
+                seenMovieIds.add(screening.movie.id);
+                filtered.push(screening);
+            }
+        }
+    }
+
+    return filtered;
 });
 onMounted(async () => {
     await screeningStore.getScreenings();

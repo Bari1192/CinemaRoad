@@ -26,7 +26,8 @@
             <div v-if="filteredMoviesByType.length > 0" class="grid grid-cols-1 md:grid-cols-5 gap-6 mt-10 h-fit">
                 <BaseCardSelector v-for="screening in filteredMoviesByType" @click="selectMovie(screening.movie)"
                     :key="screening.id" :title="screening.movie?.title" :type="screening.movie?.type"
-                    :src="screening.movie.poster_url" :alt="screening.movie?.title"
+                    :src="`../assets/img${screening.movie.poster_url}`"
+                    :alt="screening.movie?.title"
                     :description="screening.description" 
                     />
             </div>

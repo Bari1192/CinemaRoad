@@ -22,6 +22,12 @@ export const useUserStore = defineStore('user', {
             sessionStorage.setItem('token', this.token);
         },
 
+        async updateUserData(id, data) {
+            const response = await http.put(`/users/${id}`, data);
+
+            return response.data.data;
+        },
+
         async getUser() {
             const token = sessionStorage.getItem("token");
             const response = await http.get("/user", {
@@ -40,7 +46,7 @@ export const useUserStore = defineStore('user', {
 
         async logoutUser() {
             this.token = null;
-            this.userData = null;
+            this.userData = {};
 
             sessionStorage.removeItem("token");
             sessionStorage.removeItem("userData");

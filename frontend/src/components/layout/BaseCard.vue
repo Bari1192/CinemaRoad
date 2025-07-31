@@ -33,7 +33,7 @@ const props = defineProps({
   <div class="card w-full h-full bg-slate-900 shadow-xl overflow-hidden rounded-xl border border-slate-700 transition-all duration-200 hover:scale-105
         hover:cursor-pointer">
     <div class="relative">
-      <img :src="props.src" :alt="props.alt" class="w-full h-full object-cover" />
+      <img :src="`${props.src}`" :alt="props.alt" class="w-full h-full object-cover" />
       <span v-if="props.type && props.type == 'action'" class="text-sky-700 absolute right-0 top-0 text-sm md:text-base font-bold tracking-widest rounded-bl-xl rounded-tr-xl shadow-md shadow-gray-800 uppercase bg-gray-200 py-2.5 px-6
         md:px-6 md:py-2 lg:px-4 lg:py-1.5">
         Akció

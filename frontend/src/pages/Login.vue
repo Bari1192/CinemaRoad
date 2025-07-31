@@ -4,10 +4,11 @@
 
         <div class="w-8/12 mx-auto border border-pink-600 p-6 rounded-lg">
 
-            <FormKit type="form" :actions="false">
+            <FormKit type="form" :actions="false" @submit="handleLogin">
 
                 <div class="w-full md:w-1/2 mx-auto">
                     <FormKit
+                        v-model="email"
                         type="email"
                         name="email"
                         label="E-mail"
@@ -19,6 +20,7 @@
 
                 <div class="w-full md:w-1/2 mx-auto">
                     <FormKit
+                        v-model="password"
                         type="password"
                         name="password"
                         label="Jelszó"
@@ -43,5 +45,25 @@
 </template>
 
 <script setup>
-import BaseLayout from '@layouts/BaseLayout.vue'
+import BaseLayout from '@layouts/BaseLayout.vue';
+import { useUserStore} from '@stores/UserStore.js';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const userStore = useUserStore();
+
+const email = ref('');
+const password = ref('');
+
+const handleLogin = async() => {
+    console.log("Bejelentkezés megkezdése...");
+
+    await userStore.logInUser({
+        email: email.value,
+        password: password.value
+    });
+
+    router.push("/");
+}
 </script>

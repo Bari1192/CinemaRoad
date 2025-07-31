@@ -30,9 +30,15 @@
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 ease-in-out text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-600 has-[.active]:hover:text-white">
             <RouterLink to="#">Helyszínek</RouterLink>
           </li>
-          <li
+
+          <!-- Bejelentkezés -->
+          <li v-if="!userIsLoggedIn"
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 ease-in-out text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-600 has-[.active]:hover:text-white">
             <RouterLink to="/Login">Bejelentkezés</RouterLink>
+          </li>
+          <li v-else
+          class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 ease-in-out text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-600 has-[.active]:hover:text-white">
+          <button @click="handleLogOut">Kijelentkezés</button>
           </li>
         </ul>
       </div>
@@ -40,19 +46,24 @@
   </nav>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      menuOpen: false
-    }
-  },
-  methods: {
-    toggleMenu() {
-      this.menuOpen = !this.menuOpen
-    }
-  }
+<script setup>
+import { ref, computed } from 'vue';
+import { useUserStore } from '@stores/UserStore.js';
+
+
+const userStore = useUserStore();
+
+const menuOpen = ref(false);
+const userIsLoggedIn = computed(()=>userStore.isUserLoggedIn);
+
+const handleLogOut = () => {
+ userStore.logoutUser();
 }
+
+const toggleMenu = () => {
+  menuOpen.value = !menuOpen.value;
+};
+
 </script>
 
 <style>

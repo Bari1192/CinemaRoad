@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DriveInCinemaController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ScreeningController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ Route::get('/user', function (Request $request) {
 
 Route::apiResource("screenings", ScreeningController::class);
 Route::apiResource("drive_in_cinemas", DriveInCinemaController::class);
-
+Route::apiResource("/reservations", ReservationController::class);
 Route::apiResource('movies', MovieController::class);
 
 // Auth

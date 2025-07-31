@@ -2,9 +2,14 @@
 import BaseLayout from '@layouts/BaseLayout.vue'
 import Stepper from '@components/layout/Stepper.vue'
 import { useTicketStore } from '@stores/TicketStore'
-import { computed } from 'vue'
+import { useUserStore } from '@stores/UserStore'
+import { computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
-const ticketStore = useTicketStore()
+const userStore = useUserStore();
+const ticketStore = useTicketStore();
+
+const router = useRouter();
 
 const locationName = computed(() =>
     ticketStore.location?.name || ticketStore.locationName || '–'
@@ -39,6 +44,31 @@ const formattedTime = computed(() => {
     if (isNaN(dateObj)) return input
     return `${dateObj.toLocaleDateString('hu-HU', { year: 'numeric', month: '2-digit', day: '2-digit' })} (${dateObj.toLocaleDateString('hu-HU', { weekday: "long" })}) ${dateObj.toLocaleTimeString('hu-HU', { hour: '2-digit', minute: '2-digit' })}`
 });
+
+const handleConfirmation = async () => {
+    const parkingSpots = Array.isArray(ticketStore.parkingSpot)
+        ? ticketStore.parkingSpot
+        : [ticketStore.parkingSpot];
+
+    for (const spot of parkingSpots) {
+        const reservationData = {
+            user_id: userStore.userID,
+            screening_id: ticketStore.time.id,
+            location_id: ticketStore.location.id,
+            reserved_at: ticketStore.time.start_time,
+            parkingspot: spot
+        };
+
+        await ticketStore.postTicketReservation(reservationData);
+    }
+
+    ticketStore.$reset();
+    router.push("/ThankYouPage");
+};
+
+onMounted(async()=>{
+    await userStore.getUser();
+})
 </script>
 
 <template>
@@ -97,8 +127,8 @@ const formattedTime = computed(() => {
         </div>
         <div class="flex justify-center my-6">
             <button class="px-10 py-3 bg-pink-700 text-white font-bold rounded-xl shadow hover:bg-pink-600 transition"
-                @click="ticketStore.$reset()">
-                Új foglalás
+                @click="handleConfirmation">
+                Foglalás véglegesítése
             </button>
         </div>
     </BaseLayout>

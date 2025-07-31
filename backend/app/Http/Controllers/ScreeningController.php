@@ -13,7 +13,7 @@ class ScreeningController extends Controller
 {
     public function index():JsonResource
     {
-        $data = Screening::with(["DriveInCinema"])->get();
+        $data = Screening::with(["DriveInCinema", "movie"])->get();
 
         return ScreeningResource::collection($data);
     }
@@ -29,7 +29,7 @@ class ScreeningController extends Controller
 
     public function show(Screening $screening):JsonResource
     {
-        return new ScreeningResource($screening->load("DriveInCinema"));
+        return new ScreeningResource($screening->load("DriveInCinema", "show"));
     }
 
     public function update(UpdateScreeningRequest $request, Screening $screening)

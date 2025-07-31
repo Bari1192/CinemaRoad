@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { http } from "@utils/http.mjs";
 
 export const useTicketStore = defineStore("ticketstore", {
   state: () => ({
@@ -7,6 +8,7 @@ export const useTicketStore = defineStore("ticketstore", {
     movie: null,
     time: null,
     parkingSpot: null,
+    screeningId: null
   }),
   actions: {
     setLocation(location) {
@@ -32,6 +34,21 @@ export const useTicketStore = defineStore("ticketstore", {
     setParkingSpot(parkingSpot) {
       this.parkingSpot = parkingSpot;
       localStorage.setItem("parkingSpot", JSON.stringify(parkingSpot));
+    },
+    
+    async postTicketReservation(data){
+      const response = await http.post("/reservations", data);
+      return response.data.data;
+    },
+
+    async getReservations() {
+      try {
+        const response = await http.get("/reservations");
+        return response.data.data;
+      } catch (error) {
+        console.error("Hiba a foglalások lekérdezése közben: ", error);
+        return [];
+      }
     },
 
     clearLocation() {

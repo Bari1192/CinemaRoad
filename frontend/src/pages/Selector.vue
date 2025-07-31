@@ -7,7 +7,7 @@
                     class="rounded-xl shadow-md max-h-80 object-cover md:w-1/2" />
                 <div class="flex flex-col space-y-4 md:w-1/2 md:mt-10">
                     <h1 class="text-3xl font-bold text-pink-600">{{ ticketStore.location.name }}</h1>
-                    <p class="text-base text-pink-700 text-justify md:mt-5">{{ ticketStore.location }}</p>
+                    <p class="text-base text-pink-700 text-justify md:mt-5">{{ ticketStore.location.description }}</p>
                 </div>
             </div>
             <h2 class="text-3xl font-semibold pt-14">Aktuális filmkínálatunk a {{ ticketStore.locationName }}

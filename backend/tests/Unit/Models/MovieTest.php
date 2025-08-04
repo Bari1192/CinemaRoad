@@ -30,15 +30,18 @@ class MovieTest extends TestCase
     {
         $movie = Movie::create([
             'title' => 'Test Movie for Screenings',
+            'type' => 'Test_movie_type',
+            'description' => 'Test_movie_description',
             'duration_min' => 90,
+            'poster_url' => 'N/A_test_poster_url/poster_url'
         ]);
 
         $screening = Screening::create([
             'movie_id' => $movie->id,
             'drive_in_cinema_id' => 1,
-            'start_time' => "2025-06-24 18:00:00",
-            'end_time' => "2025-06-24 20:00:00",
+            'start_time' => now(),
         ]);
+        $movie->refresh();
 
         $this->assertTrue($movie->screenings->contains($screening));
     }
@@ -53,7 +56,6 @@ class MovieTest extends TestCase
             'movie_id' => $movie->id,
             'drive_in_cinema_id' => 1,
             'start_time' => "2025-06-25 10:00:00",
-            'end_time' => "2025-06-25 12:00:00",
         ]);
         $this->assertEquals($movie->id, $screening->movie->id);
     }

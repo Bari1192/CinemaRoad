@@ -28,7 +28,7 @@ class ScreeningTest extends TestCase
             "title" => "TestMovieTitle",
             "description" => "TestMovieDescription",
             "duration_min" => 120,
-            "posterUrl" => "http://test.url/movie_poster.jpg"
+            "poster_url" => "http://test.url/movie_poster.jpg"
         ]);
         $movie->save();
         $cinema = new DriveInCinema([
@@ -54,7 +54,7 @@ class ScreeningTest extends TestCase
             "title" => "TestMovieTitle2",
             "description" => "TestMovieDescription2",
             "duration_min" => 100,
-            "posterUrl" => "http://test.url/movie_poster2.jpg"
+            "poster_url" => "http://test.url/movie_poster2.jpg"
         ]);
 
         $movie->save();

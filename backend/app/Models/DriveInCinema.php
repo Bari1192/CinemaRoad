@@ -20,11 +20,8 @@ class DriveInCinema extends Model
 
     public $table = "drive_in_cinemas";
 
-    public function screenings():HasMany {
+    public function screenings(): HasMany
+    {
         return $this->hasMany(Screening::class);
     }
-
-    // public function parkingSpots():HasMany {
-    //     return $this->hasMany(Parkingspot::class);
-    // }
 }

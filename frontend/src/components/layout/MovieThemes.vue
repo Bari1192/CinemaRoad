@@ -25,8 +25,8 @@ const horrorMovies = computed(() =>
 <template>
     <div
         class="mx-auto w-full md:max-w-7xl lg:max-w-[1800px] my-6 px-2 sm:px-6 py-5 bg-slate-900 rounded-lg shadow-xl mb-8">
-        <h2 class="text-2xl sm:text-4xl md:text-5xl text-white font-bold mb-5 text-start px-2">Családi filmek
-            <div class="max-w-[160px] md:max-w-[325px] h-[4px] bg-yellow-400/80 mt-1 mb-5 rounded-full"></div>
+        <h2 class="text-2xl sm:text-4xl md:text-5xl text-white font-bold mb-5 uppercase text-start px-2">Családi filmek
+            <div class="max-w-[160px] md:max-w-[385px] h-[4px] bg-yellow-400/80 mt-1 mb-5 rounded-full"></div>
         </h2>
         <div
             class="grid grid-cols-2 gap-4 p-2 md:flex md:overflow-x-auto md:-mx-4 md:px-4 md:pb-8 md:gap-0 md:custom-scrollbar-family">
@@ -72,8 +72,8 @@ const horrorMovies = computed(() =>
 
     <div
         class="mx-auto w-full md:max-w-7xl lg:max-w-[1800px] my-6 px-2 sm:px-6 py-5 bg-slate-900 rounded-lg shadow-xl mb-8">
-        <h2 class="text-2xl sm:text-4xl md:text-5xl text-white font-bold  text-start px-2">Horror Filmek
-            <div class="max-w-[160px] md:max-w-[325px] h-[4px] bg-red-600/75 mt-1 mb-5 rounded-full"></div>
+        <h2 class="text-2xl sm:text-4xl md:text-5xl text-white font-bold uppercase text-start px-2">Horror Filmek
+            <div class="max-w-[160px] md:max-w-[385px] h-[4px] bg-red-600/75 mt-1 mb-5 rounded-full"></div>
         </h2>
         <div
             class="grid grid-cols-2 gap-4 p-2 md:flex md:overflow-x-auto md:-mx-4 md:px-4 md:pb-8 md:gap-0 md:custom-scrollbar-family">

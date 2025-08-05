@@ -13,6 +13,10 @@ class Movie extends Model
     protected $table = 'movies';
     public $timestamps = true;
 
+    protected $casts = [
+        'release_date' => 'date',
+    ];
+
     protected $fillable = [
         'title',
         'description',

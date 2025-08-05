@@ -19,7 +19,12 @@ class StoreMovieRequest extends FormRequest
             'description' => ['required', 'string', 'max:255'],
             'type' => ['required', 'string', 'max:20'],
             'director' => ['required', 'string', 'max:50'],
-            'release_date' => ['required', Rule::date('YY:mm')->beforeOrEqual(today()->subMonth(6))],
+            'release_date' => [
+                'required',
+                'date',
+                'after_or_equal:' . now()->subDays(180)->format('Y-m-d'),
+                'before_or_equal:' . now()->format('Y-m-d')
+            ],
             'duration_min' => ['required', 'integer', 'min:0'],
             'poster_url' => ['required', 'string', 'url'],
         ];

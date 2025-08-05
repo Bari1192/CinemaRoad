@@ -5,6 +5,7 @@ namespace Tests\Unit\Models;
 use App\Models\DriveInCinema;
 use App\Models\Movie;
 use App\Models\Screening;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -30,7 +31,7 @@ class MovieRelationshipTest extends TestCase
             'description' => 'A description for the test movie.',
             'duration_min' => 100,
             'poster_url' => 'http://example.com/test_movie_poster.jpg',
-            'release_date' => date_format(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
             'director' => fake()->firstName() . ' ' . fake()->lastName(),
             'created_at' => now(),
             'updated_at' => now(),
@@ -52,7 +53,7 @@ class MovieRelationshipTest extends TestCase
             'title' => 'Another movie for cinema',
             'type' => 'Action',
             'description' => 'Another description for the test movie.',
-            'release_date' => date_format(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
             'director' => fake()->firstName() . ' ' . fake()->lastName(),
             'duration_min' => 80,
             'poster_url' => 'http://example.com/another_test_movie_poster.jpg',

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Movie;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -24,7 +25,7 @@ class MovieSeeder extends Seeder
                     'poster_url' => $movieData['poster_url'],
                     'type' => $movieType,
                     'director' => fake()->firstName() . ' ' . fake()->lastName(),
-                    'release_date' => date_format(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+                    'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
                     'duration_min' => fake()->numberBetween(60, 90),
                 ]);
             }

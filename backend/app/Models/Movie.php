@@ -17,8 +17,12 @@ class Movie extends Model
         'title',
         'description',
         'type',
+        'release_date',
+        'director',
         'duration_min',
         'poster_url',
+        'created_at',
+        'updated_at',
     ];
     public function screenings(): HasMany
     {

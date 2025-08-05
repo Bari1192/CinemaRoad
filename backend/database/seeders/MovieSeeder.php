@@ -12,7 +12,7 @@ class MovieSeeder extends Seeder
     {
         $categoryTypes = [
             'action' => '/Action_Movies_img',
-            'family' => '/Family_Movies_img', 
+            'family' => '/Family_Movies_img',
             'horror' => '/Horror_Movies_img',
         ];
 
@@ -21,8 +21,10 @@ class MovieSeeder extends Seeder
                 Movie::create([
                     'title' => $movieData['title'],
                     'description' => $movieData['description'],
-                    'poster_url' => $movieData['poster_url'], 
+                    'poster_url' => $movieData['poster_url'],
                     'type' => $movieType,
+                    'director' => fake()->firstName() . ' ' . fake()->lastName(),
+                    'release_date' => date_format(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
                     'duration_min' => fake()->numberBetween(60, 90),
                 ]);
             }

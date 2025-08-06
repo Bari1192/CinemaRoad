@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Movie;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class MovieSeeder extends Seeder
 {
@@ -27,6 +26,7 @@ class MovieSeeder extends Seeder
                     'director' => fake()->firstName() . ' ' . fake()->lastName(),
                     'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
                     'duration_min' => fake()->numberBetween(60, 90),
+                    'actors' => $this->generateActors($movieType)
                 ]);
             }
         }
@@ -62,5 +62,13 @@ class MovieSeeder extends Seeder
                 ["title" => "Fekete Tó", "description" => "A nyári táborozás pokollá válik, mikor a tó partján különös események kezdődnek. Valami a víz alatt figyel... és sosem jött fel levegőért.", "poster_url" => $basePathToImgs . '/Fekete_to.jpg'],
             ],
         };
+    }
+    public function generateActors(string $movieType): array
+    {
+        if ($movieType != 'Family') {
+            return collect(range(1, rand(15, 30)))->map(fn() => fake()->firstName() . ' ' . fake()->lastName())->toArray();
+        } else {
+            return [];
+        }
     }
 }

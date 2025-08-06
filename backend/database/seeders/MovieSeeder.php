@@ -65,7 +65,7 @@ class MovieSeeder extends Seeder
     }
     public function generateActors(string $movieType): array
     {
-        if ($movieType != 'Family') {
+        if ($movieType !== 'family') {
             return collect(range(1, rand(15, 30)))->map(fn() => fake()->firstName() . ' ' . fake()->lastName())->toArray();
         } else {
             return [];

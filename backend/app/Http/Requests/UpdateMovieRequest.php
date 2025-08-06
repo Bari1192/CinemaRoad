@@ -27,6 +27,14 @@ class UpdateMovieRequest extends FormRequest
             ],
             'duration_min' => ['required', 'integer', 'min:0'],
             'poster_url' => ['required', 'string', 'url'],
+            'actors' => [ 
+                Rule::when(
+                    request('type') !== 'Family',
+                    ['nullable', 'array'],
+                    ['nullable', 'prohibited']
+                )
+            ],
+            'actors.*' => ['string'],
         ];
     }
 }

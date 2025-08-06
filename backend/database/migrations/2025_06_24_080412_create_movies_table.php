@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("director", 50);
             $table->unsignedInteger('duration_min');
             $table->string('poster_url');
+            $table->json('actors')->nullable();
             $table->timestamps();
         });
     }

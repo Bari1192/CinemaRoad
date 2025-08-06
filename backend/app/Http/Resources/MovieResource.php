@@ -19,6 +19,7 @@ class MovieResource extends JsonResource
             'description' => $this->description,
             'duration_min' => $this->duration_min,
             'poster_url' => $this->poster_url,
+            'actors' => $this->actors,
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d h:m'),
             'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d h:m'),
         ];

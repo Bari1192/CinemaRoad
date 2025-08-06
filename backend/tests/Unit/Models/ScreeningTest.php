@@ -5,6 +5,7 @@ namespace Tests\Unit\Models;
 use App\Models\DriveInCinema;
 use App\Models\Movie;
 use App\Models\Screening;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
@@ -28,7 +29,13 @@ class ScreeningTest extends TestCase
             "title" => "TestMovieTitle",
             "description" => "TestMovieDescription",
             "duration_min" => 120,
-            "poster_url" => "http://test.url/movie_poster.jpg"
+            "poster_url" => "http://test.url/movie_poster.jpg",
+            'description' => 'Description',
+            'type' => 'Action',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $movie->save();
         $cinema = new DriveInCinema([
@@ -43,7 +50,7 @@ class ScreeningTest extends TestCase
             "drive_in_cinema_id" => $cinema->id,
             "start_time" => "2025-06-23 16:00:00"
         ]);
-        $screening->save(); 
+        $screening->save();
         $retrievedScreening = Screening::find($screening->id);
         $this->assertEquals($movie->id, $retrievedScreening->movie->id);
     }
@@ -54,7 +61,13 @@ class ScreeningTest extends TestCase
             "title" => "TestMovieTitle2",
             "description" => "TestMovieDescription2",
             "duration_min" => 100,
-            "poster_url" => "http://test.url/movie_poster2.jpg"
+            "poster_url" => "http://test.url/movie_poster2.jpg",
+            'description' => 'Description',
+            'type' => 'Action',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         $movie->save();

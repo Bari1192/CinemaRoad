@@ -27,6 +27,14 @@ class StoreMovieRequest extends FormRequest
             ],
             'duration_min' => ['required', 'integer', 'min:0'],
             'poster_url' => ['required', 'string', 'url'],
+            'actors' => [ // így a 'family' esetén nem fogja engedni hozzáírni az 'actors' részhez!
+                Rule::when(
+                    request('type') !== 'Family',
+                    ['nullable', 'array'],
+                    ['nullable', 'prohibited'] 
+                )
+            ],
+            'actors.*' => ['string'],
         ];
     }
 }

@@ -15,6 +15,7 @@ class Movie extends Model
 
     protected $casts = [
         'release_date' => 'date',
+        'actors' => 'array',
     ];
 
     protected $fillable = [
@@ -25,6 +26,7 @@ class Movie extends Model
         'director',
         'duration_min',
         'poster_url',
+        'actors',
         'created_at',
         'updated_at',
     ];

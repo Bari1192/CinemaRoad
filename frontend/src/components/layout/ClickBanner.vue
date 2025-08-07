@@ -73,29 +73,32 @@ onUnmounted(() => {
 });
 </script>
 
-
 <template>
   <div class="container mx-auto w-full h-full px-0 mt-5 mb-10 xl:my-10 relative overflow-hidden">
-    <div class="carousel-container h-full w-full min-h-[40dvh] max-h-[70dvh] xl:h-[90vh]" @mouseenter="stopAutoplay"
-      @mouseleave="startAutoplay">
-      <div v-for="(movie, index) in movies" :key="index" :class="[
-        'carousel-item absolute w-full h-full transition-transform duration-1000 ease-in-out overflow-hidden border-y-4 border-slate-600 lg:rounded-2xl',
-        { 'active-slide': index === activeIndex }
-      ]" :style="getSlideTransform(index)">
-        <img :src="movie.imageUrl" :alt="movie.title"
-          class="w-full h-full object-cover lg:rounded-lg shadow-xl overflow-hidden">
-        <div class="absolute right-0 top-0 bg-gradient-to-b from-black via-black/70 to-transparent text-white lg:rounded-r-lg overflow-hidden
+    
+    <router-link :to="'/movies/LandingPage'">
+      <div class="carousel-container h-full w-full min-h-[40dvh] max-h-[70dvh] xl:h-[90vh]" @mouseenter="stopAutoplay"
+        @mouseleave="startAutoplay">
+        <div v-for="(movie, index) in movies" :key="index" :class="[
+          'carousel-item absolute w-full h-full transition-transform duration-1000 ease-in-out overflow-hidden border-y-4 border-slate-600 lg:rounded-2xl',
+          { 'active-slide': index === activeIndex }
+        ]" :style="getSlideTransform(index)">
+          <img :src="movie.imageUrl" :alt="movie.title"
+            class="w-full h-full object-cover lg:rounded-lg shadow-xl overflow-hidden">
+          <div class="absolute right-0 top-0 bg-gradient-to-b from-black via-black/70 to-transparent text-white lg:rounded-r-lg overflow-hidden
         pl-6 pt-2 pr-4 pb-8
         md:pl-8 md:pt-3 md:pb-12
         lg:pl-12 lg:pt-8 lg:pb-16
         xl:pl-12 xl:pt-8 xl:pb-16
         ">
-          <h3 class="text-base md:text-xl lg:text-2xl xl:text-4xl font-bold mt-1 text-right">{{ movie.title }}</h3>
-          <p class="before_premier text-sm md:text-lg lg:text-xl xl:text-2xl text-right italic lg:mt-1.5 text-pink-500"
-            :class="movie.title === 'Dustzone: Last Run' ? 'text-pink-200 font-semibold' : ''">Premier előtti vetítés</p>
+            <h3 class="text-base md:text-xl lg:text-2xl xl:text-4xl font-bold mt-1 text-right">{{ movie.title }}</h3>
+            <p class="before_premier text-sm md:text-lg lg:text-xl xl:text-2xl text-right italic lg:mt-1.5 text-pink-500"
+              :class="movie.title === 'Dustzone: Last Run' ? 'text-pink-200 font-semibold' : ''">Premier előtti vetítés
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </router-link>
 
     <button @click="!isPrevDisabled && prevSlide()" class="carousel-control-btn absolute left-4 top-1/2 -translate-y-1/2 rounded-full hover:bg-opacity-75 transition-all duration-300 z-10 
       bg-gray-800 border-2 border-gray-900 shadow-md shadow-gray-900/55 text-white
@@ -127,8 +130,7 @@ onUnmounted(() => {
 
     <div
       class="lg:hidden mb-2 carousel-indicators absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-2 z-10 bg-gray-400/70 rounded-lg p-1">
-      <button v-for="(movie, index) in movies" :key="'indicator-' + index" @click="goToSlide(index)"
-        :class="['md:w-6 md:h-6 w-4 h-4 rounded-full bg-gray-400 border border-white/25 shadow-sm shadow-black/50 hover:bg-pink-100 transition-colors duration-300'
+      <button v-for="(movie, index) in movies" :key="'indicator-' + index" @click="goToSlide(index)" :class="['md:w-6 md:h-6 w-4 h-4 rounded-full bg-gray-400 border border-white/25 shadow-sm shadow-black/50 hover:bg-pink-100 transition-colors duration-300'
         , { 'bg-pink-500': index === activeIndex }]"></button>
     </div>
 

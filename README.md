@@ -1,36 +1,6 @@
 # 🎬 Cinema Road – Drive-in Mozi 
-## 1️⃣ Eszközök telepítése
 
-### 🖥️ 1.1 Visual Studio Code
-
-1. Böngészőben menj ide: [Visual Studio Code letöltése](https://code.visualstudio.com/)  
-2. Válaszd ki a rendszered (Windows/Mac/Linux), töltsd le, telepítsd.
-3. Indítsd el a Visual Studio Code-ot!
-
-**Tipp:**  
-Terminál megnyitása:  
-- Menüsor: **Nézet → Terminál**  
-- vagy: **Ctrl + `** (magyar billentyűzeten: _Alt Gr + 7_)
-
----
-
-### 🐙 1.2 Git telepítése
-
-1. Menj ide: [Git letöltése](https://git-scm.com/downloads)
-2. Válaszd ki a rendszert, telepítsd.
-3. VS Code automatikusan érzékelni fogja!
-
----
-
-### 🐳 1.3 Docker Desktop telepítése
-
-1. Nyisd meg: [Docker Desktop letöltése](https://www.docker.com/products/docker-desktop)
-2. Válassz rendszert (Windows/Mac), töltsd le, telepítsd, indítsd el!
-3. **Fontos:** mindig legyen elindítva, mielőtt dolgozol!
-
----
-
-## 2️⃣ A projekt letöltése (klónozás)
+## 1️⃣ A projekt letöltése (klónozás)
 
 1. VS Code-ban **nyiss Terminált** (lásd fent).
 2. Válaszd ki a mappát, ahova mented:
@@ -48,7 +18,7 @@ Terminál megnyitása:
 
 ---
 
-## 3️⃣ Környezeti változók beállítása (.env)
+## 2️⃣ Környezeti változók beállítása (.env)
 
 1. Másold az alapértelmezett beállításokat:
    ```bash
@@ -59,7 +29,7 @@ Terminál megnyitása:
 
 ---
 
-## 4️⃣ Indítás 💡 / Leállítás 🛑 / Törlés ❌
+## 3️⃣ Indítás 💡 / Leállítás 🛑 / Törlés ❌
 
 ### 🚦 Indítás (bármikor):
 A CinemaRoad mappájában:
@@ -89,7 +59,7 @@ docker compose down -v
 
 ---
 
-## 5️⃣ Mi van a projektben?
+## 4️⃣ Mit tartalmaz a projekt?
 
 - `frontend/` – felhasználói (Vue.js) alkalmazás
 - `backend/` – szerver és adatbázis (PHP/Laravel)
@@ -101,7 +71,7 @@ docker compose down -v
 
 ---
 
-## 6️⃣ Hibakeresés, karbantartás 🛠️
+## 5️⃣ Hibakeresés és karbantartás 🛠️
 
 - Logok: `backend/storage/logs`
 - Ha valami nem jó: leállítás + újraindítás!

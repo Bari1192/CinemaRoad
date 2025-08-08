@@ -38,7 +38,7 @@ class MovieSeeder extends Seeder
                     "poster_url" => $basePathToImgs . '/Neon_Siege.webp'
                 ],
 
-                ["title" => "Steel Horizon", "description" => "A jövő tengerein már nem a hullámok uralkodnak. Egy renegát kapitány és csapata harcba száll a világ utolsó olajkészleteiért – a túlélés ára az árulás.", "poster_url" => $basePathToImgs . '/steel_horizon.jpg'],
+                ["title" => "Steel Horizon", "description" => "A jövő tengerein már nem a hullámok uralkodnak. Egy renegát kapitány és csapata harcba száll a világ utolsó olajkészleteiért – a túlélés ára az árulás.", "poster_url" => $basePathToImgs . '/steel_horizon.webp'],
                 ["title" => "Bullet Protocol", "description" => "Egy titkos ügynök utolsó küldetése gyorsan személyes bosszúvá válik. A golyók útját senki sem állíthatja meg – főleg, ha a célpont a rendszer maga.", "poster_url" => $basePathToImgs . '/Bullet_Protocol.webp'],
                 ["title" => "Urban Vendetta", "description" => "Az utcákon nincs igazság, csak túlélés. Egy visszavonult zsaru újra fegyvert ragad, hogy megtisztítsa a várost attól, amit egykor ő is segített felépíteni.", "poster_url" => $basePathToImgs . '/Urban_Vendetta.webp'],
                 ["title" => "Code Red Omega", "description" => "Egy globális kibertámadás csak a kezdet. Egy elit hackercsapat versenyt fut az idővel, hogy megállítsa az Omega-protokoll aktiválását – vagy vége az emberiségnek.", "poster_url" => $basePathToImgs . '/Code_Red.webp'],

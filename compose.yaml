@@ -112,3 +112,5 @@ services:
     image: dockage/mailcatcher:0.9.0
     networks:
       - fullstack
+    ports:
+      - "1025:1025"

@@ -22,6 +22,8 @@ docker compose exec backend php artisan migrate:fresh --seed
 
 docker compose exec backend php artisan storage:link
 
+docker compose exec backend php artisan test
+
 if [ -z "${APP_KEY}" ]; then
     docker compose exec backend php artisan key:generate
 else

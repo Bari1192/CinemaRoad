@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Reservation extends Model
 {
@@ -17,18 +18,22 @@ class Reservation extends Model
         "location_id",
         "reserved_at",
         "parkingspot",
-        "created_at"
     ];
 
     public $timestamps = true;
 
-    public function screening()
+    public function screening(): BelongsTo
     {
         return $this->belongsTo(Screening::class);
     }
 
-    public function location()
+    public function location(): BelongsTo
     {
         return $this->belongsTo(DriveInCinema::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

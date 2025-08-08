@@ -22,10 +22,28 @@ class RegisterUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => ["required", "string", "max:255"],
-            "email" => ["required", "email:rfc"],
-            "phone" => ["required", "string", "max:50"],
-            "password" => ["required", "string", "min:8"],
+            "name" => ["required",
+                        "string",
+                        "max:60",
+                        "min:6"], // Legrövidebb név: Úr Pál (?) tudjon regisztrálni.
+
+            "email" => ["required",
+                        "email:rfc",
+                        "min:15",
+                        "max:50",
+                        'regex:/@(?:gmail|freemail|yahoo|citromail|outlook)\.(com|hu)$/'],
+
+            "phone" => ["required",
+                        "string",
+                        "max:50",
+                        "min:6",
+                        "regex:/^\+?(06)?(20|30|40|70)\d{7}$/"],
+
+            "password" => ["required",
+                        "string",
+                        "min:8",
+                        "max:50",
+                        'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,50}$/'],
         ];
     }
 }

@@ -27,7 +27,7 @@
 
         <div class="grid grid-cols-2 md:flex-row gap-4 justify-center lg:justify-start w-full">
 
-          <router-link :to="'/tickets'" class="md:flex md:justify-end">
+          <router-link :to="'/LocationChoose'" class="md:flex md:justify-end">
             <button class="order-2 lg:order-1 bg-gradient-to-r from-pink-600 to-pink-800 hover:from-pink-700 hover:to-pink-900
               border-2 border-pink-300/70 
                rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl

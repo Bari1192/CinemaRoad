@@ -15,13 +15,13 @@ class ScreeningSeeder extends Seeder
     {
         $startDay = Carbon::parse(today());
 
-        $howManyDays = 5;
+        $howManyDays = 14;
 
         foreach (DriveInCinema::all() as $cinema) {
 
             for ($day = 0; $day < $howManyDays; $day++) { 
                 $currentDay = (clone $startDay)->addDays($day);
-                $movies = Movie::inRandomOrder()->take(5)->get();
+                $movies = Movie::inRandomOrder()->take(4)->get();
     
                 $startTime = (clone $currentDay)->setTime(16, 30);
     

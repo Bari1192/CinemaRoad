@@ -25,7 +25,7 @@ class StoreReservationRequest extends FormRequest
             "user_id" => ["required", "integer", "min:0", "exists:users,id"],
             "screening_id" => ["required", "integer", "min:0", "exists:screenings,id"],
             "reserved_at" => ["required", "date"],
-            "parkingspot" => ["required", "string", "max:4"],
+            "parkingspot" => ["required", "string"],
             "location_id" => ["required", "integer", "min:0", "exists:drive_in_cinemas,id"]
         ];
     }

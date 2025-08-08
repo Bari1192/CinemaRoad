@@ -50,23 +50,26 @@ const handleConfirmation = async () => {
         ? ticketStore.parkingSpot
         : [ticketStore.parkingSpot];
 
-    for (const spot of parkingSpots) {
-        const reservationData = {
-            user_id: userStore.userID,
-            screening_id: ticketStore.time.id,
-            location_id: ticketStore.location.id,
-            reserved_at: ticketStore.time.start_time,
-            parkingspot: spot
-        };
+        const parkingSpotsConcat = parkingSpots.join(',');
+    const reservationData = {
+        user_id: userStore.userID,
+        screening_id: ticketStore.time.id,
+        location_id: ticketStore.location.id,
+        reserved_at: ticketStore.time.start_time,
+        parkingspot: parkingSpotsConcat
+    };
 
-        await ticketStore.postTicketReservation(reservationData);
-    }
+    await ticketStore.postTicketReservation(reservationData);
+
+
+    console.log("parkingSpots: ", typeof (parkingSpots), parkingSpots);
+
 
     ticketStore.$reset();
     router.push("/ThankYouPage");
 };
 
-onMounted(async()=>{
+onMounted(async () => {
     await userStore.getUser();
 })
 </script>

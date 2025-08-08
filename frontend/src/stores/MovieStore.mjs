@@ -1,10 +1,12 @@
 import { ref } from "vue";
 import { http } from "@utils/http.mjs";
 import { defineStore } from "pinia";
+import { controlledComputed } from "@vueuse/core";
 
 export const useMovieStore = defineStore("movies", () => {
   const movies = ref([]);
   const movie = ref();
+  const movieDetails = ref(null);
 
   async function getMovies() {
     try {
@@ -60,14 +62,43 @@ export const useMovieStore = defineStore("movies", () => {
     }
   }
 
+  function setMovieRoute(movieObj) {
+    movieDetails == movieObj;
+  }
+
+  function storeMovieToLocalStore(movieObj) {
+    try {
+
+      movieDetails.value = movieObj;
+      localStorage.setItem('movieDetails', JSON.stringify(movieObj));
+      console.log("Film objektum sikeresen elmentve")
+
+    } catch (error) {
+
+     console.error("Hiba a film objektum tárolóba való elmentése során: ", error) 
+     
+    }
+  }
+
+  function clearMovieDetails() {
+    movieDetails == null;
+    movie == null;
+    localStorage.removeItem('movieDetails');
+  }
+  
+
   return {
     movies,
     movie,
+    movieDetails,
 
     getMovies,
     getMovie,
     createMovie,
     updateMovie,
     deleteMovie,
+    setMovieRoute,
+    storeMovieToLocalStore,
+    clearMovieDetails,
   };
 });

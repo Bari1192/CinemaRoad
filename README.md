@@ -5,7 +5,7 @@
 1. VS Code-ban **nyiss Terminált** (lásd fent).
 2. Válaszd ki a mappát, ahova mented:
    ```bash
-   cd /ahová_kell/
+   cd /altalad_valasztott_mappa/
    ```
 3. Írd be:
    ```bash
@@ -20,16 +20,14 @@
 
 ## 2️⃣ Környezeti változók beállítása (.env)
 
-1. Másold az alapértelmezett beállításokat:
-   ```bash
-   cp backend/.env.example backend/.env
-   ```
-2. Ha szeretnél, **szerkeszd a backend/.env** fájlt (pl. jelszó, email…)
-3. Első indításhoz elég az alapértelmezett érték!
+1. Az alapértelmezett beállításokat a `.env.example` fájl tartalmazza a projekthez.
+2. Amennyiben változtatni szeretnéd, **szerkeszd a backend/.env.example** fájlt (pl. jelszó, email…)
+3. A változtatásaid alapján jön létre a gyökérkönyvtárban a `.env` fájl, melyre a projekt épül.
+4. Első indításhoz az alapértelmezett értékekkel elegendő futtatni!
 
 ---
 
-## 3️⃣ Indítás 💡 / Leállítás 🛑 / Törlés ❌
+## 3️⃣ Indítás ▶️ / Leállítás ⏸️ / Törlés ❌
 
 ### 🚦 Indítás (bármikor):
 A CinemaRoad mappájában:
@@ -43,7 +41,7 @@ sh start.sh
 ```bash
 sh ./start.sh
 ```
-- Ez **elindít minden szervert és adatbázist**!
+- Ez **elindít minden szervert, adatbázist és a függőségek telepítését is elvégzi**!
 
 ### 🛑 Leállítás:
 ```bash
@@ -55,7 +53,7 @@ docker compose stop
 ```bash
 docker compose down -v
 ```
-- Ezzel *minden újraindul*, minden eddigi adat (felhasználók, filmek stb.) elveszik.
+- Ezzel *minden újraindul*, minden eddigi adat *(felhasználók, filmek stb.)* elveszik.
 
 ---
 

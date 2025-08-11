@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useMovieStore } from '@stores/MovieStore.mjs'
-import Family from '@assets/svg/Family.vue'
+import Family from '@assets/svg/ZeroPlus.vue'
 import SixteenPlus from '@assets/svg/SixteenPlus.vue'
 import EighteenPlus from '@assets/svg/EighteenPlus.vue'
 

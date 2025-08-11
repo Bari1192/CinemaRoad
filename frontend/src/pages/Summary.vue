@@ -66,7 +66,7 @@ const handleConfirmation = async () => {
     router.push("/ThankYouPage");
 };
 
-onMounted(async()=>{
+onMounted(async () => {
     await userStore.getUser();
 })
 </script>
@@ -74,9 +74,11 @@ onMounted(async()=>{
 <template>
     <BaseLayout>
         <Stepper :currentStep="4" />
-        <div class="flex justify-center mt-20">
+        <div class="flex justify-center mt-20 mx-4">
             <div
-                class=" via-white pink-600 shadow-xl border-[3px] border-dashed border-slate-500/75 rounded-3xl w-full max-w-lg relative py-8 px-6 ticket overflow-hidden">
+                class=" via-white pink-600 shadow-xl border-[3px] border-dashed border-slate-500/75 rounded-3xl w-full max-w-lg relative 
+                py-8 px-6 ticket overflow-hidden
+                md: pb-4">
                 <!-- Jegy perforáció -->
                 <div
                     class="absolute left-0 top-16 h-32 w-6 bg-white border-r-4 border-dashed border-indigo-300 rounded-r-2xl -z-10">
@@ -85,48 +87,51 @@ onMounted(async()=>{
                     class="absolute right-0 bottom-16 h-32 w-6 bg-white border-l-4 border-dashed border-pink-300 rounded-l-2xl -z-10">
                 </div>
                 <!-- Mozi neve -->
-                <div class="text-lg text-black/75 font-bold mb-1 uppercase text-center">Drive-in mozi foglalás
+                <div class="text-xl text-black/75 font-bold mb-1 uppercase text-center">Drive-in mozi foglalás
                     megerősítése</div>
-                <div class="text-3xl font-bold text-pink-600 mb-2">{{ locationName }}</div>
+                <div class="text-2xl lg:text-3xl mt-4 lg:underline underline-offset-4 font-bold text-pink-600 mb-2 lg:text-center">{{ locationName }}</div>
                 <!-- Film -->
-                <div class="flex items-center gap-4 py-5  border-pink-100 mb-6">
-                    <img v-if="moviePoster" :src="moviePoster"
-                        class="w-20 h-28 object-cover rounded-lg border border-gray-200 shadow-md" />
+                <div class="flex items-center gap-4 py-5  border-pink-100 flex-col md:flex-row w-full">
                     <div>
-                        <div class="text-xl font-extrabold text-gray-800">{{ movieTitle }}</div>
-                        <div class="text-xs text-pink-900 font-bold uppercase opacity-60 tracking-wider mb-2">
-                            Kiválasztott film</div>
-                        <div class="text-gray-500">{{ movieDesc }}</div>
+                    <img v-if="moviePoster" :src="`../src/assets/img/${moviePoster}`"
+                        class="w-full h-fit object-cover rounded-lg border border-gray-200 shadow-md" />
+                    </div>
+                    <div>
+                        <div class="text-sm underline underline-offset-4 text-pink-900 font-bold uppercase opacity-70 tracking-wider mb-2">
+                            Kiválasztott film:
+                            </div>
+                        <div class="mx-auto text-lg font-bold text-gray-700">{{ movieTitle }}</div>
+                        <div class="mt-2 italic text-gray-500">{{ movieDesc }}</div>
                     </div>
                 </div>
                 <!-- Időpont -->
-                <div class="flex flex-col my-6 gap-2 px-2">
-                    <div class="font-semibold text-gray-500 text-xl tracking-wider">Vetítés időpontja</div>
-                    <div class="text-lg font-extrabold tracking-wider text-pink-900"
+                <div class="flex flex-col gap-2">
+                    <div class="underline underline-offset-4 text-pink-900 font-bold uppercase opacity-70 text-sm lg:text-base">Vetítés időpontja</div>
+                    <div class="text-lg font-bold tracking-wider text-gray-700"
                         style="font-family: 'Nunito','Arial','Times New Roman', Times, serif;">
                         {{ formattedTime }}
                     </div>
                 </div>
                 <!-- Parkolóhely(ek) -->
-                <div class="flex flex-col gap-2 mt-2 px-2">
-                    <div class="font-semibold text-gray-500 text-xl tracking-wider">Foglalásod a következő hely(ek)re
+                <div class="flex flex-col gap-2 mt-6 border-y-4 border-dashed border-slate-500 py-4 md:w-4/5">
+                    <div class="text-pink-800 font-extrabold lg:font-bold tracking-wider uppercase opacity-70 text-sm lg:text-base">Foglalásod a következő hely(ek)re
                         szól:</div>
                     <div class="flex gap-2 flex-wrap mt-1">
                         <span v-for="(place, i) in parkings" :key="i"
-                            class="inline-flex items-center gap-1 px-4 py-2 rounded-full border font-bold bg-gradient-to-br from-pink-100 to-pink-300 border-pink-300 text-pink-900 shadow-sm tracking-wide">
-                            <span class="material-icons text-lg text-pink-500"></span> {{ place }} <!-- sor / oszlop -->
+                            class="inline-flex items-center gap-1 px-2 py-1 md:px-4 md:py-2 rounded-full border font-bold bg-gradient-to-br 
+                            from-pink-100 to-pink-300 border-pink-300 text-pink-900 shadow-sm tracking-wide">
+                            <span class="material-icons text-lg text-black/75">{{ place }}</span> 
                         </span>
                     </div>
                 </div>
-                <!-- Jegy “aláírás"/footer” sáv -->
                 <div
-                    class="border-t-4 border-dashed border-slate-400 mt-10 pt-7 text-center text-lg font-medium text-gray-700">
+                    class="italic mt-6 md:mt-2 pt-4 text-center text-lg font-medium text-gray-700">
                     Jó szórakozást kívánunk a Cinema Road csapata!
                 </div>
             </div>
         </div>
-        <div class="flex justify-center my-6">
-            <button class="px-10 py-3 bg-pink-700 text-white font-bold rounded-xl shadow hover:bg-pink-600 transition"
+        <div class="flex justify-center my-10">
+            <button class="text-lg px-10 py-3 bg-pink-700 border border-white/55 shadow-md shadow-pink-400/45 text-white uppercase font-bold rounded-xl hover:bg-pink-600 transition"
                 @click="handleConfirmation">
                 Foglalás véglegesítése
             </button>

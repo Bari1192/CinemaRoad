@@ -4,7 +4,7 @@ import BaseLayout from '@layouts/BaseLayout.vue'
 import dustzoneImg from '@assets/img/Main_Slider_img/Dustzone_last_run.webp'
 import nightfireImg from '@assets/img/Main_Slider_img/Nightfire_redemption.webp'
 import realmshatterImg from '@assets/img/Main_Slider_img/Realmshatter.webp'
-import Family from '@assets/svg/Family.vue'
+import Family from '@assets/svg/ZeroPlus.vue'
 import SixteenPlus from '@assets/svg/SixteenPlus.vue'
 import EighteenPlus from '@assets/svg/EighteenPlus.vue'
 

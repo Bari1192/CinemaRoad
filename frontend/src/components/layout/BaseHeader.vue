@@ -16,7 +16,11 @@
           style="font-family: 'Cookie','Arial','Times New Roman', Times, serif;">
           <li
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 ease-in-out text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-600 has-[.active]:hover:text-white">
-            <RouterLink to="#">Special Week</RouterLink>
+            <RouterLink to="/movies/SpecialWeek">Special Week</RouterLink>
+          </li>
+          <li
+            class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 ease-in-out text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-600 has-[.active]:hover:text-white">
+            <RouterLink to="/movies/MovieWeek">Mozihét</RouterLink>
           </li>
           <li
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 ease-in-out text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-600 has-[.active]:hover:text-white">

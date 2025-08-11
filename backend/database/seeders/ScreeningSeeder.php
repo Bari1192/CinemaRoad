@@ -2,69 +2,43 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
 use App\Models\DriveInCinema;
 use App\Models\Movie;
 use App\Models\Screening;
 use Carbon\Carbon;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class ScreeningSeeder extends Seeder
 {
-    public function run(): void
-    {
-        $startDay = Carbon::parse(today());
+    // 3 és 4 között random generálja a vetítések számát naponta.
+    // NEM ismétlődnek a filmek egymás után, random lehívja a filmeket és annyit tölt bele, ahány vetítés kell aznap!
+    // Előző filmidő + 20 perc szünetet számol >> így áll össze 1 'blokk'!
 
-        $howManyDays = 5;
+    public function run()
+    {
+        $startDay = Carbon::today();
+        $howManyDays = 14;
 
         foreach (DriveInCinema::all() as $cinema) {
+            for ($day = 0; $day < $howManyDays; $day++) {
+                $date = (clone $startDay)->addDays($day);
+                $numScreenings = rand(3, 4);
 
-            for ($day = 0; $day < $howManyDays; $day++) { 
-                $currentDay = (clone $startDay)->addDays($day);
-                $movies = Movie::inRandomOrder()->take(5)->get();
-    
-                $startTime = (clone $currentDay)->setTime(16, 30);
-    
+                $movies = Movie::inRandomOrder()->take($numScreenings)->get();
+
+                $startTime = (clone $date)->setTime(16, 30);
+
                 foreach ($movies as $movie) {
-                    Screening::create([
-                        'movie_id' => $movie->id,
-                        'drive_in_cinema_id' => $cinema->id,
-                        'start_time' => $startTime,
-                    ]);
-    
+                    Screening::factory()
+                        ->state([
+                            'drive_in_cinema_id' => $cinema->id,
+                            'movie_id' => $movie->id,
+                            'start_time' => $startTime,
+                        ])
+                        ->create();
                     $startTime = (clone $startTime)->addMinutes($movie->duration_min + 20);
                 }
             }
         }
     }
-    // public function run(): void
-    // {
-    //     DB::table("screenings")->insert([
-    //         [
-    //             "movie_id" => 1,
-    //             "drive_in_cinema_id" => 1,
-    //             "start_time" => "2025-06-23 16:30:00"
-    //         ],
-    //         [
-    //             "movie_id" => 2,
-    //             "drive_in_cinema_id" => 1,
-    //             "start_time" => "2025-06-24 18:00:00"
-    //         ],
-    //         [
-    //             "movie_id" => 3,
-    //             "drive_in_cinema_id" => 1,
-    //             "start_time" => "2025-06-25 20:30:00"
-    //         ],
-    //         [
-    //             "movie_id" => 3,
-    //             "drive_in_cinema_id" => 1,
-    //             "start_time" => "2025-06-25 22:30:00"
-    //         ],
-    //         [
-    //             "movie_id" => 3,
-    //             "drive_in_cinema_id" => 1,
-    //             "start_time" => "2025-06-25 23:50:00"
-    //         ],
-    //     ]);
-    // }
 }

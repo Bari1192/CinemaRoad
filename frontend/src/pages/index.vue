@@ -24,8 +24,7 @@ import RetroCTA from "@components/layout/RetroCTA.vue";
         lg:gap-6 xl:gap-10">
         <BaseCard :title="'Steel Horizon'" :type="'action'"
           :description="'Lélegzetelállító harci jelenetek, robbanások, hősök és egy mindenre elszánt harcos.'"
-          :src="'src/assets/img/action.png'" :alt="'Autós üldözés'"
-          :img_size_class="'object-cover overflow-hidden'" />
+          :src="'src/assets/img/action.png'" :alt="'Autós üldözés'" :img_size_class="'object-cover overflow-hidden'" />
 
         <BaseCard :title="'Autós üldözés'" :type="'family'"
           :description="'A természet lágy ölén a gondtalan gyermekek új kalandra hívnak a varázslatos elemek világába!'"
@@ -41,7 +40,7 @@ import RetroCTA from "@components/layout/RetroCTA.vue";
         <BaseCard :title="'Premier Filmek a Héten'" :type="'premier'"
           :description="'Elsők között néznéd meg várva várt mozifilmed? Nézd meg még premier előtt!'"
           :src="'src/assets/img/news.webp'" :alt="'Premier Filmek a Héten'"
-          :img_size_class="'object-cover overflow-hidden'" />
+          :img_size_class="'object-cover overflow-hidden'" :cta="true" :link="'/movies/SpecialWeek'" />
       </div>
     </div>
     <div class="my-40 mx-4">

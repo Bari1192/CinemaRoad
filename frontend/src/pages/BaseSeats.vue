@@ -73,10 +73,11 @@ function handleNext() {
                 <div class="grid grid-cols-11 justify-center text-center mb-2 md:mb-4">
                     <div class="text-xs lg:text-base xl:text-lg"></div>
                     <div class="text-xs lg:text-base xl:text-lg"></div>
-                    <div v-for="col in cols - 1" :key="'col-' + col" class="font-semibold text-yellow-500 text-xs border-2 border-pink-700/50 rounded-full w-fit px-1 mx-auto 
+                    <div v-for="col in cols - 1" :key="'col-' + col" class="font-semibold text-yellow-500 text-xs border-2 border-pink-700/50 rounded-full w-fit mx-auto 
+                    px-1.5 mt-2
                     md:text-base md:px-2.5
                     lg:text-lg  md:border-4 
-                    lg:px-4 xl:mt-2">
+                    lg:px-3 xl:mt-2">
                         {{ col }}
                         <!-- Számok SOR -->
                     </div>
@@ -85,10 +86,14 @@ function handleNext() {
 
                 <div v-for="row in rows" :key="'row-' + row"
                     class="grid grid-cols-11 gap-2 items-center justify-center mx-auto text-center w-full h-full">
-                    <div v-if="row !== 'X'" class="font-semibold text-yellow-500 text-xs lg:text-lg border-2 md:border-4 border-pink-700/50 
-                    rounded-full w-fit h-fit py-1 px-2 lg:px-4 -ml-4 xl:ml-4 md:ml-0 xl:text-center mx-auto">
+                    <div v-if="row !== 'X'" class="font-semibold text-yellow-500 border-2 md:border-4 border-pink-700/50 
+    rounded-full w-fit h-fit 
+    px-1 text-[10px] sm:text-xs md:text-sm lg:text-lg 
+    sm:px-2 
+    mx-auto -mr-1 md:ml-3
+    lg:px-2
+     xl:ml-4 text-center">
                         {{ row }}
-                        <!-- BETÜK OSZLOP -->
                     </div>
                     <div v-else>
                         <div></div>
@@ -102,27 +107,22 @@ function handleNext() {
                             <div class="flex w-full h-full mx-auto justify-center items-center align-middle opacity-85">
                                 <!-- üres -->
                             </div>
-
                             <div class="flex w-full h-full mx-auto justify-center items-center align-middle opacity-85">
-                                <i class="fa-solid fa-angles-right text-gray-500"></i>
                             </div>
                             <div>
                                 <!-- üres -->
                             </div>
                             <div class="flex w-full h-full mx-auto justify-center items-center opacity-85">
-                                <i class="fa-solid fa-angles-right text-gray-500"></i>
                             </div>
                             <div class="flex w-full h-full mx-auto justify-center items-center align-middle opacity-85">
                                 <!-- üres -->
                             </div>
                             <div class="flex w-full h-full mx-auto justify-center items-center opacity-85">
-                                <i class="fa-solid fa-angles-right text-gray-500"></i>
                             </div>
                             <div>
                                 <!-- üres -->
                             </div>
                             <div class="flex w-full h-full mx-auto justify-center items-center align-middle opacity-85">
-                                <i class="fa-solid fa-angles-right text-gray-500"></i>
                             </div>
                             <div>
                                 <!-- üres -->
@@ -172,14 +172,15 @@ function handleNext() {
                 </div>
                 <div class="w-full flex h-32 justify-center flex-col mx-auto text-center my-10 gap-8 pb-12">
                     <div v-if="selectedSeats"
-                        class="text-white h-16 mt-4 font-semibold underline underline-offset-2 text-lg">
+                        class="text-white h-16 mt-4 font-semibold underline underline-offset-2 md:text-lg text-base">
                         Kiválasztott
                         helyek:
                         <p class="text-lime-500">{{ selectedSeats.join(', ') }}</p>
                     </div>
                     <button @click="handleNext" :disabled="!selectedSeats || selectedSeats.length === 0"
                         :class="selectedSeats && selectedSeats.length > 0 ? 'bg-pink-700 cursor-pointer' : 'bg-gray-400 cursor-not-allowed opacity-60'"
-                        class="text-white w-1/5 mx-auto font-bold text-lg rounded-xl px-8 py-3 transition duration-150 hover:bg-pink-800 border border-white/65">
+                        class="text-white w-fit mx-auto font-bold rounded-xl px-2 py-1 text-base md:text-lg
+                        lg:px-8 lg:py-3 lg:w-1/5 transition duration-150 hover:bg-pink-800 border border-white/65">
                         Tovább
                     </button>
                 </div>

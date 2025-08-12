@@ -33,7 +33,11 @@ class MovieTest extends TestCase
             'type' => 'Test_movie_type',
             'description' => 'Test_movie_description',
             'duration_min' => 90,
-            'poster_url' => 'N/A_test_poster_url/poster_url'
+            'poster_url' => 'N/A_test_poster_url/poster_url',
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'release_date' => date_format(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         $screening = Screening::create([
@@ -50,7 +54,14 @@ class MovieTest extends TestCase
     {
         $movie = Movie::create([
             'title' => 'Parent Movie',
-            'duration_min' => 120,
+            'type' => 'Test_movie_type',
+            'description' => 'Test_movie_description',
+            'poster_url' => 'N/A_test_poster_url/poster_url',
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'release_date' => date_format(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'duration_min' => 80,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $screening = Screening::create([
             'movie_id' => $movie->id,

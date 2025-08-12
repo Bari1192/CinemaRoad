@@ -15,6 +15,8 @@ class DriveInCinemaResource extends JsonResource
             "name" => $this->name,
             "location" => $this->location,
             "description" => $this->description,
+            "created_at" => $this->created_at,
+            "updated_at" => $this->updated_at
         ];
     }
 }

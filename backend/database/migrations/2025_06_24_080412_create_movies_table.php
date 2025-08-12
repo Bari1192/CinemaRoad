@@ -10,11 +10,14 @@ return new class extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 255)->required();
-            $table->string("type", 20)->nullable();
-            $table->text('description')->nullable();
-            $table->unsignedInteger('duration_min')->nullable();
-            $table->string('poster_url')->nullable();
+            $table->string('title', 100);
+            $table->text('description', 255);
+            $table->string("type", 20);
+            $table->date("release_date");
+            $table->string("director", 50);
+            $table->unsignedInteger('duration_min');
+            $table->string('poster_url');
+            $table->json('actors')->nullable();
             $table->timestamps();
         });
     }

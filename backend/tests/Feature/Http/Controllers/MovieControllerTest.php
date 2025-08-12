@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Movie;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
@@ -13,10 +14,15 @@ class MovieControllerTest extends TestCase
     public function test_it_returns_successful_status_when_getting_all_movies()
     {
         Movie::create([
-            'title' => 'Sample Movie',
-            'duration_min' => 90,
+            'title' => 'Test Movie for Controller',
             'type' => 'Action',
-            'poster_url' => 'http://pelda-default-url.com/poster1.jpg',
+            'description' => 'A description for the test movie.',
+            'duration_min' => 100,
+            'poster_url' => 'http://example.com/test_movie_poster.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $response = $this->getJson('/api/movies');
         $response->assertStatus(200);
@@ -26,9 +32,15 @@ class MovieControllerTest extends TestCase
     public function test_it_returns_data_key_when_getting_all_movies()
     {
         Movie::create([
-            'title' => 'Sample Movie',
-            'duration_min' => 90,
-            'poster_url' => 'http://pelda-default-url.com/poster2.jpg',
+            'title' => 'Test Movie for Controller',
+            'type' => 'Action',
+            'description' => 'A description for the test movie.',
+            'duration_min' => 100,
+            'poster_url' => 'http://example.com/test_movie_poster.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $response = $this->getJson('/api/movies');
         $response->assertJsonStructure(['data']);
@@ -38,9 +50,15 @@ class MovieControllerTest extends TestCase
     public function test_it_returns_non_empty_data_array_when_getting_all_movies_with_data()
     {
         Movie::create([
-            'title' => 'Sample Movie',
-            'duration_min' => 90,
-            'poster_url' => 'http://pelda-default-url.com/poster3.jpg',
+            'title' => 'Test Movie for Controller',
+            'type' => 'Action',
+            'description' => 'A description for the test movie.',
+            'duration_min' => 100,
+            'poster_url' => 'http://example.com/test_movie_poster.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $response = $this->getJson('/api/movies');
         $this->assertNotEmpty($response->json('data'));
@@ -53,6 +71,11 @@ class MovieControllerTest extends TestCase
             'description' => 'This is a test movie description.',
             'duration_min' => 120,
             'poster_url' => 'http://pelda-default-url.com/poster.jpg',
+            'type' => 'Action',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         $response = $this->postJson('/api/movies', $movieData);
         $response->assertStatus(201);
@@ -63,9 +86,14 @@ class MovieControllerTest extends TestCase
     {
         $movieData = [
             'title' => 'Test Movie for DB Storage',
-            'description' => 'Description for storage test.',
-            'duration_min' => 110,
-            'poster_url' => 'http://pelda-default-url.com/db_poster.jpg',
+            'description' => 'This is a test movie description.',
+            'duration_min' => 120,
+            'poster_url' => 'http://pelda-default-url.com/poster.jpg',
+            'type' => 'Action',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         $this->postJson('/api/movies', $movieData);
         $this->assertDatabaseHas('movies', ['title' => 'Test Movie for DB Storage']);
@@ -75,14 +103,19 @@ class MovieControllerTest extends TestCase
     public function test_it_returns_correct_json_structure_after_creating_movie()
     {
         $movieData = [
-            'title' => 'Test Movie Title Structure',
-            'description' => 'Description for structure test.',
+            'title' => 'Test Movie Title',
+            'description' => 'This is a test movie description.',
             'duration_min' => 125,
-            'poster_url' => 'http://pelda-default-url.com/structure_poster.jpg',
+            'poster_url' => 'http://pelda-default-url.com/poster.jpg',
+            'type' => 'Action',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         $response = $this->postJson('/api/movies', $movieData);
         $response->assertJsonStructure([
-            'data' => ['id', 'title', 'description', 'duration_min', 'poster_url', 'created_at', 'updated_at']
+            'data' => ['id', 'title', 'description', 'duration_min', 'poster_url', 'type', 'release_date', 'director', 'created_at', 'updated_at']
         ]);
     }
 
@@ -91,9 +124,14 @@ class MovieControllerTest extends TestCase
     {
         $movieData = [
             'title' => 'New Movie Title Returned',
-            'description' => 'Description for new movie returned',
+            'description' => 'This is a test movie description.',
             'duration_min' => 90,
-            'poster_url' => 'http://pelda-default-url.com/new_poster.png',
+            'poster_url' => 'http://pelda-default-url.com/poster.jpg',
+            'type' => 'Action',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         $response = $this->postJson('/api/movies', $movieData);
         $response->assertJsonFragment(['title' => 'New Movie Title Returned']);
@@ -108,6 +146,10 @@ class MovieControllerTest extends TestCase
             'type' => 'Action',
             'duration_min' => 135,
             'poster_url' => 'http://pelda-default-url.com/duration_poster.png',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         $response = $this->postJson('/api/movies', $movieData);
         $response->assertJsonFragment(['duration_min' => 135]);
@@ -118,8 +160,13 @@ class MovieControllerTest extends TestCase
         $movie = Movie::create([
             'title' => 'Specific Movie',
             'duration_min' => 100,
+            'description' => 'Description for duration check',
             'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/show_poster.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $response = $this->getJson("/api/movies/{$movie->id}");
         $response->assertStatus(200);
@@ -131,8 +178,13 @@ class MovieControllerTest extends TestCase
         $movie = Movie::create([
             'title' => 'Specific Movie Title',
             'duration_min' => 100,
+            'description' => 'Description for duration check',
             'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/show_title_poster.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $response = $this->getJson("/api/movies/{$movie->id}");
         $response->assertJsonFragment(['title' => 'Specific Movie Title']);
@@ -144,8 +196,13 @@ class MovieControllerTest extends TestCase
         $movie = Movie::create([
             'title' => 'Specific Movie for Structure',
             'duration_min' => 100,
+            'description' => 'Description for duration check',
             'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/show_structure_poster.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $response = $this->getJson("/api/movies/{$movie->id}");
         $response->assertJsonStructure([
@@ -164,13 +221,23 @@ class MovieControllerTest extends TestCase
     {
         $movie = Movie::create([
             'title' => 'Original Movie',
+            'description' => 'Description for duration check',
             'duration_min' => 100,
             'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/update_poster.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $updatedData = [
             'title' => 'Updated Movie Title',
             'duration_min' => 150,
+            'description' => 'Description for duration check',
+            'type' => 'Action',
+            'poster_url' => 'http://pelda-default-url.com/update_poster.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
         ];
         $response = $this->putJson("/api/movies/{$movie->id}", $updatedData);
         $response->assertStatus(200);
@@ -181,12 +248,23 @@ class MovieControllerTest extends TestCase
     {
         $movie = Movie::create([
             'title' => 'Original Movie for DB Update',
+            'description' => 'Description',
             'duration_min' => 100,
             'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/db_update_poster.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $updatedData = [
             'title' => 'Changed Title in DB',
+            'description' => 'Description for duration check',
+            'duration_min' => 100,
+            'type' => 'Action',
+            'poster_url' => 'http://pelda-default-url.com/update_poster.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
         ];
         $this->putJson("/api/movies/{$movie->id}", $updatedData);
         $this->assertDatabaseHas('movies', ['id' => $movie->id, 'title' => 'Changed Title in DB']);
@@ -198,17 +276,26 @@ class MovieControllerTest extends TestCase
         $movie = Movie::create([
             'title' => 'Original Movie for Structure Update',
             'duration_min' => 100,
+            'description' => 'Description',
             'poster_url' => 'http://pelda-default-url.com/update_structure_poster.jpg',
             'type' => 'Action',
-            'description' => 'Test Description'
+            'description' => 'Test Description',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         $updatedData = [
             'title' => 'Updated Title Again',
             'type' => 'Action',
-            'description' => 'Updated description',
+            'description' => 'Description',
             'duration_min' => 100,
             'poster_url' => 'http://pelda-default-url.com/update_structure_poster.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
 
         $response = $this->putJson("/api/movies/{$movie->id}", $updatedData);
@@ -221,6 +308,8 @@ class MovieControllerTest extends TestCase
                 'description',
                 'duration_min',
                 'poster_url',
+                'release_date',
+                'director',
                 'created_at',
                 'updated_at',
             ]
@@ -234,11 +323,23 @@ class MovieControllerTest extends TestCase
             'title' => 'Original Movie for Data Update',
             'duration_min' => 100,
             'type' => 'Action',
+            'description' => 'Description',
             'poster_url' => 'http://pelda-default-url.com/update_data_poster.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $updatedData = [
             'title' => 'Finally Updated Data',
-            'type' => 'Action'
+            'type' => 'Action',
+            'duration_min' => 100,
+            'description' => 'Description',
+            'poster_url' => 'http://pelda-default-url.com/update_data_poster.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         $response = $this->putJson("/api/movies/{$movie->id}", $updatedData);
         $response->assertJsonFragment(['title' => 'Finally Updated Data']);
@@ -260,8 +361,13 @@ class MovieControllerTest extends TestCase
         $movie = Movie::create([
             'title' => 'Movie to Delete',
             'type' => 'Action',
+            'description' => 'Description',
             'duration_min' => 100,
             'poster_url' => 'http://pelda-default-url.com/delete_poster.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $response = $this->deleteJson("/api/movies/{$movie->id}");
         $response->assertStatus(204);
@@ -273,8 +379,13 @@ class MovieControllerTest extends TestCase
         $movie = Movie::create([
             'title' => 'Movie to be removed',
             'type' => 'Action',
+            'description' => 'Description',
             'duration_min' => 100,
             'poster_url' => 'http://pelda-default-url.com/remove_poster.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $this->deleteJson("/api/movies/{$movie->id}");
         $this->assertDatabaseMissing('movies', ['id' => $movie->id]);
@@ -294,6 +405,10 @@ class MovieControllerTest extends TestCase
             'type' => 'Action',
             'duration_min' => 100,
             'poster_url' => 'http://pelda-default-url.com/validation_no_title.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         $response = $this->postJson('/api/movies', $movieData);
         $response->assertStatus(422);
@@ -308,6 +423,10 @@ class MovieControllerTest extends TestCase
             'type' => 'Action',
             'duration_min' => 100,
             'poster_url' => 'http://pelda-default-url.com/validation_long_title.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         $response = $this->postJson('/api/movies', $movieData);
         $response->assertStatus(422);
@@ -322,6 +441,10 @@ class MovieControllerTest extends TestCase
             'type' => 'Action',
             'duration_min' => -10,
             'poster_url' => 'http://pelda-default-url.com/validation_negative_duration.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         $response = $this->postJson('/api/movies', $movieData);
         $response->assertStatus(422);
@@ -331,9 +454,14 @@ class MovieControllerTest extends TestCase
     {
         $movie = Movie::create([
             'title' => 'Original Movie',
+            'description' => 'Test description',
             'duration_min' => 100,
             'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/update_validation_long_title_original.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $updatedData = [
             'title' => str_repeat('B', 256),
@@ -347,9 +475,14 @@ class MovieControllerTest extends TestCase
     {
         $movie = Movie::create([
             'title' => 'Original Movie',
+            'description' => 'Test description',
             'duration_min' => 100,
             'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/update_validation_negative_duration_original.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $updatedData = [
             'duration_min' => -5,
@@ -364,8 +497,13 @@ class MovieControllerTest extends TestCase
         $movie = Movie::create([
             'title' => 'Original Movie',
             'duration_min' => 100,
+            'description' => 'Test description',
             'type' => 'Action',
             'poster_url' => 'http://pelda-default-url.com/update_validation_missing_title_original.jpg',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $updatedData = [
             'title' => '',

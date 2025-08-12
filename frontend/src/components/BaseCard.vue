@@ -1,5 +1,7 @@
 <script setup>
-
+import SixteenPlus from '@assets/svg/SixteenPlus.vue';
+import EighteenPlus from '@assets/svg/EighteenPlus.vue';
+import ZeroPlus from '@assets/svg/ZeroPlus.vue';
 const props = defineProps({
   title: {
     type: String,
@@ -8,6 +10,11 @@ const props = defineProps({
   type: {
     type: String,
     required: true,
+  },
+  type_visible: {
+    type: Boolean,
+    required: false,
+    default: true,
   },
   src: {
     type: String,
@@ -21,15 +28,50 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  cta: {
+    type: Boolean,
+    required: false,
+    default: true,
+  },
+  button_text: {
+    type: String,
+    required: false,
+    default: 'Megnézem',
+  },
+  link: {
+    type: String,
+    required: false,
+  },
+  age_limit_visible: {
+    type: Boolean,
+    default: true,
+    required: false,
+  },
+  img_size_class:{
+    type:String,
+    required:false,
+    default:'h-[160px] sm:h-[220px] md:h-[400px] w-full object-cover overflow-hidden'
+  }
 })
 </script>
 
 <template>
-  <div class="card w-full h-full bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-700 min-h-[24rem] transition-all duration-200 hover:scale-105
+  <div class="card w-full h-full bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-700 min-h-[12rem] transition-all duration-200 hover:scale-105
         hover:cursor-pointer">
     <div class="relative">
-      <img :src="props.src" :alt="props.alt" class="w-full h-full object-cover"/>
-      <span
+      <div v-if="age_limit_visible" class="w-full h-full relative">
+        <div v-if="props.type == 'action'" class="absolute top-0 left-0 opacity-85">
+          <SixteenPlus class="w-10 h-10" />
+        </div>
+        <div v-if="props.type == 'family'" class="absolute top-0 left-0 opacity-85">
+          <ZeroPlus class="w-10 h-10" />
+        </div>
+        <div v-if="props.type == 'horror'" class="absolute top-0 left-0 opacity-85">
+          <EighteenPlus class="w-10 h-10" />
+        </div>
+      </div>
+      <img :src="props.src" :alt="props.alt" :class="props.img_size_class"/>
+      <span v-if="type_visible"
         class="absolute right-0 top-0 text-xs md:text-base font-bold md:font-medium tracking-widest py-1 md:py-2 px-4 md:px-6 rounded-bl-xl rounded-tr-2xl shadow-md shadow-gray-800 uppercase bg-gray-200">
         {{ props.type }}
       </span>
@@ -37,10 +79,14 @@ const props = defineProps({
     <div class="flex-1 flex flex-col justify-between px-4 py-3">
       <h3 class="text-lg font-semibold text-white mb-1 truncate">{{ props.title }}</h3>
       <p class="text-sm text-slate-200 mb-3 line-clamp-3">{{ props.description }}</p>
-      <button
-        class="mt-auto w-full bg-pink-700 hover:bg-pink-600 text-white font-semibold rounded-xl py-2 transition-all">
-        Megnézem
-      </button>
+      <span v-if="cta">
+        <router-link :to="`${props.link}`">
+          <button
+            class="mt-auto w-full bg-pink-700 hover:bg-pink-600 text-white font-semibold rounded-xl py-2 transition-all">
+            {{ props.button_text }}
+          </button>
+        </router-link>
+      </span>
     </div>
   </div>
 </template>

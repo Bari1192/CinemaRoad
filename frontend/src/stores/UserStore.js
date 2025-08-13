@@ -6,7 +6,7 @@ export const useUserStore = defineStore('user', {
     state: () => ({
         token: sessionStorage.getItem('token') || null,
         userData: {},
-        userID: ref(null),
+        userID: null,
         loading: false
     }),
     getters: {

@@ -28,10 +28,12 @@
             </div>
             <div v-if="filteredMoviesByType.length > 0" class="grid grid-cols-1 md:grid-cols-5 gap-6 mt-10">
                 <BaseCard v-for="screening in filteredMoviesByType" @click="selectMovie(screening.movie)"
-                    :key="screening.id" :title="screening.movie?.title" :type="screening.movie?.type"
+                    :key="screening.id"
+                    :title="screening.movie?.title"
+                    :type="screening.movie?.type"
                     :src="`../assets/img${screening.movie.poster_url}`"
                     :alt="screening.movie?.title"
-                    :description="screening.movie.description" 
+                    :description="screening.movie?.description" 
                     />
             </div>
         </div>
@@ -63,8 +65,9 @@ const selectedGenre = ref('Mind');
 const currentLocationId = computed(() => ticketStore.location?.id);
 const screenings = ref([]);
 const movies = ref([]);
+
 const enrichedScreenings = computed(() => {
-    if (!screenings.value.length || !movies.value.length || !currentLocationId.value) return [];
+    if (!screenings.value.length|| !movies.value.length || !currentLocationId.value) return [];
     return screenings.value
         .filter(s => Number(s.drive_in_cinema_id) === Number(currentLocationId.value))
         .map(screening => {

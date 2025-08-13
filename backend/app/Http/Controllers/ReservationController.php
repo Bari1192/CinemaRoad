@@ -40,9 +40,12 @@ class ReservationController extends Controller
         return new ReservationResource($newReservation);
     }
 
-    public function show(Reservation $reservation)
+    public function show($id)
     {
-        $reservation->load(['user', 'screening', 'driveInCinema']);
+
+        $reservation = Reservation::findOrFail($id);
+
+        $reservation->load(['user', 'screening', 'location']);
 
         return new ReservationResource($reservation);
     }
@@ -52,8 +55,10 @@ class ReservationController extends Controller
         // Ez lehet nem kell.
     }
 
-    public function destroy(Reservation $reservation)
+    public function destroy($id)
     {
-        // Ez lehet nem kell.
+        $reservation = Reservation::findOrFail($id);
+
+        return ($reservation->delete()) ? response()->noContent() : abort(500);
     }
 }

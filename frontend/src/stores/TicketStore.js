@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 import { http } from "@utils/http.mjs";
+import { ref } from "vue";
+
 
 export const useTicketStore = defineStore("ticketstore", {
   state: () => ({
@@ -8,8 +10,9 @@ export const useTicketStore = defineStore("ticketstore", {
     movie: null,
     time: null,
     parkingSpot: null,
-    screeningId: null
-  }),
+    screeningId: null,
+    reservations: ref([])
+}),
   actions: {
     setLocation(location) {
       this.location = location;
@@ -44,10 +47,22 @@ export const useTicketStore = defineStore("ticketstore", {
     async getReservations() {
       try {
         const response = await http.get("/reservations");
-        return response.data.data;
+        this.reservations = response.data.data;
+        return this.reservations;
       } catch (error) {
         console.error("Hiba a foglalások lekérdezése közben: ", error);
         return [];
+      }
+
+      return { reservations, getReservations };
+    },
+
+    async deleteReservation(id){
+      try {
+        const response = await http.delete(`/reservations/${id}`);
+        return response.data.data;
+      } catch (error) {
+        console.error("Hiba a foglalás törlése közben: ", error)
       }
     },
 

@@ -8,12 +8,12 @@
 
                 <div class="w-full md:w-1/2 mx-auto">
                     <FormKit v-model="email" type="email" name="email" label="E-mail" label-class="text-xl"
-                        input-class="rounded-lg p-2 w-full" validation="email" />
+                        input-class="rounded-lg p-2 text-black w-full" validation="email" />
                 </div>
 
                 <div class="w-full md:w-1/2 mx-auto">
                     <FormKit v-model="password" type="password" name="password" label="Jelszó" label-class="text-xl"
-                        input-class="rounded-lg p-2 w-full" />
+                        input-class="rounded-lg text-black p-2 w-full" />
 
                     <RouterLink :to="'/Registration'">
                         Még nem regisztrált? Kattintson ide!

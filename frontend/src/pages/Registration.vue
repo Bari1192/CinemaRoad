@@ -58,7 +58,7 @@ const userStore = useUserStore();
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail|freemail|yahoo|citromail|aoutlook)\.(com|hu)$/;
 const phoneRegex = /^(\+36|06)(20|30|40|70)\d{7}$/;
-const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_])[A-Za-z\d!@#$%^&*_]{8,}$/;
 
 
 const form = ref({

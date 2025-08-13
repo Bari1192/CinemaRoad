@@ -1,11 +1,13 @@
 import { defineStore } from "pinia";
 import { http } from '@utils/http.mjs';
+import { ref } from "vue";
 
 export const useUserStore = defineStore('user', {
     state: () => ({
         token: sessionStorage.getItem('token') || null,
         userData: {},
-        userID: null
+        userID: ref(null),
+        loading: false
     }),
     getters: {
         isUserLoggedIn: (state) => !!state.token,
@@ -29,6 +31,7 @@ export const useUserStore = defineStore('user', {
         },
 
         async getUser() {
+
             const token = sessionStorage.getItem("token");
             const response = await http.get("/user", {
                 headers: {

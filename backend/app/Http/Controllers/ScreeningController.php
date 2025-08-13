@@ -29,7 +29,7 @@ class ScreeningController extends Controller
 
     public function show(Screening $screening):JsonResource
     {
-        return new ScreeningResource($screening->load("DriveInCinema"));
+        return new ScreeningResource($screening->load("DriveInCinema", "movie"));
     }
 
     public function update(UpdateScreeningRequest $request, Screening $screening)

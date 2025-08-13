@@ -12,8 +12,8 @@ const props = defineProps({
 
 
 <template>
-    <div class="card w-full h-full bg-slate-900 shadow-xl rounded-xl border border-slate-700 cursor-pointer hover:scale-105 transition-all duration-200">
-        <img :src="src" :alt="alt" class="w-full h-full object-cover rounded-t-xl" />
+    <div class="card w-full bg-slate-900 shadow-xl rounded-xl border border-slate-700 cursor-pointer hover:scale-105 transition-all duration-200">
+        <img :src="src" :alt="alt" class="w-full object-cover rounded-t-xl" />
         <div class="px-4 py-3">
             <h3 class="text-lg font-semibold text-white mb-1 truncate">{{ title }}</h3>
             <p class="text-sm text-slate-200 line-clamp-3">{{ description }}</p>

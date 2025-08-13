@@ -15,7 +15,7 @@ const props = defineProps({
   },
   alt: {
     type: String,
-    required: true,
+    required: false,
   },
   description: {
     type: String,
@@ -25,10 +25,10 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="card w-full h-full bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-700 min-h-[24rem] transition-all duration-200 hover:scale-105
+  <div class="card w-full h-full bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-700  transition-all duration-200 hover:scale-105
         hover:cursor-pointer">
     <div class="relative">
-      <img :src="props.src" :alt="props.alt" class="w-full h-full object-cover"/>
+      <img :src="props.src" :alt="props.alt" class="w-full h-[350px] object-cover"/>
       <span
         class="absolute right-0 top-0 text-xs md:text-base font-bold md:font-medium tracking-widest py-1 md:py-2 px-4 md:px-6 rounded-bl-xl rounded-tr-2xl shadow-md shadow-gray-800 uppercase bg-gray-200">
         {{ props.type }}

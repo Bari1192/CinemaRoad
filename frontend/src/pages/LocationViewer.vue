@@ -9,8 +9,8 @@
                     class="absolute inset-0 rounded-2xl bg-indigo-300/70 blur-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10">
                 </div>
 
-                <BaseCardNavigate :title="cinema.name" :src="'/starfield_autosmozi.jpg'" :alt="cinema.name"
-                    :description="''" class="w-[300px] h-[400px]" />
+                <BaseCard :title="cinema.name" :src="'/starfield_autosmozi.jpg'" :alt="cinema.name"
+                    :description="''" :type_visible="false" class="w-[300px] h-[400px]" />
             </div>
         </div>
     </BaseLayout>
@@ -18,7 +18,7 @@
 
 <script setup>
 import BaseLayout from '@layouts/BaseLayout.vue';
-import BaseCardNavigate from '@components/layout/BaseCardNavigate.vue';
+import BaseCard from '@components/BaseCard.vue';
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useDriveInCinemaStore } from '@stores/DriveInCinemaStore';

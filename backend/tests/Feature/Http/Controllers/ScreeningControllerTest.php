@@ -5,6 +5,7 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\DriveInCinema;
 use App\Models\Movie;
 use App\Models\Screening;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
@@ -20,6 +21,12 @@ class ScreeningControllerTest extends TestCase
             'title' => 'Test Movie for Screening',
             'duration_min' => 120,
             'poster_url' => 'http://test.url/poster_movie.jpg',
+            'type' => 'Action',
+            'description' => 'Description',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $this->cinema = DriveInCinema::create([
             'name' => 'Test Drive-In Cinema for Screening',

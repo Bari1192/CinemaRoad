@@ -1,18 +1,20 @@
 <template>
   <BaseLayout>
 
-    <Stepper :currentStep="2" />
-
-    <Calendar :screenings="filteredScreenings" @select-screening="onVetítésVálaszt" />
-
-    <div class="w-full flex justify-end items-center align-middle ">
-      <button
-        @click="handleNext"
-        class="text-pink-700 my-8 w-1/6 text-xl bg-white border-2 px-6 font-semibold py-3 border-pink-700  hover:bg-white/90 hover:text-pink-500
-        rounded-lg hover:shadow-sm hover:shadow-slate-300/55 transition-all ease-in-out duration-200"
-      >
-        Következő
-      </button>
+    <div class="min-h-screen px-2 w-full flex flex-col justify-between">
+      <Stepper :currentStep="2" />
+      <div class="flex flex-1 items-center justify-center w-full">
+        <Calendar :screenings="filteredScreenings" @select-screening="onVetítésVálaszt" />
+      </div>
+      <div class="w-full md:w-4/5 md:mx-auto flex justify-end items-center">
+        <button @click="handleNext" class="text-pink-700 w-fit min-w-[110px] max-w-xs  bg-white border-2 font-semibold  border-pink-700 hover:bg-white/90 hover:text-pink-500
+        rounded-lg hover:shadow-sm hover:shadow-slate-300/55 transition-all ease-in-out duration-200
+        text-base lg:text-xl px-3 py-2 mt-3 mb-6 
+        md:text-base
+        lg:px-6 lg:py-3 lg:my-8">
+          Következő
+        </button>
+      </div>
     </div>
   </BaseLayout>
 </template>

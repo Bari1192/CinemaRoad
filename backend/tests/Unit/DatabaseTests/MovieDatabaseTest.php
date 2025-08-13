@@ -68,7 +68,38 @@ class MovieDatabaseTest extends TestCase
             'A `description` oszlop típusa nem `text`.'
         );
     }
+    public function test_movies_table_has_director_column()
+    {
+        $this->assertTrue(
+            Schema::hasColumn('movies', 'director'),
+            'A `movies` táblában nincs `director` oszlop.'
+        );
+    }
 
+    public function test_movie_director_column_type_is_text()
+    {
+        $this->assertEquals(
+            'varchar',
+            Schema::getColumnType('movies', 'director'),
+            'A `director` oszlop típusa nem `text`.'
+        );
+    }
+    public function test_movies_table_has_release_date_column()
+    {
+        $this->assertTrue(
+            Schema::hasColumn('movies', 'director'),
+            'A `movies` táblában nincs `release_date` oszlop.'
+        );
+    }
+
+    public function test_movie_release_date_column_type_is_date()
+    {
+        $this->assertEquals(
+            'date',
+            Schema::getColumnType('movies', 'release_date'),
+            'A `director` oszlop típusa nem `date` formátumú.'
+        );
+    }
 
     public function test_movies_table_has_duration_min_column()
     {

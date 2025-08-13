@@ -5,6 +5,7 @@ namespace Tests\Unit\DatabaseTests;
 use App\Models\DriveInCinema;
 use App\Models\Movie;
 use App\Models\Screening;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
@@ -25,7 +26,12 @@ class ScreeningsDatabaseTest extends TestCase
             "title" => "TestTitle For Screening",
             "description" => "TestDescription For Screening",
             "duration_min" => 90,
-            "poster_url" => "http://test-poster.url/poster.jpg" 
+            "poster_url" => "http://test-poster.url/poster.jpg",
+            'type' => 'Action',
+            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         $this->cinema = DriveInCinema::create([
@@ -40,7 +46,7 @@ class ScreeningsDatabaseTest extends TestCase
             'start_time' => '2025-06-24 20:00:00',
         ]);
     }
-    
+
     public function test_screenings_table_exists()
     {
         $this->assertTrue(
@@ -57,7 +63,7 @@ class ScreeningsDatabaseTest extends TestCase
         );
     }
 
-    
+
     public function test_screenings_table_has_movie_id_column()
     {
         $this->assertTrue(
@@ -66,7 +72,7 @@ class ScreeningsDatabaseTest extends TestCase
         );
     }
 
-    
+
     public function test_screenings_table_has_drive_in_cinema_id_column()
     {
         $this->assertTrue(
@@ -75,7 +81,7 @@ class ScreeningsDatabaseTest extends TestCase
         );
     }
 
-    
+
     public function test_screenings_table_has_start_time_column()
     {
         $this->assertTrue(
@@ -93,7 +99,7 @@ class ScreeningsDatabaseTest extends TestCase
         );
     }
 
-    
+
     public function test_screening_movie_id_column_is_bigint()
     {
         $this->assertEquals(
@@ -103,7 +109,7 @@ class ScreeningsDatabaseTest extends TestCase
         );
     }
 
-    
+
     public function test_screening_drive_in_cinema_id_column_is_bigint()
     {
         $this->assertEquals(
@@ -113,7 +119,7 @@ class ScreeningsDatabaseTest extends TestCase
         );
     }
 
-    
+
     public function test_screening_start_time_column_is_datetime()
     {
         $this->assertEquals(
@@ -132,7 +138,7 @@ class ScreeningsDatabaseTest extends TestCase
         ]);
     }
 
-    
+
     public function test_a_screening_can_be_deleted_from_database()
     {
         $this->screening->delete();
@@ -142,7 +148,7 @@ class ScreeningsDatabaseTest extends TestCase
         ]);
     }
 
-    
+
     public function test_a_screening_can_be_updated_in_database()
     {
         $newStartTime = '2025-06-24 22:00:00';
@@ -154,13 +160,13 @@ class ScreeningsDatabaseTest extends TestCase
         ]);
     }
 
-    
+
     public function test_screening_movie_id_is_accessible()
     {
         $this->assertNotNull($this->screening->movie_id);
     }
 
-    
+
     public function test_screening_drive_in_cinema_id_is_accessible()
     {
         $this->assertNotNull($this->screening->drive_in_cinema_id);

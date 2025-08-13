@@ -13,12 +13,22 @@ class Movie extends Model
     protected $table = 'movies';
     public $timestamps = true;
 
+    protected $casts = [
+        'release_date' => 'date',
+        'actors' => 'array',
+    ];
+
     protected $fillable = [
         'title',
         'description',
         'type',
+        'release_date',
+        'director',
         'duration_min',
         'poster_url',
+        'actors',
+        'created_at',
+        'updated_at',
     ];
     public function screenings(): HasMany
     {

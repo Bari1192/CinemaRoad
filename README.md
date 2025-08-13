@@ -1,41 +1,11 @@
 # 🎬 Cinema Road – Drive-in Mozi 
-## 1️⃣ Eszközök telepítése
 
-### 🖥️ 1.1 Visual Studio Code
-
-1. Böngészőben menj ide: [Visual Studio Code letöltése](https://code.visualstudio.com/)  
-2. Válaszd ki a rendszered (Windows/Mac/Linux), töltsd le, telepítsd.
-3. Indítsd el a Visual Studio Code-ot!
-
-**Tipp:**  
-Terminál megnyitása:  
-- Menüsor: **Nézet → Terminál**  
-- vagy: **Ctrl + `** (magyar billentyűzeten: _Alt Gr + 7_)
-
----
-
-### 🐙 1.2 Git telepítése
-
-1. Menj ide: [Git letöltése](https://git-scm.com/downloads)
-2. Válaszd ki a rendszert, telepítsd.
-3. VS Code automatikusan érzékelni fogja!
-
----
-
-### 🐳 1.3 Docker Desktop telepítése
-
-1. Nyisd meg: [Docker Desktop letöltése](https://www.docker.com/products/docker-desktop)
-2. Válassz rendszert (Windows/Mac), töltsd le, telepítsd, indítsd el!
-3. **Fontos:** mindig legyen elindítva, mielőtt dolgozol!
-
----
-
-## 2️⃣ A projekt letöltése (klónozás)
+## 1️⃣ A projekt letöltése (klónozás)
 
 1. VS Code-ban **nyiss Terminált** (lásd fent).
 2. Válaszd ki a mappát, ahova mented:
    ```bash
-   cd /ahová_kell/
+   cd /altalad_valasztott_mappa/
    ```
 3. Írd be:
    ```bash
@@ -48,18 +18,16 @@ Terminál megnyitása:
 
 ---
 
-## 3️⃣ Környezeti változók beállítása (.env)
+## 2️⃣ Környezeti változók beállítása (.env)
 
-1. Másold az alapértelmezett beállításokat:
-   ```bash
-   cp backend/.env.example backend/.env
-   ```
-2. Ha szeretnél, **szerkeszd a backend/.env** fájlt (pl. jelszó, email…)
-3. Első indításhoz elég az alapértelmezett érték!
+1. Az alapértelmezett beállításokat a `.env.example` fájl tartalmazza a projekthez.
+2. Amennyiben változtatni szeretnéd, **szerkeszd a backend/.env.example** fájlt (pl. jelszó, email…)
+3. A változtatásaid alapján jön létre a gyökérkönyvtárban a `.env` fájl, melyre a projekt épül.
+4. Első indításhoz az alapértelmezett értékekkel elegendő futtatni!
 
 ---
 
-## 4️⃣ Indítás 💡 / Leállítás 🛑 / Törlés ❌
+## 3️⃣ Indítás ▶️ / Leállítás ⏸️ / Törlés ❌
 
 ### 🚦 Indítás (bármikor):
 A CinemaRoad mappájában:
@@ -73,7 +41,7 @@ sh start.sh
 ```bash
 sh ./start.sh
 ```
-- Ez **elindít minden szervert és adatbázist**!
+- Ez **elindít minden szervert, adatbázist és a függőségek telepítését is elvégzi**!
 
 ### 🛑 Leállítás:
 ```bash
@@ -85,11 +53,11 @@ docker compose stop
 ```bash
 docker compose down -v
 ```
-- Ezzel *minden újraindul*, minden eddigi adat (felhasználók, filmek stb.) elveszik.
+- Ezzel *minden újraindul*, minden eddigi adat *(felhasználók, filmek stb.)* elveszik.
 
 ---
 
-## 5️⃣ Mi van a projektben?
+## 4️⃣ Mit tartalmaz a projekt?
 
 - `frontend/` – felhasználói (Vue.js) alkalmazás
 - `backend/` – szerver és adatbázis (PHP/Laravel)
@@ -101,7 +69,7 @@ docker compose down -v
 
 ---
 
-## 6️⃣ Hibakeresés, karbantartás 🛠️
+## 5️⃣ Hibakeresés és karbantartás 🛠️
 
 - Logok: `backend/storage/logs`
 - Ha valami nem jó: leállítás + újraindítás!

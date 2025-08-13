@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -13,11 +14,14 @@ class MovieResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'type' => $this->type,
+            'director' => $this->director,
+            'release_date' => Carbon::parse($this->release_date)->format('Y-m-d'),
             'description' => $this->description,
             'duration_min' => $this->duration_min,
             'poster_url' => $this->poster_url,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'actors' => $this->actors,
+            'created_at' => Carbon::parse($this->created_at)->format('Y-m-d h:m'),
+            'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d h:m'),
         ];
     }
 }

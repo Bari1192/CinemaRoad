@@ -1,7 +1,7 @@
 <template>
     <BaseLayout>
         <Stepper :currentStep="1" />
-        <div v-if="ticketStore.location" class="max-w-10xl mx-auto p-5">
+        <div v-if="ticketStore.location" class="max-w-10xl mx-auto p-5 w-full">
             <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
                 <img src="/starfield_autosmozi.jpg" alt="Helyszín képe"
                     class="rounded-xl shadow-md max-h-80 object-cover md:w-1/2" />
@@ -28,11 +28,11 @@
             </div>
             <div v-if="filteredMoviesByType.length > 0" class="grid grid-cols-1 md:grid-cols-5 gap-6 mt-10">
                 <BaseCard v-for="screening in filteredMoviesByType" @click="selectMovie(screening.movie)"
-                
                     :key="screening.id" :title="screening.movie?.title" :type="screening.movie?.type"
                     :src="`../assets/img${screening.movie.poster_url}`"
                     :alt="screening.movie?.title"
-                    :description="screening.description"/>
+                    :description="screening.movie.description" 
+                    />
             </div>
         </div>
         <div v-else>

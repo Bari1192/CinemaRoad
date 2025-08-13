@@ -26,7 +26,7 @@ const horrorMovies = computed(() =>
 )
 
 function goToMoviePage(movieID) {
-    router.push(`/movie/${movieID}`);
+    router.push(`/movies/${movieID}`);
 }
 </script>
 

@@ -24,18 +24,19 @@ import RetroCTA from "@components/layout/RetroCTA.vue";
         lg:gap-6 xl:gap-10">
         <BaseCard :title="'Steel Horizon'" :type="'action'"
           :description="'Lélegzetelállító harci jelenetek, robbanások, hősök és egy mindenre elszánt harcos.'"
-          :src="'src/assets/img/action.png'" :alt="'Autós üldözés'" :img_size_class="'object-cover overflow-hidden'" />
+          :src="'src/assets/img/action.png'" :alt="'Autós üldözés'" :img_size_class="'object-cover overflow-hidden'"
+          :cta="true" :link="'/movies/SpecialWeek'" />
 
         <BaseCard :title="'Autós üldözés'" :type="'family'"
           :description="'A természet lágy ölén a gondtalan gyermekek új kalandra hívnak a varázslatos elemek világába!'"
           :src="'src/assets/img/family.png'" :alt="'The Magical Meadow'"
-          :img_size_class="' object-cover overflow-hidden'" />
+          :img_size_class="' object-cover overflow-hidden'" :cta="true" :link="'/movies/SpecialWeek'" />
 
 
         <BaseCard :title="'Baljós árnyak'" :type="'horror'"
           :description="'A sötétség magányában csak magadra számíthatsz. A hangok a fejedből, vagy az éj lepléből szállnak?'"
           :src="'src/assets/img/horror.png'" :alt="'Baljós árnyak - horrofilm, kizárólag felnőtteknek.'"
-          :img_size_class="'object-cover overflow-hidden'" />
+          :img_size_class="'object-cover overflow-hidden'" :cta="true" :link="'/movies/SpecialWeek'" />
 
         <BaseCard :title="'Premier Filmek a Héten'" :type="'premier'"
           :description="'Elsők között néznéd meg várva várt mozifilmed? Nézd meg még premier előtt!'"

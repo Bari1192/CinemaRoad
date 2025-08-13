@@ -4,7 +4,8 @@ import { useMovieStore } from '@stores/MovieStore.mjs'
 import Family from '@assets/svg/ZeroPlus.vue'
 import SixteenPlus from '@assets/svg/SixteenPlus.vue'
 import EighteenPlus from '@assets/svg/EighteenPlus.vue'
-
+import { useRouter } from 'vue-router'
+const router = useRouter();
 const store = useMovieStore()
 const movies = ref([])
 const imgpath = '../src/assets/img/';
@@ -23,6 +24,10 @@ const actionMovies = computed(() =>
 const horrorMovies = computed(() =>
     movies.value.filter(m => m.type == 'horror')
 )
+
+function goToMoviePage(movieID) {
+    router.push(`/movie/${movieID}`);
+}
 </script>
 
 <template>
@@ -34,7 +39,7 @@ const horrorMovies = computed(() =>
         <div
             class="grid grid-cols-2 gap-4 p-2 md:flex md:overflow-x-auto md:-mx-4 md:px-4 md:pb-8 md:gap-0 md:custom-scrollbar-family">
             <div v-for="movie in familyMovies" :key="movie.id" class="card-themes overflow-hidden relative flex-shrink-0 m-2 gap-2 flex justify-center items-center w-full max-w-full min-w-0
-          md:w-[300px] md:max-w-[300px] md:min-w-[300px] border-4 border-yellow-400">
+          md:w-[300px] md:max-w-[300px] md:min-w-[300px] border-4 border-yellow-400 hover:cursor-pointer" @click="goToMoviePage(movie.id)">
                 <div class="w-full h-full relative">
                     <img :src="`${imgpath}${movie.poster_url}`"
                         class="h-[160px] sm:h-[220px] md:h-[400px] w-full object-cover overflow-hidden"
@@ -62,7 +67,7 @@ const horrorMovies = computed(() =>
         <div
             class="grid grid-cols-2 gap-4 p-2 md:flex md:overflow-x-auto md:-mx-4 md:px-4 md:pb-8 md:gap-0 md:custom-scrollbar-family">
             <div v-for="movie in actionMovies" :key="movie.id" class="card-themes overflow-hidden relative flex-shrink-0 m-2 gap-2 flex justify-center items-center w-full max-w-full min-w-0
-                    md:w-[300px] md:max-w-[300px] md:min-w-[300px] border-4 border-slate-500/75">
+                    md:w-[300px] md:max-w-[300px] md:min-w-[300px] border-4 border-slate-500/75 hover:cursor-pointer" @click="goToMoviePage(movie.id)">
                 <div class="w-full h-full relative">
                     <img :src="`${imgpath}${movie.poster_url}`"
                         class="h-[160px] sm:h-[220px] md:h-[400px] w-full object-cover">
@@ -78,7 +83,6 @@ const horrorMovies = computed(() =>
                         <!-- Ez csak a háttér "shadow" a szöveg mögött z-mínusz 10-zel -->
                     </span>
                 </span>
-
             </div>
         </div>
     </div>
@@ -91,7 +95,7 @@ const horrorMovies = computed(() =>
         <div
             class="grid grid-cols-2 gap-4 p-2 md:flex md:overflow-x-auto md:-mx-4 md:px-4 md:pb-8 md:gap-0 md:custom-scrollbar-family">
             <div v-for="movie in horrorMovies" :key="movie.id" class="card-themes overflow-hidden relative flex-shrink-0 m-2 gap-2 flex justify-center items-center w-full max-w-full min-w-0
-          md:w-[300px] md:max-w-[300px] md:min-w-[300px] border-4 border-red-600">
+          md:w-[300px] md:max-w-[300px] md:min-w-[300px] border-4 border-red-600 hover:cursor-pointer" @click="goToMoviePage(movie.id)">
                 <div class="w-full h-full relative">
                     <img :src="`${imgpath}${movie.poster_url}`"
                         class="h-[160px] sm:h-[220px] md:h-[400px] w-full object-cover" :alt="movie.title"

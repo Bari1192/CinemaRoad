@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DriveInCinemaController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ScreeningController;
@@ -23,3 +24,5 @@ Route::apiResource('movies', MovieController::class);
 Route::post("/register", [RegisterController::class, "store"]);
 Route::post("/authenticate", [AuthController::class, "authenticate"]);
 Route::apiResource('/users', UserController::class);
+
+Route::apiResource('/purchases', PurchaseController::class);

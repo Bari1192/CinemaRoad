@@ -13,5 +13,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DriveInCinemaSeeder::class);
         $this->call(ScreeningSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(PurchaseSeeder::class);
     }
 }

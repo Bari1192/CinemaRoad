@@ -4,17 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Resources\ReservationResource;
-use App\Jobs\SendReservationConfirmation;
-use App\Mail\ReservationConfirmation;
 use App\Models\Reservation;
-use App\Models\Screening;
-use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
 {
@@ -28,6 +19,7 @@ class ReservationController extends Controller
     {
         $data = $request->validated();
 
+        $data['confirmation'] = bin2hex(random_bytes(12)); //24 karakteres lesz majd!
         $newReservation = Reservation::create($data);
 
         $newReservation->load([
@@ -61,4 +53,13 @@ class ReservationController extends Controller
 
         return ($reservation->delete()) ? response()->noContent() : abort(500);
     }
+
+    // public function userReservations()
+    // {
+
+    //     $reservations = Reservation::whereNotNull('user_id')->get();
+    //     $reservations->load(['user', 'screening', 'location']);
+
+    //     return Reservation::collection($reservations);
+    // }
 }

@@ -28,6 +28,27 @@ class ReservationController extends Controller
     {
         $data = $request->validated();
 
+        // Foglalni kívánt parkolóhelyek
+        $newSpots = explode(',', $data['parkingspot']);
+
+        // Összes foglalás az adott vetítésre
+        $existingReservations = Reservation::where('screening_id', $data['screening_id'])->get();
+
+        // Kigyűjtöm az összes foglalt helyet ebbe a tömbbe.
+        $takenSpots = [];
+        foreach ($existingReservations as $res) {
+            $takenSpots = array_merge($takenSpots, explode(',', $res->parkingspot));
+        }
+
+        // Ha az új, foglalni kívánt helyek benne vannak a "takenSpots" tömbbe akkor hiba.
+        foreach ($newSpots as $spot) {
+            if (in_array($spot, $takenSpots)) {
+                return response()->json([
+                    'message' => "A következő hely már foglalt: $spot"
+                ], 422);
+            }
+        }
+
         $newReservation = Reservation::create($data);
 
         $newReservation->load([

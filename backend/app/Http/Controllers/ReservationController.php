@@ -44,7 +44,7 @@ class ReservationController extends Controller
 
     public function update(Request $request, Reservation $reservation)
     {
-        // Ez lehet nem kell.
+        // De, kell!
     }
 
     public function destroy($id)
@@ -53,13 +53,4 @@ class ReservationController extends Controller
 
         return ($reservation->delete()) ? response()->noContent() : abort(500);
     }
-
-    // public function userReservations()
-    // {
-
-    //     $reservations = Reservation::whereNotNull('user_id')->get();
-    //     $reservations->load(['user', 'screening', 'location']);
-
-    //     return Reservation::collection($reservations);
-    // }
 }

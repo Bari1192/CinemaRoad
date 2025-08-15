@@ -20,7 +20,6 @@ class PurchaseController extends Controller
         $data = $request->validated();
         $data['ticket_code'] = bin2hex(random_bytes(12));
         $purchase = Purchase::create($data);
-        // Mail::to($purchase->guest_email)->send(new TicketMail($purchase));
         return new PurchaseResource($purchase);
     }
 

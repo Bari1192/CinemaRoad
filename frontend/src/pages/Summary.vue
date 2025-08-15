@@ -15,10 +15,6 @@ const locationName = computed(() =>
     ticketStore.location?.name || ticketStore.locationName || '–'
 )
 
-// const locationDesc = computed(() =>
-//     ticketStore.location?.description || ''
-// )
-
 const bookingType = ref(null);
 const guestEmail = ref(null);
 
@@ -87,7 +83,7 @@ const handleConfirmation = async () => {
         await ticketStore.postTicketPurchase(payload);
     }
 
-    else if(!userStore.userID && guestEmail.value) {
+    else if (!userStore.userID && guestEmail.value) {
         const payload = {
             location_id: ticketStore.location.id,
             movie_id: ticketStore.movie.id,
@@ -140,7 +136,7 @@ onMounted(async () => {
                         class="text-2xl lg:text-3xl mt-4 lg:underline underline-offset-4 font-bold text-pink-600 mb-2 lg:text-center">
                         {{ locationName }}</div>
                     <!-- Film -->
-                    <div class="flex items-center gap-4 py-5  border-pink-100 flex-col md:flex-row w-full">
+                    <div class="flex items-center gap-4 pt-5 pb-2  border-pink-100 flex-col md:flex-row w-full">
                         <div>
                             <img v-if="moviePoster" :src="`../src/assets/img/${moviePoster}`"
                                 class="w-full h-fit object-cover rounded-lg border border-gray-200 shadow-md" />
@@ -154,10 +150,15 @@ onMounted(async () => {
                             <div class="mt-2 italic text-gray-500">{{ movieDesc }}</div>
                         </div>
                     </div>
-    
+
                     <!-- Foglalási, vagy vásárlási select rész -->
-                    <div v-if="!userStore.userID" class="flex flex-col gap-2">
-                        <FormKit type="email" name="email" v-model="guestEmail" label="Email cím" input-class="p-2 border-pink-600 border-2 rounded-lg"/>
+                    <div v-if="!userStore.userID" class="flex flex-col w-full justify-center items-center gap-2 my-4">
+                        <FormKit type="email" name="email" v-model="guestEmail" label="Email cím megadása"
+                            input-class="py-1.5 lg:py-1 border-pink-600 border-2 rounded-lg w-1/2 block px-2 text-black font-semibold"
+                            label-class="block text-center font-bold text-pink-500 border border-pink-500 bg-amber-300/90 w-fit rounded-md px-2 py-1 mb-2 text-sm lg:text-base text-black"
+                            help="Vásárlás után erre az e-mail címre küldjük számodra a vásárolt jegyeidet!"
+                            help-class="pt-1 text-sm italic text-gray-500 font-semibold mb-2 w-1/2" />
+
                     </div>
                     <div v-if="userStore.userID" class="flex flex-col gap-2">
                         <label class="flex items-center gap-2">
@@ -169,7 +170,7 @@ onMounted(async () => {
                             Megveszem
                         </label>
                     </div>
-    
+
                     <!-- Időpont -->
                     <div class="flex flex-col gap-2">
                         <div
@@ -181,7 +182,7 @@ onMounted(async () => {
                         </div>
                     </div>
                     <!-- Parkolóhely(ek) -->
-                    <div class="flex flex-col gap-2 mt-6 border-y-4 border-dashed border-slate-500 py-4 md:w-4/5">
+                    <div class="flex flex-col gap-2 mt-6 border-t-4 border-dashed border-slate-500 py-4 md:w-4/5">
                         <div
                             class="text-pink-800 font-extrabold lg:font-bold tracking-wider uppercase opacity-70 text-sm lg:text-base">
                             Foglalásod a következő hely(ek)re
@@ -192,9 +193,6 @@ onMounted(async () => {
                                 <span class="material-icons text-lg text-black/75">{{ place }}</span>
                             </span>
                         </div>
-                    </div>
-                    <div class="italic mt-6 md:mt-2 pt-4 text-center text-lg font-medium text-gray-700">
-                        Jó szórakozást kívánunk a Cinema Road csapata!
                     </div>
                 </div>
             </div>

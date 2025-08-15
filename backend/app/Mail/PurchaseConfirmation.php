@@ -26,6 +26,7 @@ class PurchaseConfirmation extends Mailable
                 'purchase' => $this->purchase,
                 'user' => $this->purchase->user ?? null, // FIGYELNI RÁ, hogy ha null, akkor NINCS megszólítás!
                 'location' => $this->purchase->location->name,
+                'ticket_code' => $this->purchase->ticket_code,
                 'screening_start_time' => $this->purchase->screening->start_time,
                 'movie_name' => $this->purchase->screening->movie->title,
                 'parking_spot' => $this->purchase->parkingspot,

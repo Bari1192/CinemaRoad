@@ -22,15 +22,16 @@ class ReservationConfirmation extends Mailable
     public function build()
     {
         return $this->subject('CinemaRoad - Foglalásod megerősítve')
-                    ->view('emails.reservation_confirmation')
-                    ->with([
-                        'reservation' => $this->reservation,
-                        'user' => $this->reservation->user,
-                        'location' => $this->reservation->location->name ?? 'Ismeretlen helyszín',
-                        'screening_start_time' => $this->reservation->screening->start_time ?? 'Ismeretlen időpont',
-                        'movie_name' => $this->reservation->screening->movie->title ?? 'Ismeretlen film',
-                        'parking_spot' => $this->reservation->parkingspot,
-                    ]);
+            ->view('emails.reservation_confirmation')
+            ->with([
+                'reservation' => $this->reservation,
+                'user' => $this->reservation->user,
+                'location' => $this->reservation->location->name ?? 'Ismeretlen helyszín',
+                'confirmation' => $this->reservation->confirmation,
+                'screening_start_time' => $this->reservation->screening->start_time ?? 'Ismeretlen időpont',
+                'movie_name' => $this->reservation->screening->movie->title ?? 'Ismeretlen film',
+                'parking_spot' => $this->reservation->parkingspot,
+            ]);
     }
 
     public function attachments(): array

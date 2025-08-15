@@ -44,6 +44,11 @@ export const useTicketStore = defineStore("ticketstore", {
       return response.data.data;
     },
 
+    async postTicketPurchase(data) {
+      const response = await http.post("/purchases", data);
+      return response.data.data;
+    },
+
     async getReservations() {
       try {
         const response = await http.get("/reservations");
@@ -53,8 +58,6 @@ export const useTicketStore = defineStore("ticketstore", {
         console.error("Hiba a foglalások lekérdezése közben: ", error);
         return [];
       }
-
-      return { reservations, getReservations };
     },
 
     async deleteReservation(id){

@@ -31,25 +31,30 @@ export const useUserStore = defineStore('user', {
         },
 
         async getUser() {
-
-            const token = sessionStorage.getItem("token");
-            const response = await http.get("/user", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
-            this.userID = response.data.id;
-
-            const userResponse = await http.get(`/users/${this.userID}`);
-            this.userData = userResponse.data.data;
-
-            return response.data;
+            try {
+                const token = sessionStorage.getItem("token");
+                const response = await http.get("/user", {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+    
+                this.userID = response.data.id;
+    
+                const userResponse = await http.get(`/users/${this.userID}`);
+                this.userData = userResponse.data.data;
+    
+                return response.data;
+            } catch (error) {
+                this.userData = null;
+                this.userID = null;
+            }
         },
 
         async logoutUser() {
             this.token = null;
             this.userData = {};
+            this.userID = null;
 
             sessionStorage.removeItem("token");
             sessionStorage.removeItem("userData");

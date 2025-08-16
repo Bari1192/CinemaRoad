@@ -28,6 +28,7 @@ class ReservationConfirmation extends Mailable
                 'user' => $this->reservation->user,
                 'location' => $this->reservation->location->name ?? 'Ismeretlen helyszín',
                 'confirmation' => $this->reservation->confirmation,
+                'ticket_code' => $this->reservation->confirmation, // IDE
                 'screening_start_time' => $this->reservation->screening->start_time ?? 'Ismeretlen időpont',
                 'movie_name' => $this->reservation->screening->movie->title ?? 'Ismeretlen film',
                 'parking_spot' => $this->reservation->parkingspot,

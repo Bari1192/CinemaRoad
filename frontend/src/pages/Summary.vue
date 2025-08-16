@@ -58,6 +58,9 @@ const handleConfirmation = async () => {
         ? ticketStore.parkingSpot
         : [ticketStore.parkingSpot];
 
+    // ide mentem a confirmation vagy a ticket_code-ot.
+    let resultData = null;
+
     // HA BE VAN JELENTKEZVE, ÉS FOGLAL
     if (bookingType.value === 'reservation' && userStore.userID) {
         const payload = {
@@ -68,7 +71,7 @@ const handleConfirmation = async () => {
             parkingspot: parkingSpots.join(',')
         };
         console.log("Reservation bejelentkezett payload: ", payload);
-        await ticketStore.postTicketReservation(payload);
+        resultData = await ticketStore.postTicketReservation(payload);
     }
     //HA BE VAN JELENTKEZVE ÉS VESZI
     else if ((bookingType.value === 'purchase' && userStore.userID)) {
@@ -80,7 +83,7 @@ const handleConfirmation = async () => {
             user_id: userStore.userID
         };
         console.log("Purchase bejelentkezett payload: ", payload);
-        await ticketStore.postTicketPurchase(payload);
+        resultData = await ticketStore.postTicketPurchase(payload);
     }
 
     else if (!userStore.userID && guestEmail.value) {
@@ -92,16 +95,25 @@ const handleConfirmation = async () => {
             guest_email: guestEmail.value
         };
         console.log("Purchase guest payload: ", payload);
-        await ticketStore.postTicketPurchase(payload);
+        resultData = await ticketStore.postTicketPurchase(payload);
     }
 
     ticketStore.$reset();
-    router.push("/ThankYouPage");
+    router.push({
+        path: "/ThankYouPage",
+        query: {
+            bookingType: bookingType.value || 'purchase',
+            code: bookingType.value === 'reservation'
+                    ? resultData.confirmation
+                    : resultData.ticket_code
+        }
+    });
 };
 
 
 
-
+const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail|freemail|yahoo|citromail|aoutlook)\.(com|hu)$/;
+const userIsLoggedIn = computed(() => userStore.isUserLoggedIn);
 
 const isLoading = ref(false);
 onMounted(async () => {
@@ -152,23 +164,55 @@ onMounted(async () => {
                     </div>
 
                     <!-- Foglalási, vagy vásárlási select rész -->
-                    <div v-if="!userStore.userID" class="flex flex-col w-full justify-center items-center gap-2 my-4">
-                        <FormKit type="email" name="email" v-model="guestEmail" label="Email cím megadása"
-                            input-class="py-1.5 lg:py-1 border-pink-600 border-2 rounded-lg w-1/2 block px-2 text-black font-semibold"
-                            label-class="block text-center font-bold text-pink-500 border border-pink-500 bg-amber-300/90 w-fit rounded-md px-2 py-1 mb-2 text-sm lg:text-base text-black"
-                            help="Vásárlás után erre az e-mail címre küldjük számodra a vásárolt jegyeidet!"
-                            help-class="pt-1 text-sm italic text-gray-500 font-semibold mb-2 w-1/2" />
+                    <div v-if="!userStore.userID" class="flex flex-col w-full gap-2 my-4">
+                        <label for="email"
+                            class="block font-bold text-pink-500 border border-pink-500 bg-amber-300/90 w-fit rounded-md px-2 py-1 mb-2 text-sm lg:text-base text-black">
+                            Email cím megadása
+                        </label>
+                        <div class="flex flex-col sm:flex-row items-start gap-2 w-full sm:w-1/2">
+                            <FormKit id="email" type="email" name="email" v-model="guestEmail"
+                                input-class="py-1.5 lg:py-1 border-pink-600 border-2 rounded-lg w-full px-2 text-black font-semibold"
+                                :validation="[['required'], ['matches', emailRegex]]"
+                                :validation-messages="{ matches: 'Kérlek, valós Email-t adj meg!' }"
+                                :validation-visibility="dirty" />
+                            <FormKitMessages for="email" class="text-red-600 text-sm font-semibold" />
+                        </div>
 
+                        <p class="pt-1 text-sm italic text-gray-500 font-semibold mb-2 w-full sm:w-1/2">
+                            Vásárlás után erre az e-mail címre küldjük számodra a vásárolt jegyeidet!
+                        </p>
                     </div>
-                    <div v-if="userStore.userID" class="flex flex-col gap-2">
-                        <label class="flex items-center gap-2">
-                            <input type="radio" value="reservation" v-model="bookingType" />
-                            Előfoglalom
+
+
+                    <div v-if="userStore.userID" class="flex my-3 flex-col gap-2">
+                        <label for="options"
+                            class="block font-bold text-pink-500 border border-pink-500 bg-amber-300/90 w-fit rounded-md px-3 py-1 mb-2 text-sm lg:text-base">
+                            Hogyan szeretnéd biztosítani a jegyed?
                         </label>
-                        <label class="flex items-center gap-2">
-                            <input type="radio" value="purchase" v-model="bookingType" />
-                            Megveszem
-                        </label>
+
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <label class="flex items-center justify-center border rounded-lg px-6 py-4 cursor-pointer transition-all
+            focus-within:ring-pink-400
+           select-none font-semibold text-black" :class="bookingType === 'reservation'
+            ? 'bg-pink-500 text-white border-pink-500 shadow-md'
+            : 'bg-white border-pink-500'">
+                                <input type="radio" name="options" value="reservation" v-model="bookingType"
+                                    class="hidden" />
+                                Előfoglalom
+                            </label>
+
+                            <label class="flex items-center justify-center border rounded-lg px-4 py-2 cursor-pointer transition-all
+            focus-within:ring-pink-400
+           select-none font-semibold text-black" :class="bookingType === 'purchase'
+            ? 'bg-pink-500 text-white border-pink-500 shadow-md'
+            : 'bg-white border-pink-500'">
+                                <input type="radio" name="options" value="purchase" v-model="bookingType"
+                                    class="hidden" />
+                                Megveszem
+                            </label>
+
+                        </div>
+
                     </div>
 
                     <!-- Időpont -->
@@ -181,6 +225,7 @@ onMounted(async () => {
                             {{ formattedTime }}
                         </div>
                     </div>
+
                     <!-- Parkolóhely(ek) -->
                     <div class="flex flex-col gap-2 mt-6 border-t-4 border-dashed border-slate-500 py-4 md:w-4/5">
                         <div
@@ -197,10 +242,15 @@ onMounted(async () => {
                 </div>
             </div>
             <div class="flex justify-center my-10">
-                <button
+                <button v-if="userIsLoggedIn"
                     class="text-lg px-10 py-3 bg-pink-700 border border-white/55 shadow-md shadow-pink-400/45 text-white uppercase font-bold rounded-xl hover:bg-pink-600 transition"
                     @click="handleConfirmation">
                     Foglalás véglegesítése
+                </button>
+                <button v-else
+                    class="text-lg px-10 py-3 bg-pink-700 border border-white/55 shadow-md shadow-pink-400/45 text-white uppercase font-bold rounded-xl hover:bg-pink-600 transition"
+                    @click="handleConfirmation">
+                    Vásárlás véglegesítése
                 </button>
             </div>
         </div>

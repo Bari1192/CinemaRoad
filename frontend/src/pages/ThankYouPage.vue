@@ -31,7 +31,7 @@
 <script setup>
 import BaseLayout from '@layouts/BaseLayout.vue';
 import { useUserStore } from '@stores/UserStore';
-import { onMounted, computed } from 'vue';
+import { onMounted, onBeforeUnmount, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 const userStore = useUserStore();
@@ -44,7 +44,19 @@ const code = computed(() => route.query.code || null);
 
 const goHome = () => router.push('/');
 
+const handleBack = () => {
+  router.replace('/');
+};
+
 onMounted(async () => {
   await userStore.getUser();
+
+  window.addEventListener('popstate', () => {
+    router.replace('/');
+  });
 })
+
+onBeforeUnmount(() => {
+  window.removeEventListener('popstate', handleBack);
+});
 </script>

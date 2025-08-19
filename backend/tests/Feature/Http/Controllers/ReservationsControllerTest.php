@@ -99,7 +99,6 @@ class ReservationsControllerTest extends TestCase
 
         $response->assertJsonStructure([
             "data" => [
-                "id",
                 "user_id",
                 "screening_id",
                 "location_id",

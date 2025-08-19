@@ -30,8 +30,17 @@ class ReservationsTest extends TestCase
         $reservation = new Reservation;
 
         $this->assertEquals(
-            ["user_id", "screening_id", "location_id", "reserved_at", "parkingspot"],
+            ["user_id",
+            "confirmation",
+            "location_id",
+            "screening_id",
+            "parkingspot",
+            "reserved_at",
+            "created_at",
+            "updated_at"],
             $reservation->getFillable());
+
+            
     }
     
     public function test_it_belongs_to_user(): void

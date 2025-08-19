@@ -3,32 +3,47 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 <div class="col-span-1">
-                    <h3 class="text-6xl text-pink-500 mb-4 text-center lg:text-start tracking-wider"
+                    <h3 class="text-6xl text-pink-500 mb-4 lg:mb-2 italic text-center lg:text-start tracking-wider"
                         style="font-family: 'Cookie','Arial','Times New Roman', Times, serif;">Cinema Road</h3>
-                    <p class="text-sm leading-relaxed text-justify">
-                        Éld át a klasszikus drive-in mozi élményét modern technológiával!
+                    <p class="text-sm leading-relaxed text-justify italic">
+                        Éld át a klasszikus <b>drive-in mozi élményét</b> modern technológiával!
                         A legjobb filmek, a legnagyobb vászon, a saját autód kényelméből.
                     </p>
                 </div>
 
-                <div class="col-span-1 w-full lg:w-1/2 mx-auto">
+                <div class="col-span-1 w-full lg:w-4/5 mx-auto">
                     <h4 class="text-xl font-semibold text-white mb-4">Gyorslinkek</h4>
-                    <ul>
-                        <li class="mb-2">
-                            <a href="#" class="hover:text-pink-400 transition-colors duration-200">Kezdőlap</a>
-                        </li>
-                        <li class="mb-2">
-                            <a href="#" class="hover:text-pink-400 transition-colors duration-200">Filmek</a>
-                        </li>
-                        <li class="mb-2">
-                            <a href="#" class="hover:text-pink-400 transition-colors duration-200">Vetítési idők</a>
-                        </li>
-                        <li class="mb-2">
-                            <a href="#" class="hover:text-pink-400 transition-colors duration-200">Jegyvásárlás</a>
-                        </li>
-                        <li class="mb-2">
-                            <a href="#" class="hover:text-pink-400 transition-colors duration-200">Kapcsolat</a>
-                        </li>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 justify-around items-center mx-auto w-full ">
+                        <router-link to="/">
+                            <li class="mb-2 lg:mb-1">
+                                <a href="#" class="hover:text-pink-400 transition-colors duration-200">Kezdőlap</a>
+                            </li>
+                        </router-link>
+                        <router-link to="/SpecialWeek">
+                            <li class="mb-2 lg:mb-1">
+                                <a href="#" class="hover:text-pink-400 transition-colors duration-200">Rendezvények</a>
+                            </li>
+                        </router-link>
+                        <router-link to="/LocationChoose">
+                            <li class="mb-2 lg:mb-1">
+                                <a href="#" class="hover:text-pink-400 transition-colors duration-200">Jegyvásárlás</a>
+                            </li>
+                        </router-link>
+                        <router-link to="/LocationViewer">
+                            <li class="mb-2 lg:mb-1">
+                                <a href="#" class="hover:text-pink-400 transition-colors duration-200">Helyszínek</a>
+                            </li>
+                        </router-link>
+                        <router-link to="/Login">
+                            <li class="mb-2 lg:mb-1">
+                                <a href="#" class="hover:text-pink-400 transition-colors duration-200">Bejelentkezés</a>
+                            </li>
+                        </router-link>
+                        <router-link to="/Registration">
+                            <li class="mb-2 lg:mb-1">
+                                <a href="#" class="hover:text-pink-400 transition-colors duration-200">Regisztráció</a>
+                            </li>
+                        </router-link>
                     </ul>
                 </div>
 
@@ -49,38 +64,29 @@
                 </div>
 
                 <div class="col-span-1">
-                    <h4 class="text-xl font-semibold text-white mb-4">Kövess Minket!</h4>
-                    <div class="flex space-x-4 mb-6">
-                        <a href="#" class="text-gray-400 hover:text-pink-500 transition-colors duration-200">
-                            <i class="fab fa-facebook-f text-2xl"></i>
+                    <h4 class="text-xl font-semibold text-white mb-5">Kövess Minket!</h4>
+                    <div class="flex space-x-4 mb-3">
+                        <a href="#" class="text-blue-500 hover:text-pink-500 transition-colors duration-200">
+                            <i class="fab fa-facebook-f text-3xl"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-pink-500 transition-colors duration-200">
-                            <i class="fab fa-instagram text-2xl"></i>
+                        <a href="#" class="text-rose-400 hover:text-pink-500 transition-colors duration-200">
+                            <i class="fab fa-instagram text-3xl"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-pink-500 transition-colors duration-200">
-                            <i class="fab fa-twitter text-2xl"></i>
+                        <a href="#" class="text-sky-400 hover:text-pink-500 transition-colors duration-200">
+                            <i class="fab fa-twitter text-3xl"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-pink-500 transition-colors duration-200">
-                            <i class="fab fa-youtube text-2xl"></i>
+                        <a href="#"
+                            class="text-red-500 rounded-full hover:text-pink-500 transition-colors duration-200">
+                            <i class="fab fa-youtube text-3xl"></i>
                         </a>
                     </div>
-
-                    <div class="mt-6 mb-4 lg:my-2">
-                        <h4 class="text-xl font-semibold text-white mb-3">Feliratkozás</h4>
-                        <form class="flex">
-                            <input type="email" placeholder="E-mail címed"
-                                class="flex-grow p-2 rounded-l-md bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-pink-500" />
-                            <button type="submit"
-                                class="bg-pink-600 hover:bg-pink-700 text-white p-2 rounded-r-md transition-colors duration-200">
-                                Feliratkozom
-                            </button>
-                        </form>
-                    </div>
+                    <p class="text-white text-sm italic">Értesülj elsőként nyereményjátékainkról, akcióinkról és a legújabb
+                        filmek kínálatáról!</p>
                 </div>
             </div>
 
             <div class="border-t border-gray-700 mt-10 pt-8 text-center text-gray-500 text-sm">
-                &copy; {{ currentYear }} Cinema Road. Minden jog fenntartva.
+               Cinema Road&copy; - {{ currentYear }} - Minden jog fenntartva.
             </div>
         </div>
     </footer>

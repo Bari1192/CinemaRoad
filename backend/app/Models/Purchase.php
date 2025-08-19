@@ -6,25 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Reservation extends Model
+class Purchase extends Model
 {
     use HasFactory;
 
-    public $table = "reservations";
-
-    protected $fillable = [
-        "user_id",
-        "confirmation",
-        "location_id",
-        "screening_id",
-        "parkingspot",
-        "reserved_at",
-        "created_at",
-        "updated_at"
-    ];
-
     public $timestamps = true;
 
+    protected $fillable = [
+        'location_id',
+        'screening_id',
+        'movie_id',
+        'ticket_code',
+        'guest_email',
+        'parkingspot',
+        'user_id',
+        'created_at',
+        'updated_at',
+    ];
     public function screening(): BelongsTo
     {
         return $this->belongsTo(Screening::class);
@@ -35,6 +33,11 @@ class Reservation extends Model
         return $this->belongsTo(DriveInCinema::class);
     }
 
+    public function movie(): BelongsTo
+    {
+        return $this->belongsTo(Movie::class);
+    }
+    
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

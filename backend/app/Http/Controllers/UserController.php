@@ -27,18 +27,11 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
         $user = User::findOrFail($id);
         return new UserResource($user);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateUserRequest $request, $id)
     {
         $data = $request->validated();
@@ -50,9 +43,6 @@ class UserController extends Controller
         return new UserResource($userData);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //

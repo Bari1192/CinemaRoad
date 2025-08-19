@@ -44,6 +44,11 @@ export const useTicketStore = defineStore("ticketstore", {
       return response.data.data;
     },
 
+    async postTicketPurchase(data) {
+      const response = await http.post("/purchases", data);
+      return response.data.data;
+    },
+
     async getReservations() {
       try {
         console.log("Megkezdem a foglalások lekérdezését.")

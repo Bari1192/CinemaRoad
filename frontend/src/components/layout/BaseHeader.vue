@@ -22,13 +22,17 @@
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 ease-in-out text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-600 has-[.active]:hover:text-white">
             <RouterLink to="/movies/MovieWeek">Mozihét</RouterLink>
           </li> -->
-          <li
+          <!-- <li
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 ease-in-out text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-600 has-[.active]:hover:text-white">
             <router-link to="/movies/movie">Movie aloldal</router-link>
-          </li>
-          <li
+          </li> -->
+          <li v-if="userIsLoggedIn"
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 ease-in-out text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-600 has-[.active]:hover:text-white">
             <RouterLink to="/LocationChoose">Jegyfoglalás</RouterLink>
+          </li>
+          <li v-if="!userIsLoggedIn"
+            class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 ease-in-out text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-600 has-[.active]:hover:text-white">
+            <RouterLink to="/LocationChoose">Jegyvásárlás</RouterLink>
           </li>
           <li
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 ease-in-out text-pink-600 hover:bg-pink-00 hover:text-white rounded p-2 has-[.active]:text-pink-600 has-[.active]:hover:text-white">

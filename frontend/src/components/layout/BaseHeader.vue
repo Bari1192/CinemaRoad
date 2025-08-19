@@ -37,9 +37,13 @@
               </ul>
             </transition>
           </li>
-          <li
+          <li v-if="userIsLoggedIn"
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 text-pink-600 hover:text-white rounded">
             <RouterLink to="/LocationChoose">Jegyfoglalás</RouterLink>
+          </li>
+          <li v-if="!userIsLoggedIn"
+            class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 text-pink-600 hover:text-white rounded">
+            <RouterLink to="/LocationChoose">Jegyvásárlás</RouterLink>
           </li>
           <li
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 text-pink-600 hover:text-white rounded">

@@ -40,7 +40,7 @@
           </router-link>
 
 
-          <router-link :to="'/movies'" class="md:flex md:justify-start">
+          <router-link :to="'/movies/SpecialWeek'" class="md:flex md:justify-start">
             <button class="order-1 lg:order-2 bg-slate-700 hover:bg-slate-600 rounded-xl border-2 border-slate-400/65
               transition-all duration-300 hover:border-slate-400
             text-white font-semibold py-3 px-1 w-full
@@ -67,7 +67,7 @@
               <p class="text-white text-xs font-medium  
                 md:text-base md:tracking-wide lg:text-lg lg:text-center
                 ">
-                🍿 Randi ötlet keresel? Ez tuti beválik, <router-link :to="'/movies/movie'"
+                🍿 Randi ötlet keresel? Ez tuti beválik, <router-link :to="'/movies/MovieWeek/1'"
                   class="text-pink-500 underline underline-offset-2">csekkold!</router-link>
               </p>
             </div>

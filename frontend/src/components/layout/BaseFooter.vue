@@ -19,7 +19,7 @@
                                 <a href="#" class="hover:text-pink-400 transition-colors duration-200">Kezdőlap</a>
                             </li>
                         </router-link>
-                        <router-link to="/SpecialWeek">
+                        <router-link to="/movies/SpecialWeek">
                             <li class="mb-2 lg:mb-1">
                                 <a href="#" class="hover:text-pink-400 transition-colors duration-200">Rendezvények</a>
                             </li>

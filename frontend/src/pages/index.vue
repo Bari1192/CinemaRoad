@@ -5,6 +5,28 @@ import ClickBanner from "@components/layout/ClickBanner.vue";
 import BaseFooter from "@components/layout/BaseFooter.vue";
 import BaseCard from "@components/BaseCard.vue";
 import RetroCTA from "@components/layout/RetroCTA.vue";
+import { useDriveInCinemaStore } from "@stores/DriveInCinemaStore";
+import { useMovieStore } from "@stores/MovieStore.mjs";
+import { useScreeningStore } from "@stores/ScreeningStore.mjs";
+import { onMounted, ref } from "vue";
+
+const driveInCinemas = useDriveInCinemaStore();
+const screenings = useScreeningStore();
+const movies = useMovieStore();
+const loading = ref(false);
+
+onMounted(async () => {
+  loading.value = true;
+  try {
+    await screenings.getScreenings();
+    await movies.getMovies();
+    await driveInCinemas.getDriveInCinemas();
+  } catch (error) {
+    console.log('Hiba a főoldalon -> adatok lekérésében', error.value);
+  } finally {
+    loading.value = false;
+  }
+});
 </script>
 
 

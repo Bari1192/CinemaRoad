@@ -22,7 +22,7 @@ class ScreeningSeeder extends Seeder
         foreach (DriveInCinema::all() as $cinema) {
             for ($day = 0; $day < $howManyDays; $day++) {
                 $date = (clone $startDay)->addDays($day);
-                $numScreenings = rand(3, 4);
+                $numScreenings = 4;
 
                 $movies = Movie::inRandomOrder()->take($numScreenings)->get();
 

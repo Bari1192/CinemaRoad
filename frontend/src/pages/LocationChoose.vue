@@ -3,20 +3,20 @@
     <Stepper :currentStep="0" />
     <h1 class="text-4xl md:text-5xl font-bold text-pink-600 text-center drop-shadow-lg mt-40 pb-12">Kérlek, válaszd ki a
       helyszínt, ahova menni szeretnél.</h1>
-    <div class="relative my-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
+    <div class="relative  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
       <div v-for="cinema in driveincinemaStore.driveInCinemas" :key="cinema.id" @click="selectCinema(cinema)"
         class="relative group">
-        <!-- Blur div -->
-        <div
-          class="absolute inset-0 rounded-2xl bg-indigo-300/70 blur-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10">
+
+        <div class="relative max-w-md  mx-auto group inline-black">
+          <!-- Blur div -->
+          <div
+            class="absolute inset-0 rounded-2xl bg-indigo-300/70 blur-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10">
+          </div>
+          <div @click="selectCinema(cinema)">
+            <BaseCard :title="cinema.name" :src="'/starfield_autosmozi.jpg'" :alt="cinema.name" :description="''"
+              :type_visible="false" class="max-w-xs md:max-w-md my-40 mx-auto" />
+          </div>
         </div>
-    <div class="relative max-w-md my-40 mx-auto group inline-black">
-      <div
-        class="absolute inset-0 rounded-2xl bg-indigo-300/70 blur-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10">
-      </div>
-      <div v-for="cinema in driveincinemaStore.driveInCinemas" :key="cinema.id" @click="selectCinema(cinema)">
-        <BaseCard :title="cinema.name" :src="'/starfield_autosmozi.jpg'" :alt="cinema.name" :description="''"
-          :type_visible="false" class="max-w-xs md:max-w-md my-40 mx-auto" />
       </div>
     </div>
 

@@ -64,6 +64,7 @@ import { useTicketStore } from '@stores/TicketStore';
 import { useScreeningStore } from '@stores/ScreeningStore.mjs';
 import { onMounted, computed, ref } from 'vue';
 import BaseSpinner from '@components/layout/BaseSpinner.vue';
+import { router } from '../router';
 
 const userStore = useUserStore();
 const ticketStore = useTicketStore();
@@ -114,8 +115,20 @@ const loadReservationsAndScreenings = async () => {
 
 
 onMounted(async () => {
-    await userStore.getUser();
-    await loadReservationsAndScreenings();
+    try {
+        await userStore.getUser();
+
+        if (!userStore.userData || !userStore.userData.id) {
+            router.push('/');
+            return;
+        }
+
+        await loadReservationsAndScreenings();
+    } catch (error) {
+        router.push("/")
+    }
+
+
 });
 
 </script>

@@ -46,15 +46,15 @@ export const useTicketStore = defineStore("ticketstore", {
 
     async getReservations() {
       try {
+        console.log("Megkezdem a foglalások lekérdezését.")
         const response = await http.get("/reservations");
         this.reservations = response.data.data;
+        console.log("Foglalások lekérve.")
         return this.reservations;
       } catch (error) {
         console.error("Hiba a foglalások lekérdezése közben: ", error);
         return [];
       }
-
-      return { reservations, getReservations };
     },
 
     async deleteReservation(id){

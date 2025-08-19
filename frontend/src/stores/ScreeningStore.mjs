@@ -10,6 +10,7 @@ export const useScreeningStore = defineStore("screenings", () => {
     try {
       const resp = await http.get("/screenings");
       screenings.value = resp.data;
+      return resp.data;
     } catch (err) {
       console.error("Hiba a vetítések lekérésekor", err);
       throw err;

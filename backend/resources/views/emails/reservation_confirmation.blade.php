@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
     <meta charset="UTF-8">
     <title>CinemaRoad - Foglalás visszaigazolása</title>
@@ -11,30 +12,30 @@
     <table width="100%" cellpadding="0" cellspacing="0" style="background:#f3edef;padding:0;margin:0;">
         <tr>
             <td style="padding:32px 0; margin:auto;">
-                <table width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;margin:0 auto;border-radius:25px;background:#fff;box-shadow:0 6px 30px #65a30d33, 0 0 3px #65a30d;border:3px dashed #a3e635;overflow:hidden;">
+                <table width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;margin:0 auto;border-radius:25px;background:#fff;box-shadow:0 6px 30px #e91e6333, 0 0 3px #e91e63;border:3px dashed #ce93d8;overflow:hidden;">
                     <tr>
                         <td style="padding:24px 16px 8px 16px; margin:auto;">
-                            <h1 style="color:#65a30d;font-size:1.5rem;font-weight:800;margin:0 0 6px 0;letter-spacing:2px;text-align:center;font-family: 'Cookie','Arial','Times New Roman', Times, serif;">Cinema Road</h1>
+                            <h1 style="color:#e91e63;font-size:1.5rem;font-weight:800;margin:0 0 6px 0;letter-spacing:2px;text-align:center;font-family: 'Cookie','Arial','Times New Roman', Times, serif;">Cinema Road</h1>
                             <h2 style="color:black;font-size:1.5rem;font-weight:800;margin:0 0 6px 0;letter-spacing:2px;text-align:center;">Előfoglalás visszaigazolva</h2>
                         </td>
                     </tr>
                     <tr>
                         <td style="padding:20px 28px 8px 28px;text-align:left;color:#111;">
                             <p style="font-size:1.12rem;margin:0 0 12px 0;">
-                                Kedves <span style="color:#65a30d;font-weight:700;">{{ $user->name }}</span>!
+                                Kedves <span style="color:#e91e63;font-weight:700;">{{ $user->name }}</span>!
                             </p>
                             <p style="font-weight:bold;margin:0;">
                                 Előfoglalásodat sikeresen rögzítettük.<br>
-                                Köszönjük, hogy a <span style="color:#65a30d;font-weight:700;">CinemaRoad</span>-ot választottad!
+                                Köszönjük, hogy a <span style="color:#e91e63;font-weight:700;">CinemaRoad</span>-ot választottad!
                             </p>
                         </td>
                     </tr>
                     <tr>
                         <td style="padding:4px 24px 24px 24px;">
-                            <table width="100%" cellpadding="0" cellspacing="0" style="background:#ecfccb;border-radius:16px;padding: 16px;margin-top:18px;border-top: 4px dashed #65a30d;">
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background:#fce4ec;border-radius:16px;padding: 16px;margin-top:18px;border-top: 4px dashed #e91e63;">
                                 <tr>
                                     <td style="padding:16px;">
-                                        <div style="font-size:1.1rem;font-weight:700;color:#65a30d;margin-bottom:10px;">
+                                        <div style="font-size:1.1rem;font-weight:700;color:#e91e63;margin-bottom:10px;">
                                             Foglalásod részletei:
                                         </div>
                                         <ul style="padding-left:18px;margin:0;font-size:1rem;line-height:170%;">
@@ -49,18 +50,23 @@
                             </table>
                         </td>
                     </tr>
-                     <p style="font-weight:bold;margin:0;">
-                                Foglalásod a vetítés megkezdése előtti <u>20. percig</u> tudjuk fenntartani számodra. 
-                                <p style="font-style: italic;">Kérjük a <b>vetítés megkezdése előtt</b> legalább <b>30-45 perccel</b> vedd át a jegyedet a jegykiadó pultunknál!</p>
-                               
+                    <tr>
+                        <td style="padding:0 28px 20px 28px;">
+                            <p style="font-weight:bold;margin:0 0 8px 0;">
+                                Foglalásod a vetítés megkezdése előtti <u>20. percig</u> tudjuk fenntartani számodra.
                             </p>
+                            <p style="font-style: italic;margin:0;">
+                                Kérjük a <b>vetítés megkezdése előtt</b> legalább <b>30-45 perccel</b> vedd át a jegyedet a jegykiadó pultunknál!
+                            </p>
+                        </td>
+                    </tr>
                     <tr>
                         <td style="padding:0 32px 28px 32px;">
-                            <hr style="margin:20px auto 16px auto;border:none;border-bottom:2px dashed #a3e635;">
-                            <div style="font-size:1rem;font-weight:bold;color:#65a30d;margin-bottom:4px;">Várunk szeretettel,</div>
+                            <hr style="margin:20px auto 16px auto;border:none;border-bottom:2px dashed #ce93d8;">
+                            <div style="font-size:1rem;font-weight:bold;color:#e91e63;margin-bottom:4px;">Várunk szeretettel,</div>
                             <div style="font-size:1rem;font-weight:700;font-style:italic;">CinemaRoad - Autósmozi csapat</div>
                             <div style="font-size:0.92rem;color:#aeaeae;font-style:italic;margin-top:14px;">
-                                Kérdésed merült fel a foglalással kapcsolatban? Módosítani szeretnéd a jegyedet? Írj nekünk a(z) <a href="mailto:info@cinemaroad.hu" style="color:#65a30d;text-decoration:underline;">info@cinemaroad.hu</a> címre!
+                                Kérdésed merült fel a foglalással kapcsolatban? Módosítani szeretnéd a jegyedet? Írj nekünk a(z) <a href="mailto:info@cinemaroad.hu" style="color:#e91e63;text-decoration:underline;">info@cinemaroad.hu</a> címre!
                             </div>
                         </td>
                     </tr>
@@ -69,4 +75,5 @@
         </tr>
     </table>
 </body>
+
 </html>

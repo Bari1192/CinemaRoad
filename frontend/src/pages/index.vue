@@ -45,28 +45,28 @@ onMounted(async () => {
       <div class="card mx-auto px-6 w-fit lg:w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-center gap-6 md:gap-8 
         lg:gap-6 xl:gap-10">
         <router-link to="/movies/SpecialWeek">
-          <BaseCard :title="'Steel Horizon'" :type="'action'"
+          <BaseCard :title="'Steel Horizon'" :type="'Akció'" :class="'text-gray-900 font-extrabold'"
             :description="'Lélegzetelállító harci jelenetek, robbanások, hősök és egy mindenre elszánt harcos.'"
             :src="'src/assets/img/action.png'" :alt="'Autós üldözés'" :img_size_class="'object-cover overflow-hidden'"
             :cta="true" :link="'/movies/SpecialWeek'" />
         </router-link>
 
         <router-link to="/movies/SpecialWeek">
-          <BaseCard :title="'The Magical Meadow'" :type="'family'"
+          <BaseCard :title="'The Magical Meadow'" :type="'Családi'"  :class="'text-yellow-700 font-extrabold'"
             :description="'A természet lágy ölén a gondtalan gyermekek új kalandra hívnak a varázslatos elemek világába!'"
             :src="'src/assets/img/family.png'" :alt="'The Magical Meadow'"
             :img_size_class="' object-cover overflow-hidden'" :cta="true" :link="'/movies/SpecialWeek'" />
         </router-link>
 
         <router-link to="/movies/SpecialWeek">
-          <BaseCard :title="'Baljós árnyak'" :type="'horror'"
+          <BaseCard :title="'Baljós árnyak'" :type="'Horror'" :class="'text-red-900 font-extrabold'"
             :description="'A sötétség magányában csak magadra számíthatsz. A hangok a fejedből, vagy az éj lepléből szállnak?'"
             :src="'src/assets/img/horror.png'" :alt="'Baljós árnyak - horrofilm, kizárólag felnőtteknek.'"
             :img_size_class="'object-cover overflow-hidden'" :cta="true" :link="'/movies/SpecialWeek'" />
         </router-link>
 
         <router-link to="/movies/SpecialWeek">
-          <BaseCard :title="'Premier Filmek a Héten'" :type="'premier'"
+          <BaseCard :title="'Premier Filmek a Héten'" :type="'Premierek'"
             :description="'Elsők között néznéd meg várva várt mozifilmed? Nézd meg még premier előtt!'"
             :src="'src/assets/img/news.webp'" :alt="'Premier Filmek a Héten'"
             :img_size_class="'object-cover overflow-hidden'" :cta="true" :link="'/movies/SpecialWeek'" />

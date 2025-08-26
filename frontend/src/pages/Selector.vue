@@ -28,13 +28,15 @@
             </div>
             <div v-if="filteredMoviesByType.length > 0" class="grid grid-cols-1 md:grid-cols-5 gap-6 mt-10">
                 <BaseCard v-for="screening in filteredMoviesByType" @click="selectMovie(screening.movie)"
-                    :key="screening.id"
-                    :title="screening.movie?.title"
-                    :type="screening.movie?.type"
-                    :src="`../assets/img${screening.movie.poster_url}`"
-                    :alt="screening.movie?.title"
-                    :description="screening.movie?.description" 
-                    />
+                    :key="screening.id" :title="screening.movie?.title"
+                    :src="`../assets/img${screening.movie.poster_url}`" :alt="screening.movie?.title"
+                    :description="screening.movie?.description"
+                    :type="EasierLabelsGenerate[screening.movie?.type] ?? 'Egyéb kategória'" :class="{
+                        'text-gray-900 font-extrabold': screening.movie?.type === 'action',
+                        'text-yellow-700 font-extrabold': screening.movie?.type === 'family',
+                        'text-red-900 font-extrabold': screening.movie?.type === 'horror'
+                    }">
+                </BaseCard>
             </div>
         </div>
         <div v-else>
@@ -53,6 +55,8 @@ import Stepper from '@components/layout/Stepper.vue';
 import BaseSpinner from '@components/layout/BaseSpinner.vue';
 import BaseCard from '@components/BaseCard.vue';
 
+const EasierLabelsGenerate = { action: 'Akció', family: 'Családi', horror: 'Horror' }
+
 const router = useRouter();
 const movieStore = useMovieStore();
 const screeningStore = useScreeningStore();
@@ -63,11 +67,12 @@ function selectMovie(movie) {
 }
 const selectedGenre = ref('Mind');
 const currentLocationId = computed(() => ticketStore.location?.id);
+const typeLabel = computed(() => EasierLabelsGenerate[screening.movie?.type] ?? 'Egyéb kategória')
 const screenings = ref([]);
 const movies = ref([]);
 
 const enrichedScreenings = computed(() => {
-    if (!screenings.value.length|| !movies.value.length || !currentLocationId.value) return [];
+    if (!screenings.value.length || !movies.value.length || !currentLocationId.value) return [];
     return screenings.value
         .filter(s => Number(s.drive_in_cinema_id) === Number(currentLocationId.value))
         .map(screening => {
@@ -78,7 +83,7 @@ const enrichedScreenings = computed(() => {
 const filteredMoviesByType = computed(() => {
     const seenMovieIds = new Set();
     const filtered = [];
-    
+
     for (const screening of enrichedScreenings.value) {
         if (!screening.movie) continue;
 
@@ -92,6 +97,7 @@ const filteredMoviesByType = computed(() => {
 
     return filtered;
 });
+
 onMounted(async () => {
     await screeningStore.getScreenings();
     await movieStore.getMovies();

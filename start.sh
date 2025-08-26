@@ -1,4 +1,9 @@
-#!/bin/bash
+DEMO=0
+for arg in "$@"; do
+  case "$arg" in
+    --demo|–demo|—demo) DEMO=1 ;;
+  esac
+done
 
 if [ -f "backend/.env" ]; then
     echo "A .env fájl már létezik"
@@ -18,11 +23,12 @@ docker compose up -d
 
 docker compose exec backend composer install
 
-docker compose exec backend php artisan migrate:fresh --seed
-
-docker compose exec backend php artisan storage:link
-
-docker compose exec backend php artisan test
+if [ "$DEMO" -eq 1 ]; then
+  echo "DEMO üzemmód aktiválva - Seeder - Tesztek - Linkek"
+  docker compose exec backend php artisan migrate:fresh --seed
+  docker compose exec backend php artisan storage:link
+  docker compose exec backend php artisan test
+fi
 
 if [ -z "${APP_KEY}" ]; then
     docker compose exec backend php artisan key:generate

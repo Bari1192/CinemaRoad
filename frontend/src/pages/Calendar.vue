@@ -4,34 +4,49 @@ import { computed, ref } from 'vue'
 const props = defineProps({
   screenings: { type: Array, required: true }
 })
+
 const emit = defineEmits(['select-screening'])
 
 const daysOfWeek = ['Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat', 'Vasárnap']
+const openedDayKey = ref(null)
 const selectedScreeningId = ref(null);
+
+function localDateKey(input) {
+  const d = new Date(input)
+  d.setHours(0, 0, 0, 0)
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${y}-${m}-${day}`
+}
+
 
 const screeningsByDate = computed(() => {
   const groups = {}
   for (const vetitesi_idopont of props.screenings) {
     const dateObj = new Date(vetitesi_idopont.start_time)
-    const dateKey = dateObj.toISOString().split('T')[0]
-    if (!groups[dateKey]) groups[dateKey] = {
-      dayIndex: (dateObj.getDay() + 6) % 7,
-      localDate: dateObj,
-      vets: []
+    const dateKey = localDateKey(dateObj)
+    if (!groups[dateKey]) {
+      const localMidnight = new Date(dateObj)
+      localMidnight.setHours(0, 0, 0, 0)
+      groups[dateKey] = {
+        dayIndex: (dateObj.getDay() + 6) % 7,
+        localDate: localMidnight,
+        vets: []
+      }
     }
     groups[dateKey].vets.push(vetitesi_idopont)
   }
   return groups
 })
+
 const weekRows = computed(() => {
   const allDates = Object.entries(screeningsByDate.value).map(([dateKey, obj]) => ({
     dateKey, ...obj
   }))
   if (!allDates.length) return []
-
   const minDate = allDates.reduce((min, d) => d.localDate < min ? d.localDate : min, allDates[0].localDate)
   const maxDate = allDates.reduce((max, d) => d.localDate > max ? d.localDate : max, allDates[0].localDate)
-
   const startOfWeek = (date) => {
     const n = (date.getDay() + 6) % 7
     const d = new Date(date)
@@ -46,22 +61,20 @@ const weekRows = computed(() => {
     d.setHours(23, 59, 59, 999)
     return d
   }
-
   const rows = []
-  let from = startOfWeek(minDate)
-  let to = endOfWeek(maxDate)
-  let weekStart = new Date(from)
+  let weekStart = startOfWeek(minDate)
+  const to = endOfWeek(maxDate)
   while (weekStart <= to) {
     const days = []
     for (let i = 0; i < 7; i++) {
       const d = new Date(weekStart)
       d.setDate(d.getDate() + i)
-      const dateKey = d.toISOString().slice(0, 10)
+      const dateKey = localDateKey(d) 
       days.push({
         dateKey,
         dayName: daysOfWeek[i],
         localDate: d,
-        screenings: (screeningsByDate.value[dateKey]?.vets) || []
+        screenings: screeningsByDate.value[dateKey]?.vets ?? []
       })
     }
     rows.push(days)
@@ -73,16 +86,15 @@ const weekRows = computed(() => {
 function magyarDatum(d) {
   return d.toLocaleDateString('hu-HU', { month: '2-digit', day: '2-digit' })
 }
+
 function magyarIdo(s) {
   return new Date(s).toLocaleTimeString('hu-HU', { hour: '2-digit', minute: '2-digit', hour12: false })
 }
+
 function clickScreening(vetitesi_idopont) {
-  selectedScreeningId.value = vetitesi_idopont.start_time;
+  selectedScreeningId.value = vetitesi_idopont.start_time
   emit('select-screening', vetitesi_idopont.id)
 }
-
-
-const openedDayKey = ref(null)
 
 const toggleDay = (dayKey) => {
   openedDayKey.value = openedDayKey.value === dayKey ? null : dayKey

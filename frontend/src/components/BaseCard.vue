@@ -1,7 +1,10 @@
 <script setup>
+import ZeroPlus from '@assets/svg/ZeroPlus.vue';
+import FourPlus from '@assets/svg/FourPlus.vue';
+import SixPlus from '@assets/svg/SixPlus.vue';
+import TwelvePlus from '@assets/svg/TwelvePlus.vue';
 import SixteenPlus from '@assets/svg/SixteenPlus.vue';
 import EighteenPlus from '@assets/svg/EighteenPlus.vue';
-import ZeroPlus from '@assets/svg/ZeroPlus.vue';
 const props = defineProps({
   title: {
     type: String,
@@ -42,15 +45,19 @@ const props = defineProps({
     type: String,
     required: false,
   },
+  age_limit: {
+    type: Number,
+    required: false,
+  },
   age_limit_visible: {
     type: Boolean,
     default: true,
     required: false,
   },
-  img_size_class:{
-    type:String,
-    required:false,
-    default:'h-[160px] sm:h-[220px] md:h-[400px] w-full object-cover overflow-hidden'
+  img_size_class: {
+    type: String,
+    required: false,
+    default: 'h-[160px] sm:h-[220px] md:h-[400px] w-full object-cover overflow-hidden'
   }
 })
 </script>
@@ -60,17 +67,26 @@ const props = defineProps({
         hover:cursor-pointer">
     <div class="relative">
       <div v-if="age_limit_visible" class="w-full h-full relative">
-        <div v-if="props.type == 'action'" class="absolute top-0 left-0 opacity-85">
-          <SixteenPlus class="w-10 h-10" />
-        </div>
-        <div v-if="props.type == 'family'" class="absolute top-0 left-0 opacity-85">
+        <div v-if="props.age_limit === 0" class="absolute top-0 left-0 opacity-85">
           <ZeroPlus class="w-10 h-10" />
         </div>
-        <div v-if="props.type == 'horror'" class="absolute top-0 left-0 opacity-85">
+        <div v-if="props.age_limit === 4" class="absolute top-0 left-0 opacity-85">
+          <FourPlus class="w-10 h-10" />
+        </div>
+        <div v-if="props.age_limit === 6" class="absolute top-0 left-0 opacity-85">
+          <SixPlus class="w-10 h-10" />
+        </div>
+        <div v-if="props.age_limit === 12" class="absolute top-0 left-0 opacity-85">
+          <TwelvePlus class="w-10 h-10" />
+        </div>
+        <div v-if="props.age_limit === 16" class="absolute top-0 left-0 opacity-85">
+          <SixteenPlus class="w-10 h-10" />
+        </div>
+        <div v-if="props.age_limit === 18" class="absolute top-0 left-0 opacity-85">
           <EighteenPlus class="w-10 h-10" />
         </div>
       </div>
-      <img :src="props.src" :alt="props.alt" :class="props.img_size_class"/>
+      <img :src="props.src" :alt="props.alt" :class="props.img_size_class" />
       <span v-if="type_visible"
         class="absolute right-0 top-0 text-xs md:text-base font-bold md:font-medium tracking-widest py-1 md:py-2 px-4 md:px-6 rounded-bl-xl rounded-tr-2xl shadow-md shadow-gray-800 uppercase bg-gray-200">
         {{ props.type }}

@@ -14,36 +14,38 @@ class RegisterUserRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            "name" => ["required",
-                        "string",
-                        "max:60",
-                        "min:6"], // Legrövidebb név: Úr Pál (?) tudjon regisztrálni.
+            "name" => [
+                "required",
+                "string",
+                "max:60",
+                "min:6"
+            ], // Legrövidebb név: Úr Pál (?) tudjon regisztrálni.
 
-            "email" => ["required",
-                        "email:rfc",
-                        "min:15",
-                        "max:50",
-                        'regex:/@(?:gmail|freemail|yahoo|citromail|outlook)\.(com|hu)$/'],
+            "email" => [
+                "required",
+                "email:rfc",
+                // "min:15",
+                "max:50",
+            ],
 
-            "phone" => ["required",
-                        "string",
-                        "max:50",
-                        "min:6",
-                        "regex:/^\+?(06)?(20|30|40|70)\d{7}$/"],
+            "phone" => [
+                "required",
+                "string",
+                "max:50",
+                "min:6",
+                // "regex:/^\+?(06)?(20|30|40|70)\d{7}$/"
+            ],
 
-            "password" => ["required",
-                        "string",
-                        "min:8",
-                        "max:50",
-                        'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,50}$/'],
+            "password" => [
+                "required",
+                "string",
+                "min:8",
+                "max:50",
+                'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,50}$/'
+            ],
         ];
     }
 }

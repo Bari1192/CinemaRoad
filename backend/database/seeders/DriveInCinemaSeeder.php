@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 class DriveInCinemaSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         DB::table("drive_in_cinemas")->insert([

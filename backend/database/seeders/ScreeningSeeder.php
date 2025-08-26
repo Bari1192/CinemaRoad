@@ -10,10 +10,6 @@ use Carbon\Carbon;
 
 class ScreeningSeeder extends Seeder
 {
-    // 3 és 4 között random generálja a vetítések számát naponta.
-    // NEM ismétlődnek a filmek egymás után, random lehívja a filmeket és annyit tölt bele, ahány vetítés kell aznap!
-    // Előző filmidő + 20 perc szünetet számol >> így áll össze 1 'blokk'!
-
     public function run()
     {
         $startDay = Carbon::today();

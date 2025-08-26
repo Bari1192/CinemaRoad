@@ -12,7 +12,7 @@
           style="font-family: 'Cookie','Arial','Times New Roman', Times, serif;">
           <li
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 text-pink-600 hover:text-white rounded">
-            <RouterLink to="/movies/SpecialWeek">Special Week</RouterLink>
+            <RouterLink to="/movies/SpecialWeek">Premier Filmek</RouterLink>
           </li>
           <li
             class="relative md:text-3xl lg:text-4xl tracking-wider xl:px-3 transition-all duration-150 text-pink-600 rounded focus-within:z-30">
@@ -88,7 +88,7 @@
           style="font-family: 'Cookie','Arial','Times New Roman', Times, serif;">
           <li
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 transition-colors duration-150 text-pink-600 hover:text-white rounded">
-            <RouterLink to="/movies/SpecialWeek">Rendezvények</RouterLink>
+            <RouterLink to="/movies/SpecialWeek">Premier Filmek</RouterLink>
           </li>
           <li v-if="!isMobile" class="relative group">
             <button @click="toggleCinemaDropdown"

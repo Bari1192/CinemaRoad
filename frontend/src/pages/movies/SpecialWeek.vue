@@ -4,8 +4,8 @@ import BaseLayout from '@layouts/BaseLayout.vue'
 import dustzoneImg from '@assets/img/Main_Slider_img/Dustzone_last_run.webp'
 import nightfireImg from '@assets/img/Main_Slider_img/Nightfire_redemption.webp'
 import realmshatterImg from '@assets/img/Main_Slider_img/Realmshatter.webp'
-import SixteenPlus from '@assets/svg/SixteenPlus.vue'
 import AgeLimitBadge from '@components/AgeLimitBadge.vue'
+import SpecialWeekTimer from './SpecialWeekTimer.vue'
 
 const films = [
     {
@@ -53,9 +53,9 @@ const films = [
 <template>
     <BaseLayout>
         <div class="min-h-screen text-white flex flex-col items-center py-12 px-4 space-y-20">
-            <div class="text-3xl md:text-5xl font-extrabold text-center py-0 space-y-0" style="line-height: 4rem;">
-                Következő héten megjelenő
-                <br><span class="text-pink-400 ">Premier előtti </span>vetítéseink
+            <div class="text-3xl md:text-5xl font-extrabold text-center py-0 space-y-0" style="line-height: 2rem;">
+                <span class="text-pink-400 ">Premier előtti </span>vetítéseink
+                <SpecialWeekTimer /> 
             </div>
 
             <div v-for="(film, index) in films" :key="index"

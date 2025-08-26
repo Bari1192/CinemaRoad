@@ -6,6 +6,7 @@ import { useTicketStore } from '@stores/TicketStore'
 import { useUserStore } from '@stores/UserStore'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import AgeLimitBadge from '@components/AgeLimitBadge.vue'
 
 const userStore = useUserStore();
 const ticketStore = useTicketStore();
@@ -27,6 +28,10 @@ const movieDesc = computed(() =>
 const moviePoster = computed(() =>
     ticketStore.movie?.poster_url || ''
 )
+const movieAgeLimit = computed(() =>
+    ticketStore.movie?.age_limit || ''
+)
+
 const parkings = computed(() =>
     Array.isArray(ticketStore.parkingSpot)
         ? ticketStore.parkingSpot
@@ -104,8 +109,8 @@ const handleConfirmation = async () => {
         query: {
             bookingType: bookingType.value || 'purchase',
             code: bookingType.value === 'reservation'
-                    ? resultData.confirmation
-                    : resultData.ticket_code
+                ? resultData.confirmation
+                : resultData.ticket_code
         }
     });
 };
@@ -158,7 +163,10 @@ onMounted(async () => {
                                 class="text-sm underline underline-offset-4 text-pink-900 font-bold uppercase opacity-70 tracking-wider mb-2">
                                 Kiválasztott film:
                             </div>
-                            <div class="mx-auto text-lg font-bold text-gray-700">{{ movieTitle }}</div>
+                            <div class="mx-auto inline-flex items-center align-middle gap-2 md:text-lg lg:text-2xl font-bold text-gray-700">
+                                <AgeLimitBadge :age="movieAgeLimit" klassz="h-4 w-4 md:w-6 md:h-6 lg:w-8 lg:h-8" />
+                                {{ movieTitle }}
+                            </div>
                             <div class="mt-2 italic text-gray-500">{{ movieDesc }}</div>
                         </div>
                     </div>
@@ -166,7 +174,7 @@ onMounted(async () => {
                     <!-- Foglalási, vagy vásárlási select rész -->
                     <div v-if="!userStore.userID" class="flex flex-col w-full gap-2 my-4">
                         <label for="email"
-                            class="block font-bold text-pink-500 border border-pink-500 bg-amber-300/90 w-fit rounded-md px-2 py-1 mb-2 text-sm lg:text-base text-black">
+                            class="block font-bold text-pink-500 border border-pink-500 bg-amber-300/90 w-fit rounded-md px-2 py-1 mb-2 text-sm lg:text-base ">
                             Email cím megadása
                         </label>
                         <div class="flex flex-col sm:flex-row items-start gap-2 w-full sm:w-1/2">

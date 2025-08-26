@@ -14,6 +14,7 @@ return new class extends Migration
             $table->text('description', 255);
             $table->string("type", 20);
             $table->date("release_date");
+            $table->unsignedSmallInteger("age_limit")->default(18);
             $table->string("director", 50);
             $table->unsignedInteger('duration_min');
             $table->string('poster_url');

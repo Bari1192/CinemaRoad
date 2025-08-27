@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreReservationRequest;
+use App\Http\Requests\UpdateReservationRequest;
 use App\Http\Resources\ReservationResource;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ class ReservationController extends Controller
 {
     public function index()
     {
-        $reservations = Reservation::all();
+        $reservations = Reservation::with(["user", "screening.movie"])->get();
         return ReservationResource::collection($reservations);
     }
 
@@ -84,9 +85,33 @@ class ReservationController extends Controller
         return new ReservationResource($reservation);
     }
 
-    public function update(Request $request, Reservation $reservation)
+    public function update(UpdateReservationRequest $request, Reservation $reservation)
     {
-        // De, kell!
+        $data = $request->validated();
+
+        $newSpots = explode(',', $data['parkingspot']);
+
+        $existingReservations = Reservation::where('screening_id', $data['screening_id'])
+            ->where('id', '!=', $reservation->id)
+            ->get();
+
+        $takenSpots = [];
+
+        foreach($existingReservations as $res){
+            $takenSpots = array_merge($takenSpots, explode(',', $res->parkingspot));
+        }
+
+        foreach($newSpots as $spot){
+            if(in_array($spot, $takenSpots)){
+                return response()->json([
+                    "message" => "A következő hely már foglalt: $spot"
+                ], 422);
+            }
+        }
+        
+        $reservation->update($data);
+
+        return new ReservationResource($reservation); 
     }
 
     public function destroy($id)

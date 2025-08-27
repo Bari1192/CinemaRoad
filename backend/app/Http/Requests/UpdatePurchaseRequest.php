@@ -19,6 +19,7 @@ class UpdatePurchaseRequest extends FormRequest
             'movie_id' => ['integer', 'exists:movies,id'],
             'location_id' => ['integer', 'exists:drive_in_cinemas,id'],
             'screening_id' => ['integer', 'exists:screenings,id'],
+            "parkingspot" => ["required", "string"],
         ];
     }
 }

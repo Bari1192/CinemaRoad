@@ -6,6 +6,7 @@ use App\Http\Requests\StorePurchaseRequest;
 use App\Http\Requests\UpdatePurchaseRequest;
 use App\Http\Resources\PurchaseResource;
 use App\Models\Purchase;
+use App\Models\Reservation;
 
 class PurchaseController extends Controller
 {
@@ -21,22 +22,28 @@ class PurchaseController extends Controller
 
         $newSpots = explode(',', $data["parkingspot"]);
 
+        // Keresztellenőrzés végett!!
         $existingPurchases = Purchase::where('screening_id', $data['screening_id'])->get();
+        $existingReservations = Reservation::where('screening_id', $data['screening_id'])->get();
 
         $takenSpots = [];
-        foreach($existingPurchases as $exp) {
+        foreach ($existingPurchases as $exp) {
             $takenSpots = array_merge($takenSpots, explode(',', $exp->parkingspot));
         }
 
-        foreach($newSpots as $spot) {
-            if(in_array($spot, $takenSpots)) {
+        foreach ($existingReservations as $res) {
+            $takenSpots = array_merge($takenSpots, explode(',', $res->parkingspot));
+        }
+
+        foreach ($newSpots as $spot) {
+            if (in_array($spot, $takenSpots)) {
                 return response()->json([
                     'message' => "A következő hely már foglalt: $spot"
                 ], 422);
             }
         }
 
-        
+
         $data['ticket_code'] = bin2hex(random_bytes(12));
         $purchase = Purchase::create($data);
         return new PurchaseResource($purchase);
@@ -57,10 +64,17 @@ class PurchaseController extends Controller
             ->where('id', '!=', $purchase->id)
             ->get();
 
+        $existingReservations = Reservation::where('screening_id', $data['screening_id'])->get();
+
         $takenSpots = [];
 
         foreach ($existingPurchases as $p) {
             $takenSpots = array_merge($takenSpots, explode(',', $p->parkingspot));
+        }
+
+        // Keresztellenőrzés végett!!
+        foreach ($existingReservations as $res) {
+            $takenSpots = array_merge($takenSpots, explode(',', $res->parkingspot));
         }
 
         foreach ($newSpots as $spot) {

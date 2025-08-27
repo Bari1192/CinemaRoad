@@ -17,6 +17,7 @@ class PurchaseResource extends JsonResource
             'ticket_code' => $this->ticket_code,
             'guest_email' => $this->guest_email,
             'parkingspot' => $this->parkingspot,
+            "movieTitle" => $this->movie->title,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

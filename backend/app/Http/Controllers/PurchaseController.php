@@ -11,13 +11,32 @@ class PurchaseController extends Controller
 {
     public function index()
     {
-        $purchases = Purchase::all();
+        $purchases = Purchase::with(["movie"])->get();
         return PurchaseResource::collection($purchases);
     }
 
     public function store(StorePurchaseRequest $request, Purchase $purchase)
     {
         $data = $request->validated();
+
+        $newSpots = explode(',', $data["parkingspot"]);
+
+        $existingPurchases = Purchase::where('screening_id', $data['screening_id'])->get();
+
+        $takenSpots = [];
+        foreach($existingPurchases as $exp) {
+            $takenSpots = array_merge($takenSpots, explode(',', $exp->parkingspot));
+        }
+
+        foreach($newSpots as $spot) {
+            if(in_array($spot, $takenSpots)) {
+                return response()->json([
+                    'message' => "A következő hely már foglalt: $spot"
+                ], 422);
+            }
+        }
+
+        
         $data['ticket_code'] = bin2hex(random_bytes(12));
         $purchase = Purchase::create($data);
         return new PurchaseResource($purchase);
@@ -30,6 +49,28 @@ class PurchaseController extends Controller
 
     public function update(UpdatePurchaseRequest $request, Purchase $purchase)
     {
+        $data = $request->validated();
+
+        $newSpots = explode(',', $data['parkingspot']);
+
+        $existingPurchases = Purchase::where('screening_id', $data['screening_id'])
+            ->where('id', '!=', $purchase->id)
+            ->get();
+
+        $takenSpots = [];
+
+        foreach ($existingPurchases as $p) {
+            $takenSpots = array_merge($takenSpots, explode(',', $p->parkingspot));
+        }
+
+        foreach ($newSpots as $spot) {
+            if (in_array($spot, $takenSpots)) {
+                return response()->json([
+                    "message" => "A következő hely már foglalt: $spot"
+                ], 422);
+            }
+        }
+
         $purchase->update($request->validated());
         return new PurchaseResource($purchase);
     }

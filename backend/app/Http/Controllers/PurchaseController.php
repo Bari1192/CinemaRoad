@@ -12,7 +12,7 @@ class PurchaseController extends Controller
 {
     public function index()
     {
-        $purchases = Purchase::with(["movie"])->get();
+        $purchases = Purchase::with(["movie", "user"])->get();
         return PurchaseResource::collection($purchases);
     }
 

@@ -124,4 +124,25 @@ class ReservationsControllerTest extends TestCase
         $this->postJson("/api/reservations", $reservationData);
         $this->assertDatabaseHas("reservations", $reservationData);
     }
+
+    public function test_user_can_not_reserve_an_already_taken_parkingspot()
+    {
+        $purchase = $this->postJson("/api/purchases",[
+            "location_id" => 1,
+            "movie_id" => 1,
+            "screening_id" => 1,
+            "guest_email" => "guestemail@gmail.com",
+            "parkingspot" => "A1",
+        ]);
+
+        $reservationResponse = $this->postJson("/api/reservations", [
+            "user_id" => 1,
+            "screening_id" => 1,
+            "reserved_at" => now()->toDateString(),
+            "location_id" => 1,
+            "parkingspot" => "A1",
+        ]);
+
+        $reservationResponse->assertStatus(422);
+    }
 }

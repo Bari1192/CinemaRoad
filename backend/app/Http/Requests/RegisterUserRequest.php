@@ -2,13 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ValidEmailDomain;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterUserRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
@@ -22,13 +20,14 @@ class RegisterUserRequest extends FormRequest
                 "string",
                 "max:60",
                 "min:6"
-            ], // Legrövidebb név: Úr Pál (?) tudjon regisztrálni.
+            ],
 
             "email" => [
                 "required",
-                "email:rfc",
-                // "min:15",
+                "min:8",
                 "max:50",
+                "email:rfc",
+                new ValidEmailDomain(), // Meghívjuk, hogy végezze el az ellenőrzési függvényt!
             ],
 
             "phone" => [
@@ -36,7 +35,6 @@ class RegisterUserRequest extends FormRequest
                 "string",
                 "max:50",
                 "min:6",
-                // "regex:/^\+?(06)?(20|30|40|70)\d{7}$/"
             ],
 
             "password" => [

@@ -10,7 +10,6 @@ class RegisterControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
-    // B A S E
     public function test_guest_can_register()
     {
         $response = $this->postJson("/api/register", [
@@ -23,7 +22,6 @@ class RegisterControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    // N A M E
     public function test_guest_can_not_register_with_too_long_name()
     {
         $response = $this->postJson("/api/register", [

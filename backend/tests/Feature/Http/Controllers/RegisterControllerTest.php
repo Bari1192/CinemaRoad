@@ -75,7 +75,7 @@ class RegisterControllerTest extends TestCase
     {
         $response = $this->postJson("/api/register", [
             "name" => "Test Name",
-            "email" => "test@gmail.com",
+            "email" => "t@a.com",
             "phone" => "+06701234567",
             "password" => "Testpassword123_"
         ]);
@@ -90,7 +90,7 @@ class RegisterControllerTest extends TestCase
         $response = $this->postJson("/api/register", [
             "name" => "Test Name",
             "email" => "testemail@gmail.com",
-            "phone" => "+0670123456765412398",
+            "phone" => "+0670123456765412398111111",
             "password" => "Testpassword123_"
         ]);
 
@@ -102,7 +102,7 @@ class RegisterControllerTest extends TestCase
         $response = $this->postJson("/api/register", [
             "name" => "Test Name",
             "email" => "testemail@gmail.com",
-            "phone" => "+0670123456",
+            "phone" => "+3670123456",
             "password" => "Testpassword123_"
         ]);
 
@@ -186,11 +186,9 @@ class RegisterControllerTest extends TestCase
         $response = $this->postJson("/api/register", [
             "name" => "Test Name",
             "email" => "testemail@gmail.com",
-            "phone" => "06701234567",
+            "phone" => "+36705004040",
             "password" => "Testpassword123_"
         ]);
-
-
-        $response->assertJsonStructure(["data" => ["message"]]); // tip: ez 2 asszertáció. Egy a 'data'-ra, másik a 'message'-re.
+        $response->assertJsonStructure(["data" => ["message"]]); 
     }
 }

@@ -33,8 +33,8 @@ class RegisterUserRequest extends FormRequest
             "phone" => [
                 "required",
                 "string",
-                "max:50",
-                "min:6",
+                "max:25",
+                "min:12",
             ],
 
             "password" => [

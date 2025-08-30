@@ -56,7 +56,7 @@
                 <div v-for="reservation in filteredItems" :key="reservation.id"
                     class="bg-gray-100 py-4 pl-2 rounded-lg shadow">
                     <p class="font-semibold pl-2">Helyszín: <span class="px-2">{{ locationNames[reservation.location_id]
-                            }}</span></p>
+                    }}</span></p>
                     <p class="font-semibold pl-2">Email: <span class="px-2">{{ reservation.guest_email ||
                         reservation.userEmail }}</span></p>
                     <p class="font-semibold pl-2">Film: <span class="px-2">Film</span></p>
@@ -103,13 +103,13 @@
                 <div v-for="purchase in paginatedItems" :key="purchase.id"
                     class="bg-gray-100 py-4 pl-2 rounded-lg shadow">
                     <p class="font-semibold pl-2">Helyszín: <span class="px-2">{{ locationNames[purchase.location_id]
-                            }}</span></p>
+                    }}</span></p>
                     <p class="font-semibold pl-2">Email: <span class="px-2">{{ purchase.guest_email ||
                         purchase.userEmail }}</span></p>
                     <p class="font-semibold pl-2">Film: <span class="px-2">Film</span></p>
                     <td class="font-semibold p-2">
                         <span v-if="editingDataId !== purchase.id"> Jegyek: {{ purchase.parkingspot
-                            }}</span>
+                        }}</span>
                         <input v-else v-model="editableData.parkingspot" class="border rounded px-1 w-20 text-center" />
                     </td>
                     <p class="font-semibold pl-2">Azonosító: <span class="px-2">{{ purchase.confirmation ||
@@ -240,9 +240,10 @@
                         next: 'px-3 py-1 m-1 bg-blue-500 text-white rounded-full hover:bg-blue-600'
                     }" />
             </div>
-
-
         </div>
+
+
+        <AdminMovieUpdatePanel />
     </BaseLayout>
 </template>
 
@@ -251,6 +252,7 @@ import BaseLayout from '@layouts/BaseLayout.vue';
 import Paginator from 'primevue/paginator'
 import { onMounted, ref, computed } from 'vue';
 import { ToastService } from '@stores/ToastService';
+import AdminMovieUpdatePanel from './AdminMovieUpdatePanel.vue';
 
 import { useTicketStore } from '@stores/TicketStore';
 import { useMovieStore } from '@stores/MovieStore.mjs';

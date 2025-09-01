@@ -141,17 +141,17 @@ const handleCreateMovie = async () => {
     formData.append("poster_url", posterUrl);
 
 
-
     try {
         // Filmfeltöltés!
         const response = await http.post("/movies", formData);
         console.log("Success", response.data);
         alert("Film sikeresen létrehozva!");
 
-        // Képfeltöltés!!
+        // Képfeltöltés!! plusz a film típus fájlnév miatt
         const posterFormData = new FormData();
         const sanitizedFile = sanitizeFile(selectedFile.value);
         posterFormData.append('poster', sanitizedFile);
+        posterFormData.append('type', movieType.value);
         console.log("posterFormData poster: ", posterFormData.get('poster'))
 
 

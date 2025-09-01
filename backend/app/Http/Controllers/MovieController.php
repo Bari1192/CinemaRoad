@@ -50,18 +50,24 @@ class MovieController extends Controller
         Log::info("storePoster method-ba eljutottunk!");
         $request->validate([
             'poster' => ['required', 'image', 'max:5120'],
+            'type' => ['required', 'string', 'max:7']
         ]);
 
         if ($request->hasFile('poster')) {
+
             $file = $request->file('poster');
+            $type = $request->input('type');
+
             $basename = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
-            Log::info("basename: ");
-            Log::info($basename);
-            $filename = time() . '_' . $basename . '.' . $file->getClientOriginalExtension();
+            $extension = $file->getClientOriginalExtension();
+
+            $folder = "moviePosters/{$type}_Movies_img";
+
+            $filename = $basename . '.' . $extension;
 
             // Mentse el a public mappába
-            $path = $file->storeAs('moviePosters', $filename, 'public');
-            
+            $path = $file->storeAs($folder, $filename, 'public');
+
             // Térjen vissza a relativePath-el
             return response()->json([
                 'message' => 'Poster uploaded successfully',

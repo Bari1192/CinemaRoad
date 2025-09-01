@@ -11,7 +11,8 @@ import "vue3-toastify/dist/index.css";
 
 // PrimeVue
 import PrimeVue from 'primevue/config';
-import Paginator from 'primevue/paginator'
+import Paginator from 'primevue/paginator';
+import FileUpload from 'primevue/fileupload'
 import Aura from '@primeuix/themes/aura';
 
 const CinemaRoadPreset = definePreset(Aura, {

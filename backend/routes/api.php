@@ -18,7 +18,9 @@ Route::get('/user', function (Request $request) {
 Route::apiResource("screenings", ScreeningController::class);
 Route::apiResource("drive_in_cinemas", DriveInCinemaController::class);
 Route::apiResource("/reservations", ReservationController::class);
+
 Route::apiResource('movies', MovieController::class);
+Route::post('/movies/upload-poster', [MovieController::class, 'storePoster']);
 
 // Auth
 Route::post("/register", [RegisterController::class, "store"]);

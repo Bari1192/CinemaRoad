@@ -31,13 +31,17 @@ Route::apiResource("/reservations", ReservationController::class)->middleware('a
 // Minden engedélyezett, kivéve a store és update. Azok maradjanak levédve.
 Route::apiResource('movies', MovieController::class)->except("store", "update");
 
-Route::middleware(['auth:sanctum'])->group(function() {
+Route::middleware(['auth:sanctum'])->group(function () {
 
     // Film feltöltés védve
     Route::post("/movies", [MovieController::class, "store"]);
+
+    // Film módosítása
+    Route::put("/movies/{movie}", [MovieController::class, "update"]);
+
     // Kép feltöltés védve
     Route::post('/movies/upload-poster', [MovieController::class, 'storePoster'])
-    ->can('uploadPoster', Movie::class);
+        ->can('uploadPoster', Movie::class);
 });
 // ----------------------------------------------------------------------------------------
 
@@ -50,5 +54,10 @@ Route::apiResource('/users', UserController::class);
 
 // ----------------------------------------------------------------------------------------
 // V Á S Á R L Á S O K
-Route::apiResource('/purchases', PurchaseController::class)->middleware('auth:sanctum');
+Route::apiResource('/purchases', PurchaseController::class)->except("update", "destroy");
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::put('/purchases/{purchase}', [PurchaseController::class, 'update']);
+    Route::delete('/purchases/{purchase}', [PurchaseController::class, 'destroy']);
+});
 // ----------------------------------------------------------------------------------------

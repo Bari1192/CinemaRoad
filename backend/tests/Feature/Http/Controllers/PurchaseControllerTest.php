@@ -2,6 +2,11 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\DriveInCinema;
+use App\Models\Movie;
+use App\Models\Screening;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
@@ -81,7 +86,7 @@ class PurchaseControllerTest extends TestCase
 
     public function test_user_can_not_purchase_an_already_taken_parkingspot()
     {
-        $purchase = $this->postJson("/api/purchases",[
+        $purchase = $this->postJson("/api/purchases", [
             "location_id" => 1,
             "movie_id" => 1,
             "screening_id" => 1,
@@ -116,29 +121,55 @@ class PurchaseControllerTest extends TestCase
 
     public function test_guest_purchase_is_in_database()
     {
+        $movie = Movie::create([
+            'title' => 'Specific Movie',
+            'duration_min' => 100,
+            'description' => 'Description for duration check',
+            'type' => 'Action',
+            'poster_url' => 'http://pelda-default-url.com/show_poster.jpg',
+            'release_date' => fake()->dateTimeBetween('-180 days', 'now')->format('Y-m-d'),
+            'director' => fake()->firstName() . ' ' . fake()->lastName(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $location = DriveInCinema::create([
+            "name" => "TestName",
+            "location" => "TestLocation",
+            "description" => "TestDescription"
+        ]);
+
+        $screening = Screening::factory()->create(['movie_id' => $movie->id]);
+
+        // Létrehozunk egy user-t, aki "guest"
+        // $guestUser = User::factory()->create([
+        //     'role' => 'user'
+        // ]);
+
+        // $this->actingAs($guestUser, 'sanctum');
+
         $purchaseData = [
-            "location_id" => 1,
-            "movie_id" => 1,
-            "screening_id" => 1,
+            "location_id" => $location->id,
+            "movie_id" => $movie->id,
+            "screening_id" => $screening->id,
             "parkingspot" => "A1",
             "guest_email" => "guestTestEmail@gmail.com",
         ];
 
-        $this->postJson("/api/purchases", $purchaseData);
-        $this->assertDatabaseHas(
-            "purchases",
-            [
-                "location_id" => 1,
-                "movie_id" => 1,
-                "screening_id" => 1,
-                "parkingspot" => "A1",
-                "guest_email" => "guestTestEmail@gmail.com",
-            ]
-        );
+        $this->postJson("/api/purchases", $purchaseData)
+            ->assertStatus(201);
+
+        $this->assertDatabaseHas("purchases", $purchaseData);
     }
 
     public function test_guest_purchase_json_structure_correct()
     {
+        $user = User::factory()->create([
+            'role' => 'user',
+        ]);
+
+        $this->actingAs($user, 'sanctum');
+
         $purchaseData = [
             "location_id" => 1,
             "movie_id" => 1,
@@ -166,6 +197,12 @@ class PurchaseControllerTest extends TestCase
 
     public function test_guest_can_not_purchase_an_already_taken_parkingspot()
     {
+        $user = User::factory()->create([
+            'role' => 'user',
+        ]);
+
+        $this->actingAs($user, 'sanctum');
+
         $reservation = $this->postJson("/api/reservations", [
             "user_id" => 1,
             "screening_id" => 1,
@@ -174,7 +211,7 @@ class PurchaseControllerTest extends TestCase
             "parkingspot" => "A1",
         ]);
 
-        $guestPurchase = $this->postJson("/api/purchases",[
+        $guestPurchase = $this->postJson("/api/purchases", [
             "location_id" => 1,
             "movie_id" => 1,
             "screening_id" => 1,

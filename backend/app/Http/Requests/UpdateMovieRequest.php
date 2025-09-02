@@ -3,13 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class UpdateMovieRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        $movie = $this->route("movie");
+        return Gate::authorize('update', $movie)->allowed();
     }
 
     public function rules()

@@ -7,9 +7,7 @@ use App\Http\Requests\UpdateMovieRequest;
 use App\Http\Resources\MovieResource;
 use App\Models\Movie;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class MovieController extends Controller

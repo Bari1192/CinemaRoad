@@ -2,14 +2,16 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Movie;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class StoreMovieRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::authorize('create', Movie::class)->allowed();
     }
 
     public function rules(): array

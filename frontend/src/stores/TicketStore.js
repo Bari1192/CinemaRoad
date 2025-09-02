@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import { http } from "@utils/http.mjs";
 import { ref } from "vue";
 
-
 export const useTicketStore = defineStore("ticketstore", {
   state: () => ({
     location: null,
@@ -50,7 +49,7 @@ export const useTicketStore = defineStore("ticketstore", {
       return response.data.data;
     },
 
-    async getPurchases(){
+    async getPurchases() {
       try {
         const token = sessionStorage.getItem('token');
 
@@ -68,7 +67,7 @@ export const useTicketStore = defineStore("ticketstore", {
       }
     },
 
-    async updatePurchase(id, data){
+    async updatePurchase(id, data) {
       try {
         const token = sessionStorage.getItem('token');
 
@@ -84,7 +83,7 @@ export const useTicketStore = defineStore("ticketstore", {
       }
     },
 
-    async deletePurchase(id){
+    async deletePurchase(id) {
       try {
         const token = sessionStorage.getItem('token');
 
@@ -102,8 +101,14 @@ export const useTicketStore = defineStore("ticketstore", {
 
     async getReservations() {
       try {
+        const token = sessionStorage.getItem('token');
+
         console.log("Megkezdem a foglalások lekérdezését.")
-        const response = await http.get("/reservations");
+        const response = await http.get("/reservations", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         this.reservations = response.data.data;
         console.log("Foglalások lekérve.")
         return this.reservations;
@@ -115,10 +120,17 @@ export const useTicketStore = defineStore("ticketstore", {
 
     async deleteReservation(id) {
       try {
-        const response = await http.delete(`/reservations/${id}`);
+        const token = sessionStorage.getItem('token');
+
+        const response = await http.delete(`/reservations/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         return response.data.data;
       } catch (error) {
         console.error("Hiba a foglalás törlése közben: ", error)
+        throw error
       }
     },
 

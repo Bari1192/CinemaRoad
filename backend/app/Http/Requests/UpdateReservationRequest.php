@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class UpdateReservationRequest extends FormRequest
 {
@@ -11,7 +12,8 @@ class UpdateReservationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true; // Majd be kell állítani hogy csak admin tudjon update-elni!
+        $purchase = $this->route("reservation");
+        return Gate::authorize('update', $purchase)->allowed();
     }
 
     /**

@@ -18,7 +18,9 @@ Route::get('/user', function (Request $request) {
 
 Route::apiResource("screenings", ScreeningController::class);
 Route::apiResource("drive_in_cinemas", DriveInCinemaController::class);
-Route::apiResource("/reservations", ReservationController::class);
+
+// F O G L A L Á S O K
+Route::apiResource("/reservations", ReservationController::class)->middleware('auth:sanctum');
 
 
 // F I L M E K

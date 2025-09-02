@@ -326,8 +326,10 @@ const handleDeleteReservation = async (id) => {
     try {
         await ticketStore.deleteReservation(id);
         ToastService.showSuccess("Sikeresen törölve!")
+        await ticketStore.getReservations();
     } catch (error) {
         console.error("Hiba történt a foglalás törlése közben: ", error)
+        ToastService.showError("Hiba a foglalás törlése közben!")
     }
 };
 

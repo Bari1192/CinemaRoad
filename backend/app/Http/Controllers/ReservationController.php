@@ -8,6 +8,7 @@ use App\Http\Resources\ReservationResource;
 use App\Models\Purchase;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ReservationController extends Controller
 {
@@ -117,10 +118,13 @@ class ReservationController extends Controller
         return new ReservationResource($reservation);
     }
 
-    public function destroy($id)
+    public function destroy(Reservation $reservation)
     {
-        $reservation = Reservation::findOrFail($id);
+        Gate::authorize("delete",$reservation);
 
-        return ($reservation->delete()) ? response()->noContent() : abort(500);
+        $data = Reservation::findOrFail($reservation->id);
+
+
+        return ($data->delete()) ? response()->noContent() : abort(500);
     }
 }

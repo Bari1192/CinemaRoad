@@ -46,11 +46,11 @@ class MoviePolicy extends BasePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Movie $movie): Response
+    public function update(User $user): Response
     {
         return $this->isAdmin($user)
             ? Response::allow()
-            : Response::deny("Only owners and admins can update their cars!");
+            : Response::deny("Only the admin can update the movie!");
     }
 
     /**

@@ -91,13 +91,15 @@
 <script setup>
 import BaseLayout from '@layouts/BaseLayout.vue';
 import { ToastService } from '@stores/ToastService';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { useUserStore } from '@stores/UserStore';
+import { useRouter } from 'vue-router';
 
-import { useMovieStore } from '@stores/MovieStore.mjs';
 import { http } from '@utils/http.mjs';
 import { FormKit } from '@formkit/vue';
+const router = useRouter();
 
-const movieStore = useMovieStore();
+const userStore = useUserStore();
 
 const movieTitle = ref('');
 const movieDurationMin = ref(null);
@@ -164,7 +166,7 @@ const handleCreateMovie = async () => {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 Authorization: `Bearer ${token}`
-             }
+            }
         });
         console.log("Poster upload successful", posterResponse.data);
 
@@ -194,4 +196,11 @@ function normalizeString(str) {
     let normalized = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     normalized = normalized.replace(/\s+/g, '_'); return normalized;
 }
+
+onMounted(async () => {
+    await userStore.getUser();
+    if (!userStore.isAdmin) {
+        router.replace("/");
+    };
+})
 </script>

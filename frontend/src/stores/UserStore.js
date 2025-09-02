@@ -11,6 +11,7 @@ export const useUserStore = defineStore('user', {
     }),
     getters: {
         isUserLoggedIn: (state) => !!state.token,
+        isAdmin: (state) => !!state.userData && state.userData.role === "admin",
     },
     actions: {
         async registerUser({ name, email, phone, password }) {

@@ -256,10 +256,14 @@ import AdminMovieUpdatePanel from './AdminMovieUpdatePanel.vue';
 
 import { useTicketStore } from '@stores/TicketStore';
 import { useMovieStore } from '@stores/MovieStore.mjs';
+import { useUserStore } from '@stores/UserStore';
+import { useRouter } from 'vue-router';
 
 const movieStore = useMovieStore();
 const ticketStore = useTicketStore();
+const userStore = useUserStore();
 
+const router = useRouter();
 const editingDataId = ref(null);
 const editableData = ref({});
 const viewMode = ref('reservations');
@@ -366,6 +370,11 @@ const handleUpdatePurchase = async (id) => {
 }
 
 onMounted(async () => {
+    await userStore.getUser();
+    if(!userStore.isAdmin) {
+        router.replace("/");
+    };
+
     await ticketStore.getReservations();
     await ticketStore.getPurchases();
     await movieStore.getMovies();

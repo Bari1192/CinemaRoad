@@ -16,5 +16,13 @@ class UserSeeder extends Seeder
             "password" => Hash::make("asdasd"),
             "phone"=>"063030303030"
         ]);
+
+        $admin = User::factory()->create([
+            "name" => "Admin",
+            "email" => "admin@gmail.com",
+            "password" => "Admin1234_",
+            "phone" => "06707171717",
+            "role" => "admin"
+        ]);
     }
 }

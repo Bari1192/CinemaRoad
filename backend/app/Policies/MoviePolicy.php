@@ -13,9 +13,7 @@ class MoviePolicy extends BasePolicy
      */
     public function viewAny(User $user): Response
     {
-        return $this->isAdmin($user) || "user" == $user->role
-            ? Response::allow()
-            : Response::deny();
+        //
     }
 
     /**

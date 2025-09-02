@@ -1,7 +1,6 @@
 import { ref } from "vue";
 import { http } from "@utils/http.mjs";
 import { defineStore } from "pinia";
-import { controlledComputed } from "@vueuse/core";
 
 export const useMovieStore = defineStore("movies", () => {
   const movies = ref([]);
@@ -10,7 +9,13 @@ export const useMovieStore = defineStore("movies", () => {
 
   async function getMovies() {
     try {
-      const resp = await http.get("/movies");
+      const token = sessionStorage.getItem("token");
+
+      const resp = await http.get("/movies", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       movies.value = resp.data.data;
       return movies.value;
     } catch (error) {

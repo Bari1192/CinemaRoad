@@ -143,7 +143,13 @@ const handleCreateMovie = async () => {
 
     try {
         // Filmfeltöltés!
-        const response = await http.post("/movies", formData);
+        const token = sessionStorage.getItem("token");
+
+        const response = await http.post("/movies", formData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         console.log("Success", response.data);
         alert("Film sikeresen létrehozva!");
 
@@ -154,9 +160,11 @@ const handleCreateMovie = async () => {
         posterFormData.append('type', movieType.value);
         console.log("posterFormData poster: ", posterFormData.get('poster'))
 
-
         const posterResponse = await http.post("/movies/upload-poster", posterFormData, {
-            headers: { 'Content-Type': 'multipart/form-data' }
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`
+             }
         });
         console.log("Poster upload successful", posterResponse.data);
 

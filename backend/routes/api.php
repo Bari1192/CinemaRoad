@@ -19,24 +19,36 @@ Route::get('/user', function (Request $request) {
 Route::apiResource("screenings", ScreeningController::class);
 Route::apiResource("drive_in_cinemas", DriveInCinemaController::class);
 
+
+// ----------------------------------------------------------------------------------------
 // F O G L A L Á S O K
 Route::apiResource("/reservations", ReservationController::class)->middleware('auth:sanctum');
+// ----------------------------------------------------------------------------------------
 
 
+// ----------------------------------------------------------------------------------------
 // F I L M E K
-Route::middleware(['auth:sanctum'])->group(function() {
-    // Film feltöltés védve
-    Route::apiResource('movies', MovieController::class);
+// Minden engedélyezett, kivéve a store és update. Azok maradjanak levédve.
+Route::apiResource('movies', MovieController::class)->except("store", "update");
 
+Route::middleware(['auth:sanctum'])->group(function() {
+
+    // Film feltöltés védve
+    Route::post("/movies", [MovieController::class, "store"]);
     // Kép feltöltés védve
     Route::post('/movies/upload-poster', [MovieController::class, 'storePoster'])
     ->can('uploadPoster', Movie::class);
 });
+// ----------------------------------------------------------------------------------------
+
 
 // Auth
 Route::post("/register", [RegisterController::class, "store"]);
 Route::post("/authenticate", [AuthController::class, "authenticate"])->name("auth.authenticate");
 Route::apiResource('/users', UserController::class);
 
+
+// ----------------------------------------------------------------------------------------
 // V Á S Á R L Á S O K
 Route::apiResource('/purchases', PurchaseController::class)->middleware('auth:sanctum');
+// ----------------------------------------------------------------------------------------

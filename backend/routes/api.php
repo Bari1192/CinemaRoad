@@ -20,6 +20,8 @@ Route::apiResource("screenings", ScreeningController::class);
 Route::apiResource("drive_in_cinemas", DriveInCinemaController::class);
 Route::apiResource("/reservations", ReservationController::class);
 
+
+// F I L M E K
 Route::middleware(['auth:sanctum'])->group(function() {
     // Film feltöltés védve
     Route::apiResource('movies', MovieController::class);
@@ -34,4 +36,5 @@ Route::post("/register", [RegisterController::class, "store"]);
 Route::post("/authenticate", [AuthController::class, "authenticate"])->name("auth.authenticate");
 Route::apiResource('/users', UserController::class);
 
-Route::apiResource('/purchases', PurchaseController::class);
+// V Á S Á R L Á S O K
+Route::apiResource('/purchases', PurchaseController::class)->middleware('auth:sanctum');

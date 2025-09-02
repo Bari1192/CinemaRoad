@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePurchaseRequest;
 use App\Http\Resources\PurchaseResource;
 use App\Models\Purchase;
 use App\Models\Reservation;
+use Illuminate\Support\Facades\Gate;
 
 class PurchaseController extends Controller
 {
@@ -55,7 +56,8 @@ class PurchaseController extends Controller
     }
 
     public function update(UpdatePurchaseRequest $request, Purchase $purchase)
-    {
+    {        
+        Gate::authorize("update",$purchase);
         $data = $request->validated();
 
         $newSpots = explode(',', $data['parkingspot']);
@@ -91,6 +93,7 @@ class PurchaseController extends Controller
 
     public function destroy(Purchase $purchase)
     {
+        Gate::authorize("delete",$purchase);
         $data = Purchase::findOrFail($purchase->id);
 
         return ($data->delete()) ? response()->noContent() : abort(500);

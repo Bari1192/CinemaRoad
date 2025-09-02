@@ -335,6 +335,7 @@ const handleDeletePurchase = async (id) => {
     try {
         await ticketStore.deletePurchase(id);
         ToastService.showSuccess("Vásárlás sikeresen törölve!")
+        await ticketStore.getPurchases();
     } catch (error) {
         console.error("Hiba történt a vásárlás törlése közben: ", error)
     }

@@ -2,13 +2,16 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Purchase;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class UpdatePurchaseRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        $purchase = $this->route("purchase");
+        return Gate::authorize('update', $purchase)->allowed();
     }
 
     public function rules(): array

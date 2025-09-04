@@ -1,10 +1,10 @@
 <template>
     <BaseLayout>
         <div class="w-11/12 mx-auto my-10">
-            <h1 v-if="viewMode === 'reservations'" class="mt-10 mb-5 font-bold text-2xl sm:text-3xl text-center">
+            <h1 v-if="viewMode === 'reservations'" class="mt-10 text-pink-600 mb-5 font-bold text-2xl sm:text-3xl text-center">
                 Foglalási áttekintő
             </h1>
-            <h1 v-else class="mt-10 mb-5 font-bold text-2xl sm:text-3xl text-center">
+            <h1 v-else class="mt-10 text-pink-600 mb-5 font-bold text-2xl sm:text-3xl text-center">
                 Vásárlási áttekintő
             </h1>
 
@@ -12,8 +12,8 @@
             <div class="mb-2 w-full grid grid-cols-1 md:grid-cols-4 gap-2">
 
                 <div> <!-- Helyszín -->
-                    <label class="text-lg font-semibold px-1" for="locationOptions">Helyszín:</label>
-                    <select v-model="selectedLocation" class="p-2 rounded-lg w-full" name="locationOptions"
+                    <label class="text-lg font-semibold text-pink-600 px-1" for="locationOptions">Helyszín:</label>
+                    <select v-model="selectedLocation" class="p-2 text-pink-600 font-semibold rounded-lg w-full" name="locationOptions"
                         id="locationOptions">
                         <option class="font-semibold" value="">Összes</option>
                         <option class="font-semibold" v-for="loc in Object.values(locationNames)" :key="loc"
@@ -22,8 +22,8 @@
                 </div>
 
                 <div> <!-- Film -->
-                    <label class="text-lg font-semibold px-1" for="movieOptions">Film:</label>
-                    <select v-model="selectedMovie" class="p-2 rounded-lg w-full" name="movieOptions" id="movieOptions">
+                    <label class="text-lg font-semibold text-pink-600 px-1" for="movieOptions">Film:</label>
+                    <select v-model="selectedMovie" class="p-2 text-pink-600 font-semibold rounded-lg w-full" name="movieOptions" id="movieOptions">
                         <option value="">Összes</option>
                         <option v-for="movie in movieStore.movies" :key="movie" :value="movie.title">{{ movie.title }}
                         </option>
@@ -31,18 +31,18 @@
                 </div>
 
                 <div> <!-- Email -->
-                    <label class="text-lg font-semibold px-1" for="emailFilter">Email:</label>
-                    <input v-model="emailFilter" type="text" id="emailFilter" class="p-2 rounded-lg w-full" />
+                    <label class="text-lg font-semibold text-pink-600 px-1" for="emailFilter">Email:</label>
+                    <input v-model="emailFilter" type="text" id="emailFilter" class="p-2 text-pink-600 font-semibold rounded-lg w-full" />
                 </div>
 
                 <!-- Nézetek -->
                 <div class="flex flex-col md:flex-row gap-2 ">
                     <button @click="viewMode = 'reservations'"
-                        :class="['font-semibold p-1 rounded-lg w-full md:w-auto', viewMode === 'reservations' ? 'bg-pink-200' : 'bg-white']">
+                        :class="['font-semibold text-pink-600 p-1 rounded-lg w-full md:w-auto', viewMode === 'reservations' ? 'bg-pink-200' : 'bg-white']">
                         Foglalások
                     </button>
                     <button @click="viewMode = 'purchases'"
-                        :class="['font-semibold p-1 rounded-lg w-full md:w-auto', viewMode === 'purchases' ? 'bg-pink-200' : 'bg-white']">
+                        :class="['font-semibold text-pink-600 p-1 rounded-lg w-full md:w-auto', viewMode === 'purchases' ? 'bg-pink-200' : 'bg-white']">
                         Vásárlások
                     </button>
                 </div>
@@ -102,17 +102,17 @@
                 </div>
                 <div v-for="purchase in paginatedItems" :key="purchase.id"
                     class="bg-gray-100 py-4 pl-2 rounded-lg shadow">
-                    <p class="font-semibold pl-2">Helyszín: <span class="px-2">{{ locationNames[purchase.location_id]
+                    <p class="font-semibold text-pink-600 pl-2">Helyszín: <span class="px-2">{{ locationNames[purchase.location_id]
                     }}</span></p>
-                    <p class="font-semibold pl-2">Email: <span class="px-2">{{ purchase.guest_email ||
+                    <p class="font-semibold text-pink-600 pl-2">Email: <span class="px-2">{{ purchase.guest_email ||
                         purchase.userEmail }}</span></p>
-                    <p class="font-semibold pl-2">Film: <span class="px-2">Film</span></p>
-                    <td class="font-semibold p-2">
+                    <p class="font-semibold text-pink-600 pl-2">Film: <span class="px-2">Film</span></p>
+                    <td class="font-semibold text-pink-600 p-2">
                         <span v-if="editingDataId !== purchase.id"> Jegyek: {{ purchase.parkingspot
                         }}</span>
                         <input v-else v-model="editableData.parkingspot" class="border rounded px-1 w-20 text-center" />
                     </td>
-                    <p class="font-semibold pl-2">Azonosító: <span class="px-2">{{ purchase.confirmation ||
+                    <p class="font-semibold text-pink-600 pl-2">Azonosító: <span class="px-2">{{ purchase.confirmation ||
                         purchase.ticket_code }}</span>
                     </p>
 
@@ -139,12 +139,12 @@
             <table v-if="viewMode === 'reservations'" class="hidden lg:table bg-gray-100 w-full rounded-lg shadow">
                 <thead class="border-b-4 border-pink-600">
                     <tr>
-                        <th class="text-center p-2 text-lg">Helyszín</th>
-                        <th class="text-center p-2 text-lg">Email</th>
-                        <th class="text-center p-2 text-lg">Film</th>
-                        <th class="text-center p-2 text-lg">Jegyek</th>
-                        <th class="text-center p-2 text-lg">Foglalási azonosító</th>
-                        <th class="text-center p-2 text-lg">Műveletek</th>
+                        <th class="text-center text-pink-600 p-2 text-lg">Helyszín</th>
+                        <th class="text-center text-pink-600 p-2 text-lg">Email</th>
+                        <th class="text-center text-pink-600 p-2 text-lg">Film</th>
+                        <th class="text-center text-pink-600 p-2 text-lg">Jegyek</th>
+                        <th class="text-center text-pink-600 p-2 text-lg">Foglalási azonosító</th>
+                        <th class="text-center text-pink-600 p-2 text-lg">Műveletek</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -186,26 +186,26 @@
             <table v-if="viewMode === 'purchases'" class="hidden lg:table bg-gray-100 w-full rounded-lg shadow">
                 <thead class="border-b-4 border-pink-600">
                     <tr>
-                        <th class="text-center p-2 text-lg">Helyszín</th>
-                        <th class="text-center p-2 text-lg">Email</th>
-                        <th class="text-center p-2 text-lg">Film</th>
-                        <th class="text-center p-2 text-lg">Jegyek</th>
-                        <th class="text-center p-2 text-lg">Vásárlási azonosító</th>
-                        <th class="text-center p-2 text-lg">Műveletek</th>
+                        <th class="text-center text-pink-600 p-2 text-lg">Helyszín</th>
+                        <th class="text-center text-pink-600 p-2 text-lg">Email</th>
+                        <th class="text-center text-pink-600 p-2 text-lg">Film</th>
+                        <th class="text-center text-pink-600 p-2 text-lg">Jegyek</th>
+                        <th class="text-center text-pink-600 p-2 text-lg">Vásárlási azonosító</th>
+                        <th class="text-center text-pink-600 p-2 text-lg">Műveletek</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="purchase in paginatedItems" :key="purchase.id" class="text-center">
-                        <td class="font-semibold p-2">{{ locationNames[purchase.location_id] }}</td>
-                        <td class="font-semibold p-2">{{ purchase.guest_email || purchase.userEmail }}</td>
-                        <td class="font-semibold p-2">{{ purchase.movieTitle || "Ismeretlen" }}</td>
-                        <td class="font-semibold p-2">
+                        <td class="font-semibold text-pink-600 p-2">{{ locationNames[purchase.location_id] }}</td>
+                        <td class="font-semibold text-pink-600 p-2">{{ purchase.guest_email || purchase.userEmail }}</td>
+                        <td class="font-semibold text-pink-600 p-2">{{ purchase.movieTitle || "Ismeretlen" }}</td>
+                        <td class="font-semibold text-pink-600 p-2">
                             <span v-if="editingDataId !== purchase.id">{{ purchase.parkingspot }}</span>
                             <input v-else v-model="editableData.parkingspot"
                                 class="border rounded px-1 w-20 text-center" />
                         </td>
-                        <td class="font-semibold p-2">{{ purchase.ticket_code }}</td>
-                        <td class="font-semibold p-2">
+                        <td class="font-semibold text-pink-600 p-2">{{ purchase.ticket_code }}</td>
+                        <td class="font-semibold text-pink-600 p-2">
                             <div v-if="editingDataId !== purchase.id" class="flex justify-center gap-2">
                                 <button @click="startEdit(purchase)"
                                     class="text-black font-semibold bg-yellow-500 px-3 py-1 rounded-lg">

@@ -13,23 +13,23 @@
                 <FormKit type="form" :actions="false" @submit="handleLogin" class="w-full md:max-w-3xl bg-orange-500">
 
                     <!-- Title -->
-                     <h1 class="text-3xl font-bold text-center mb-6">Bejelentkezés</h1>
+                     <h1 class="text-3xl text-pink-600 font-bold text-center mb-6">Bejelentkezés</h1>
 
                     <!-- Email -->
                     <div class="mb-5">
-                        <FormKit v-model="email" type="email" name="email" label="E-mail" label-class="text-xl"
+                        <FormKit v-model="email" type="email" name="email" label="E-mail" label-class="text-xl text-pink-600"
                             input-class="rounded-lg p-2 text-black w-full border-2 border-pink-700" validation="email" />
                     </div>
 
                     <!-- Jelszó -->
                     <div class="mb-4">
-                        <FormKit v-model="password" type="password" name="password" label="Jelszó" label-class="text-xl"
+                        <FormKit v-model="password" type="password" name="password" label="Jelszó" label-class="text-xl text-pink-600"
                             input-class="rounded-lg text-black p-2 w-full border-2 border-pink-700" />
                     </div>
 
                     <!-- Regisztráció linkje -->
                     <div class="text-center">
-                        <RouterLink :to="'/Registration'">
+                        <RouterLink class="text-pink-600" :to="'/Registration'">
                             Még nem regisztrált? Kattintson ide!
                         </RouterLink>
                     </div>

@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ScreeningSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(PurchaseSeeder::class);
+        $this->call(ReservationSeeder::class);
     }
 }

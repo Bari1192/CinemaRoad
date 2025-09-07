@@ -10,11 +10,11 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $en = User::factory()->create([
-            "name"=>"Különleges Ember",
-            "email" => 'asdasd@gmail.com',
-            "password" => Hash::make("asdasd"),
-            "phone"=>"063030303030"
+        $superadmin = User::factory()->create([
+            "name" => "Különleges Ember",
+            "email" => 'superadmin@gmail.com',
+            "password" => Hash::make("superadmin"),
+            "phone" => "063030303030"
         ]);
 
         $admin = User::factory()->create([
@@ -24,5 +24,6 @@ class UserSeeder extends Seeder
             "phone" => "06707171717",
             "role" => "admin"
         ]);
+        User::factory(50)->create();
     }
 }

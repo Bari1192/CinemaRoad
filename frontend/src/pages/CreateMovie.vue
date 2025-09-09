@@ -110,20 +110,26 @@ const movieDirector = ref('');
 const movieActors = ref('');
 const actorsArray = movieActors.value.split(',').map(actor => actor.trim());
 
-const src = ref(null);
-
 const selectedFile = ref(null);
+
+const fallbackImage = new URL('@/assets/img/No_image_selected.png', import.meta.url).href;
+const src = ref(fallbackImage);
 
 function onFileChange(e) {
     selectedFile.value = e.target.files[0];
-    console.log("selectedFile: ", selectedFile.value)
-    src.value = URL.createObjectURL(selectedFile.value);
+    if(selectedFile.value) {
+        src.value = URL.createObjectURL(selectedFile.value);
+    } else {
+        src.value = fallbackImage;
+    }
 }
 
 const handleCreateMovie = async () => {
     if (!selectedFile.value) {
         alert("No file selected");
         return;
+    } else {
+        src.value = fallbackImage;
     }
 
     const formData = new FormData();

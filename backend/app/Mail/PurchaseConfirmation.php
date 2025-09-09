@@ -24,7 +24,7 @@ class PurchaseConfirmation extends Mailable
             ->view('emails.purchase_confirmation')
             ->with([
                 'purchase' => $this->purchase,
-                'user' => $this->purchase->user ?? null, // FIGYELNI RÁ, hogy ha null, akkor NINCS megszólítás!
+                'user' => $this->purchase->user ?? null,
                 'location' => $this->purchase->location->name,
                 'ticket_code' => $this->purchase->ticket_code,
                 'screening_start_time' => $this->purchase->screening->start_time,

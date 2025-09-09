@@ -18,27 +18,21 @@ class ReservationCancellation extends Mailable
     {
         $this->reservation = $reservation;
     }
-
-    /**
-     * Get the message envelope.
-     */
     public function build()
     {
-        return $this->subject('CinemaRoad - Foglalás sikeres törlése')
+        return $this->subject('CinemaRoad - Foglalásod törlésre került.')
             ->view('emails.reservation_cancellation')
             ->with([
                 'reservation' => $this->reservation,
-                'user' => $this->reservation->user ?? null,
-                'ticket_code' => $this->reservation->confirmation,
+                'user' => $this->reservation->user->name ?? null,
+                'ticket_code' => $this->reservation->confirmation  ?? null,
+                'location_name' => $this->reservation->location->name  ?? null,
+                'screening_start_time' => $this->reservation->screening->start_time  ?? null,
+                'movie_title' => $this->reservation->screening->movie->title  ?? null,
+                'parkingspot' => $this->reservation->parkingspot  ?? null,
+                'reserved_at' => $this->reservation->reserved_at  ?? null,
             ]);
     }
-
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
     public function attachments(): array
     {
         return [];

@@ -23,8 +23,10 @@ class ReservationObserver
         //
     }
 
-    public function deleted(Reservation $reservation): void
+    public function deleting(Reservation $reservation): void
     {
+        $reservation->load(['user', 'screening.movie', 'location']);
+
         if ($reservation->user && $reservation->user->email) {
             Mail::to($reservation->user->email)->send(
                 new ReservationCancellation($reservation)

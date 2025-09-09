@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Mail\ReservationCancellation;
 use App\Mail\ReservationConfirmation;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Mail;
@@ -24,7 +25,11 @@ class ReservationObserver
 
     public function deleted(Reservation $reservation): void
     {
-        //
+        if ($reservation->user && $reservation->user->email) {
+            Mail::to($reservation->user->email)->send(
+                new ReservationCancellation($reservation)
+            );
+        }
     }
 
     public function restored(Reservation $reservation): void

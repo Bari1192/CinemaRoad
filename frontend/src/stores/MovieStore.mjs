@@ -1,7 +1,6 @@
 import { ref } from "vue";
 import { http } from "@utils/http.mjs";
 import { defineStore } from "pinia";
-
 export const useMovieStore = defineStore("movies", () => {
   const movies = ref([]);
   const movie = ref();
@@ -36,10 +35,6 @@ export const useMovieStore = defineStore("movies", () => {
   async function createMovie(data) {
     try {
       const resp = await http.post("/movies", data);
-      ToastService.updateToSuccess(
-        toastId,
-        "A film sikeresen hozzáadásra került!"
-      );
       return resp.data.data;
     } catch (err) {
       console.error("Hiba az film létrehozásakor", err);
@@ -50,7 +45,6 @@ export const useMovieStore = defineStore("movies", () => {
   async function updateMovie(id, data) {
     try {
       const resp = await http.put(`/movies/${id}`, data);
-      ToastService.updateToSuccess(toastId, "Film sikeresen módosítva!");
       return resp.data.data;
     } catch (err) {
       console.error("Hiba a film frissítésekor", err);

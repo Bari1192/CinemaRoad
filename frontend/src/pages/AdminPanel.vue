@@ -149,16 +149,16 @@
                 </thead>
                 <tbody>
                     <tr v-for="reservation in paginatedItems" :key="reservation.id" class="text-center p-4">
-                        <td>{{ locationNames[reservation.location_id] }}</td>
-                        <td>{{ reservation.userEmail }}</td>
-                        <td>{{ reservation.movieTitle }}</td>
-                        <td>
+                        <td  class="font-semibold text-pink-600 p-2">{{ locationNames[reservation.location_id] }}</td>
+                        <td  class="font-semibold text-pink-600 p-2">{{ reservation.userEmail }}</td>
+                        <td  class="font-semibold text-pink-600 p-2">{{ reservation.movieTitle }}</td>
+                        <td  class="font-semibold text-pink-600 p-2">
                             <span v-if="editingDataId !== reservation.id">{{ reservation.parkingspot }}</span>
                             <input v-else v-model="editableData.parkingspot"
                                 class="border rounded px-1 w-20 text-center" />
                         </td>
-                        <td>{{ reservation.confirmation }}</td>
-                        <td>
+                        <td  class="font-semibold text-pink-600 p-2">{{ reservation.confirmation }}</td>
+                        <td  class="font-semibold text-pink-600 p-2">
                             <div v-if="editingDataId !== reservation.id" class="flex justify-center gap-2">
                                 <button @click="startEdit(reservation)"
                                     class="text-black font-semibold bg-yellow-500 px-3 py-1 rounded-lg">

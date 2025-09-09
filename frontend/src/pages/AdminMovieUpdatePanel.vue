@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import { useMovieStore } from '@stores/MovieStore.mjs'
 import { ToastService } from '@stores/ToastService'
 import { useUserStore } from '@stores/UserStore'
+import { toast } from 'vue3-toastify';
 
 const userStore = useUserStore();
 const movieStore = useMovieStore()
@@ -23,8 +24,8 @@ const formatDate = (d) => {
 };
 
 const saveEdit = async (movie) => {
-    const confirmed = window.confirm("Biztosan menteni szeretnéd a módosításokat?");
-    if (!confirmed) return;
+    const confirmed = await ToastService.showConfirm('Módosítások mentése', 'Biztosan menteni szeretnéd a módosításokat?', 'Mentés', 'Mégse');
+    if (!confirmed) return; if (!confirmed) return;
 
     const movieData = {
         title: movie.title,
@@ -47,7 +48,7 @@ const saveEdit = async (movie) => {
 }
 
 const deleteMovie = async (movie) => {
-    const confirmed = window.confirm("Biztosan törölni szeretnéd a filmet?");
+    const confirmed = await ToastService.showConfirm('Film törlése', `Biztosan törölni szeretnéd a "${movie.title}" filmet?`, 'Törlés', 'Mégse');
     if (confirmed) {
         try {
             await movieStore.deleteMovie(movie.id)

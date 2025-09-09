@@ -1,7 +1,8 @@
 <template>
     <BaseLayout>
         <div class="w-11/12 mx-auto my-10">
-            <h1 v-if="viewMode === 'reservations'" class="mt-10 text-pink-600 mb-5 font-bold text-2xl sm:text-3xl text-center">
+            <h1 v-if="viewMode === 'reservations'"
+                class="mt-10 text-pink-600 mb-5 font-bold text-2xl sm:text-3xl text-center">
                 Foglalási áttekintő
             </h1>
             <h1 v-else class="mt-10 text-pink-600 mb-5 font-bold text-2xl sm:text-3xl text-center">
@@ -9,12 +10,12 @@
             </h1>
 
             <!-- Szűrők helye -->
-            <div class="mb-2 w-full grid grid-cols-1 md:grid-cols-4 gap-2">
+            <div class="mb-2 w-full grid grid-cols-1 md:grid-cols-5 gap-2">
 
                 <div> <!-- Helyszín -->
                     <label class="text-lg font-semibold text-pink-600 px-1" for="locationOptions">Helyszín:</label>
-                    <select v-model="selectedLocation" class="p-2 text-pink-600 font-semibold rounded-lg w-full" name="locationOptions"
-                        id="locationOptions">
+                    <select v-model="selectedLocation" class="p-2 text-pink-600 font-semibold rounded-lg w-full"
+                        name="locationOptions" id="locationOptions">
                         <option class="font-semibold" value="">Összes</option>
                         <option class="font-semibold" v-for="loc in Object.values(locationNames)" :key="loc"
                             :value="loc">{{ loc }}</option>
@@ -23,7 +24,8 @@
 
                 <div> <!-- Film -->
                     <label class="text-lg font-semibold text-pink-600 px-1" for="movieOptions">Film:</label>
-                    <select v-model="selectedMovie" class="p-2 text-pink-600 font-semibold rounded-lg w-full" name="movieOptions" id="movieOptions">
+                    <select v-model="selectedMovie" class="p-2 text-pink-600 font-semibold rounded-lg w-full"
+                        name="movieOptions" id="movieOptions">
                         <option value="">Összes</option>
                         <option v-for="movie in movieStore.movies" :key="movie" :value="movie.title">{{ movie.title }}
                         </option>
@@ -32,21 +34,23 @@
 
                 <div> <!-- Email -->
                     <label class="text-lg font-semibold text-pink-600 px-1" for="emailFilter">Email:</label>
-                    <input v-model="emailFilter" type="text" id="emailFilter" class="p-2 text-pink-600 font-semibold rounded-lg w-full" />
+                    <input v-model="emailFilter" type="text" id="emailFilter"
+                        class="p-2 text-pink-600 font-semibold rounded-lg w-full" />
                 </div>
 
-                <!-- Nézetek -->
-                <div class="flex flex-col md:flex-row gap-2 ">
+                <div class="flex flex-col md:flex-row items-start md:items-end gap-2"> <!-- Gombok -->
                     <button @click="viewMode = 'reservations'"
-                        :class="['font-semibold text-pink-600 p-1 rounded-lg w-full md:w-auto', viewMode === 'reservations' ? 'bg-pink-200' : 'bg-white']">
+                        :class="['font-semibold text-pink-600 p-2 px-2 rounded-lg w-full md:w-auto', viewMode === 'reservations' ? 'bg-pink-200' : 'bg-white']">
                         Foglalások
                     </button>
                     <button @click="viewMode = 'purchases'"
-                        :class="['font-semibold text-pink-600 p-1 rounded-lg w-full md:w-auto', viewMode === 'purchases' ? 'bg-pink-200' : 'bg-white']">
+                        :class="['font-semibold text-pink-600 p-2 px-2 rounded-lg w-full md:w-auto', viewMode === 'purchases' ? 'bg-pink-200' : 'bg-white']">
                         Vásárlások
                     </button>
                 </div>
+
             </div>
+
 
 
 
@@ -56,7 +60,7 @@
                 <div v-for="reservation in filteredItems" :key="reservation.id"
                     class="bg-gray-100 py-4 pl-2 rounded-lg shadow">
                     <p class="font-semibold pl-2">Helyszín: <span class="px-2">{{ locationNames[reservation.location_id]
-                    }}</span></p>
+                            }}</span></p>
                     <p class="font-semibold pl-2">Email: <span class="px-2">{{ reservation.guest_email ||
                         reservation.userEmail }}</span></p>
                     <p class="font-semibold pl-2">Film: <span class="px-2">Film</span></p>
@@ -102,18 +106,20 @@
                 </div>
                 <div v-for="purchase in paginatedItems" :key="purchase.id"
                     class="bg-gray-100 py-4 pl-2 rounded-lg shadow">
-                    <p class="font-semibold text-pink-600 pl-2">Helyszín: <span class="px-2">{{ locationNames[purchase.location_id]
-                    }}</span></p>
+                    <p class="font-semibold text-pink-600 pl-2">Helyszín: <span class="px-2">{{
+                        locationNames[purchase.location_id]
+                            }}</span></p>
                     <p class="font-semibold text-pink-600 pl-2">Email: <span class="px-2">{{ purchase.guest_email ||
                         purchase.userEmail }}</span></p>
                     <p class="font-semibold text-pink-600 pl-2">Film: <span class="px-2">Film</span></p>
                     <td class="font-semibold text-pink-600 p-2">
                         <span v-if="editingDataId !== purchase.id"> Jegyek: {{ purchase.parkingspot
-                        }}</span>
+                            }}</span>
                         <input v-else v-model="editableData.parkingspot" class="border rounded px-1 w-20 text-center" />
                     </td>
-                    <p class="font-semibold text-pink-600 pl-2">Azonosító: <span class="px-2">{{ purchase.confirmation ||
-                        purchase.ticket_code }}</span>
+                    <p class="font-semibold text-pink-600 pl-2">Azonosító: <span class="px-2">{{ purchase.confirmation
+                        ||
+                            purchase.ticket_code }}</span>
                     </p>
 
                     <div v-if="editingDataId !== purchase.id" class="flex justify-end gap-2 mt-3">
@@ -149,16 +155,16 @@
                 </thead>
                 <tbody>
                     <tr v-for="reservation in paginatedItems" :key="reservation.id" class="text-center p-4">
-                        <td  class="font-semibold text-pink-600 p-2">{{ locationNames[reservation.location_id] }}</td>
-                        <td  class="font-semibold text-pink-600 p-2">{{ reservation.userEmail }}</td>
-                        <td  class="font-semibold text-pink-600 p-2">{{ reservation.movieTitle }}</td>
-                        <td  class="font-semibold text-pink-600 p-2">
+                        <td class="font-semibold text-pink-600 p-2">{{ locationNames[reservation.location_id] }}</td>
+                        <td class="font-semibold text-pink-600 p-2">{{ reservation.userEmail }}</td>
+                        <td class="font-semibold text-pink-600 p-2">{{ reservation.movieTitle }}</td>
+                        <td class="font-semibold text-pink-600 p-2">
                             <span v-if="editingDataId !== reservation.id">{{ reservation.parkingspot }}</span>
                             <input v-else v-model="editableData.parkingspot"
                                 class="border rounded px-1 w-20 text-center" />
                         </td>
-                        <td  class="font-semibold text-pink-600 p-2">{{ reservation.confirmation }}</td>
-                        <td  class="font-semibold text-pink-600 p-2">
+                        <td class="font-semibold text-pink-600 p-2">{{ reservation.confirmation }}</td>
+                        <td class="font-semibold text-pink-600 p-2">
                             <div v-if="editingDataId !== reservation.id" class="flex justify-center gap-2">
                                 <button @click="startEdit(reservation)"
                                     class="text-black font-semibold bg-yellow-500 px-3 py-1 rounded-lg">
@@ -197,7 +203,8 @@
                 <tbody>
                     <tr v-for="purchase in paginatedItems" :key="purchase.id" class="text-center">
                         <td class="font-semibold text-pink-600 p-2">{{ locationNames[purchase.location_id] }}</td>
-                        <td class="font-semibold text-pink-600 p-2">{{ purchase.guest_email || purchase.userEmail }}</td>
+                        <td class="font-semibold text-pink-600 p-2">{{ purchase.guest_email || purchase.userEmail }}
+                        </td>
                         <td class="font-semibold text-pink-600 p-2">{{ purchase.movieTitle || "Ismeretlen" }}</td>
                         <td class="font-semibold text-pink-600 p-2">
                             <span v-if="editingDataId !== purchase.id">{{ purchase.parkingspot }}</span>
@@ -371,7 +378,7 @@ const handleUpdatePurchase = async (id) => {
 
 onMounted(async () => {
     await userStore.getUser();
-    if(!userStore.isAdmin) {
+    if (!userStore.isAdmin) {
         router.replace("/");
     };
 

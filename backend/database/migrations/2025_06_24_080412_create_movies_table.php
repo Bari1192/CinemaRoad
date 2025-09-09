@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('poster_url');
             $table->json('actors')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
     public function down(): void

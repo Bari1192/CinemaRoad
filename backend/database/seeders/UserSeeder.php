@@ -13,14 +13,15 @@ class UserSeeder extends Seeder
         $superadmin = User::factory()->create([
             "name" => "Különleges Ember",
             "email" => 'superadmin@gmail.com',
-            "password" => Hash::make("superadmin"),
-            "phone" => "063030303030"
+            "password" => Hash::make("superadminZ"),
+            "phone" => "063030303030",
+            "role" => "admin"
         ]);
 
         $admin = User::factory()->create([
             "name" => "Admin",
             "email" => "admin@gmail.com",
-            "password" => "Admin1234_",
+            "password" =>  Hash::make("Admin1234_"),
             "phone" => "06707171717",
             "role" => "admin"
         ]);

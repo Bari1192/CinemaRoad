@@ -28,7 +28,7 @@ class UpdateMovieRequest extends FormRequest
                 'before_or_equal:' . now()->format('Y-m-d')
             ],
             'duration_min' => ['required', 'integer', 'min:0'],
-            'poster_url' => ['required', 'string', 'url'],
+            'poster_url' => ['required', 'string'],
             'actors' => [ 
                 Rule::when(
                     request('type') !== 'Family',

@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Mail\PurchaseCancellation;
 use App\Mail\PurchaseConfirmation;
 use App\Mail\ReservationConfirmation;
 use App\Models\Purchase;
@@ -29,7 +30,15 @@ class PurchaseObserver
 
     public function deleted(Purchase $purchase): void
     {
-        //
+        if ($purchase->guest_email && $purchase->guest_email != null) {
+            Mail::to($purchase->guest_email)->send(
+                new PurchaseCancellation($purchase)
+            );
+        } elseif ($purchase->user && $purchase->user->email) {
+            Mail::to($purchase->user->email)->send(
+                new PurchaseCancellation($purchase)
+            );
+        }
     }
 
     public function restored(Purchase $purchase): void

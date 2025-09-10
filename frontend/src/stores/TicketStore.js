@@ -39,7 +39,7 @@ export const useTicketStore = defineStore("ticketstore", {
       localStorage.setItem("parkingSpot", JSON.stringify(parkingSpot));
     },
 
-    async postTicketReservation(data) {
+    async postTicketReservation(data) {      
       const response = await http.post("/reservations", data);
       return response.data.data;
     },
@@ -51,13 +51,7 @@ export const useTicketStore = defineStore("ticketstore", {
 
     async getPurchases() {
       try {
-        const token = sessionStorage.getItem('token');
-
-        const response = await http.get("/purchases", {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
+        const response = await http.get("/purchases");
         this.purchases = response.data.data;
         console.log("Vásárlások lekérve.");
         return this.purchases;
@@ -69,13 +63,7 @@ export const useTicketStore = defineStore("ticketstore", {
 
     async updatePurchase(id, data) {
       try {
-        const token = sessionStorage.getItem('token');
-
-        const response = await http.put(`/purchases/${id}`, data, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
+        const response = await http.put(`/purchases/${id}`, data);
         return response.data.data;
       } catch (error) {
         console.error("Hiba a vásárlás módosítása közben: ", error);
@@ -85,13 +73,7 @@ export const useTicketStore = defineStore("ticketstore", {
 
     async deletePurchase(id) {
       try {
-        const token = sessionStorage.getItem('token');
-
-        const response = await http.delete(`/purchases/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
+        const response = await http.delete(`/purchases/${id}`);
         return response.data.data;
       } catch (error) {
         console.error("Hiba történt a vásárlás törlése közben!", error);
@@ -101,16 +83,8 @@ export const useTicketStore = defineStore("ticketstore", {
 
     async getReservations() {
       try {
-        const token = sessionStorage.getItem('token');
-
-        console.log("Megkezdem a foglalások lekérdezését.")
-        const response = await http.get("/reservations", {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
+        const response = await http.get("/reservations");
         this.reservations = response.data.data;
-        console.log("Foglalások lekérve.")
         return this.reservations;
       } catch (error) {
         console.error("Hiba a foglalások lekérdezése közben: ", error);
@@ -120,13 +94,7 @@ export const useTicketStore = defineStore("ticketstore", {
 
     async deleteReservation(id) {
       try {
-        const token = sessionStorage.getItem('token');
-
-        const response = await http.delete(`/reservations/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
+        const response = await http.delete(`/reservations/${id}`);
         return response.data.data;
       } catch (error) {
         console.error("Hiba a foglalás törlése közben: ", error)

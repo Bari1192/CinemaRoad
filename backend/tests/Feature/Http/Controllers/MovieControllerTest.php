@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Movie;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -66,6 +67,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_201_status_when_creating_a_movie_successfully()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movieData = [
             'title' => 'Test Movie Title',
             'description' => 'This is a test movie description.',
@@ -84,6 +91,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_stores_movie_in_database_when_creating_it()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movieData = [
             'title' => 'Test Movie for DB Storage',
             'description' => 'This is a test movie description.',
@@ -102,6 +115,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_correct_json_structure_after_creating_movie()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movieData = [
             'title' => 'Test Movie Title',
             'description' => 'This is a test movie description.',
@@ -122,13 +141,19 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_movie_data_with_correct_title_after_creating_it()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movieData = [
             'title' => 'New Movie Title Returned',
             'description' => 'This is a test movie description.',
             'duration_min' => 90,
             'poster_url' => 'http://pelda-default-url.com/poster.jpg',
             'type' => 'Action',
-            'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
+            'release_date' => fake()->dateTimeBetween('-180 days', 'now')->format('Y-m-d'),
             'director' => fake()->firstName() . ' ' . fake()->lastName(),
             'created_at' => now(),
             'updated_at' => now(),
@@ -140,6 +165,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_movie_data_with_correct_duration_after_creating_it()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movieData = [
             'title' => 'Movie for Duration Check',
             'description' => 'Description for duration check',
@@ -157,6 +188,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_successful_status_for_showing_a_movie()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movie = Movie::create([
             'title' => 'Specific Movie',
             'duration_min' => 100,
@@ -175,6 +212,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_correct_movie_title_when_showing_a_movie()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movie = Movie::create([
             'title' => 'Specific Movie Title',
             'duration_min' => 100,
@@ -193,6 +236,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_correct_json_structure_when_showing_a_movie()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movie = Movie::create([
             'title' => 'Specific Movie for Structure',
             'duration_min' => 100,
@@ -219,6 +268,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_successful_status_when_updating_an_existing_movie()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movie = Movie::create([
             'title' => 'Original Movie',
             'description' => 'Description for duration check',
@@ -246,6 +301,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_updates_movie_data_in_database()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movie = Movie::create([
             'title' => 'Original Movie for DB Update',
             'description' => 'Description',
@@ -273,6 +334,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_correct_json_structure_after_updating_movie()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movie = Movie::create([
             'title' => 'Original Movie for Structure Update',
             'duration_min' => 100,
@@ -319,6 +386,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_updated_movie_data_after_updating_it()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movie = Movie::create([
             'title' => 'Original Movie for Data Update',
             'duration_min' => 100,
@@ -348,6 +421,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_404_when_updating_a_non_existent_movie()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+        
         $updatedData = [
             'title' => 'Non Existent Update',
             'duration_min' => 100,
@@ -358,6 +437,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_successful_status_when_deleting_a_movie()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movie = Movie::create([
             'title' => 'Movie to Delete',
             'type' => 'Action',
@@ -400,6 +485,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_422_when_creating_movie_without_title()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movieData = [
             'description' => 'Test description',
             'type' => 'Action',
@@ -417,6 +508,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_422_when_creating_movie_with_too_long_title()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movieData = [
             'title' => str_repeat('A', 256),
             'description' => 'Test description',
@@ -435,6 +532,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_422_when_creating_movie_with_negative_duration()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movieData = [
             'title' => 'Valid Title',
             'description' => 'Test description',
@@ -452,6 +555,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_422_when_updating_movie_with_too_long_title()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movie = Movie::create([
             'title' => 'Original Movie',
             'description' => 'Test description',
@@ -473,6 +582,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_422_when_updating_movie_with_negative_duration()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+        
         $movie = Movie::create([
             'title' => 'Original Movie',
             'description' => 'Test description',
@@ -494,6 +609,12 @@ class MovieControllerTest extends TestCase
 
     public function test_it_returns_422_when_updating_movie_with_missing_title_but_not_required()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $movie = Movie::create([
             'title' => 'Original Movie',
             'duration_min' => 100,

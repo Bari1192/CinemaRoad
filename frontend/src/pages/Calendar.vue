@@ -2,7 +2,8 @@
 import { computed, ref } from 'vue'
 
 const props = defineProps({
-  screenings: { type: Array, required: true }
+  screenings: { type: Array, required: true },
+  showLocations: { type: Boolean, required: false }
 })
 
 const emit = defineEmits(['select-screening'])
@@ -132,6 +133,12 @@ const toggleDay = (dayKey) => {
                     ? 'bg-pink-600 hover:bg-pink-700'
                     : 'bg-slate-300/60 hover:bg-slate-500/75'"
                   class="w-fit px-4 mx-auto rounded-md text-white font-medium py-1.5 text-base transition-all shadow">
+
+                  <template v-if="showLocations">
+                    <div class="w-full min-w-[100px]">
+                      {{ vetitesi_idopont.drivein_cinema.name }}<br />
+                    </div>
+                  </template>
                   {{ magyarIdo(vetitesi_idopont.start_time) }}
                 </button>
               </template>
@@ -181,6 +188,11 @@ const toggleDay = (dayKey) => {
                     ? 'bg-pink-600 hover:bg-pink-700'
                     : 'bg-slate-500 hover:bg-slate-600'"
                   class="px-4 py-1.5 rounded-md text-white font-medium text-sm transition-all shadow">
+                  <template v-if="showLocations">
+                    <div class="w-full min-w-[80px]">
+                      {{ vetitesi_idopont.drivein_cinema.name }}<br />
+                    </div>
+                  </template>
                   {{ magyarIdo(vetitesi_idopont.start_time) }}
                 </button>
               </div>

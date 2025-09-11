@@ -1,6 +1,6 @@
 <template>
   <BaseLayout>
-    <h1 class="text-5xl font-semibold text-center py-10">Regisztráció</h1>
+    <h1 class="text-5xl text-pink-600 font-semibold text-center py-10">Regisztráció</h1>
 
     <div class="w-8/12 mx-auto border border-pink-600 p-6 mb-10 rounded-lg">
       <FormKit type="form" :actions="false" @submit="handleRegistration">

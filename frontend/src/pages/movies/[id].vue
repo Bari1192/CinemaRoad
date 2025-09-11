@@ -3,20 +3,61 @@ import BaseLayout from '@layouts/BaseLayout.vue';
 
 import { useMovieStore } from '@stores/MovieStore.mjs';
 import { useScreeningStore } from '@stores/ScreeningStore.mjs';
+import { useTicketStore } from '@stores/TicketStore';
 import { onMounted, computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import BaseSpinner from '@components/layout/BaseSpinner.vue';
+import Calendar from '@pages/Calendar.vue';
+import { router } from '../../router';
 
 const route = useRoute();
 const movieStore = useMovieStore();
+const screeningStore = useScreeningStore();
+const ticketStore = useTicketStore();
 const loading = ref(true);
 
 const movieId = computed(() => Number(route.params.id));
 const movie = computed(() => movieStore.movies.find(m => Number(m.id) === movieId.value));
+const screenings = ref([]); // Majd kell a ".data" mert a store-ban csak .data-val térünk vissza
+const selectedScreening = ref(null);
+
+
+const enrichedScreenings = computed(() => {
+    if (!screenings.value.length || !movie.value) return [];
+    return screenings.value.filter(screening => screening.movie_id === movie.value.id);
+});
+
+const selectScreening = async() => {
+    if (!selectedScreening.value) {
+        console.log("Nincs kiválasztott vetítés!");
+        return;
+    }
+
+
+    await screeningStore.getScreening(selectedScreening.value);
+    const screening = screeningStore.screening;
+    
+
+    // Jegy adatok mentése
+    await ticketStore.setLocationName(screening.drivein_cinema.name);
+    await ticketStore.setLocation(screening.drivein_cinema);
+    await ticketStore.setMovie(screening.movie);
+
+    router.push("/ParkingSpotChooser")
+}
+
+const onSelectScreening = (screening) => {
+    selectedScreening.value = screening;
+    console.log("selectedScreening.value: ", selectedScreening.value)
+}
+
 
 onMounted(async () => {
     loading.value = true;
     await movieStore.getMovies();
+    const resp = await screeningStore.getScreenings();
+    screenings.value = resp.data;
+    console.log("screenings tömb: ", screenings.value)
     loading.value = false;
 });
 
@@ -44,13 +85,13 @@ onMounted(async () => {
             </h2>
             <div
                 class="px-4 lg:px-0 w-full max-w-md flex flex-col gap-6 md:max-w-3xl md:flex-row md:gap-8 border-t-4 border-t-slate-600 pt-6">
-                
+
                 <div class="flex-shrink-0 flex justify-center md:w-1/2">
                     <img :src="`../assets/img${movie?.poster_url}`" :alt="movie?.title"
                         class="rounded-lg object-cover w-52 h-72 shadow-xl border-2 border-slate-400 border-r-4 border-r-slate-500/90 shadow-slate-600/70 md:w-full md:h-full"
                         draggable="false" />
                 </div>
-                
+
                 <div class="mt-6 md:mt-0 md:flex-1 mx-auto flex justify-center items-center w-full">
                     <div class="grid grid-cols-2 gap-y-6 w-full h-full mx-auto">
                         <div
@@ -125,6 +166,26 @@ onMounted(async () => {
                     {{ movie?.description || 'Ismeretlen' }}
                 </div>
             </div>
+
         </div>
+
+        <!-- Vetítések! -->
+        <div v-if="enrichedScreenings.length"
+            class="w-full mx-auto max-w-md md:max-w-7xl mt-2 md:mt-6 px-4 lg:px-0 mb-10">
+            <div
+                class="text-center md:text-left text-base md:text-lg lg:text-2xl font-medium text-pink-300 uppercase tracking-wide mb-1 underline underline-offset-4">
+                Vetítések
+            </div>
+
+            <Calendar :screenings="enrichedScreenings" @select-screening="onSelectScreening" :showLocations="true"
+                class="mb-5" />
+
+            <div class="flex justify-end mb-10">
+                <button class="bg-white font-semibold text-lg p-2 rounded-lg" @click="selectScreening">Időpont
+                    kiválasztása</button>
+            </div>
+
+        </div>
+
     </BaseLayout>
 </template>

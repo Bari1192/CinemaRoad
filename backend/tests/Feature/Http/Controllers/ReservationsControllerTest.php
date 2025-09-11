@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
@@ -10,6 +11,12 @@ class ReservationsControllerTest extends TestCase
     use DatabaseTransactions;
     public function test_can_get_reservations(): void
     {
+        $user = User::factory()->create([
+            'role' => 'user',
+        ]);
+
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->get('/api/reservations');
 
         $response->assertStatus(200);
@@ -17,6 +24,12 @@ class ReservationsControllerTest extends TestCase
 
     public function test_can_post_reservation(): void
     {
+        $user = User::factory()->create([
+            'role' => 'user',
+        ]);
+
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->postJson('/api/reservations', [
             "user_id" => 1,
             "screening_id" => 10,
@@ -30,8 +43,14 @@ class ReservationsControllerTest extends TestCase
 
     public function test_can_not_post_reservation_with_non_existent_user_id(): void
     {
+        $user = User::factory()->create([
+            'role' => 'user',
+        ]);
+
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->postJson('/api/reservations', [
-            "user_id" => 999999999,
+            "user_id" => 99,
             "screening_id" => 10,
             "location_id" => 1,
             "reserved_at" => now()->toDateString(),
@@ -43,6 +62,12 @@ class ReservationsControllerTest extends TestCase
 
     public function test_can_not_post_reservation_without_user_id(): void
     {
+        $user = User::factory()->create([
+            'role' => 'user',
+        ]);
+
+        $this->actingAs($user, 'sanctum');
+        
         $response = $this->postJson('/api/reservations', [
             "screening_id" => 10,
             "location_id" => 1,
@@ -55,6 +80,12 @@ class ReservationsControllerTest extends TestCase
 
     public function test_can_not_post_reservation_with_invalid_reserved_at_field(): void
     {
+        $user = User::factory()->create([
+            'role' => 'user',
+        ]);
+
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->postJson('/api/reservations', [
             "user_id" => 1,
             "screening_id" => 10,
@@ -68,6 +99,12 @@ class ReservationsControllerTest extends TestCase
 
     public function test_can_not_book_another_reservation_to_the_same_parkingspot(): void
     {
+        $user = User::factory()->create([
+            'role' => 'user',
+        ]);
+
+        $this->actingAs($user, 'sanctum');
+
         $this->postJson('/api/reservations', [
             "user_id" => 1,
             "screening_id" => 10,
@@ -89,6 +126,12 @@ class ReservationsControllerTest extends TestCase
 
     public function test_reservation_json_structure_is_correct(): void
     {
+        $user = User::factory()->create([
+            'role' => 'user',
+        ]);
+
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->postJson('/api/reservations', [
             "user_id" => 1,
             "screening_id" => 10,
@@ -113,6 +156,12 @@ class ReservationsControllerTest extends TestCase
 
     public function test_created_reservation_is_in_database(): void
     {
+        $user = User::factory()->create([
+            'role' => 'user',
+        ]);
+
+        $this->actingAs($user, 'sanctum');
+
         $reservationData =  [
             "user_id" => 1,
             "screening_id" => 10,
@@ -123,5 +172,32 @@ class ReservationsControllerTest extends TestCase
 
         $this->postJson("/api/reservations", $reservationData);
         $this->assertDatabaseHas("reservations", $reservationData);
+    }
+
+    public function test_user_can_not_reserve_an_already_taken_parkingspot()
+    {
+        $user = User::factory()->create([
+            'role' => 'user',
+        ]);
+
+        $this->actingAs($user, 'sanctum');
+
+        $purchase = $this->postJson("/api/purchases",[
+            "location_id" => 1,
+            "movie_id" => 1,
+            "screening_id" => 1,
+            "guest_email" => "guestemail@gmail.com",
+            "parkingspot" => "A1",
+        ]);
+
+        $reservationResponse = $this->postJson("/api/reservations", [
+            "user_id" => 1,
+            "screening_id" => 1,
+            "reserved_at" => now()->toDateString(),
+            "location_id" => 1,
+            "parkingspot" => "A1",
+        ]);
+
+        $reservationResponse->assertStatus(422);
     }
 }

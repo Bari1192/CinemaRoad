@@ -166,7 +166,7 @@ onMounted(async () => {
                     <!-- Foglalási, vagy vásárlási select rész -->
                     <div v-if="!userStore.userID" class="flex flex-col w-full gap-2 my-4">
                         <label for="email"
-                            class="block font-bold text-pink-500 border border-pink-500 bg-amber-300/90 w-fit rounded-md px-2 py-1 mb-2 text-sm lg:text-base text-black">
+                            class="block font-bold text-pink-500 border border-pink-500 bg-amber-300/90 w-fit rounded-md px-2 py-1 mb-2 text-sm lg:text-base">
                             Email cím megadása
                         </label>
                         <div class="flex flex-col sm:flex-row items-start gap-2 w-full sm:w-1/2">

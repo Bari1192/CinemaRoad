@@ -2,19 +2,23 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Movie;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class StoreMovieRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::authorize('create', Movie::class)->allowed();
     }
 
     public function rules(): array
     {
+        
         return [
+            
             'title' => ['required', 'string', 'max:100'],
             'description' => ['required', 'string', 'max:255'],
             'type' => ['required', 'string', 'max:20'],
@@ -26,7 +30,8 @@ class StoreMovieRequest extends FormRequest
                 'before_or_equal:' . now()->format('Y-m-d')
             ],
             'duration_min' => ['required', 'integer', 'min:0'],
-            'poster_url' => ['required', 'string', 'url'],
+            //'poster' => ['required', 'image'],
+            'poster_url' => ['required', 'string'],
             'actors' => [ // így a 'family' esetén nem fogja engedni hozzáírni az 'actors' részhez!
                 Rule::when(
                     request('type') !== 'Family',

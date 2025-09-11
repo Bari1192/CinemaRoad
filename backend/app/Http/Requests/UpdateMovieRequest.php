@@ -3,13 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class UpdateMovieRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        $movie = $this->route("movie");
+        return Gate::authorize('update', $movie)->allowed();
     }
 
     public function rules()
@@ -26,7 +28,7 @@ class UpdateMovieRequest extends FormRequest
                 'before_or_equal:' . now()->format('Y-m-d')
             ],
             'duration_min' => ['required', 'integer', 'min:0'],
-            'poster_url' => ['required', 'string', 'url'],
+            'poster_url' => ['required', 'string'],
             'actors' => [ 
                 Rule::when(
                     request('type') !== 'Family',

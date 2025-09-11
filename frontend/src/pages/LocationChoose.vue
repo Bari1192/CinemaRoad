@@ -13,7 +13,7 @@
             class="absolute inset-0 rounded-2xl bg-indigo-300/70 blur-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10">
           </div>
           <div @click="selectCinema(cinema)">
-            <BaseCard :title="cinema.name" :src="'/starfield_autosmozi.jpg'" :alt="cinema.name" :description="''"
+            <BaseCard :title="cinema.name" :button_text="'Mozi kiválasztása'" :src="'/starfield_autosmozi.jpg'" :alt="cinema.name" :description="''"
               :type_visible="false" class="max-w-xs md:max-w-md my-40 mx-auto" />
           </div>
         </div>
@@ -32,6 +32,7 @@ import { onMounted } from 'vue'
 import BaseLayout from '@layouts/BaseLayout.vue'
 import BaseCard from '@components/BaseCard.vue'
 import Stepper from '@components/layout/Stepper.vue'
+import Button from 'primevue/button'
 
 const driveincinemaStore = useDriveInCinemaStore()
 const ticketStore = useTicketStore()

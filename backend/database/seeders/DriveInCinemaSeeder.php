@@ -15,7 +15,7 @@ class DriveInCinemaSeeder extends Seeder
         DB::table("drive_in_cinemas")->insert([
             [
                 "name" => "Starfield",
-                "location" => "Budapest, Kőbányai út 45",
+                "location" => "Budapest, X. kerület, Kőbányai út 45",
                 "description" => "A Starfield Autósmozi Budapest egyik legmodernebb kültéri vetítőhelye, ahol a klasszikus autósmozi élmény találkozik a mai technológiával. A látogatók kényelmesen élvezhetik a legújabb filmeket saját autójukból, FM-rádión keresztül hallgathatják a hangot, miközben friss popcorn és üdítő is rendelhető a mobilalkalmazáson keresztül.",
                 "created_at" => now(),
                 "updated_at" => now()

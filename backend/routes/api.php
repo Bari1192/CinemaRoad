@@ -22,7 +22,16 @@ Route::apiResource("drive_in_cinemas", DriveInCinemaController::class);
 
 // ----------------------------------------------------------------------------------------
 // F O G L A L Á S O K
-Route::apiResource("/reservations", ReservationController::class)->middleware('auth:sanctum');
+Route::apiResource("/reservations", ReservationController::class)->only(['index', 'show']);
+
+Route::middleware(['auth:sanctum'])->group(function() {
+
+    Route::post("/reservations", [ReservationController::class, "store"]);
+
+    Route::put("/reservations/{reservation}", [ReservationController::class, "update"]);
+
+    Route::delete("/reservations/{reservation}", [ReservationController::class, "destroy"]);
+});
 // ----------------------------------------------------------------------------------------
 
 

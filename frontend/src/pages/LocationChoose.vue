@@ -1,7 +1,7 @@
 <template>
   <BaseLayout>
     <Stepper :currentStep="0" />
-    <h1 class="text-4xl md:text-5xl font-bold text-pink-600 text-center drop-shadow-lg mt-40 pb-12">Kérlek, válaszd ki a
+    <h1 class="text-4xl md:text-5xl font-bold text-pink-600 text-center drop-shadow-lg mt-10">Kérlek, válaszd ki a
       helyszínt, ahova menni szeretnél.</h1>
     <div class="relative  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
       <div v-for="cinema in driveincinemaStore.driveInCinemas" :key="cinema.id" @click="selectCinema(cinema)"
@@ -14,7 +14,7 @@
           </div>
           <div @click="selectCinema(cinema)">
             <BaseCard :title="cinema.name" :button_text="'Mozi kiválasztása'" :src="'/starfield_autosmozi.jpg'" :alt="cinema.name" :description="''"
-              :type_visible="false" class="max-w-xs md:max-w-md my-40 mx-auto" />
+              :type_visible="false" class="max-w-xs md:max-w-md my-10 mx-auto" />
           </div>
         </div>
       </div>

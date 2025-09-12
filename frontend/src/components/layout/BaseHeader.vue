@@ -16,26 +16,10 @@
           </li>
           <li
             class="relative md:text-3xl lg:text-4xl tracking-wider xl:px-3 transition-all duration-150 text-pink-600 rounded focus-within:z-30">
-            <button @click="toggleCinemaDropdown"
-              class="block w-full h-full my-auto top-10 text-left focus:outline-none transition-all duration-150  hover:text-white"
-              style="font-family:inherit;" :class="cinemaDropdownOpen ? 'text-white' : ''">
+            <RouterLink :to="'/FilmSelection'">
               Filmkínálat
-            </button>
-            <transition name="fade">
-              <ul v-if="cinemaDropdownOpen" class="absolute lg:-left-7 min-w-[200px] md:w-full mt-7 lg:mt-3 bg-slate-950 shadow-2xl rounded-xl
-                       border-4 border-pink-500 z-50 flex flex-col divide-y divide-pink-800
-                       overflow-hidden"
-                style="font-family: 'Onest', 'Cookie','Arial','Times New Roman', Times, serif;">
-                <li v-for="cinema in driveinCinemas.driveInCinemas" :key="cinema.id"
-                  class="md:text-3xl lg:text-4xl tracking-wider block transition-colors duration-150 text-pink-600 hover:text-white rounded">
-                  <button @click="selectCinema(cinema)"
-                    class="block w-full text-left lg:text-2xl lg:text-center lg:px-0 tracking-wide pl-3 py-3 transition-all duration-200 text-white bg-transparent hover:bg-pink-300/85 hover:text-pink-950 hover:font-semibold focus:bg-pink-600 focus:text-white"
-                    style="font-family:inherit;">
-                    {{ cinema.name }}
-                  </button>
-                </li>
-              </ul>
-            </transition>
+            </RouterLink>
+            
           </li>
           <li v-if="userIsLoggedIn"
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 text-pink-600 hover:text-white rounded">

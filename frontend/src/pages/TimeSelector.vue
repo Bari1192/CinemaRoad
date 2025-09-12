@@ -3,6 +3,7 @@
 
     <div class="min-h-screen px-2 w-full flex flex-col justify-between">
       <Stepper :currentStep="2" />
+      <h1 class="text-3xl mb-10 font-bold text-center">{{ ticketStore.locationName }}: {{ ticketStore.movie.title }}</h1>
       <div class="flex flex-1 items-center justify-center w-full">
         <Calendar :screenings="filteredScreenings" @select-screening="onVetítésVálaszt" />
       </div>

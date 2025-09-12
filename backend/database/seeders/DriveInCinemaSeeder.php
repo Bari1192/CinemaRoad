@@ -19,15 +19,15 @@ class DriveInCinemaSeeder extends Seeder
             ],
             [
                 "name" => "Horizon Drive",
-                "location" => "Budapest, IX. kerület, Mester utca 88",
-                "description" => "A városi pihenés új dimenziója. Budapest szívében, Kőbányán található kültéri autósmozi, ahol a filmnézés élménye összeolvad a modern technológiával és a kényelmes szabadtéri szórakozással. Komfortos parkolóhelyekkel, kiváló hangminőséggel az FM rádión keresztül, valamint könnyedén rendelhető friss popcornnal és italokkal a mobilalkalmazás segítségével várunk mindenkit, aki szeretne egy különleges, nosztalgikus, mégis mai filmes élményben részesülni.",
+                "location" => "Miskolc, Szentpéteri kapu 102",
+                "description" => "A Horizon Drive Miskolc peremén, a Szentpéteri kapunál várja a filmrajongókat. A tágas parkolóhelyek és a kiváló hangminőségű FM-rádiós közvetítés révén a vendégek kényelmesen élvezhetik a filmeket saját autójukból. A mozi különlegessége, hogy a borsodi táj látványa háttérként szolgál, így a filmnézés egyedi hangulatot kap. A friss popcorn és üdítők rendelése a mobilalkalmazáson keresztül történik, így minden adott egy felejthetetlen esti kikapcsolódáshoz.",
                 "created_at" => now(),
                 "updated_at" => now()
             ],
             [
                 "name" => "Orbit Cinema",
-                "location" => "Budapest, XI. kerület, Hegyalja út 30",
-                "description" => "Budapest zöldövezeti részén, Budán található új kültéri autósmozi, ahol a klasszikus autósmozi hangulat a legmodernebb technológiával ötvöződik. Kényelmes parkolóhelyekkel, kiváló látványvilággal várjuk a filmrajongókat, hogy saját autójukból élvezhessék a legfrissebb filmeket. Az FM rádiós hangátvitel tiszta hangzást biztosít, miközben a friss popcorn és üdítő egyszerűen, a mobilalkalmazáson keresztül rendelhető meg, hogy az este zavartalanul teljen.",
+                "location" => "Debrecen, Nagyerdei körút 72",
+                "description" => "Az Orbit Cinema Debrecen szívében, a Nagyerdő közelében nyújt autósmozis élményt. A helyszín különleges atmoszféráját a természetközeli környezet és a modern vetítéstechnika ötvözete adja. A filmeket kristálytiszta képminőségben és FM-rádiós hangátvitellel élvezhetik a vendégek, miközben az alkalmazáson keresztül rendelt friss popcorn és hideg ital gondoskodik a zavartalan szórakozásról. Az Orbit Cinema ideális választás mindazok számára, akik különleges esti programra vágynak Debrecenben.",
                 "created_at" => now(),
                 "updated_at" => now()
             ]

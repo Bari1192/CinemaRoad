@@ -2,6 +2,8 @@
 import SixteenPlus from '@assets/svg/SixteenPlus.vue';
 import EighteenPlus from '@assets/svg/EighteenPlus.vue';
 import ZeroPlus from '@assets/svg/ZeroPlus.vue';
+import { boolean } from 'zod';
+import { computed } from 'vue';
 const props = defineProps({
   title: {
     type: String,
@@ -51,7 +53,20 @@ const props = defineProps({
     type:String,
     required:false,
     default:'h-[160px] sm:h-[220px] md:h-[400px] w-full object-cover overflow-hidden'
+  },
+  displayLocationName: {
+    type: Boolean,
+    required: false
+  },
+  locationName: {
+    type: String,
+    required: false
   }
+})
+
+const cityName = computed(() => {
+  if (!props.locationName) return ""
+  return props.locationName.split(",")[0]
 })
 </script>
 
@@ -77,7 +92,9 @@ const props = defineProps({
       </span>
     </div>
     <div class="flex-1 flex flex-col justify-between px-4 py-3">
-      <h3 class="text-lg font-semibold text-white mb-1 truncate">{{ props.title }}</h3>
+      <h3 class="text-lg font-semibold text-white mb-1 flex justify-between items-center">
+        <span class="truncate">{{ props.title }}</span>
+        <span v-if="displayLocationName" class="ml-auto">{{ cityName }}</span></h3>
       <p class="text-sm text-slate-200 mb-3 line-clamp-3">{{ props.description }}</p>
       <span v-if="cta">
         <router-link :to="`${props.link}`">

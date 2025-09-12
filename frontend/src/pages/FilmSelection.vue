@@ -59,13 +59,13 @@ function selectMovie(movie) {
 }
 
 const enrichedScreenings = computed(() => {
-    if (!screenings.value.length|| !movies.value.length || !currentLocationId.value) return [];
-    return screenings.value
-        .filter(s => Number(s.drive_in_cinema_id) === Number(currentLocationId.value))
-        .map(screening => {
-            const movie = movies.value.find(m => Number(m.id) === Number(screening.movie_id));
-            return { ...screening, movie: movie || null };
-        });
+    if (!screenings.value.length|| !movies.value.length) return [];
+
+    return screenings.value.map(screening => {
+        const movie = movies.value.find(m => Number(m.id) === Number(screening.movie_id));
+        return { ...screening, movie: movie || null };
+    })      
+        
 });
 const filteredMoviesByType = computed(() => {
     const seenMovieIds = new Set();

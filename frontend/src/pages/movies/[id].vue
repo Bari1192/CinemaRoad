@@ -9,6 +9,7 @@ import { useRoute } from 'vue-router';
 import BaseSpinner from '@components/layout/BaseSpinner.vue';
 import Calendar from '@pages/Calendar.vue';
 import { router } from '../../router';
+import { storage } from '@utils/http.mjs';
 
 const route = useRoute();
 const movieStore = useMovieStore();
@@ -28,12 +29,6 @@ const enrichedScreenings = computed(() => {
 });
 
 const selectScreening = async() => {
-    if (!selectedScreening.value) {
-        console.log("Nincs kiválasztott vetítés!");
-        return;
-    }
-
-
     await screeningStore.getScreening(selectedScreening.value);
     const screening = screeningStore.screening;
     
@@ -48,7 +43,6 @@ const selectScreening = async() => {
 
 const onSelectScreening = (screening) => {
     selectedScreening.value = screening;
-    console.log("selectedScreening.value: ", selectedScreening.value)
 }
 
 
@@ -57,7 +51,6 @@ onMounted(async () => {
     await movieStore.getMovies();
     const resp = await screeningStore.getScreenings();
     screenings.value = resp.data;
-    console.log("screenings tömb: ", screenings.value)
     loading.value = false;
 });
 
@@ -87,7 +80,8 @@ onMounted(async () => {
                 class="px-4 lg:px-0 w-full max-w-md flex flex-col gap-6 md:max-w-3xl md:flex-row md:gap-8 border-t-4 border-t-slate-600 pt-6">
 
                 <div class="flex-shrink-0 flex justify-center md:w-1/2">
-                    <img :src="`../assets/img${movie?.poster_url}`" :alt="movie?.title"
+                    <img :src="storage.url(`${movie.poster_url}`)"
+                     :alt="movie?.title"
                         class="rounded-lg object-cover w-52 h-72 shadow-xl border-2 border-slate-400 border-r-4 border-r-slate-500/90 shadow-slate-600/70 md:w-full md:h-full"
                         draggable="false" />
                 </div>

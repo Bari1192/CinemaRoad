@@ -1,15 +1,12 @@
 <script setup>
 import BaseLayout from '@layouts/BaseLayout.vue'
-
-import dustzoneImg from '@assets/img/Main_Slider_img/Dustzone_last_run.webp'
-import nightfireImg from '@assets/img/Main_Slider_img/Nightfire_redemption.webp'
-import realmshatterImg from '@assets/img/Main_Slider_img/Realmshatter.webp'
+import { storage } from '@utils/http.mjs';
 import SixteenPlus from '@assets/svg/SixteenPlus.vue'
 
 const films = [
     {
         title: "NIGHTFIRE: REDEMPTION",
-        image: nightfireImg,
+        image: storage.url(`/img/Main_Slider_img/Nightfire_redemption.webp`),
         details: [
             { label: "Készült:", value: "2025" },
             { label: "Típus:", value: "Akció / Sci-fi" },
@@ -21,7 +18,7 @@ const films = [
     },
     {
         title: "DUSTZONE: LAST RUN",
-        image: dustzoneImg,
+        image: storage.url(`/img/Main_Slider_img/Dustzone_last_run.webp`),
         details: [
             { label: "Készült:", value: "2025" },
             { label: "Típus:", value: "Posztapokaliptikus akció" },
@@ -33,7 +30,7 @@ const films = [
     },
     {
         title: "REALMSHATTER",
-        image: realmshatterImg,
+        image: storage.url(`/img/Main_Slider_img/Realmshatter.webp`),
         details: [
             { label: "Készült:", value: "2025" },
             { label: "Típus:", value: "Fantasy / Sci-fi" },

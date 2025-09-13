@@ -21,7 +21,7 @@
                     :key="screening.id"
                     :title="screening.movie?.title"
                     :type="screening.movie?.type"
-                    :src="`../assets/img${screening.movie.poster_url}`"
+                    :src="storage.url(`${screening.movie.poster_url}`)"
                     :alt="screening.movie?.title"
                     :description="screening.movie?.description" 
                     />
@@ -41,6 +41,7 @@ import { useRouter } from 'vue-router';
 import BaseLayout from '@layouts/BaseLayout.vue';
 import BaseSpinner from '@components/layout/BaseSpinner.vue';
 import BaseCard from '@components/BaseCard.vue';
+import { storage } from '@utils/http.mjs';
 
 const screeningStore = useScreeningStore();
 const movieStore = useMovieStore();

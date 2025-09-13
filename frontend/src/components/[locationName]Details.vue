@@ -20,7 +20,7 @@
             <BaseCard v-for="screening in distinctScreenings" :key="screening.id"
             @click="navigateToMovieSite(screening.movie)"
                 :title="screening.movie.title"
-                :src="`../assets/img${screening.movie.poster_url}`"
+                :src="storage.url(`${screening.movie.poster_url}`)"
                 :description="screening.movie.description"
                 :type="screening.movie?.type"
                 :duration_min="screening.movie.duration_min"
@@ -46,6 +46,8 @@ import BaseCard from '@components/BaseCard.vue';
 import { onMounted, ref, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { http } from '@utils/http.mjs';
+
+import { storage } from '@utils/http.mjs';
 
 const cinema = ref(null);
 const route = useRoute();

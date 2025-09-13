@@ -5,7 +5,7 @@
             <!-- 1. col -->
             <div class="flex flex-row items-start mx-3 space-x-3 sm:flex-row lg:flex-row">
                 <!-- Film posztere -->
-                <img :src="`/assets/img/${screening.movie.poster_url}`" :alt="screening.movie.title"
+                <img :src="storage.url(`${screening.movie.poster_url}`)" :alt="screening.movie.title"
                     class="h-[150px] w-[110px] md:w-[200px] md:h-auto lg:w-[250px] lg:h-auto md:ml-3 rounded-lg shadow-lg" />
 
                 <!-- Film adatai -->
@@ -49,6 +49,7 @@
 import { useScreeningStore } from '@stores/ScreeningStore.mjs';
 import ZeroPlus from '@assets/svg/ZeroPlus.vue';
 import { onMounted, ref } from 'vue';
+import { storage } from '@utils/http.mjs';
 
 const screeningStore = useScreeningStore();
 const screening = ref(null);

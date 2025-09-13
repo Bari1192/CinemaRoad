@@ -6,6 +6,8 @@ import BaseCard from '@components/BaseCard.vue'
 import { useRoute } from 'vue-router'
 import BaseSpinner from '@components/layout/BaseSpinner.vue'
 
+import { storage } from '@utils/http.mjs'
+
 const route = useRoute()
 const screeningStore = useScreeningStore()
 const daysOfWeek = ['Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat', 'Vasárnap']
@@ -122,7 +124,8 @@ function limitVets(dayVets) {
             </span>
             <span class="w-7/12 h-[3px] my-0 md:my-2 bg-slate-900/75 rounded-full"></span>
             <BaseCard :title="vetitesi_idopont.movie.title" :type="vetitesi_idopont.movie.type"
-              :src="`../../src/assets/img/${vetitesi_idopont.movie.poster_url}`" :alt="vetitesi_idopont.movie.title"
+              :src="storage.url(`${vetitesi_idopont.movie.poster_url}`)"
+              :alt="vetitesi_idopont.movie.title"
               :description="vetitesi_idopont.movie.description" :cta="true" :type_visible="false"
               :link="`/LocationChoose`" :button_text="'Kiválasztás'"
               :img_size_class="screenWidth < 768 ? 'h-[150px] w-full object-cover' : screenWidth < 1024 ? 'h-[140px] w-full object-cover' : 'h-[180px] w-full object-cover'"

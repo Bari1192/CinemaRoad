@@ -6,6 +6,7 @@ import { useTicketStore } from '@stores/TicketStore'
 import { useUserStore } from '@stores/UserStore'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { storage } from '@utils/http.mjs'
 
 const userStore = useUserStore();
 const ticketStore = useTicketStore();
@@ -150,7 +151,8 @@ onMounted(async () => {
                     <!-- Film -->
                     <div class="flex items-center gap-4 pt-5 pb-2  border-pink-100 flex-col md:flex-row w-full">
                         <div>
-                            <img v-if="moviePoster" :src="`../src/assets/img/${moviePoster}`"
+                        
+                            <img v-if="moviePoster" :src="storage.url(`${moviePoster}`)"
                                 class="w-full h-fit object-cover rounded-lg border border-gray-200 shadow-md" />
                         </div>
                         <div>

@@ -1,3 +1,7 @@
+<script setup>
+import { storage } from '@utils/http.mjs';
+</script>
+
 <template>
   <div class="container mx-auto px-4 py-8 md:py-12 lg:py-16 xl:py-20">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-48 items-center lg:w-7xl xl:w-full mx-auto">
@@ -56,7 +60,7 @@
       <div class="order-1 lg:order-2">
         <div
           class="shadow-indigo-400/30 max-w-lg mx-auto lg:w-full xl:max-w-7xl relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-slate-800 to-slate-900 border-4 border-slate-600">
-          <img :src="'src/assets/img/cinema.png'" alt="Pár autósmoziban popcornt eszik és filmet néz"
+          <img :src="storage.url('img/cinema.png')"  alt="Egy férfi és egy nő a CinemaRoad mozijában filmet néz egy popcorn társaságában, romantikusan."
             class="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] object-cover" />
 
           <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>

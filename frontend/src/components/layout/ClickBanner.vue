@@ -1,16 +1,13 @@
 <script setup>
 
 import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { storage } from '@/utils/http.mjs' // Ez hívja be az utils -on belüli 'storage' url részt!
 
-import dustzoneImg from '@/assets/img/Main_Slider_img/Dustzone_last_run.webp'
-import nightfireImg from '@/assets/img/Main_Slider_img/Nightfire_redemption.webp'
-import realmshatterImg from '@/assets/img/Main_Slider_img/Realmshatter.webp'
 const movies = ref([
-  { imageUrl: dustzoneImg, title: 'Dustzone: Last Run' },
-  { imageUrl: nightfireImg, title: 'Nightfire: Redemption' },
-  { imageUrl: realmshatterImg, title: 'Realmshatter' },
+  { imageUrl: 'img/Main_Slider_img/Dustzone_last_run.webp', title: 'Dustzone: Last Run' },
+  { imageUrl: 'img/Main_Slider_img/Nightfire_redemption.webp', title: 'Nightfire: Redemption' },
+  { imageUrl: 'img/Main_Slider_img/Realmshatter.webp', title: 'Realmshatter' },
 ])
-
 const activeIndex = ref(0);
 let autoplayInterval = null;
 const autoplayDelay = 6000;
@@ -75,7 +72,7 @@ onUnmounted(() => {
 
 <template>
   <div class="container mx-auto w-full h-full px-0 mt-5 mb-10 xl:my-10 relative overflow-hidden">
-    
+
     <router-link :to="'/movies/SpecialWeek'">
       <div class="carousel-container h-full w-full min-h-[40dvh] max-h-[70dvh] xl:h-[90vh]" @mouseenter="stopAutoplay"
         @mouseleave="startAutoplay">
@@ -83,7 +80,8 @@ onUnmounted(() => {
           'carousel-item absolute w-full h-full transition-transform duration-1000 ease-in-out overflow-hidden border-y-4 border-slate-600 lg:rounded-2xl',
           { 'active-slide': index === activeIndex }
         ]" :style="getSlideTransform(index)">
-          <img :src="movie.imageUrl" :alt="movie.title"
+          <img :src="storage.url(movie.imageUrl)"
+          :alt="movie.title"
             class="w-full h-full object-cover lg:rounded-lg shadow-xl overflow-hidden">
           <div class="absolute right-0 top-0 bg-gradient-to-b from-black via-black/70 to-transparent text-white lg:rounded-r-lg overflow-hidden
         pl-6 pt-2 pr-4 pb-8

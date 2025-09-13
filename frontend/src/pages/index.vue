@@ -9,6 +9,7 @@ import { useDriveInCinemaStore } from "@stores/DriveInCinemaStore";
 import { useMovieStore } from "@stores/MovieStore.mjs";
 import { useScreeningStore } from "@stores/ScreeningStore.mjs";
 import { onMounted, ref } from "vue";
+import { storage } from "@utils/http.mjs";
 
 const driveInCinemas = useDriveInCinemaStore();
 const screenings = useScreeningStore();
@@ -47,28 +48,30 @@ onMounted(async () => {
         <router-link to="/movies/SpecialWeek">
           <BaseCard :title="'Steel Horizon'" :type="'Akció'" :class="'text-gray-900 font-extrabold'"
             :description="'Lélegzetelállító harci jelenetek, robbanások, hősök és egy mindenre elszánt harcos.'"
-            :src="'src/assets/img/action.png'" :alt="'Autós üldözés'" :img_size_class="'object-cover overflow-hidden'"
+            :src="storage.url(`/img/action.png`)"
+            :alt="'Autós üldözés'" :img_size_class="'object-cover overflow-hidden'"
             :cta="true" :link="'/movies/SpecialWeek'" />
         </router-link>
 
         <router-link to="/movies/SpecialWeek">
-          <BaseCard :title="'The Magical Meadow'" :type="'Családi'"  :class="'text-yellow-700 font-extrabold'"
+          <BaseCard :title="'The Magical Meadow'" :type="'Családi'" :class="'text-yellow-700 font-extrabold'"
             :description="'A természet lágy ölén a gondtalan gyermekek új kalandra hívnak a varázslatos elemek világába!'"
-            :src="'src/assets/img/family.png'" :alt="'The Magical Meadow'"
+            :src="storage.url(`/img/family.png`)" :alt="'The Magical Meadow'"
             :img_size_class="' object-cover overflow-hidden'" :cta="true" :link="'/movies/SpecialWeek'" />
         </router-link>
 
         <router-link to="/movies/SpecialWeek">
           <BaseCard :title="'Baljós árnyak'" :type="'Horror'" :class="'text-red-900 font-extrabold'"
             :description="'A sötétség magányában csak magadra számíthatsz. A hangok a fejedből, vagy az éj lepléből szállnak?'"
-            :src="'src/assets/img/horror.png'" :alt="'Baljós árnyak - horrofilm, kizárólag felnőtteknek.'"
+            :src="storage.url(`/img/horror.png`)" :alt="'Baljós árnyak - horrofilm, kizárólag felnőtteknek.'"
             :img_size_class="'object-cover overflow-hidden'" :cta="true" :link="'/movies/SpecialWeek'" />
         </router-link>
 
         <router-link to="/movies/SpecialWeek">
           <BaseCard :title="'Premier Filmek a Héten'" :type="'Premierek'"
             :description="'Elsők között néznéd meg várva várt mozifilmed? Nézd meg még premier előtt!'"
-            :src="'src/assets/img/news.webp'" :alt="'Premier Filmek a Héten'"
+            :src="storage.url(`/img/news.webp`)"
+            :alt="'Premier Filmek a Héten'"
             :img_size_class="'object-cover overflow-hidden'" :cta="true" :link="'/movies/SpecialWeek'" />
         </router-link>
       </div>

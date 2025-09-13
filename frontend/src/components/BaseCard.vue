@@ -2,7 +2,6 @@
 import SixteenPlus from '@assets/svg/SixteenPlus.vue';
 import EighteenPlus from '@assets/svg/EighteenPlus.vue';
 import ZeroPlus from '@assets/svg/ZeroPlus.vue';
-import { boolean } from 'zod';
 import { computed } from 'vue';
 const props = defineProps({
   title: {

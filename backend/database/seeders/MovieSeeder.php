@@ -11,11 +11,11 @@ class MovieSeeder extends Seeder
     public function run(): void
     {
         $categoryTypes = [
-            'action' => '/Action_Movies_img',
-            'family' => '/Family_Movies_img',
-            'horror' => '/Horror_Movies_img',
+            'action' =>'/img/Action_Movies_img',
+            'family' =>'/img/Family_Movies_img',
+            'horror' =>'/img/Horror_Movies_img',
         ];
-
+        
         foreach ($categoryTypes as $movieType => $typePath) {
             foreach ($this->staticMoviesData($movieType, $typePath) as $movieData) {
                 Movie::create([

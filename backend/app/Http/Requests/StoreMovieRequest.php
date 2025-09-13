@@ -30,9 +30,8 @@ class StoreMovieRequest extends FormRequest
                 'before_or_equal:' . now()->format('Y-m-d')
             ],
             'duration_min' => ['required', 'integer', 'min:0'],
-            //'poster' => ['required', 'image'],
             'poster_url' => ['required', 'string'],
-            'actors' => [ // így a 'family' esetén nem fogja engedni hozzáírni az 'actors' részhez!
+            'actors' => [ 
                 Rule::when(
                     request('type') !== 'Family',
                     ['nullable', 'array'],

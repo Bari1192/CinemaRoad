@@ -4,6 +4,7 @@ import { useMovieStore } from '@stores/MovieStore.mjs'
 import { ToastService } from '@stores/ToastService'
 import { useUserStore } from '@stores/UserStore'
 import { toast } from 'vue3-toastify';
+import { storage } from '@utils/http.mjs';
 
 const userStore = useUserStore();
 const movieStore = useMovieStore()
@@ -77,7 +78,7 @@ const deleteMovie = async (movie) => {
                 class="bg-gradient-to-r from-indigo-400 via-purple-600 to-indigo-500 p-4 sm:p-6 rounded-lg shadow-lg">
 
                 <div class="flex items-center space-x-3 sm:space-x-4 mb-4">
-                    <img :src="`src/assets/img${movie.poster_url}`" :alt="movie.title"
+                    <img :src="storage.url(`${movie.poster_url}`)"
                         class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-cover rounded" />
                     <div class="flex-1">
                         <label class="block text-xs sm:text-sm font-medium text-pink-100 mb-1">Film neve:</label>
@@ -142,7 +143,7 @@ const deleteMovie = async (movie) => {
                     hover:bg-purple-500 transition-colors duration-150 cursor-pointer">
                         <td class="w-fit">
                             <div class="flex justify-center w-fit">
-                                <img :src="`src/assets/img${movie.poster_url}`" :alt="movie.title"
+                                <img :src="storage.url(`${movie.poster_url}`)" :alt="movie.title"
                                     class="min-w-[50px] md:min-w-[80px] lg:w-40 lg:h-40 object-cover rounded" />
                             </div>
                         </td>

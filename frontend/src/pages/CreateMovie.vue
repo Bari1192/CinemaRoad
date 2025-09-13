@@ -94,6 +94,7 @@ import { ToastService } from '@stores/ToastService';
 import { onMounted, ref } from 'vue';
 import { useUserStore } from '@stores/UserStore';
 import { useRouter } from 'vue-router';
+import { storage } from '@utils/http.mjs';
 
 import { http } from '@utils/http.mjs';
 import { FormKit } from '@formkit/vue';
@@ -111,8 +112,7 @@ const movieActors = ref('');
 const actorsArray = movieActors.value.split(',').map(actor => actor.trim());
 
 const selectedFile = ref(null);
-
-const fallbackImage = new URL('@/assets/img/No_image_selected.png', import.meta.url).href;
+const fallbackImage = new URL(storage.url({moviePoster}));
 const src = ref(fallbackImage);
 
 function onFileChange(e) {

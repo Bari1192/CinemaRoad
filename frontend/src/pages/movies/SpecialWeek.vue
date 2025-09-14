@@ -1,11 +1,7 @@
 <script setup>
-import BaseLayout from '@layouts/BaseLayout.vue'
-
-import dustzoneImg from '@assets/img/Main_Slider_img/Dustzone_last_run.webp'
-import nightfireImg from '@assets/img/Main_Slider_img/Nightfire_redemption.webp'
-import realmshatterImg from '@assets/img/Main_Slider_img/Realmshatter.webp'
-import SixteenPlus from '@assets/svg/SixteenPlus.vue'
 import { storage } from '@utils/http.mjs';
+
+import BaseLayout from '@layouts/BaseLayout.vue'
 import AgeLimitBadge from '@components/AgeLimitBadge.vue'
 import SpecialWeekTimer from './SpecialWeekTimer.vue'
 

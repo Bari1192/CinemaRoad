@@ -4,6 +4,7 @@ import { useMovieStore } from '@stores/MovieStore.mjs'
 import { useRouter } from 'vue-router'
 import AgeLimitBadge from '@components/AgeLimitBadge.vue';
 import { storage } from '@utils/http.mjs'
+
 const router = useRouter();
 const store = useMovieStore()
 const movies = ref([])
@@ -80,7 +81,6 @@ function goToMoviePage(movieID) {
                     {{ movie.title || 'Nincs megjeleníthető adat' }}
                     <span
                         class="h-12 -z-10 w-full absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-600/95 via-slate-900/95 to-transparent">
-                        <!-- Ez csak a háttér "shadow" a szöveg mögött z-mínusz 10-zel -->
                     </span>
                 </span>
             </div>

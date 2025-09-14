@@ -63,11 +63,8 @@ const handleConfirmation = async () => {
     const parkingSpots = Array.isArray(ticketStore.parkingSpot)
         ? ticketStore.parkingSpot
         : [ticketStore.parkingSpot];
-
-    // ide mentem a confirmation vagy a ticket_code-ot.
     let resultData = null;
 
-    // HA BE VAN JELENTKEZVE, ÉS FOGLAL
     if (bookingType.value === 'reservation' && userStore.userID) {
         const payload = {
             user_id: userStore.userID,
@@ -79,7 +76,6 @@ const handleConfirmation = async () => {
         console.log("Reservation bejelentkezett payload: ", payload);
         resultData = await ticketStore.postTicketReservation(payload);
     }
-    //HA BE VAN JELENTKEZVE ÉS VESZI
     else if ((bookingType.value === 'purchase' && userStore.userID)) {
         const payload = {
             location_id: ticketStore.location.id,
@@ -115,9 +111,6 @@ const handleConfirmation = async () => {
         }
     });
 };
-
-
-
 const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail|freemail|yahoo|citromail|aoutlook)\.(com|hu)$/;
 const userIsLoggedIn = computed(() => userStore.isUserLoggedIn);
 
@@ -140,23 +133,19 @@ onMounted(async () => {
                 <div class=" via-white pink-600 shadow-xl border-[3px] border-dashed border-slate-500/75 rounded-3xl w-full max-w-lg relative 
                     py-8 px-6 ticket overflow-hidden
                     md: pb-4">
-                    <!-- Jegy perforáció -->
                     <div
                         class="absolute left-0 top-16 h-32 w-6 bg-white border-r-4 border-dashed border-indigo-300 rounded-r-2xl -z-10">
                     </div>
                     <div
                         class="absolute right-0 bottom-16 h-32 w-6 bg-white border-l-4 border-dashed border-pink-300 rounded-l-2xl -z-10">
                     </div>
-                    <!-- Mozi neve -->
                     <div class="text-xl text-black/75 font-bold mb-1 uppercase text-center">Drive-in mozi foglalás
                         megerősítése</div>
                     <div
                         class="text-2xl lg:text-3xl mt-4 lg:underline underline-offset-4 font-bold text-pink-600 mb-2 lg:text-center">
                         {{ locationName }}</div>
-                    <!-- Film -->
                     <div class="flex items-center gap-4 pt-5 pb-2  border-pink-100 flex-col md:flex-row w-full">
                         <div>
-                        
                             <img v-if="moviePoster" :src="storage.url(`${moviePoster}`)"
                                 class="w-full h-fit object-cover rounded-lg border border-gray-200 shadow-md" />
                         </div>
@@ -165,15 +154,14 @@ onMounted(async () => {
                                 class="text-sm underline underline-offset-4 text-pink-900 font-bold uppercase opacity-70 tracking-wider mb-2">
                                 Kiválasztott film:
                             </div>
-                            <div class="mx-auto inline-flex items-center align-middle gap-2 md:text-lg lg:text-2xl font-bold text-gray-700">
+                            <div
+                                class="mx-auto inline-flex items-center align-middle gap-2 md:text-lg lg:text-2xl font-bold text-gray-700">
                                 <AgeLimitBadge :age="movieAgeLimit" klassz="h-4 w-4 md:w-6 md:h-6 lg:w-8 lg:h-8" />
                                 {{ movieTitle }}
                             </div>
                             <div class="mt-2 italic text-gray-500">{{ movieDesc }}</div>
                         </div>
                     </div>
-
-                    <!-- Foglalási, vagy vásárlási select rész -->
                     <div v-if="!userStore.userID" class="flex flex-col w-full gap-2 my-4">
                         <label for="email"
                             class="block font-bold text-pink-500 border border-pink-500 bg-amber-300/90 w-fit rounded-md px-2 py-1 mb-2 text-sm lg:text-base ">
@@ -187,45 +175,38 @@ onMounted(async () => {
                                 :validation-visibility="dirty" />
                             <FormKitMessages for="email" class="text-red-600 text-sm font-semibold" />
                         </div>
-
                         <p class="pt-1 text-sm italic text-gray-500 font-semibold mb-2 w-full sm:w-1/2">
                             Vásárlás után erre az e-mail címre küldjük számodra a vásárolt jegyeidet!
                         </p>
                     </div>
-
-
                     <div v-if="userStore.userID" class="flex my-3 flex-col gap-2">
                         <label for="options"
                             class="block font-bold text-pink-500 border border-pink-500 bg-amber-300/90 w-fit rounded-md px-3 py-1 mb-2 text-sm lg:text-base">
                             Hogyan szeretnéd biztosítani a jegyed?
                         </label>
-
                         <div class="flex flex-col sm:flex-row gap-4">
                             <label class="flex items-center justify-center border rounded-lg px-6 py-4 cursor-pointer transition-all
-            focus-within:ring-pink-400
-           select-none font-semibold text-black" :class="bookingType === 'reservation'
-            ? 'bg-pink-500 text-white border-pink-500 shadow-md'
-            : 'bg-white border-pink-500'">
+                                focus-within:ring-pink-400
+                               select-none font-semibold text-black" :class="bookingType === 'reservation'
+                                ? 'bg-pink-500 text-white border-pink-500 shadow-md'
+                                : 'bg-white border-pink-500'">
                                 <input type="radio" name="options" value="reservation" v-model="bookingType"
                                     class="hidden" />
                                 Előfoglalom
                             </label>
 
                             <label class="flex items-center justify-center border rounded-lg px-4 py-2 cursor-pointer transition-all
-            focus-within:ring-pink-400
-           select-none font-semibold text-black" :class="bookingType === 'purchase'
-            ? 'bg-pink-500 text-white border-pink-500 shadow-md'
-            : 'bg-white border-pink-500'">
+                            focus-within:ring-pink-400
+                           select-none font-semibold text-black" :class="bookingType === 'purchase'
+                            ? 'bg-pink-500 text-white border-pink-500 shadow-md'
+                            : 'bg-white border-pink-500'">
                                 <input type="radio" name="options" value="purchase" v-model="bookingType"
                                     class="hidden" />
                                 Megveszem
                             </label>
-
                         </div>
-
                     </div>
 
-                    <!-- Időpont -->
                     <div class="flex flex-col gap-2">
                         <div
                             class="underline underline-offset-4 text-pink-900 font-bold uppercase opacity-70 text-sm lg:text-base">
@@ -235,8 +216,6 @@ onMounted(async () => {
                             {{ formattedTime }}
                         </div>
                     </div>
-
-                    <!-- Parkolóhely(ek) -->
                     <div class="flex flex-col gap-2 mt-6 border-t-4 border-dashed border-slate-500 py-4 md:w-4/5">
                         <div
                             class="text-pink-800 font-extrabold lg:font-bold tracking-wider uppercase opacity-70 text-sm lg:text-base">

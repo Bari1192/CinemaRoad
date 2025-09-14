@@ -90,7 +90,7 @@ function limitVets(dayVets) {
       <div v-else-if="filteredLocationScreenings.length === 0" class="text-white text-lg mt-8">
         Ehhez a mozihoz egyelőre nincs elérhető vetítés.
       </div>
-      
+
       <div v-else v-for="day in screeningsByDate" :key="day.dateKey"
         class="mt-8 flex flex-col md:flex-row items-start w-full h-full md:w-10/12 bg-slate-800 rounded-xl shadow-xl mb-12 md:mb-4 p-3 md:gap-4">
         <div
@@ -127,7 +127,8 @@ function limitVets(dayVets) {
               :src="storage.url(`${vetitesi_idopont.movie.poster_url}`)"
               :alt="vetitesi_idopont.movie.title"
               :description="vetitesi_idopont.movie.description" :cta="true" :type_visible="false"
-              :link="`/LocationChoose`" :button_text="'Kiválasztás'"
+              :age_limit="vetitesi_idopont.movie.age_limit" :link="`/LocationChoose`"
+              :button_text="'Kiválasztás'"
               :img_size_class="screenWidth < 768 ? 'h-[150px] w-full object-cover' : screenWidth < 1024 ? 'h-[140px] w-full object-cover' : 'h-[180px] w-full object-cover'"
               class="w-[180px] md:w-full transition-none hover:cursor-default hover:scale-100 max-w-[210px] md:max-w-[180px] md:max-h-[340px] lg:max-h-[410px] mx-auto" />
           </div>

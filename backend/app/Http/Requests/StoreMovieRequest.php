@@ -29,13 +29,14 @@ class StoreMovieRequest extends FormRequest
                 'after_or_equal:' . now()->subDays(180)->format('Y-m-d'),
                 'before_or_equal:' . now()->format('Y-m-d')
             ],
+            'age_limit' => ['required', 'integer', 'min:0', 'max:18'],
             'duration_min' => ['required', 'integer', 'min:0'],
             'poster_url' => ['required', 'string'],
             'actors' => [ 
                 Rule::when(
                     request('type') !== 'Family',
                     ['nullable', 'array'],
-                    ['nullable', 'prohibited'] 
+                    ['nullable', 'prohibited']
                 )
             ],
             'actors.*' => ['string'],

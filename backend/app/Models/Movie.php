@@ -23,6 +23,7 @@ class Movie extends Model
         'description',
         'type',
         'release_date',
+        'is_premier',
         'age_limit',
         'director',
         'duration_min',

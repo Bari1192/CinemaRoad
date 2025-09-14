@@ -45,35 +45,35 @@ onMounted(async () => {
     <div class="container mx-auto w-full h-full mb-8">
       <div class="card mx-auto px-6 w-fit lg:w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-center gap-6 md:gap-8 
         lg:gap-6 xl:gap-10">
-        <router-link to="/movies/SpecialWeek">
+        <router-link to="/movies/PremierWeek">
           <BaseCard :title="'Steel Horizon'" :type="'Akció'" :age_limit="16" :class="'text-gray-900 font-extrabold'"
             :description="'Lélegzetelállító harci jelenetek, robbanások, hősök és egy mindenre elszánt harcos.'"
             :src="storage.url(`/img/action.png`)"
             :alt="'Autós üldözés'" :img_size_class="'object-cover overflow-hidden'"
-            :cta="true" :link="'/movies/SpecialWeek'" />
+            :cta="true" :link="'/movies/PremierWeek'" />
         </router-link>
 
-        <router-link to="/movies/SpecialWeek">
+        <router-link to="/movies/PremierWeek">
           <BaseCard :title="'The Magical Meadow'" :type="'Családi'" :age_limit="12"
             :class="'text-yellow-700 font-extrabold'"
             :description="'A természet lágy ölén a gondtalan gyermekek új kalandra hívnak a varázslatos elemek világába!'"
             :src="storage.url(`/img/family.png`)" :alt="'The Magical Meadow'"
-            :img_size_class="' object-cover overflow-hidden'" :cta="true" :link="'/movies/SpecialWeek'" />
+            :img_size_class="' object-cover overflow-hidden'" :cta="true" :link="'/movies/PremierWeek'" />
         </router-link>
 
-        <router-link to="/movies/SpecialWeek">
+        <router-link to="/movies/PremierWeek">
           <BaseCard :title="'Baljós árnyak'" :type="'Horror'" :age_limit="18" :class="'text-red-900 font-extrabold'"
             :description="'A sötétség magányában csak magadra számíthatsz. A hangok a fejedből, vagy az éj lepléből szállnak?'"
             :src="storage.url(`/img/horror.png`)" :alt="'Baljós árnyak - horrofilm, kizárólag felnőtteknek.'"
-            :img_size_class="'object-cover overflow-hidden'" :cta="true" :link="'/movies/SpecialWeek'" />
+            :img_size_class="'object-cover overflow-hidden'" :cta="true" :link="'/movies/PremierWeek'" />
         </router-link>
 
-        <router-link to="/movies/SpecialWeek">
+        <router-link to="/movies/PremierWeek">
           <BaseCard :title="'Premier Filmek a Héten'" :type="'Premierek'"
             :description="'Elsők között néznéd meg várva várt mozifilmed? Nézd meg még premier előtt!'"
             :src="storage.url(`/img/news.webp`)"
             :alt="'Premier Filmek a Héten'"
-            :img_size_class="'object-cover overflow-hidden'" :cta="true" :link="'/movies/SpecialWeek'" />
+            :img_size_class="'object-cover overflow-hidden'" :cta="true" :link="'/movies/PremierWeek'" />
         </router-link>
       </div>
     </div>

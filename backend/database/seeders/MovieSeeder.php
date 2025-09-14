@@ -10,12 +10,17 @@ class MovieSeeder extends Seeder
 {
     public function run(): void
     {
+
+        // Premier filmeknek hamarabb kell felmenniük, mint a "normálnak" (többsíkú seedelés megint)
+        $this->createPremierMovies();
+
+
         $categoryTypes = [
-            'action' =>'/img/Action_Movies_img',
-            'family' =>'/img/Family_Movies_img',
-            'horror' =>'/img/Horror_Movies_img',
+            'action' => '/img/Action_Movies_img',
+            'family' => '/img/Family_Movies_img',
+            'horror' => '/img/Horror_Movies_img',
         ];
-        
+
         foreach ($categoryTypes as $movieType => $typePath) {
             foreach ($this->staticMoviesData($movieType, $typePath) as $movieData) {
                 Movie::create([
@@ -65,6 +70,71 @@ class MovieSeeder extends Seeder
             ],
         };
     }
+    public function createPremierMovies(): void
+    {
+        $premierMovies = [
+
+            [
+                'title' => "NIGHTFIRE: REDEMPTION",
+                'description' => "Egy jövőbeli városban, ahol a törvény már csak emlék, egy különleges ügynök szembeszáll a saját múltjával és egy globális tech-kartellel. Drámai megvilágítások, esőáztatta tetők és neonfények között játszódik.",
+                'type' => 'action',
+                'age_limit' => 14,
+                'director' => fake()->firstName() . ' ' . fake()->lastName(),
+                'poster_url' => '/img/Main_Slider_img/Nightfire_redemption.webp',
+            ],
+
+            [
+                'title' => "DUSTZONE: LAST RUN",
+                'description' => "A világ romjai között egy utolsó reménysugárként indul el egy életveszélyes konvoj a túlélésért. Sebesség, por, tűz és elkeseredés – egy sivatagi hajszában, ahol nincs második esély.",
+                'type' => 'action',
+                'age_limit' => 18,
+                'director' => fake()->firstName() . ' ' . fake()->lastName(),
+                'poster_url' => '/img/Main_Slider_img/Dustzone_last_run.webp',
+            ],
+
+            [
+                'title' => "REALMSHATTER",
+                'description' => "Két világ ütközik egy pontban: a technológia és a mágia határán egy harcos feladata megakadályozni a teljes valóság széthullását. Egy epikus történet dimenziókon átívelő hősökről és sorsokról.",
+                'type' => 'action',
+                'age_limit' => 16,
+                'director' => fake()->firstName() . ' ' . fake()->lastName(),
+                'poster_url' => '/img/Main_Slider_img/Realmshatter.webp',
+            ]
+        ];
+        //
+        $nextThursday = $this->getNextThursday();
+        
+        foreach ($premierMovies as $movieData) {
+            // Itt megkapja a duration -t, a színészeket, meg a release_date -eket is
+            Movie::create([
+                'title' => $movieData['title'],
+                'description' => $movieData['description'],
+                'poster_url' => $movieData['poster_url'],
+                'type' => $movieData['type'],
+                'director' => $movieData['director'],
+                'release_date' => $nextThursday,
+                'age_limit' => $movieData['age_limit'],
+                'duration_min' => fake()->numberBetween(90, 120), // Premier filmek kicsit legyenek hosszabbak..
+                'actors' => $this->generateActors($movieData['type']),
+                'is_premier' => true  // !!!
+            ]);
+        }
+    }
+
+    // Ez nézi, hogy az aktuális dátumhoz képest (pl: csütörtök van, akkor KÖVI hét csütörtökre generálja. De ha SZERDA van, akkor mehet "holnapra".),
+    // milyen dátummal generálja a `release_date` -eket.
+
+    private function getNextThursday(): Carbon
+    {
+        $today = Carbon::now();
+
+        if ($today->isThursday()) {
+            return $today->next(Carbon::THURSDAY);
+        }
+
+        return $today->next(Carbon::THURSDAY);
+    }
+    // Színészek generálása a filmekhez - Ha nem "rajzfilm" / Animációs
     public function generateActors(string $movieType): array
     {
         if ($movieType !== 'family') {

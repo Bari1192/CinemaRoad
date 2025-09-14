@@ -5,7 +5,6 @@ import SixPlus from '@assets/svg/SixPlus.vue';
 import TwelvePlus from '@assets/svg/TwelvePlus.vue';
 import SixteenPlus from '@assets/svg/SixteenPlus.vue';
 import EighteenPlus from '@assets/svg/EighteenPlus.vue';
-import ZeroPlus from '@assets/svg/ZeroPlus.vue';
 import { computed } from 'vue';
 const props = defineProps({
   title: {

@@ -70,7 +70,7 @@ const weekRows = computed(() => {
     for (let i = 0; i < 7; i++) {
       const d = new Date(weekStart)
       d.setDate(d.getDate() + i)
-      const dateKey = localDateKey(d) 
+      const dateKey = localDateKey(d)
       days.push({
         dateKey,
         dayName: daysOfWeek[i],

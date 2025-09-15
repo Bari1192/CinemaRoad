@@ -14,7 +14,7 @@
           </div>
           <div @click="selectCinema(cinema)">
             <BaseCard :title="cinema.name" :displayLocationName="true" :locationName="cinema.location" :button_text="'Mozi kiválasztása'" 
-            :src="storage.url(`/img//starfield_autosmozi.jpg`)" :alt="cinema.name" :description="''"
+            :src="storage.url(`/img/${cinema.name}.jpg`)" :alt="cinema.name" :description="''"
               :type_visible="false" class="max-w-xs md:max-w-md my-10 mx-auto" />
           </div>
         </div>

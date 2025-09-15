@@ -4,7 +4,7 @@
         <div v-if="ticketStore.location" class="max-w-10xl mx-auto p-5 w-full">
             <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
                 
-                <img :src="storage.url(`/img/starfield_autosmozi.jpg`)" alt="Helyszín képe"
+                <img :src="storage.url(`/img/${ticketStore.locationName}.jpg`)" alt="Helyszín képe"
                     class="rounded-xl shadow-md max-h-80 object-cover md:w-1/2" />
                 <div class="flex flex-col space-y-4 md:w-1/2 md:mt-10">
                     <h1 class="text-3xl font-bold text-pink-600">{{ ticketStore.location.name }}</h1>

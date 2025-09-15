@@ -34,7 +34,7 @@ class RegisterUserRequest extends FormRequest
                 "required",
                 "string",
                 "max:25",
-                "min:12",
+                "min:11",
             ],
 
             "password" => [

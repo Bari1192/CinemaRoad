@@ -22,7 +22,7 @@
 
         <div class="flex flex-row p-2">
             <button v-for="screening in onlyFourScreenings" class="bg-white text-lg font-semibold mx-1 rounded-lg p-2"> {{
-                formatDate(screening.start_time).date }} <br> {{ formatDate(screening.start_time).time }}</button>
+                formatDate(screening.start_time).date }} <br> <div class="bg-pink-600 h-[3px] rounded-full"></div> {{ formatDate(screening.start_time).time }}</button>
         </div>
     </div>
 </template>

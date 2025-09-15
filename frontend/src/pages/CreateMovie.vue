@@ -30,7 +30,8 @@
                                 </div>
 
                                 <div class="w-24 sm:w-28">
-                                    <label class="block text-xl text-pink-600 font-semibold mb-2 text-center">Hossz (perc)</label>
+                                    <label class="block text-xl text-pink-600 font-semibold mb-2 text-center">Hossz
+                                        (perc)</label>
                                     <FormKit type="number" v-model="movieDurationMin"
                                         input-class="w-full p-2 rounded-lg border-2 border-pink-300 text-center" />
                                 </div>
@@ -46,7 +47,7 @@
                     </div>
 
                     <!-- Műfaj / Rendező -->
-                    <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="mt-4 grid grid-cols-1 sm:grid-cols-4 gap-4">
 
                         <div>
                             <h3 class="text-center text-pink-600 text-xl font-semibold mb-2">Megjelenés</h3>
@@ -56,11 +57,26 @@
 
                         <div>
                             <h3 class="text-center text-pink-600 text-xl font-semibold mb-2">Műfaj</h3>
-                            <select v-model="movieType" class="w-full p-2 text-pink-600 rounded-lg border-2 border-pink-300">
-                                <option value="">Válassz műfajt</option>
+                            <select v-model="movieType"
+                                class="w-full p-2 text-pink-600 rounded-lg border-2 border-pink-300">
+                                <option value="" disabled>Válassz műfajt</option>
                                 <option value="Action">Akció</option>
                                 <option value="Family">Családi</option>
                                 <option value="Horror">Horror</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <h3 class="text-center text-pink-600 text-xl font-semibold mb-2">Korhatár besorolás</h3>
+                            <select v-model="ageLimit"
+                                class="w-full p-2 text-pink-600 rounded-lg border-2 border-pink-300">
+                                <option value="" disabled>Válassz korhatárt</option>
+                                <option value="0">0+</option>
+                                <option value="4">4+</option>
+                                <option value="6">6+</option>
+                                <option value="12">12+</option>
+                                <option value="16">16+</option>
+                                <option value="18">18+</option>
                             </select>
                         </div>
 
@@ -91,7 +107,7 @@
 <script setup>
 import BaseLayout from '@layouts/BaseLayout.vue';
 import { ToastService } from '@stores/ToastService';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import { useUserStore } from '@stores/UserStore';
 import { useRouter } from 'vue-router';
 import { storage } from '@utils/http.mjs';
@@ -107,17 +123,23 @@ const movieDurationMin = ref(null);
 const movieDescription = ref('');
 const movieReleaseDate = ref(null);
 const movieType = ref('');
+const ageLimit = ref('');
 const movieDirector = ref('');
+
 const movieActors = ref('');
-const actorsArray = movieActors.value.split(',').map(actor => actor.trim());
+const actorsArray = computed(() => {
+    if (!movieActors.value) return [];
+    return movieActors.value
+        .split(',')
+});
 
 const selectedFile = ref(null);
-const fallbackImage = new URL(storage.url({moviePoster}));
+const fallbackImage = storage.url('/img/No_image_selected.png');
 const src = ref(fallbackImage);
 
 function onFileChange(e) {
     selectedFile.value = e.target.files[0];
-    if(selectedFile.value) {
+    if (selectedFile.value) {
         src.value = URL.createObjectURL(selectedFile.value);
     } else {
         src.value = fallbackImage;
@@ -132,6 +154,8 @@ const handleCreateMovie = async () => {
         src.value = fallbackImage;
     }
 
+    console.log("actorsArray: ", JSON.stringify(actorsArray.value));
+
     const formData = new FormData();
     formData.append("title", movieTitle.value);
     formData.append("description", movieDescription.value);
@@ -139,8 +163,11 @@ const handleCreateMovie = async () => {
     formData.append("director", movieDirector.value);
     formData.append("release_date", movieReleaseDate.value);
     formData.append("duration_min", movieDurationMin.value);
+    formData.append("age_limit", Number(ageLimit.value));
 
-    formData.append('actors', actorsArray);
+    actorsArray.value.forEach((actor, index) => {
+        formData.append(`actors[${index}]`, actor);
+    });
 
     // poster_url név létrehozása
     const fileName = selectedFile.value.name;

@@ -10,6 +10,7 @@ import BaseSpinner from '@components/layout/BaseSpinner.vue';
 import Calendar from '@pages/Calendar.vue';
 import { router } from '../../router';
 import { storage } from '@utils/http.mjs';
+import { ToastService } from '@stores/ToastService';
 
 const route = useRoute();
 const movieStore = useMovieStore();
@@ -29,16 +30,21 @@ const enrichedScreenings = computed(() => {
 });
 
 const selectScreening = async() => {
-    await screeningStore.getScreening(selectedScreening.value);
-    const screening = screeningStore.screening;
+    try {
+        await screeningStore.getScreening(selectedScreening.value);
+        const screening = screeningStore.screening;
+        
     
-
-    // Jegy adatok mentése
-    await ticketStore.setLocationName(screening.drivein_cinema.name);
-    await ticketStore.setLocation(screening.drivein_cinema);
-    await ticketStore.setMovie(screening.movie);
-
-    router.push("/ParkingSpotChooser")
+        // Jegy adatok mentése
+        await ticketStore.setLocationName(screening.drivein_cinema.name);
+        await ticketStore.setLocation(screening.drivein_cinema);
+        await ticketStore.setMovie(screening.movie);
+    
+        router.push("/ParkingSpotChooser")
+    } catch (error) {
+        console.log("Hiba az időpont kiválasztása közben: ", error);
+        ToastService.showError("Nincs időpont kiválasztva!");
+    }
 }
 
 const onSelectScreening = (screening) => {

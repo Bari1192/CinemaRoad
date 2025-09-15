@@ -41,8 +41,8 @@ function goToMoviePage(movieID) {
           md:w-[300px] md:max-w-[300px] md:min-w-[300px] border-4 border-yellow-400 hover:cursor-pointer"
                 @click="goToMoviePage(movie.id)">
                 <div class="w-full h-full relative">
-                <img :src="storage.url(movie.poster_url)" 
-                        class="h-[160px] sm:h-[220px] md:h-[400px] w-full object-cover overflow-hidden"
+                    <img :src="storage.url(movie.poster_url)"
+                        class="h-[160px] sm:h-[220px] md:h-[350px] lg:h-[400px] w-full object-cover overflow-hidden"
                         :alt="movie.title || 'Nincs adat'" />
                     <div class="absolute top-0 left-0 opacity-85">
                         <AgeLimitBadge :age="movie.age_limit" klassz="w-8 h-8" />
@@ -70,8 +70,8 @@ function goToMoviePage(movieID) {
                     md:w-[300px] md:max-w-[300px] md:min-w-[300px] border-4 border-slate-500/75 hover:cursor-pointer"
                 @click="goToMoviePage(movie.id)">
                 <div class="w-full h-full relative">
-                    <img :src="storage.url(movie.poster_url)" 
-                        class="h-[160px] sm:h-[220px] md:h-[400px] w-full object-cover">
+                    <img :src="storage.url(movie.poster_url)"
+                        class="h-[160px] sm:h-[220px] md:h-[350px] lg:h-[400px] w-full object-cover overflow-hidden">
                     <div class="absolute top-0 left-0 opacity-85">
                         <AgeLimitBadge :age="movie.age_limit" klassz="w-8 h-8" />
                     </div>
@@ -98,8 +98,9 @@ function goToMoviePage(movieID) {
           md:w-[300px] md:max-w-[300px] md:min-w-[300px] border-4 border-red-600 hover:cursor-pointer"
                 @click="goToMoviePage(movie.id)">
                 <div class="w-full h-full relative">
-                    <img :src="storage.url(movie.poster_url)" 
-                        class="h-[160px] sm:h-[220px] md:h-[400px] w-full object-cover" :alt="movie.title"
+                    <img :src="storage.url(movie.poster_url)"
+                        class="h-[160px] sm:h-[220px] md:h-[350px] lg:h-[400px] w-full object-cover overflow-hidden"
+                        :alt="movie.title"
                         @error="handleImageError" />
                     <div class="absolute top-0 left-0 opacity-85">
                         <AgeLimitBadge :age="movie.age_limit" klassz="w-8 h-8" />

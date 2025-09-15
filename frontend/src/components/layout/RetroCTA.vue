@@ -44,7 +44,7 @@ import { storage } from '@utils/http.mjs';
           </router-link>
 
 
-          <router-link :to="'/movies/PremierWeek'" class="md:flex md:justify-start">
+          <router-link :to="'/FilmSelection'" class="md:flex md:justify-start">
             <button class="order-1 lg:order-2 bg-slate-700 hover:bg-slate-600 rounded-xl border-2 border-slate-400/65
               transition-all duration-300 hover:border-slate-400
             text-white font-semibold py-3 px-1 w-full

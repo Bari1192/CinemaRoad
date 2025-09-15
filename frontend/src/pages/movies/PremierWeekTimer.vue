@@ -110,8 +110,8 @@ const scrollToPremierFilms = () => {
 
             </div>
 
-            <div class="space-y-12 mx-auto text-center">
-                <p class="relative text-2xl lg:text-3xl font-bold text-white backdrop-blur-sm rounded-lg">
+            <div class="space-y-8 lg:space-y-12 mx-auto text-center" id="premierWeekSection">
+                <p class="relative -mt-8 lg:mt-0 text-2xl lg:text-3xl font-bold text-white backdrop-blur-sm rounded-lg">
                     Jegyvásárlás megnyílik:</p>
                 <!-- Dátum kijelző -->
                 <div class="text-center">

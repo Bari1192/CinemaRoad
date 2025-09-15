@@ -19,7 +19,7 @@
             <RouterLink :to="'/FilmSelection'">
               Filmkínálat
             </RouterLink>
-            
+
           </li>
           <li v-if="userIsLoggedIn"
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 text-pink-600 hover:text-white rounded">
@@ -67,57 +67,17 @@
             d="M1 1h15M1 7h15M1 13h15" />
         </svg>
       </button>
+      <!-- Mobil-->
       <div class="w-full md:block md:w-auto" :class="{ hidden: !menuOpen }">
         <ul class="flex flex-col md:flex-row px-3 md:px-1 md:space-x-6 tracking-wide"
           style="font-family: 'Cookie','Arial','Times New Roman', Times, serif;">
           <li
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 transition-colors duration-150 text-pink-600 hover:text-white rounded">
-            <RouterLink to="/movies/SpecialWeek">Premier Filmek</RouterLink>
+            <RouterLink to="/movies/PremierWeek">Premier Filmek</RouterLink>
           </li>
-          <li v-if="!isMobile" class="relative group">
-            <button @click="toggleCinemaDropdown"
-              class="md:text-3xl lg:text-4xl tracking-wider block py-2 transition-colors duration-150 text-pink-600 hover:text-white rounded"
-              style="font-family:inherit;" :class="cinemaDropdownOpen ? 'text-white' : ''">
-              Filmkínálat
-            </button>
-            <transition name="fade">
-              <ul v-if="cinemaDropdownOpen" class="absolute -left-5 min-w-[150px] md:w-full mt-2 lg:mt-3 bg-slate-950 shadow-2xl rounded-xl
-                       border-4 border-pink-500 z-50 flex flex-col divide-y divide-pink-800
-                       overflow-hidden"
-                style="font-family: 'Onest', 'Cookie','Arial','Times New Roman', Times, serif;">
-                <li v-for="cinema in driveinCinemas.driveInCinemas" :key="cinema.id"
-                  class="md:text-3xl lg:text-4xl tracking-wider block transition-colors duration-150 text-pink-600 hover:text-white rounded">
-                  <button @click="selectCinema(cinema)"
-                    class="block w-full text-left text-base lg:px-0 tracking-wide pl-3 py-3 transition-all duration-200 text-white bg-transparent hover:bg-pink-300/85 hover:text-pink-950 hover:font-semibold focus:bg-pink-600 focus:text-white"
-                    style="font-family:inherit;">
-                    {{ cinema.name }}
-                  </button>
-                </li>
-              </ul>
-            </transition>
-          </li>
-
-          <!-- Mobil-->
-          <li v-if="isMobile"
-            class="relative md:text-3xl lg:text-4xl tracking-wider xl:px-3 transition-all duration-150 text-pink-600 rounded focus-within:z-30">
-            <button @click="toggleCinemaList"
-              class="w-full text-left py-2 md:text-3xl lg:text-4xl text-pink-600 hover:text-white"
-              style="font-family:inherit;" :class="cinemaListOpen ? 'text-white' : ''">
-              Filmkínálat <span class="inline-block -ml-1 w-fit h-2" v-if="!cinemaListOpen">🔺</span> <span
-                class="inline-block -ml-1 w-fit h-2" v-else>🔻</span>
-            </button>
-            <transition name="fade">
-              <ul v-if="cinemaListOpen" v-show="cinemaListOpen" class="ml-4 mt-1 flex flex-col">
-                <li v-for="cinema in driveinCinemas.driveInCinemas" :key="cinema.id"
-                  class="md:text-3xl lg:text-4xl tracking-wider block transition-colors duration-150 mb-0.5 text-pink-600 hover:text-white rounded">
-                  <button @click="selectCinema(cinema)" class="block font-extralight w-full text-left lg:text-2xl lg:text-center lg:px-0 tracking-wide pl-3 transition-all duration-200 
-                    text-pink-200 bg-transparent hover:text-pink-500/85 focus:text-white"
-                    style="font-family: 'Nunito', 'Cookie','Arial','Times New Roman', Times, serif;font-weight: 200;">
-                    {{ cinema.name }}
-                  </button>
-                </li>
-              </ul>
-            </transition>
+          <li
+            class="md:text-3xl lg:text-4xl tracking-wider block py-2 transition-colors duration-150 text-pink-600 hover:text-white rounded">
+            <RouterLink to="/FilmSelection">Filmkínálat</RouterLink>
           </li>
           <li
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 transition-colors duration-150 text-pink-600 hover:text-white rounded">
@@ -164,14 +124,6 @@ const toggleMenu = () => { menuOpen.value = !menuOpen.value }
 const toggleCinemaDropdown = () => { cinemaDropdownOpen.value = !cinemaDropdownOpen.value }
 const Cinemas = computed(() => driveinCinemas.getDriveInCinemas ? driveinCinemas.getDriveInCinemas() : [])
 
-function selectCinema(cinema) {
-  ticketStore.setLocation(cinema)
-  ticketStore.setLocationName(cinema.name)
-  cinemaDropdownOpen.value = false
-  router.push(`/movies/MovieWeek/${cinema.id}`)
-  cinemaListOpen.value = false
-  menuOpen.value = false
-}
 const userIsLoggedIn = computed(() => userStore.isUserLoggedIn)
 const handleLogOut = () => { userStore.logoutUser() }
 

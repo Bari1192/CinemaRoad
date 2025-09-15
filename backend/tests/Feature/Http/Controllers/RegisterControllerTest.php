@@ -102,7 +102,7 @@ class RegisterControllerTest extends TestCase
         $response = $this->postJson("/api/register", [
             "name" => "Test Name",
             "email" => "testemail@gmail.com",
-            "phone" => "+3670123456",
+            "phone" => "+367012345",
             "password" => "Testpassword123_"
         ]);
 
@@ -114,7 +114,7 @@ class RegisterControllerTest extends TestCase
         $response = $this->postJson("/api/register", [
             "name" => "Test Name",
             "email" => "testemail@gmail.com",
-            "phone" => "06601234567",
+            "phone" => "1111111",
             "password" => "Testpassword123_"
         ]);
 

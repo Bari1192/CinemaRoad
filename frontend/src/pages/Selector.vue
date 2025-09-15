@@ -28,19 +28,15 @@
                     :class="selectedGenre === 'horror' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
                     @click="selectedGenre = 'horror'">Horror</button>
             </div>
-            <div v-if="filteredMoviesByType.length > 0" class="grid grid-cols-1 md:grid-cols-5 gap-6 mt-10">
-                <BaseCard v-for="screening in filteredMoviesByType" @click="selectMovie(screening.movie)"
-                    :key="screening.id" :title="screening.movie?.title"
-                    :src="storage.url(`${screening.movie.poster_url}`)"
-                     :alt="screening.movie?.title"
-                    :description="screening.movie?.description"
-                    :type="EasierLabelsGenerate[screening.movie?.type] ?? 'Egyéb kategória'" :class="{
-                        'text-gray-900 font-extrabold': screening.movie?.type === 'action',
-                        'text-yellow-700 font-extrabold': screening.movie?.type === 'family',
-                        'text-red-900 font-extrabold': screening.movie?.type === 'horror'
-                    }">
-                </BaseCard>
+            <div v-if="filteredMoviesByType.length > 0" class="grid grid-cols-1 w-full md:grid-cols-2 gap-4 mt-10">
+                <ScreenTimePicker v-for="screening in filteredMoviesByType"
+                :moviePosterUrl="screening.movie.poster_url"
+                :movieTitle="screening.movie.title"
+                :movieAgeLimit="screening.movie.age_limit"
+                :movieType="screening.movie.type"
+                :movieId="screening.movie.id"/>
             </div>
+
         </div>
         <div v-else>
             <BaseSpinner class="mx-auto mt-10" />
@@ -56,15 +52,19 @@ import { useRouter } from 'vue-router';
 import BaseLayout from '@layouts/BaseLayout.vue';
 import Stepper from '@components/layout/Stepper.vue';
 import BaseSpinner from '@components/layout/BaseSpinner.vue';
-import BaseCard from '@components/BaseCard.vue';
+//import BaseCard from '@components/BaseCard.vue';
+import ScreenTimePicker from '@components/ScreenTimePicker.vue';
 import { storage } from '@utils/http.mjs';
 
 const EasierLabelsGenerate = { action: 'Akció', family: 'Családi', horror: 'Horror' }
+
+
 
 const router = useRouter();
 const movieStore = useMovieStore();
 const screeningStore = useScreeningStore();
 const ticketStore = useTicketStore();
+
 function selectMovie(movie) {
     ticketStore.setMovie(movie);
     router.push('/TimeSelector');

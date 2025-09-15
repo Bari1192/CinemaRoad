@@ -1,44 +1,28 @@
 <template>
-    <div v-if="screening" class="bg-slate-800 w-11/12 lg:w-9/12 mx-auto rounded-lg py-5 my-5">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Fő tároló -->
+    <div class="bg-slate-800 rounded-lg">
 
-            <!-- 1. col -->
-            <div class="flex flex-row items-start mx-3 space-x-3 sm:flex-row lg:flex-row">
-                <!-- Film posztere -->
-                <img :src="storage.url(`${screening.movie.poster_url}`)" :alt="screening.movie.title"
-                    class="h-[150px] w-[110px] md:w-[200px] md:h-auto lg:w-[250px] lg:h-auto md:ml-3 rounded-lg shadow-lg" />
-
-                <!-- Film adatai -->
-                <div class="flex flex-col justify-start">
-                    <!-- Cím -->
-                    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold">{{ screening.movie.title }}</h1>
-
-                    <!-- Korhatár, típus, hossz -->
-                    <div class="flex flex-row flex-wrap gap-2 mt-1 items-center">
-                        <ZeroPlus class="w-[35px] md:w-[40px] lg:w-[40px]" />
-                        <span class="px-2 py-1 md:text-lg bg-white font-semibold rounded-lg">{{ screening.movie.type }}</span>
-                        <span class="px-2 py-1 md:text-lg bg-white font-semibold rounded-lg">{{ screening.movie.duration_min }}
-                            perc</span>
-                    </div>
+        <!-- Első tároló row-ban. Képnek meg leírásnak. -->
+        <div class="flex flex-row">
+            <!-- Kép, adatok sora -->
+            <div class="grid grid-cols-2">
+                <!-- Kép -->
+                <div class="p-2">
+                    <img :src="storage.url(props.moviePosterUrl)" :alt="props.movieTitle">
                 </div>
 
-                <!-- Pink sáv -->
-                <div class="mx-auto hidden sm:block">
-                    <div class="bg-pink-600 rounded-lg w-[5px] h-full"></div>
+                <!-- Adatok -->
+                <div class="flex flex-col">
+                    <h1 class="font-bold my-1 text-lg">{{ props.movieTitle }}</h1>
+                    <component :is="AgeLimitIcons[props.movieAgeLimit]" class="w-8 h-8" />
+                    <h2 class="my-2"><span class="bg-white p-1 px-2 rounded-full">{{ props.movieType }}</span></h2>
                 </div>
             </div>
+        </div>
 
-
-
-            <!-- Vetítések, 2. col -->
-            <div class="flex md:p-3 lg:gap-1 lg:p-1 lg:flex-row items-center justify-center">
-                <button class="h-[90px] w-[100px] mx-2 md:h-[110px] md:w-[100px] md:mx-4 lg:h-[200px] lg:w-[100px] lg:px-1 rounded-lg bg-white" v-for="i in 4" :key="i">
-                    <h1 class="text-lg md:text-xl lg:text-2xl my-auto font-semibold justify-center">08.23</h1>
-                    <span class="h-[5px] bg-pink-600 block my-2 mx-1 px-1 lg:my-5 rounded-lg"></span>
-                    <span class="text-lg md:text-xl lg:text-2xl font-semibold justify-center">16:30</span>
-                </button>
-            </div>
-
+        <div class="flex flex-row p-2">
+            <button v-for="screening in onlyFourScreenings" class="bg-white text-lg font-semibold mx-1 rounded-lg p-2"> {{
+                formatDate(screening.start_time).date }} <br> {{ formatDate(screening.start_time).time }}</button>
         </div>
     </div>
 </template>
@@ -47,14 +31,81 @@
 
 <script setup>
 import { useScreeningStore } from '@stores/ScreeningStore.mjs';
-import ZeroPlus from '@assets/svg/ZeroPlus.vue';
-import { onMounted, ref } from 'vue';
+import { useTicketStore } from '@stores/TicketStore';
+import { ref, computed } from 'vue';
 import { storage } from '@utils/http.mjs';
 
+import ZeroPlus from '@assets/svg/ZeroPlus.vue';
+import FourPlus from '@assets/svg/FourPlus.vue';
+import SixPlus from '@assets/svg/SixPlus.vue';
+import TwelvePlus from '@assets/svg/TwelvePlus.vue';
+import SixteenPlus from '@assets/svg/SixteenPlus.vue';
+import EighteenPlus from '@assets/svg/EighteenPlus.vue';
+
 const screeningStore = useScreeningStore();
+const ticketStore = useTicketStore();
 const screening = ref(null);
 
-onMounted(async () => {
-    screening.value = await screeningStore.getScreening(1);
+const onlyFourScreenings = computed(() => {
+    const allScreenings = Array.isArray(screeningStore.screenings)
+        ? screeningStore.screenings
+        : screeningStore.screenings?.data ?? []
+
+    const locationFiltered = allScreenings.filter(
+        s =>
+            Number(s.drive_in_cinema_id) === Number(ticketStore.location.id) &&
+            Number(s.movie_id) === Number(props.movieId)
+    )
+
+    const sorted = [...locationFiltered].sort(
+        (a, b) => new Date(a.start_time) - new Date(b.start_time)
+    )
+
+    return sorted.slice(0, 4)
+});
+
+function formatDate(dateString) {
+  const d = new Date(dateString.replace(" ", "T")); // '2025-09-15T16:30:00'
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  const hours = String(d.getHours()).padStart(2, "0");
+  const minutes = String(d.getMinutes()).padStart(2, "0");
+
+  return {
+    date: `${month}.${day}`,
+    time: `${hours}:${minutes}`
+  };
+}
+
+const AgeLimitIcons = {
+  0: ZeroPlus,
+  4: FourPlus,
+  6: SixPlus,
+  12: TwelvePlus,
+  16: SixteenPlus,
+  18: EighteenPlus
+};
+
+const props = defineProps({
+    moviePosterUrl: {
+        type: String,
+        required: true
+    },
+    movieTitle: {
+        required: true,
+        type: String
+    },
+    movieAgeLimit: {
+        required: true,
+        type: Number
+    },
+    movieType: {
+        required: true,
+        type: String
+    },
+    movieId: {
+        required: true,
+        type: Number
+    }
 })
 </script>

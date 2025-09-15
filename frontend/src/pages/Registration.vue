@@ -76,7 +76,7 @@ const router = useRouter();
 const userStore = useUserStore();
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail|freemail|yahoo|citromail|outlook)\.(com|hu)$/;
-const phoneRegex = /^(\+36|06)(20|30|40|70)\d{7}$/;
+const phoneRegex = /^(\+36|06)(20|30|40|70)\d{7}$/; //Ez lehet nem kell? Mi van, ha külföldi ember akar regisztrálni..
 const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_])[A-Za-z\d!@#$%^&*_]{8,}$/;
 
 const form = ref({

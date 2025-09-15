@@ -9,7 +9,7 @@
                     class="absolute inset-0 rounded-2xl bg-indigo-300/70 blur-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10">
                 </div>
 
-                <BaseCard :title="cinema.name" :src="storage.url(`/img/starfield_autosmozi.jpg`)" :alt="cinema.name"
+                <BaseCard :title="cinema.name" :src="storage.url(`/img/${cinema.name}.jpg`)" :alt="cinema.name"
                     :description="''" :type_visible="false" class="w-[300px] h-[400px]" />
             </div>
         </div>

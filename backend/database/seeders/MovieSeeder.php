@@ -78,7 +78,7 @@ class MovieSeeder extends Seeder
                 'title' => "NIGHTFIRE: REDEMPTION",
                 'description' => "Egy jövőbeli városban, ahol a törvény már csak emlék, egy különleges ügynök szembeszáll a saját múltjával és egy globális tech-kartellel. Drámai megvilágítások, esőáztatta tetők és neonfények között játszódik.",
                 'type' => 'action',
-                'age_limit' => 14,
+                'age_limit' => 12,
                 'director' => fake()->firstName() . ' ' . fake()->lastName(),
                 'poster_url' => '/img/Main_Slider_img/Nightfire_redemption.webp',
             ],

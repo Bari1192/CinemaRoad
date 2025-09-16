@@ -18,17 +18,13 @@
             </div>
             <div v-if="filteredMoviesByType.length > 0" class="grid grid-cols-1 md:grid-cols-5 gap-6 mt-5 text-inherit">
                 <BaseCard v-for="screening in filteredMoviesByType" @click="selectMovie(screening.movie)"
-                    :key="screening.id"
-                    :title="screening.movie?.title"
-                    :type="screening.movie.is_premier? 'PREMIER' : screening.movie.type" :class="{
+                    :key="screening.id" :title="screening.movie?.title"
+                    :type="screening.movie.is_premier ? 'PREMIER' : screening.movie.type" :class="{
                         'text-gray-900': screening.movie?.type === 'action',
                         'text-yellow-700': screening.movie?.type === 'family',
                         'text-red-900': screening.movie?.type === 'horror'
-                    }"
-                    :src="storage.url(`${screening.movie.poster_url}`)"
-                    :alt="screening.movie?.title"
-                    :description="screening.movie?.description" 
-                    />
+                    }" :src="storage.url(`${screening.movie.poster_url}`)" :alt="screening.movie?.title"
+                    :description="screening.movie?.description" :isPremier="screening.movie.is_premier" />
             </div>
         </div>
         <div v-else>
@@ -64,18 +60,18 @@ function selectMovie(movie) {
 }
 
 const enrichedScreenings = computed(() => {
-    if (!screenings.value.length|| !movies.value.length) return [];
+    if (!screenings.value.length || !movies.value.length) return [];
 
     return screenings.value.map(screening => {
         const movie = movies.value.find(m => Number(m.id) === Number(screening.movie_id));
         return { ...screening, movie: movie || null };
-    })      
-        
+    })
+
 });
 const filteredMoviesByType = computed(() => {
     const seenMovieIds = new Set();
     const filtered = [];
-    
+
     for (const screening of enrichedScreenings.value) {
         if (!screening.movie) continue;
 

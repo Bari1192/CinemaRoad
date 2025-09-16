@@ -91,7 +91,7 @@ const premierScreeningTime = computed(() => {
                         </div>
                         <div
                             class="text-amber-300/90 font-medium uppercase text-sm md:text-base w-1/3 lg:w-2/3 text-left mx-auto tracking-wide">
-                            Cím
+                            Helyszín
                         </div>
                         <div class="text-pink-100 font-semibold text-sm md:text-base w-full mx-auto">
                             {{ film.drivein_cinema.location }}

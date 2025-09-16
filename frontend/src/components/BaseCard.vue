@@ -106,10 +106,22 @@ const cityName = computed(() => {
         </div>
       </div>
       <img :src="props.src" :alt="props.alt" :class="props.img_size_class" />
-      <span v-if="type_visible"
-        class="absolute right-0 top-0 text-xs 'font-bold'  md:text-base tracking-widest py-1 md:py-2 px-4 md:px-6 rounded-bl-xl rounded-tr-2xl shadow-md shadow-gray-800 uppercase bg-gray-200"
-        :class="props.type === 'PREMIER' ? 'bg-amber-500 text-white md:font-medium':'md:font-medium' ">
+      <span v-if="type_visible && isPremier"
+        class="absolute right-0 top-0 text-xs font-bold md:text-base tracking-widest py-1 md:py-2 px-4 md:px-6 rounded-bl-xl rounded-tr-2xl shadow-md shadow-gray-800 uppercase "
+        :class="props.isPremier ? 'bg-amber-500 text-white md:font-medium' : 'bg-gray-200 md:font-medium'">
         {{ props.type }}
+      </span>
+      <span v-if="type_visible && props.type === 'action'"
+        class="absolute right-0 top-0 text-xs md:font-semibold bg-gray-200 font-medium md:text-base tracking-widest py-1 md:py-2 px-4 md:px-6 rounded-bl-xl rounded-tr-2xl shadow-md shadow-gray-800 uppercase">
+        akció
+      </span>
+      <span v-if="type_visible && props.type === 'horror'"
+        class="absolute right-0 top-0 text-xs md:font-semibold bg-gray-200 font-medium md:text-base tracking-widest py-1 md:py-2 px-4 md:px-6 rounded-bl-xl rounded-tr-2xl shadow-md shadow-gray-800 uppercase">
+        Horror
+      </span>
+      <span v-if="type_visible && props.type === 'family'"
+        class="absolute right-0 top-0 text-xs md:font-semibold bg-gray-200 font-medium md:text-base tracking-widest py-1 md:py-2 px-4 md:px-6 rounded-bl-xl rounded-tr-2xl shadow-md shadow-gray-800 uppercase">
+        Családi
       </span>
 
     </div>

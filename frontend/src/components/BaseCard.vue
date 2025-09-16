@@ -55,10 +55,10 @@ const props = defineProps({
     default: true,
     required: false,
   },
-  img_size_class:{
-    type:String,
-    required:false,
-    default:'h-[160px] sm:h-[220px] md:h-[400px] w-full object-cover overflow-hidden'
+  img_size_class: {
+    type: String,
+    required: false,
+    default: 'h-[160px] sm:h-[220px] md:h-[400px] w-full object-cover overflow-hidden'
   },
   displayLocationName: {
     type: Boolean,
@@ -67,6 +67,11 @@ const props = defineProps({
   locationName: {
     type: String,
     required: false
+  },
+  isPremier: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
 
@@ -102,15 +107,18 @@ const cityName = computed(() => {
       </div>
       <img :src="props.src" :alt="props.alt" :class="props.img_size_class" />
       <span v-if="type_visible"
-        class="absolute right-0 top-0 text-xs md:text-base font-bold md:font-medium tracking-widest py-1 md:py-2 px-4 md:px-6 rounded-bl-xl rounded-tr-2xl shadow-md shadow-gray-800 uppercase bg-gray-200">
+        class="absolute right-0 top-0 text-xs 'font-bold'  md:text-base tracking-widest py-1 md:py-2 px-4 md:px-6 rounded-bl-xl rounded-tr-2xl shadow-md shadow-gray-800 uppercase bg-gray-200"
+        :class="props.type === 'PREMIER' ? 'bg-amber-500 text-white md:font-medium':'md:font-medium' ">
         {{ props.type }}
       </span>
+
     </div>
     <div class="flex-1 flex flex-col justify-between px-4 py-3">
       <h3 class="text-lg font-semibold text-white mb-1 flex justify-between items-center">
         <span class="truncate">{{ props.title }}</span>
-        <span v-if="displayLocationName" class="ml-auto">{{ cityName }}</span></h3>
-      <p class="text-sm text-slate-200 mb-3 line-clamp-3">{{ props.description }}</p>
+        <span v-if="displayLocationName" class="ml-auto">{{ cityName }}</span>
+      </h3>
+      <p class="text-sm text-slate-200 mb-3 font-semibold md:min-h-16 line-clamp-3">{{ props.description }}</p>
       <span v-if="cta">
         <router-link :to="`${props.link}`">
           <button

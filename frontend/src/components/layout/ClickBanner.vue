@@ -73,7 +73,7 @@ onUnmounted(() => {
 <template>
   <div class="container mx-auto w-full h-full px-0 mt-5 mb-10 xl:my-10 relative overflow-hidden">
 
-    <router-link :to="'/movies/SpecialWeek'">
+    <router-link :to="'/movies/PremierWeek'">
       <div class="carousel-container h-full w-full min-h-[40dvh] max-h-[70dvh] xl:h-[90vh]" @mouseenter="stopAutoplay"
         @mouseleave="startAutoplay">
         <div v-for="(movie, index) in movies" :key="index" :class="[

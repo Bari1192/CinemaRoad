@@ -16,6 +16,7 @@ class MovieResource extends JsonResource
             'type' => $this->type,
             'director' => $this->director,
             'release_date' => Carbon::parse($this->release_date)->format('Y-m-d'),
+            'is_premier' => $this->is_premier,
             'age_limit' => $this->age_limit,
             'description' => $this->description,
             'duration_min' => $this->duration_min,

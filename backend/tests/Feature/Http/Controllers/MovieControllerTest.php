@@ -359,7 +359,6 @@ class MovieControllerTest extends TestCase
             'poster_url' => 'http://pelda-default-url.com/update_structure_poster.jpg',
             'type' => 'Action',
             'age_limit' => 16,
-            'description' => 'Test Description',
             'release_date' => Carbon::parse(fake()->dateTimeBetween('-180 days', 'now'), 'Y-m-d'),
             'director' => fake()->firstName() . ' ' . fake()->lastName(),
             'created_at' => now(),

@@ -25,7 +25,6 @@ class UpdateMovieRequest extends FormRequest
                 'required',
                 'date',
                 'after_or_equal:' . now()->subDays(180)->format('Y-m-d'),
-                'before_or_equal:' . now()->format('Y-m-d')
             ],
             'is_premier' => ['boolean'],
             'age_limit' => ['required', 'integer', 'min:0', 'max:18'],

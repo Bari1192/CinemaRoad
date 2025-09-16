@@ -32,6 +32,7 @@ const saveEdit = async (movie) => {
         title: movie.title,
         description: movie.description,
         type: movie.type,
+        age_limit: movie.age_limit,
         release_date: formatDate(movie.release_date),
         director: movie.director,
         duration_min: Number(movie.duration_min),
@@ -77,23 +78,33 @@ const deleteMovie = async (movie) => {
             <div v-for="(movie, idx) in editableMovies" :key="movie.id"
                 class="bg-gradient-to-r from-indigo-400 via-purple-600 to-indigo-500 p-4 sm:p-6 rounded-lg shadow-lg">
 
-                <div class="flex items-center space-x-3 sm:space-x-4 mb-4">
+                <div class="flex items-center justify-center space-x-3 sm:space-x-4 mb-4">
                     <img :src="storage.url(`${movie.poster_url}`)"
                         class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-cover rounded" />
                     <div class="flex-1">
                         <label class="block text-xs sm:text-sm font-medium text-pink-100 mb-1">Film neve:</label>
                         <input v-model="movie.title"
-                            class="w-full py-2 px-2 sm:px-3 text-sm sm:text-base border border-gray-300 rounded text-black" />
+                            class="w-full p-2 sm:px-3 text-sm sm:text-base border border-gray-300 rounded text-black" />
+                    </div>
+                    <div class="md:flex md:mt-6 space-x-2 space-y-1 md:space-y-0 mx-auto align-middle">
+                        <label class="block mb-1 md:mb-0 text-xs sm:text-sm font-medium md:bg-indigo-900/75 md:border-yellow-400 md:border-2 md:py-3 md:px-2 rounded-md text-pink-100">Korhatár
+                            besorolás:</label>
+                        <input v-model="movie.age_limit" type="number"
+                            class="w-full max-w-[95px] md:max-w-[75px] flex justify-center md:bg-gray-200 bg-black/45 md:mx-auto text-center py-1.5 h-fit md:py-2 font-semibold text-base md:text-lg xl:px-3 border border-gray-300 rounded" 
+                            :class="movie.age_limit==18? 'text-red-400 md:text-red-600': 'text-amber-500'"
+                            />
                     </div>
                 </div>
 
+
+
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-4">
                     <div>
-                        <label class="block text-xs sm:text-sm font-medium text-pink-100 mb-1">Típus:</label>
-                        <input v-model="movie.type"
-                            class="w-full py-2 px-2 sm:px-3 text-sm sm:text-base border border-gray-300 rounded text-black" />
-                        <select v-model="movie.type">
-                            <option v-if="movie.type">{{}}</option>
+                        <label class="block text-xs sm:text-sm font-medium text-pink-100 mb-1">
+                            Típus:
+                        </label>
+                        <select v-model="movie.type"
+                            class="w-full py-2 px-2 sm:px-3 text-sm sm:text-base border border-gray-300 rounded text-black">
                             <option value="family">Családi film</option>
                             <option value="action">Akciófilm</option>
                             <option value="horror">Horrorfilm</option>
@@ -152,8 +163,12 @@ const deleteMovie = async (movie) => {
                                 class="w-full py-2 px-2 xl:px-3 text-sm xl:text-base border border-gray-300 rounded text-black" />
                         </td>
                         <td class="py-3 px-2">
-                            <input v-model="movie.type"
-                                class="w-full py-2 px-2 xl:px-3 text-sm xl:text-base border border-gray-300 rounded text-black" />
+                            <select v-model="movie.type"
+                                class="w-full py-2 px-2 xl:px-3 text-sm xl:text-base border border-gray-300 rounded text-black">
+                                <option value="family">Családi film</option>
+                                <option value="action">Akciófilm</option>
+                                <option value="horror">Horrorfilm</option>
+                            </select>
                         </td>
                         <td class="py-3 px-2">
                             <input v-model="movie.release_date" type="date"

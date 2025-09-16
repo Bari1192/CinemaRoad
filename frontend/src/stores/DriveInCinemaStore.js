@@ -21,6 +21,7 @@ export const useDriveInCinemaStore = defineStore("driveInCinemas", () => {
     try {
       const { data } = await http.get(`/drive_in_cinemas/${id}`);
       driveInCinema.value = data;
+      return data.data;
     } catch (err) {
       console.error("Hiba a helyszín lekérdezésekor", err);
       throw err;

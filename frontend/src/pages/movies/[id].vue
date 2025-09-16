@@ -39,6 +39,8 @@ const selectScreening = async() => {
         await ticketStore.setLocationName(screening.drivein_cinema.name);
         await ticketStore.setLocation(screening.drivein_cinema);
         await ticketStore.setMovie(screening.movie);
+
+        ticketStore.setTime(screening);
     
         router.push("/ParkingSpotChooser")
     } catch (error) {

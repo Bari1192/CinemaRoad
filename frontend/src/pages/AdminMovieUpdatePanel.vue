@@ -87,12 +87,12 @@ const deleteMovie = async (movie) => {
                             class="w-full p-2 sm:px-3 text-sm sm:text-base border border-gray-300 rounded text-black" />
                     </div>
                     <div class="md:flex md:mt-6 space-x-2 space-y-1 md:space-y-0 mx-auto align-middle">
-                        <label class="block mb-1 md:mb-0 text-xs sm:text-sm font-medium md:bg-indigo-900/75 md:border-yellow-400 md:border-2 md:py-3 md:px-2 rounded-md text-pink-100">Korhatár
+                        <label
+                            class="block mb-1 md:mb-0 text-xs sm:text-sm font-medium md:bg-indigo-900/75 md:border-yellow-400 md:border-2 md:py-3 md:px-2 rounded-md text-pink-100">Korhatár
                             besorolás:</label>
                         <input v-model="movie.age_limit" type="number"
-                            class="w-full max-w-[95px] md:max-w-[75px] flex justify-center md:bg-gray-200 bg-black/45 md:mx-auto text-center py-1.5 h-fit md:py-2 font-semibold text-base md:text-lg xl:px-3 border border-gray-300 rounded" 
-                            :class="movie.age_limit==18? 'text-red-400 md:text-red-600': 'text-amber-500'"
-                            />
+                            class="w-full max-w-[95px] md:max-w-[75px] flex justify-center md:bg-gray-200 bg-black/45 md:mx-auto text-center py-1.5 h-fit md:py-2 font-semibold text-base md:text-lg xl:px-3 border border-gray-300 rounded"
+                            :class="movie.age_limit == 18 ? 'text-red-400 md:text-red-600' : 'text-amber-500'" />
                     </div>
                 </div>
 
@@ -144,6 +144,7 @@ const deleteMovie = async (movie) => {
                         <th class="py-4 px-3 text-center rounded-tl-lg font-bold text-sm lg:text-lg">Film posztere</th>
                         <th class="py-4 px-3 text-center font-bold text-sm lg:text-lg">Film neve</th>
                         <th class="py-4 px-3 text-center font-bold text-sm lg:text-lg">Film típusa</th>
+                        <th class="py-4 px-3 text-center font-bold text-sm lg:text-lg">Korhatár</th>
                         <th class="py-4 px-3 text-center font-bold text-sm lg:text-lg">Megjelenés</th>
                         <th class="py-4 px-3 text-center font-bold text-sm lg:text-lg">Rendező</th>
                         <th class="py-4 px-3 text-center rounded-tr-lg font-bold text-sm lg:text-lg">Műveletek</th>
@@ -170,6 +171,11 @@ const deleteMovie = async (movie) => {
                                 <option value="horror">Horrorfilm</option>
                             </select>
                         </td>
+                        <td class="py-3 px-2">
+                            <input v-model="movie.age_limit" type="number"
+                                class="w-full max-w-[95px] md:max-w-[75px] flex justify-center md:bg-gray-200 bg-black/45 md:mx-auto text-center py-1.5 h-fit md:py-2 font-semibold text-base md:text-lg xl:px-3 border border-gray-300 rounded"
+                                :class="movie.age_limit == 18 ? 'text-red-400 md:text-red-600' : 'text-amber-500'" />
+                        </td class="py-3 px-2">
                         <td class="py-3 px-2">
                             <input v-model="movie.release_date" type="date"
                                 class="w-full py-2 px-2 xl:px-3 text-sm xl:text-base border border-gray-300 rounded text-black" />

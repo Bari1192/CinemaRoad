@@ -8,7 +8,8 @@
                 <h1 class="text-3xl font-bold text-pink-600">
                     {{ cinema.name }}
                 </h1>
-                <p class="text-base text-pink-700 text-justify md:mt-5">
+                <h2 class="text-xl text-pink-600 font-bold">{{ cinema.location }}</h2>
+                <p class="text-xl font-semibold text-pink-600 text-justify md:mt-5">
                     {{ cinema.description }}
                 </p>
             </div>
@@ -18,16 +19,22 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-10">
             <BaseCard v-for="screening in distinctScreenings" :key="screening.id"
-            @click="navigateToMovieSite(screening.movie)"
                 :title="screening.movie.title"
                 :src="storage.url(`${screening.movie.poster_url}`)"
                 :description="screening.movie.description"
-                :type="screening.movie?.type"
+                :type="screening.movie.is_premier ? 'PREMIER' : screening.movie.type" :class="{
+                        'text-gray-900': screening.movie?.type === 'action',
+                        'text-yellow-700': screening.movie?.type === 'family',
+                        'text-red-900': screening.movie?.type === 'horror'
+                    }"
                 :duration_min="screening.movie.duration_min"
                 :poster_url="screening.movie.poster_url"
                 :actors="screening.movie.actors"
                 :director="screening.movie.director"
-                :release_date="screening.movie.release_date"/>
+                :release_date="screening.movie.release_date"
+                :isPremier="screening.movie.is_premier"
+                :link="`/movies/${screening.movie.id}`"
+                />
         </div>
     </div>
 
@@ -48,6 +55,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { http } from '@utils/http.mjs';
 
 import { storage } from '@utils/http.mjs';
+import { discriminatedUnion } from 'zod';
 
 const cinema = ref(null);
 const route = useRoute();

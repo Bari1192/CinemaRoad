@@ -19,7 +19,7 @@
                     </h1>
                     <span class="flex flex-row">
                         <component :is="AgeLimitIcons[props.movieAgeLimit]" class="w-8 h-8" />
-                        <span class="bg-yellow-500 text-black p-1 ml-[10px] font-semibold rounded-full"
+                        <span class="bg-yellow-500 text-black text-center p-1 ml-[10px] font-semibold rounded-full"
                             v-if="props.isPremier">Premier</span>
                     </span>
                     <h2 class="my-2"><span

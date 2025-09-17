@@ -36,7 +36,8 @@
                 :movieTitle="screening.movie.title"
                 :movieAgeLimit="screening.movie.age_limit"
                 :movieType="screening.movie.type"
-                :movieId="screening.movie.id"/>
+                :movieId="screening.movie.id"
+                :isPremier="screening.movie.is_premier"/>
             </div>
 
         </div>

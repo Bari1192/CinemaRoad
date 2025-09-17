@@ -8,9 +8,9 @@
                     class="rounded-xl shadow-md max-h-80 object-cover md:w-1/2" />
                 <div class="flex flex-col space-y-4 md:w-1/2 md:mt-10">
                     <h1 class="text-3xl font-bold text-pink-600">{{ ticketStore.location.name }}</h1>
-                    <h2 class="text-lg font-bold text-pink-700 text-justify md:mt-5">{{ ticketStore.location.location }}
+                    <h2 class="text-xl font-bold text-pink-600 text-justify md:mt-5">{{ ticketStore.location.location }}
                     </h2>
-                    <p class="text-lg font-semibold text-pink-700 text-justify md:mt-5">{{
+                    <p class="text-xl font-semibold text-pink-600 text-justify md:mt-5">{{
                         ticketStore.location.description }}</p>
                 </div>
             </div>

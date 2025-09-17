@@ -72,6 +72,10 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: false
+  },
+  description:{
+    type: String,
+    required: false
   }
 })
 
@@ -130,7 +134,7 @@ const cityName = computed(() => {
         <span class="truncate">{{ props.title }}</span>
         <span v-if="displayLocationName" class="ml-auto">{{ cityName }}</span>
       </h3>
-      <p class="text-sm text-slate-200 mb-3 font-semibold md:min-h-16 line-clamp-3">{{ props.description }}</p>
+      <p v-if="props.description" class="text-sm text-slate-200 mb-3 font-semibold md:min-h-16 line-clamp-3">{{ props.description }}</p>
       <span v-if="cta">
         <router-link :to="`${props.link}`">
           <button

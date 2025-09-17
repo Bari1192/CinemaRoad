@@ -1,0 +1,598 @@
+{
+  "id": "cinema-road-footer-tests",
+  "version": "2.0",
+  "name": "Cinema Road Footer Tests",
+  "url": "http://frontend.cinemaroad",
+  "tests": [
+    {
+      "id": "footer-visibility-test",
+      "name": "Footer megjelenítés teszt",
+      "commands": [
+        {
+          "id": "1",
+          "comment": "",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "2",
+          "comment": "",
+          "command": "waitForElementVisible",
+          "target": "css=footer",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "3",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=footer.bg-gray-900",
+          "targets": [
+            [
+              "css=footer.bg-gray-900",
+              "css:finder"
+            ],
+            [
+              "css=footer",
+              "css:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "id": "4",
+          "comment": "",
+          "command": "assertText",
+          "target": "css=h3.text-pink-500",
+          "targets": [
+            [
+              "css=h3.text-pink-500",
+              "css:finder"
+            ]
+          ],
+          "value": "Cinema Road"
+        },
+        {
+          "id": "5",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=footer p.text-sm.italic",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "navigation-links-test",
+      "name": "Navigációs linkek teszt",
+      "commands": [
+        {
+          "id": "1",
+          "comment": "Oldal betöltése",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "4",
+          "comment": "Premier Filmek link megjelenése",
+          "command": "assertElementPresent",
+          "target": "xpath=//a[text()='Premier Filmek']",
+          "targets": [
+            [
+              "xpath=//a[text()='Premier Filmek']",
+              "xpath:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "comment": "Oldal betöltése",
+          "command": "click",
+          "target": "xpath=//a[text()='Premier Filmek']",
+          "targets": [],
+          "value": "",
+          "id": "8d4fcb71-5aeb-49ef-9462-53e6a7b47305"
+        },
+        {
+          "comment": "Oldal betöltése",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": "",
+          "id": "d73e7b87-1465-4e91-ad1e-e56ee43d0c76"
+        },
+        {
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "xpath=//a[text()='Helyszínek']",
+          "targets": [
+            [
+              "xpath=//a[text()='Premier Filmek']",
+              "xpath:finder"
+            ]
+          ],
+          "value": "",
+          "id": "20ba688d-a7ae-4292-82cb-455401bdc05a"
+        },
+        {
+          "comment": "Premier Filmek link ",
+          "command": "click",
+          "target": "xpath=//a[text()='Helyszínek']",
+          "targets": [
+            [
+              "xpath=//a[text()='Premier Filmek']",
+              "xpath:finder"
+            ]
+          ],
+          "value": "",
+          "id": "43795af2-6367-4645-aa49-1d15b4355ec9"
+        },
+        {
+          "comment": "Oldal betöltése",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": "",
+          "id": "015e22c2-f67b-44b8-a78a-448015c9796a"
+        },
+        {
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "xpath=//a[text()='Regisztráció']",
+          "targets": [
+            [
+              "xpath=//a[text()='Premier Filmek']",
+              "xpath:finder"
+            ]
+          ],
+          "value": "",
+          "id": "e2b0ac94-bc41-4d12-b580-cb544efcf98f"
+        },
+        {
+          "id": "8",
+          "comment": "Regisztráció link megjelenése",
+          "command": "click",
+          "target": "xpath=//a[text()='Regisztráció']",
+          "targets": [
+            [
+              "xpath=//a[text()='Regisztráció']",
+              "xpath:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "comment": "",
+          "command": "close",
+          "target": "xpath=//a[text()='Helyszínek']",
+          "targets": [
+            [
+              "xpath=//a[text()='Premier Filmek']",
+              "xpath:finder"
+            ]
+          ],
+          "value": "",
+          "id": "3da20cee-02fc-4bb7-a8a3-7c60c00b236a"
+        }
+      ]
+    },
+    {
+      "id": "navigation-links-clickability-test",
+      "name": "Navigációs linkek kattinthatóság teszt",
+      "commands": [
+        {
+          "id": "1",
+          "comment": "",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "comment": "Oldal betöltése",
+          "command": "assertElementPresent",
+          "target": "xpath=//a[text()='Kezdőlap']",
+          "targets": [],
+          "value": "",
+          "id": "1af1f662-dd9d-4510-b627-21d72df54bc1"
+        },
+        {
+          "id": "2",
+          "comment": "Kezdőlap link ",
+          "command": "click",
+          "target": "xpath=//a[text()='Kezdőlap']",
+          "targets": [
+            [
+              "xpath=//a[text()='Kezdőlap']",
+              "xpath:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "id": "6",
+          "comment": "",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "comment": "Oldal betöltése",
+          "command": "assertElementPresent",
+          "target": "xpath=//a[text()='Jegyvásárlás']",
+          "targets": [],
+          "value": "",
+          "id": "9206afba-b0eb-4dd7-8f40-4c870a956ce2"
+        },
+        {
+          "id": "7",
+          "comment": "Jegyvásárlás link",
+          "command": "click",
+          "target": "xpath=//a[text()='Jegyvásárlás']",
+          "targets": [
+            [
+              "xpath=//a[text()='Jegyvásárlás']",
+              "xpath:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "id": "9",
+          "comment": "",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "comment": "Oldal betöltése",
+          "command": "assertElementPresent",
+          "target": "xpath=//a[text()='Bejelentkezés']",
+          "targets": [],
+          "value": "",
+          "id": "6cc3d736-e0e6-4be5-bc64-9dc359775da7"
+        },
+        {
+          "id": "10",
+          "comment": "Bejelentkezési link",
+          "command": "click",
+          "target": "xpath=//a[text()='Bejelentkezés']",
+          "targets": [
+            [
+              "xpath=//a[text()='Helyszínek']",
+              "xpath:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "comment": "Oldal bezárása",
+          "command": "close",
+          "target": "/",
+          "targets": [],
+          "value": "",
+          "id": "f5e6b07e-2fb4-46e8-ba9a-42c8097d449a"
+        }
+      ]
+    },
+    {
+      "id": "contact-info-test",
+      "name": "Elérhetőségek teszt",
+      "commands": [
+        {
+          "id": "1",
+          "comment": "Oldal betöltése",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "2",
+          "comment": "Elérhetőségek szekció megjelenése",
+          "command": "assertElementPresent",
+          "target": "xpath=//h4[text()='Elérhetőségek']",
+          "targets": [
+            [
+              "xpath=//h4[text()='Elérhetőségek']",
+              "xpath:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "id": "3",
+          "comment": "Cím megjelenése",
+          "command": "assertElementPresent",
+          "target": "css=.fa-map-marker-alt",
+          "targets": [
+            [
+              "css=.fa-map-marker-alt",
+              "css:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "id": "4",
+          "comment": "Telefon ikon megjelenése",
+          "command": "assertElementPresent",
+          "target": "css=.fa-phone",
+          "targets": [
+            [
+              "css=.fa-phone",
+              "css:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "id": "5",
+          "comment": "Email ikon megjelenése",
+          "command": "assertElementPresent",
+          "target": "css=.fa-envelope",
+          "targets": [
+            [
+              "css=.fa-envelope",
+              "css:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "id": "6",
+          "comment": "Cím szöveg ellenőrzése",
+          "command": "assertElementPresent",
+          "target": "xpath=//p[contains(text(), '1234 Budapest, Mozi utca 5.')]",
+          "targets": [
+            [
+              "xpath=//p[contains(text(), '1234 Budapest, Mozi utca 5.')]",
+              "xpath:finder"
+            ]
+          ],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "social-media-links-test",
+      "name": "Social media linkek teszt",
+      "commands": [
+        {
+          "id": "1",
+          "comment": "Oldal betöltése",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "2",
+          "comment": "Kövess Minket szekció megjelenése",
+          "command": "assertElementPresent",
+          "target": "xpath=//h4[text()='Kövess Minket!']",
+          "targets": [
+            [
+              "xpath=//h4[text()='Kövess Minket!']",
+              "xpath:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "id": "3",
+          "comment": "Facebook ikon megjelenése",
+          "command": "assertElementPresent",
+          "target": "css=.fa-facebook-f",
+          "targets": [
+            [
+              "css=.fa-facebook-f",
+              "css:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "id": "4",
+          "comment": "Instagram ikon megjelenése",
+          "command": "assertElementPresent",
+          "target": "css=.fa-instagram",
+          "targets": [
+            [
+              "css=.fa-instagram",
+              "css:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "id": "5",
+          "comment": "Twitter ikon megjelenése",
+          "command": "assertElementPresent",
+          "target": "css=.fa-twitter",
+          "targets": [
+            [
+              "css=.fa-twitter",
+              "css:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "id": "6",
+          "comment": "YouTube ikon megjelenése",
+          "command": "assertElementPresent",
+          "target": "css=.fa-youtube",
+          "targets": [
+            [
+              "css=.fa-youtube",
+              "css:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "id": "7",
+          "comment": "Social media linkek kattinthatósága - Facebook",
+          "command": "assertElementPresent",
+          "target": "css=a .fa-facebook-f",
+          "targets": [
+            [
+              "css=a .fa-facebook-f",
+              "css:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "id": "8",
+          "comment": "Social media linkek kattinthatósága - Instagram",
+          "command": "assertElementPresent",
+          "target": "css=a .fa-instagram",
+          "targets": [
+            [
+              "css=a .fa-instagram",
+              "css:finder"
+            ]
+          ],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "copyright-test",
+      "name": "Copyright szekció teszt",
+      "commands": [
+        {
+          "id": "1",
+          "comment": "",
+          "command": "open",
+          "target": "http://frontend.cinemaroad/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "2",
+          "comment": "Copyright szekció",
+          "command": "assertElementPresent",
+          "target": "css=.border-t.border-gray-700",
+          "targets": [
+            [
+              "css=.border-t.border-gray-700",
+              "css:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "id": "4",
+          "comment": "Copyright szöveg tartalmazza az aktuális évet",
+          "command": "assertElementPresent",
+          "target": "xpath=//div[contains(@class, 'text-center') and contains(text(), '2025')]",
+          "targets": [
+            [
+              "xpath=//div[contains(@class, 'text-center') and contains(text(), '2024')]",
+              "xpath:finder"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "id": "5",
+          "comment": "Minden jog fenntartva szöveg",
+          "command": "assertElementPresent",
+          "target": "xpath=//div[contains(@class, 'text-center') and contains(text(), 'Minden jog fenntartva')]",
+          "targets": [
+            [
+              "xpath=//div[contains(@class, 'text-center') and contains(text(), 'Minden jog fenntartva')]",
+              "xpath:finder"
+            ]
+          ],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "responsive-footer-test",
+      "name": "Reszponzív footer teszt",
+      "commands": [
+        {
+          "id": "1",
+          "comment": "Oldal betöltése",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "2",
+          "comment": "Viewport beállítása mobile méret",
+          "command": "setWindowSize",
+          "target": "375x667",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "3",
+          "comment": "Footer megjelenése mobile-on",
+          "command": "assertElementPresent",
+          "target": "css=footer",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "4",
+          "comment": "Grid oszlopok mobile-on",
+          "command": "assertElementPresent",
+          "target": "css=.grid.grid-cols-1",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "5",
+          "comment": "Viewport beállítása desktop méret",
+          "command": "setWindowSize",
+          "target": "1920x1080",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "6",
+          "comment": "Footer megjelenése desktop-on",
+          "command": "assertElementPresent",
+          "target": "css=footer",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "suites": [
+    {
+      "id": "complete-footer-test-suite",
+      "name": "Teljes Footer Teszt Csomag",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": [
+        "footer-visibility-test",
+        "navigation-links-test",
+        "navigation-links-clickability-test",
+        "contact-info-test",
+        "social-media-links-test",
+        "copyright-test",
+        "responsive-footer-test"
+      ]
+    }
+  ],
+  "urls": [
+    "http://frontend.cinemaroad/"
+  ],
+  "plugins": []
+}

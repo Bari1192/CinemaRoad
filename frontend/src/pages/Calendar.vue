@@ -24,8 +24,8 @@ function localDateKey(input) {
 
 const screeningsByDate = computed(() => {
   const groups = {}
-  for (const vetitesi_idopont of props.screenings) {
-    const dateObj = new Date(vetitesi_idopont.start_time)
+  for (const screening of props.screenings) {
+    const dateObj = new Date(screening.start_time)
     const dateKey = localDateKey(dateObj)
     if (!groups[dateKey]) {
       const localMidnight = new Date(dateObj)
@@ -36,7 +36,7 @@ const screeningsByDate = computed(() => {
         vets: []
       }
     }
-    groups[dateKey].vets.push(vetitesi_idopont)
+    groups[dateKey].vets.push(screening)
   }
   return groups
 })
@@ -92,9 +92,9 @@ function magyarIdo(s) {
   return new Date(s).toLocaleTimeString('hu-HU', { hour: '2-digit', minute: '2-digit', hour12: false })
 }
 
-function clickScreening(vetitesi_idopont) {
-  selectedScreeningId.value = vetitesi_idopont.start_time
-  emit('select-screening', vetitesi_idopont.id)
+function clickScreening(screening) {
+  selectedScreeningId.value = screening.id;
+  emit('select-screening', screening.id)
 }
 
 const toggleDay = (dayKey) => {
@@ -128,18 +128,18 @@ const toggleDay = (dayKey) => {
             <!-- Vetítések -->
             <div class="flex flex-col gap-2 w-full h-full mt-6">
               <template v-if="day.screenings.length">
-                <button v-for="vetitesi_idopont in day.screenings" :key="vetitesi_idopont.id"
-                  @click="clickScreening(vetitesi_idopont)" :class="selectedScreeningId === vetitesi_idopont.start_time
+                <button v-for="screening in day.screenings" :key="screening.id"
+                  @click="clickScreening(screening)" :class="selectedScreeningId === screening.id
                     ? 'bg-pink-600 hover:bg-pink-700'
                     : 'bg-slate-300/60 hover:bg-slate-500/75'"
                   class="w-fit px-4 mx-auto rounded-md text-white font-medium py-1.5 text-base transition-all shadow">
 
                   <template v-if="showLocations">
                     <div class="w-full min-w-[100px]">
-                      {{ vetitesi_idopont.drivein_cinema.name }}<br />
+                      {{ screening.drivein_cinema.name }}<br />
                     </div>
                   </template>
-                  {{ magyarIdo(vetitesi_idopont.start_time) }}
+                  {{ magyarIdo(screening.start_time) }}
                 </button>
               </template>
               <template v-else>
@@ -183,17 +183,17 @@ const toggleDay = (dayKey) => {
             <!-- Lenyíló rész -->
             <transition name="fade">
               <div v-if="openedDayKey === day.dateKey" class="p-3 flex flex-wrap gap-2 bg-slate-900">
-                <button v-for="vetitesi_idopont in day.screenings" :key="vetitesi_idopont.id"
-                  @click="clickScreening(vetitesi_idopont)" :class="selectedScreeningId === vetitesi_idopont.start_time
+                <button v-for="screening in day.screenings" :key="screening.id"
+                  @click="clickScreening(screening)" :class="selectedScreeningId === screening.id
                     ? 'bg-pink-600 hover:bg-pink-700'
                     : 'bg-slate-500 hover:bg-slate-600'"
                   class="px-4 py-1.5 rounded-md text-white font-medium text-sm transition-all shadow">
                   <template v-if="showLocations">
                     <div class="w-full min-w-[80px]">
-                      {{ vetitesi_idopont.drivein_cinema.name }}<br />
+                      {{ screening.drivein_cinema.name }}<br />
                     </div>
                   </template>
-                  {{ magyarIdo(vetitesi_idopont.start_time) }}
+                  {{ magyarIdo(screening.start_time) }}
                 </button>
               </div>
             </transition>

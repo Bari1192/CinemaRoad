@@ -14,20 +14,20 @@
                         ticketStore.location.description }}</p>
                 </div>
             </div>
-            <h2 class="text-3xl font-semibold pt-14">Aktuális filmkínálatunk a {{ ticketStore.locationName }}
+            <h2 class="text-3xl text-pink-600 font-semibold pt-14">Aktuális filmkínálatunk a {{ ticketStore.locationName }}
                 helyszínen:</h2>
             <div class="flex gap-3">
                 <button class="p-2 rounded-lg"
                     :class="selectedGenre === 'Mind' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
                     @click="selectedGenre = 'Mind'">Mind</button>
                 <button class="p-2 rounded-lg"
-                    :class="selectedGenre === 'action' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
+                    :class="selectedGenre === 'action' ? 'bg-pink-600 text-white' : 'bg-white text-pink-600'"
                     @click="selectedGenre = 'action'">Akció</button>
                 <button class="p-2 rounded-lg"
-                    :class="selectedGenre === 'family' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
+                    :class="selectedGenre === 'family' ? 'bg-pink-600 text-white' : 'bg-white text-pink-600'"
                     @click="selectedGenre = 'family'">Családi</button>
                 <button class="p-2 rounded-lg"
-                    :class="selectedGenre === 'horror' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
+                    :class="selectedGenre === 'horror' ? 'bg-pink-600 text-white' : 'bg-white text-pink-600'"
                     @click="selectedGenre = 'horror'">Horror</button>
             </div>
             <div v-if="filteredMoviesByType.length > 0" class="grid grid-cols-1 w-full md:grid-cols-2 gap-4 mt-10">

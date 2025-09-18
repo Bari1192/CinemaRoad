@@ -14,7 +14,7 @@
 
                 <!-- Adatok -->
                 <div class="flex flex-col lg:col-span-2">
-                    <h1 class="font-bold my-1 text-lg md:text-2xl hover:underline">
+                    <h1 class="font-bold my-1 text-pink-600 text-lg md:text-2xl hover:underline">
                         <RouterLink :to="`/movies/${props.movieId}`">{{ props.movieTitle }}</RouterLink>
                     </h1>
                     <span class="flex flex-row">
@@ -23,13 +23,13 @@
                             v-if="props.isPremier">Premier</span>
                     </span>
                     <h2 class="my-2"><span
-                            class="bg-white p-1 px-2 font-semibold rounded-full">{{ props.movieType }}</span></h2>
+                            class="bg-white p-1 px-2 text-pink-600 font-semibold rounded-full">{{ props.movieType }}</span></h2>
 
                     <div class="flex-row hidden mt-2 lg:flex">
                         <button type="button"
                             @click="handleSelectScreeningTime(screening.drivein_cinema.name, screening.drivein_cinema.id, screening.movie.id, screening.id)"
                             v-for="screening in onlyFourScreenings"
-                            class="bg-white text-lg font-semibold mx-1 rounded-lg p-2">
+                            class="bg-white text-pink-600 text-lg font-semibold mx-1 rounded-lg p-2">
                             {{ formatDate(screening.start_time).date }} <br>
                             <div class="bg-pink-600 h-[3px] rounded-full"></div> {{
                                 formatDate(screening.start_time).time}}

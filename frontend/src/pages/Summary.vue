@@ -8,6 +8,8 @@ import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import AgeLimitBadge from '@components/AgeLimitBadge.vue'
 import { storage } from '@utils/http.mjs'
+import { ToastService } from '@stores/ToastService'
+import Toast from 'primevue/toast'
 
 const userStore = useUserStore();
 const ticketStore = useTicketStore();
@@ -56,7 +58,12 @@ const formattedTime = computed(() => {
 
 const handleConfirmation = async () => {
     if (!bookingType.value && userStore.userID) {
-        alert("Kérlek válassz! Foglalni, vagy vásárolni szeretnél?");
+        ToastService.showError("Kérlek válasszon! Foglalni, vagy vásárolni szeretne?")
+        return;
+    }
+
+    if(!guestEmail.value && !userStore.userID) {
+        ToastService.showError("Kérem adja meg email címét!");
         return;
     }
 

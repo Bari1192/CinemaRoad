@@ -200,7 +200,7 @@ const toggleDay = (dayKey) => {
           </div>
 
           <!-- NINCS VETÍTÉS -->
-          <div v-else class="bg-slate-700 rounded-lg shadow p-3 flex items-center gap-2 opacity-60 cursor-not-allowed">
+          <div v-else class="hidden bg-slate-700 rounded-lg shadow p-3 items-center gap-2 opacity-60 cursor-not-allowed">
             <span class="bg-gray-500 text-white font-bold px-3 py-1 rounded-md text-sm">
               {{ magyarDatum(day.localDate) }}
             </span>

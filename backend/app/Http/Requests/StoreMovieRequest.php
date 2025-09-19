@@ -16,9 +16,9 @@ class StoreMovieRequest extends FormRequest
 
     public function rules(): array
     {
-        
+
         return [
-            
+
             'title' => ['required', 'string', 'max:100'],
             'description' => ['required', 'string', 'max:255'],
             'type' => ['required', 'string', 'max:20'],
@@ -27,13 +27,12 @@ class StoreMovieRequest extends FormRequest
                 'required',
                 'date',
                 'after_or_equal:' . now()->subDays(180)->format('Y-m-d'),
-                'before_or_equal:' . now()->format('Y-m-d')
             ],
-            'is_premier'=>['boolean'],
+            'is_premier' => ['boolean'],
             'age_limit' => ['required', 'integer', 'min:0', 'max:18'],
             'duration_min' => ['required', 'integer', 'min:0'],
             'poster_url' => ['required', 'string'],
-            'actors' => [ 
+            'actors' => [
                 Rule::when(
                     request('type') !== 'Family',
                     ['nullable', 'array'],

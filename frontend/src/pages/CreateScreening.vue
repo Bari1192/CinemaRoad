@@ -4,62 +4,157 @@
         <h1 class="text-3xl font-semibold text-center py-10">
             Vetítési nap összeállító
         </h1>
-        <div class="bg-gray-200 p-3 my-4 rounded-lg">
-            <div class="flex flex-row">
-                <div class="px-3">
-                    <label class="text-xl font-semibold" for="date">
-                        Dátum kiválasztása:
-                    </label>
-                    <input name="date" type="date" class="text-lg font-semibold p-1 rounded-lg" />
-                </div>
-
-                <div class="px-3">
+        <div class="mx-12 bg-indigo-700/45 border border-purple-700 shadow-md shadow-pink-500 p-3 my-4 rounded-lg text-white">
+            <div class="grid grid-cols-2 lg:w-fit mx-auto lg:gap-12 lg:mt-2">
+                <div class="col-span-1 w-fit flex flex-col justify-around m-2 gap-4">
                     <label class="text-xl font-semibold" for="driveInCinema">
-                        Mozi kiválasztása:
+                        Válassza ki a mozi helyszínét a vetítési nap összeállításához:
                     </label>
-                    <select name="driveInCinema" id="driveInCinema"
-                        class="text-lg border border-pink-600 font-semibold p-2 rounded-lg">
+
+                    <div class="relative">
+                        <button type="button" @click="toggleDropdown"
+                            class="w-full text-lg border border-pink-600 text-pink-950 font-semibold p-2 rounded-lg bg-white flex items-center justify-between cursor-pointer hover:bg-indigo-50 transition-colors"
+                            :class="{ 'ring-2 ring-pink-300': isOpen }">
+
+                            <div class="flex items-center gap-3">
+                                <img v-if="selectedCinema" :src="storage.url(`img/${selectedCinema.name}.jpg`)"
+                                    :alt="selectedCinema.name"
+                                    class="w-8 h-8 rounded-full object-cover border border-gray-300" />
+                                <div v-else
+                                    class="w-8 h-8 rounded-full bg-gray-200 border border-slate-500 flex items-center justify-center">
+                                    <span class="text-base">📍</span>
+                                </div>
+
+                                <span>{{ selectedCinema ? selectedCinema.name : 'Mozihelyszín kiválasztása...' }}</span>
+                            </div>
+
+                            <svg class="w-5 h-5 transition-transform duration-300" :class="{ 'rotate-180': isOpen }"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+
+                        <div v-show="isOpen"
+                            class="absolute top-full left-0 right-0 mt-1 bg-white border border-pink-600 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto">
+
+                            <button v-for="cinema in driveInCinemaStore.driveInCinemas" :key="cinema.id" type="button"
+                                @click="selectCinema(cinema)"
+                                class="w-full flex items-center gap-3 p-3 hover:bg-indigo-100 transition-colors text-left border-b border-pink-100 last:border-b-0">
+
+                                <img :src="storage.url(`img/${cinema.name}.jpg`)" :alt="cinema.name"
+                                    class="w-12 h-12 rounded-full object-cover border border-gray-300 flex-shrink-0"
+                                    @error="handleImageError" />
+
+                                <div class="flex-1">
+                                    <div class="text-lg font-semibold text-purple-500">
+                                        {{ cinema.name }}
+                                    </div>
+                                    <div class="text-sm italic text-gray-600">
+                                        Kiválasztáshoz kattintson ide!
+                                    </div>
+                                </div>
+
+                                <div v-if="selectedCinema && selectedCinema.id === cinema.id"
+                                    class="w-6 h-6 bg-pink-600 rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <select name="driveInCinema" id="driveInCinema" v-model="selectedValue" class="sr-only">
+                        <option value="">Válasszon...</option>
                         <option v-for="cinema in driveInCinemaStore.driveInCinemas" :key="cinema.id" :value="cinema.id">
                             {{ cinema.name }}
                         </option>
                     </select>
                 </div>
+                <div class="col-span-1 w-full mx-auto flex flex-col justify-around gap-4 p-4">
+                    <label class="text-xl font-semibold text-white" for="date">
+                        Válassza ki melyik nap moziműsorát tervezi:
+                    </label>
+                    <div class="relative">
+                        <input name="date" id="date" type="date" v-model="selectedDate"
+                            class="w-full text-lg font-semibold p-3 rounded-lg border-2 border-pink-600 bg-white text-pink-950 focus:ring-2 focus:ring-pink-300
+                             focus:border-pink-700 transition-all duration-200 hover:bg-sky-50" />
+                        <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                        </div>
+                    </div>
+                    <div v-if="selectedDate" class="bg-white/10 rounded-lg p-3 backdrop-blur-sm">
+                        <div class="text-sm text-white/80">Kiválasztott dátum:</div>
+                        <div class="text-lg font-bold text-white">{{ formatSelectedDate }}</div>
+                    </div>
+                </div>
             </div>
 
-            <div class="grid grid-cols-4 gap-3">
-                <div v-for="(movie, i) in selectedMovieObjects" :key="i" class="p-1  w-8/12 rounded">
-                    <h2 class="text-lg font-semibold text-center mb-2">{{ i + 1 }}. Film</h2>
+            <div class="w-full h-[5px] bg-gradient-to-r from-transparent via-sky-300 to-transparent my-8">
+            </div>
 
-                    <select v-model="selectedMovies[i]" class="w-full p-2 border rounded">
-                        <option disabled value="">Válassz filmet</option>
+            <div class="grid grid-cols-4 mt-4 gap-8 mb-8"> <!-- térközzel itt a gap-pel játsz, ne a width-del! -->
+                <div v-for="(movie, i) in selectedMovieObjects" :key="i" class="p-1 mx-auto rounded">
+                    <h2 class="text-lg font-semibold text-center mb-2 text-pink-700 py-2 px-3 bg-sky-50 rounded-md w-fit mx-auto cursor-default">{{ i + 1 }}. Vetítés létrehozása</h2>
+
+                    <select v-model="selectedMovies[i]" class="w-full p-2 border mt-2 text-pink-950 rounded">
+                        <option disabled value="">Válassza ki a filmet!</option>
                         <option v-for="movie in movieStore.movies" :key="movie.id" :value="movie.id">
                             {{ movie.title }}
                         </option>
                     </select>
 
-                    <div v-if="movie" class="card mt-3 p-2 border rounded bg-white">
+                    <div v-if="movie" class="bg-rose-50 border-2 border-indigo-500 rounded-lg min-h-[650px]
+                     shadow-md shadow-sky-300 mt-3 p-2 flex flex-col justify-between">
                         <img v-if="movie.poster_url" :src="storage.url(movie.poster_url)" :alt="movie.title"
-                            class="w-full h-64 object-cover" />
+                            class="w-full h-64 object-cover rounded-md" />
                         <div class="card-body mt-2">
-                            <h2 class="card-title text-lg text-pink-500 font-semibold">{{ movie.title }}</h2>
-                            <p class="text-sm text-gray-600">{{ movie.description }}</p>
+                            <div
+                                class="grid grid-cols-2 mt-2 text-center text-gray-800 font-semibold border-b border-black/10 pl-1 pb-2">
+                                <div class="bg-amber-300 my-auto px-2 py-2 border-r-2 border-black/10 text-black rounded-md">
+                                    Film címe:
+                                </div>
+                                <h2 class="card-title text-base px-2 py-2 text-black font-semibold">
+                                    {{ movie.title }}</h2>
+                            </div>
+                        </div>
+                        <div
+                            class="grid grid-rows-4 mt-2 text-center text-gray-800 font-semibold border-b border-black/10 pl-1">
+                            <div
+                                class="row-span-1 bg-amber-300 border-y-2 border-black/10 px-2 py-2 text-black rounded-md">
+                                Film leírása:
+                            </div>
+                            <div class="row-span-3 text-sm font-normal text-start px-2 text-black pt-2 pb-0">{{
+                                movie.description }}</div>
                         </div>
 
-                        <div class="mt-2 text-center text-gray-800 font-semibold">
-                            {{ getSchedule(i, movie.duration_min) }}
+                        <div class="grid grid-cols-2 mt-2 text-center text-gray-800 font-semibold">
+                            <div class="bg-amber-300 px-2 py-2 border-r-2 border-black/10 text-black rounded-md">
+                                Vetítés:
+                            </div>
+                            <div class="px-2 py-2 text-black">
+                                {{ getSchedule(i, movie.duration_min) }}
+                            </div>
                         </div>
-                        <pre>{{ storage.url(movie.poster_url) }}</pre>
+                        <div class="grid grid-cols-2 mt-2 text-center text-gray-800 font-semibold">
+                            <div class="bg-amber-300 px-2 py-2 text-black rounded-md border-r-2 border-black/10">
+                                Kategória:
+                            </div>
+                            <div class="px-2 py-2 text-black capitalize">
+                                {{ movie.type }}
+                            </div>
+                        </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </BaseLayout>
 </template>
 
 <script setup>
-import { computed, ref, onMounted } from "vue";
+import { computed, ref, onMounted, onUnmounted } from "vue";
 import { useMovieStore } from "@stores/MovieStore.mjs";
 import { useDriveInCinemaStore } from "@stores/DriveInCinemaStore";
 import { storage } from "@utils/http.mjs";
@@ -69,13 +164,39 @@ const movieStore = useMovieStore();
 const driveInCinemaStore = useDriveInCinemaStore();
 
 const selectedMovies = ref(["", "", "", ""]);
+const isOpen = ref(false);
+const selectedValue = ref("");
 
 const selectedMovieObjects = computed(() =>
-selectedMovies.value.map((id) =>
-movieStore.movies.find((m) => m.id === id) || null
-)
+    selectedMovies.value.map((id) =>
+        movieStore.movies.find((m) => m.id === id) || null
+    )
 );
 
+const selectedCinema = computed(() => {
+    if (!selectedValue.value) return null
+    return driveInCinemaStore.driveInCinemas.find(cinema => cinema.id === selectedValue.value)
+});
+
+const toggleDropdown = () => {
+    isOpen.value = !isOpen.value
+};
+
+const selectCinema = (cinema) => {
+    selectedValue.value = cinema.id
+    isOpen.value = false
+};
+
+const handleImageError = (event) => {
+    event.target.src = storage.url('img/default-cinema.jpg')
+    console.warn('Mozi kép nem található:', event.target.alt)
+};
+
+const closeDropdown = (event) => {
+    if (!event.target.closest('.relative')) {
+        isOpen.value = false
+    }
+};
 
 const baseStart = { hour: 16, minute: 30 };
 const getSchedule = (index, duration) => {
@@ -109,5 +230,42 @@ const getSchedule = (index, duration) => {
 onMounted(async () => {
     await movieStore.getMovies();
     await driveInCinemaStore.getDriveInCinemas();
+    document.addEventListener('click', closeDropdown);
+});
+
+onUnmounted(() => {
+    document.removeEventListener('click', closeDropdown);
 });
 </script>
+
+<style scoped>
+.max-h-60::-webkit-scrollbar {
+    width: 6px;
+}
+
+.max-h-60::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.max-h-60::-webkit-scrollbar-thumb {
+    background: #db2777;
+    border-radius: 3px;
+}
+
+.max-h-60::-webkit-scrollbar-thumb:hover {
+    background: #be185d;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+</style>

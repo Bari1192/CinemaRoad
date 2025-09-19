@@ -18,7 +18,7 @@
                 helyszínen:</h2>
             <div class="flex gap-3">
                 <button class="p-2 rounded-lg"
-                    :class="selectedGenre === 'Mind' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
+                    :class="selectedGenre === 'Mind' ? 'bg-pink-600 text-white' : 'bg-white text-pink-600'"
                     @click="selectedGenre = 'Mind'">Mind</button>
                 <button class="p-2 rounded-lg"
                     :class="selectedGenre === 'action' ? 'bg-pink-600 text-white' : 'bg-white text-pink-600'"

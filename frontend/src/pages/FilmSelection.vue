@@ -4,16 +4,16 @@
             <h1 class="text-4xl text-center font-bold py-12">Aktuális filmkínálatunk</h1>
             <div class="flex gap-3">
                 <button class="p-2 rounded-lg"
-                    :class="selectedGenre === 'Mind' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
+                    :class="selectedGenre === 'Mind' ? 'bg-pink-600 text-white' : 'bg-white text-pink-600'"
                     @click="selectedGenre = 'Mind'">Mind</button>
                 <button class="p-2 rounded-lg"
-                    :class="selectedGenre === 'action' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
+                    :class="selectedGenre === 'action' ? 'bg-pink-600 text-white' : 'bg-white text-pink-600'"
                     @click="selectedGenre = 'action'">Akció</button>
                 <button class="p-2 rounded-lg"
-                    :class="selectedGenre === 'family' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
+                    :class="selectedGenre === 'family' ? 'bg-pink-600 text-white' : 'bg-white text-pink-600'"
                     @click="selectedGenre = 'family'">Családi</button>
                 <button class="p-2 rounded-lg"
-                    :class="selectedGenre === 'horror' ? 'bg-pink-600 text-white' : 'bg-white text-600'"
+                    :class="selectedGenre === 'horror' ? 'bg-pink-600 text-white' : 'bg-white text-pink-600'"
                     @click="selectedGenre = 'horror'">Horror</button>
             </div>
             <div v-if="filteredMoviesByType.length > 0" class="grid grid-cols-1 md:grid-cols-5 gap-6 mt-5 text-inherit">

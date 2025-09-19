@@ -1,7 +1,7 @@
 <script setup>
 
 import { ref, onMounted, onUnmounted, computed } from 'vue';
-import { storage } from '@/utils/http.mjs' // Ez hívja be az utils -on belüli 'storage' url részt!
+import { storage } from '@/utils/http.mjs'
 
 const movies = ref([
   { imageUrl: 'img/Main_Slider_img/Dustzone_last_run.webp', title: 'Dustzone: Last Run' },
@@ -17,9 +17,10 @@ const isPrevDisabled = computed(() => activeIndex.value === 0);
 const isNextDisabled = computed(() => activeIndex.value === movies.value.length - 1);
 
 const nextSlide = () => {
-  if (activeIndex.value == 3) {
+  if (activeIndex.value >= movies.value.length - 1) {
     return;
   }
+
   activeIndex.value += direction;
   if (activeIndex.value >= movies.value.length - 1) {
     activeIndex.value = movies.value.length - 1;
@@ -31,8 +32,18 @@ const nextSlide = () => {
 };
 
 const prevSlide = () => {
+  if (activeIndex.value <= 0) {
+    return;
+  }
+
   direction = -1;
-  nextSlide();
+  if (activeIndex.value > 0) {
+    activeIndex.value--;
+  }
+
+  if (activeIndex.value === 0) {
+    direction = 1;
+  }
 };
 
 const goToSlide = (index) => {
@@ -60,8 +71,27 @@ const stopAutoplay = () => {
 
 const getSlideTransform = (index) => {
   const offset = (index - activeIndex.value) * 100;
-  return `transform: translateX(${offset}%); opacity: ${index === activeIndex.value ? 1 : 0.5}; z-index: ${index === activeIndex.value ? 5 : 1};`;
+  return `transform: translateX(${offset}%);z-index: ${index === activeIndex.value ? 5 : 1};`;
 };
+
+const handlePrevClick = (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+
+  if (!isPrevDisabled.value) {
+    prevSlide();
+  }
+};
+
+const handleNextClick = (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+
+  if (!isNextDisabled.value) {
+    nextSlide();
+  }
+};
+
 onMounted(() => {
   startAutoplay();
 });
@@ -80,46 +110,52 @@ onUnmounted(() => {
           'carousel-item absolute w-full h-full transition-transform duration-1000 ease-in-out overflow-hidden border-y-4 border-slate-600 lg:rounded-2xl',
           { 'active-slide': index === activeIndex }
         ]" :style="getSlideTransform(index)">
-          <img :src="storage.url(movie.imageUrl)"
-          :alt="movie.title"
+          <img :src="storage.url(movie.imageUrl)" :alt="movie.title"
             class="w-full h-full object-cover lg:rounded-lg shadow-xl overflow-hidden">
           <div class="absolute right-0 top-0 bg-gradient-to-b from-black via-black/70 to-transparent text-white lg:rounded-r-lg overflow-hidden
         pl-6 pt-2 pr-4 pb-8
         md:pl-8 md:pt-3 md:pb-12
         lg:pl-12 lg:pt-8 lg:pb-16
         xl:pl-12 xl:pt-8 xl:pb-16
-        ">
-            <h3 class="text-base md:text-xl lg:text-2xl xl:text-4xl font-bold mt-1 text-right">{{ movie.title }}</h3>
-            <p class="before_premier text-sm md:text-lg lg:text-xl xl:text-2xl text-right italic lg:mt-1.5 text-pink-500"
-              :class="movie.title === 'Dustzone: Last Run' ? 'text-pink-200 font-semibold' : ''">Premier előtti vetítés
+        " style="font-family: 'Noto Sans', 'Times New Roman', Times, serif;">
+            <h3 class="text-lg md:text-xl lg:text-2xl xl:text-4xl font-bold mt-1 text-right">{{ movie.title }}</h3>
+            <p class="before_premier text-lg md:text-lg lg:text-xl xl:text-2xl text-right lg:mt-1.5 text-pink-500">
+              Premier előtti vetítés
             </p>
           </div>
         </div>
       </div>
     </router-link>
 
-    <button @click="!isPrevDisabled && prevSlide()" class="carousel-control-btn absolute left-4 top-1/2 -translate-y-1/2 rounded-full hover:bg-opacity-75 transition-all duration-300 z-10 
+    <!-- Bal navigációs gomb -->
+    <button @click="handlePrevClick" class="carousel-control-btn absolute left-4 top-1/2 -translate-y-1/2 rounded-full hover:bg-opacity-75 transition-all duration-300 z-10 
       bg-gray-800 border-2 border-gray-900 shadow-md shadow-gray-900/55 text-white
       p-1.5 bg-opacity-90 
       md:p-1.5 md:bg-opacity-80 
       lg:p-2.5
       xl:p-3
-      hidden lg:block" :class="{ 'opacity-40 pointer-events-none cursor-not-allowed': isPrevDisabled }">
-
+      hidden lg:block" :class="{
+        'opacity-50 cursor-not-allowed bg-gray-50/50': isPrevDisabled,
+        'hover:bg-gray-700': !isPrevDisabled
+      }">
       <svg class="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12" fill="none" stroke="currentColor"
         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
       </svg>
     </button>
 
-    <button @click="!isNextDisabled && nextSlide()" class="carousel-control-btn absolute right-4 top-1/2 -translate-y-1/2
+    <!-- Jobb navigációs gomb -->
+    <button @click="handleNextClick" class="carousel-control-btn absolute right-4 top-1/2 -translate-y-1/2
      bg-gray-800 text-white rounded-full hover:bg-opacity-75 transition-all duration-300 z-10 
       border-2 border-gray-900 shadow-md shadow-gray-900/55 
       p-1.5 bg-opacity-90 
       md:p-1.5 md:bg-opacity-80 
       lg:p-2.5
       xl:p-3
-      hidden lg:block" :class="{ 'opacity-40 pointer-events-none cursor-not-allowed': isNextDisabled }">
+      hidden lg:block" :class="{
+        'opacity-50 cursor-not-allowed bg-gray-50/20': isNextDisabled,
+        'hover:bg-gray-700': !isNextDisabled
+      }">
       <svg class="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12" fill="none" stroke="currentColor"
         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -148,8 +184,7 @@ onUnmounted(() => {
 }
 
 .before_premier {
-  font-family: 'Noto Sans', 'Times New Roman', Times, serif;
-  font-style: unset;
+  
   text-shadow: 0 0 25px rgb(158, 119, 144);
 }
 

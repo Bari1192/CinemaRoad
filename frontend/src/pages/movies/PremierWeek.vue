@@ -23,8 +23,18 @@ const films = computed(() => {
     return arr.filter(r => r.movie && r.movie.is_premier === 1);
 });
 const premierScreeningTime = computed(() => {
-    return films.value?.screening?.start_time || '2025-09-18 18:00:00'
-})
+    const now = new Date();
+    const day = now.getDay();
+
+    let daysToAdd = (4 - day + 7) % 7;
+    if (daysToAdd === 0) daysToAdd = 7;
+
+    const nextThursday = new Date(now);
+    nextThursday.setDate(nextThursday.getDate() + daysToAdd);
+    nextThursday.setHours(0, 1, 0, 0); 
+
+    return nextThursday.toISOString();
+});
 </script>
 
 <template>
@@ -44,10 +54,12 @@ const premierScreeningTime = computed(() => {
                     </div>
                 </div>
                 <div class="lg:w-1/2 flex flex-col justify-center gap-4">
-                    <h2 class="text-2xl md:text-3xl font-bold text-amber-400 tracking-wide text-center lg:text-left">{{ film.movie.title }}
+                    <h2 class="text-2xl md:text-3xl font-bold text-amber-400 tracking-wide text-center lg:text-left">{{
+                        film.movie.title }}
                     </h2>
                     <div>
-                        <p class="mb-2 text-pink-50 text-sm md:text-base font-semibold px-8 lg:px-0">{{ film.movie.description }}</p>
+                        <p class="mb-2 text-pink-50 text-sm md:text-base font-semibold px-8 lg:px-0">{{
+                            film.movie.description }}</p>
                     </div>
                     <div class="grid grid-cols-2 gap-y-4 border-y-2 border-y-slate-600/50 py-4 w-11/12 mx-auto">
                         <div
@@ -99,7 +111,9 @@ const premierScreeningTime = computed(() => {
 
                     </div>
                     <div class="px-8 lg:px-2 w-full">
-                        <h3 class="text-white underline underline-offset-4 lg:no-underline font-medium uppercase mb-1 mt-2">Szereplők</h3>
+                        <h3
+                            class="text-white underline underline-offset-4 lg:no-underline font-medium uppercase mb-1 mt-2">
+                            Szereplők</h3>
                         <div class="flex flex-wrap gap-2 py-2">
                             <span v-for="actor in film.movie.actors" :key="actor"
                                 class="bg-pink-600/85 text-white text-xs md:text-sm rounded-full px-3 py-1 font-medium shadow">

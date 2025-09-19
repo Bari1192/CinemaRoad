@@ -9,20 +9,6 @@ const props = defineProps({
     }
 })
 
-function getNextThursdayMidnight(now = new Date()) {
-    const d = new Date(now)
-    const day = d.getDay() // 0=Vas, 1=Hét, 2=Kedd, 3=Sze, 4=Csüt, 5=Pén, 6=Szom
-    const diff = (4 - day + 7) % 7 // hány nap múlva lesz csütörtök (0, ha ma)
-    const target = new Date(d)
-    target.setHours(0, 1, 0, 0) // 00:01-re állítjuk
-    if (diff > 0) target.setDate(target.getDate() + diff)
-    else if (diff === 0 && now.getHours() >= 0 && now.getMinutes() >= 1) {
-        // Ha ma csütörtök és már elmúlt 00:01, akkor következő hét
-        target.setDate(target.getDate() + 7)
-    }
-    return target
-}
-
 function formatDateHu(date) {
     return date.toLocaleDateString('hu-HU', {
         year: 'numeric',
@@ -33,8 +19,7 @@ function formatDateHu(date) {
 // Ezt kapja a szülőtől -> így fix premier dátum + óra-perc számolja!
 const premierDate = computed(() => new Date(props.premierDateTime))
 
-const nextThursday = computed(() => getNextThursdayMidnight())
-const nextThursdayLabel = computed(() => formatDateHu(nextThursday.value))
+const nextThursdayLabel = computed(() => formatDateHu(premierDate.value))
 
 const nowMs = ref(Date.now())
 let timerId = null

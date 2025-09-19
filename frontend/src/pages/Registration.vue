@@ -1,8 +1,6 @@
 <template>
   <BaseLayout>
-    <div
-  class="w-full max-w-lg mx-4 sm:mx-auto my-10 bg-gray-700 p-6 sm:p-10 rounded-2xl shadow-xl border border-pink-200 box-border">
-
+    <div class="max-w-lg mx-4 sm:mx-auto my-10 bg-gray-700 p-6 sm:p-10 rounded-2xl shadow-xl border border-pink-200 box-border">
 
       <h1 class="text-4xl font-bold text-pink-600 text-center mb-8 drop-shadow-sm">
         Regisztráció

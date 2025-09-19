@@ -11,8 +11,8 @@
                             <h2 class="text-center text-pink-600 text-2xl font-semibold mb-2">Poszter</h2>
 
                             <label class="block mb-2">
-                                <input type="file" method="post" name="poster" enctype="multipart/form-data"
-                                    accept="image/png" @change="onFileChange"
+                                <input type="file" method="post" name="poster" ref="fileInput"
+                                    enctype="multipart/form-data" accept="image/png" @change="onFileChange"
                                     class="block w-full text-sm text-gray-900 bg-white rounded-lg cursor-pointer" />
                             </label>
 
@@ -43,6 +43,22 @@
                                     class="w-full rounded-lg p-3 border-2 border-pink-300 text-lg min-h-[120px]"
                                     name="movieDescription" id="movieDescription"></textarea>
                             </div>
+
+                            <div>
+                                <label class="block text-xl font-semibold text-pink-600 mb-2"
+                                    for="isPremier">Premier</label>
+                                <label class="text-lg">
+                                    <input class="accent-pink-600" type="radio" v-model="isPremier" name="isPremier"
+                                        :value="true">
+                                    Igen
+                                </label>
+                                <label class="text-lg">
+                                    <input class="accent-pink-600" type="radio" v-model="isPremier" name="isPremier"
+                                        :value="false" checked>
+                                    Nem
+                                </label>
+                            </div>
+
                         </div>
                     </div>
 
@@ -114,6 +130,7 @@ import { storage } from '@utils/http.mjs';
 
 import { http } from '@utils/http.mjs';
 import { FormKit } from '@formkit/vue';
+import Toast from 'primevue/toast';
 const router = useRouter();
 
 const userStore = useUserStore();
@@ -126,6 +143,7 @@ const movieType = ref('');
 const ageLimit = ref('');
 const movieDirector = ref('');
 
+const isPremier = ref(false);
 const movieActors = ref('');
 const actorsArray = computed(() => {
     if (!movieActors.value) return [];
@@ -133,6 +151,7 @@ const actorsArray = computed(() => {
         .split(',')
 });
 
+const fileInput = ref(null);
 const selectedFile = ref(null);
 const fallbackImage = storage.url('/img/No_image_selected.png');
 const src = ref(fallbackImage);
@@ -145,16 +164,35 @@ function onFileChange(e) {
         src.value = fallbackImage;
     }
 }
+const missingInputs = computed(() => {
+    const missing = [];
+
+    if (!movieTitle.value) missing.push("cím");
+    if (!movieDurationMin.value) missing.push("hossz");
+    if (!movieDescription.value) missing.push("leírás");
+    if (!movieReleaseDate.value) missing.push("megjelenés");
+    if (!movieType.value) missing.push("műfaj");
+    if (!ageLimit.value) missing.push("korhatár besorolás");
+    if (!movieDirector.value) missing.push("rendező");
+    if (!movieActors.value) missing.push("színészek");
+
+    return missing;
+});
 
 const handleCreateMovie = async () => {
     if (!selectedFile.value) {
-        alert("No file selected");
+        ToastService.showError("Nincs kép kiválasztva!")
         return;
     } else {
         src.value = fallbackImage;
     }
 
-    console.log("actorsArray: ", JSON.stringify(actorsArray.value));
+    if (missingInputs.value.length > 0) {
+        ToastService.showError(
+            "Kérem töltse ki az alábbi mezőket: " + missingInputs.value.join(", ")
+        );
+        return;
+    }
 
     const formData = new FormData();
     formData.append("title", movieTitle.value);
@@ -164,6 +202,7 @@ const handleCreateMovie = async () => {
     formData.append("release_date", movieReleaseDate.value);
     formData.append("duration_min", movieDurationMin.value);
     formData.append("age_limit", Number(ageLimit.value));
+    formData.append("is_premier", isPremier.value ? 1 : 0)
 
     actorsArray.value.forEach((actor, index) => {
         formData.append(`actors[${index}]`, actor);
@@ -185,15 +224,14 @@ const handleCreateMovie = async () => {
                 Authorization: `Bearer ${token}`
             }
         });
-        console.log("Success", response.data);
-        alert("Film sikeresen létrehozva!");
+        ToastService.showSuccess("Film sikeresen létrehozva!")
+
 
         // Képfeltöltés!! plusz a film típus fájlnév miatt
         const posterFormData = new FormData();
-        const sanitizedFile = sanitizeFile(selectedFile.value);
-        posterFormData.append('poster', sanitizedFile);
+        const normalizedFile = normalizeFile(selectedFile.value);
+        posterFormData.append('poster', normalizedFile);
         posterFormData.append('type', movieType.value);
-        console.log("posterFormData poster: ", posterFormData.get('poster'))
 
         const posterResponse = await http.post("/movies/upload-poster", posterFormData, {
             headers: {
@@ -201,7 +239,21 @@ const handleCreateMovie = async () => {
                 Authorization: `Bearer ${token}`
             }
         });
-        console.log("Poster upload successful", posterResponse.data);
+
+        movieTitle.value = "";
+        movieDescription.value = "";
+        movieType.value = "";
+        movieDirector.value = "";
+        movieReleaseDate.value = "";
+        movieDurationMin.value = "";
+        ageLimit.value = "";
+        movieActors.value = "";
+        actorsArray.value = [];
+        selectedFile.value = null;
+        isPremier.value = false;
+        if (fileInput.value) {
+            fileInput.value.value = "";
+        }
 
     } catch (err) {
         console.error("Error", err.response?.data || err);
@@ -209,7 +261,7 @@ const handleCreateMovie = async () => {
     }
 };
 
-function sanitizeFile(file) {
+function normalizeFile(file) {
     const ext = file.name.split('.').pop().toLowerCase();
     const baseName = file.name
         .split('.')

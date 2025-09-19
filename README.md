@@ -21,7 +21,7 @@
 ## 2️⃣ Környezeti változók beállítása (.env)
 
 1. Az alapértelmezett beállításokat a `.env.example` fájl tartalmazza a projekthez.
-2. Amennyiben változtatni szeretnéd, **szerkeszd a backend/.env.example** fájlt (pl. jelszó, email…)
+2. Amennyiben változtatni szeretnéd, **szerkeszd a .env** fájlt *(pl. jelszó, email)*
 3. A változtatásaid alapján jön létre a gyökérkönyvtárban a `.env` fájl, melyre a projekt épül.
 4. Első indításhoz az alapértelmezett értékekkel elegendő futtatni!
 
@@ -30,18 +30,28 @@
 ## 3️⃣ Indítás ▶️ / Leállítás ⏸️ / Törlés ❌
 
 ### 🚦 Indítás (bármikor):
-A CinemaRoad mappájában:
+
+1. Ahhoz, hogy az előre beállított URL címeken elérhető legyen a projekt, szükséges a windows `host` fájl megfelelő beállítása az alábbiak szerint (Alapértelmezetten a `C:\Windows\System32\drivers\etc` mappában található a `host` fájl.
+   -  Jobb klikk segítségével ***Notepad***-dal megnyitva a fájl végéhez görgetve a **Host_Setup.md** fájlban található, az "***# End of section"*** rész alatti beállítások átmásolása szükséges! 🛠️
+
+Mindezek után a *CinemaRoad* mappájában adjuk ki a terminálban a következő parancsokat:
+
+1. Amennyiben demo környezetben szeretnénk futtatni a projektet
 
 ```bash
-sh start.sh
+sh start.sh --demo
 ```
+- **elindít minden szervert, adatbázist és a függőségek telepítését is elvégzi a tesztesetekkel, a backend storage elérését publikálja**!
 
 ***VAGY***
 
+1. Amennyiben fejlesztői *(dev)* környezetben szeretnénk futtatni a projektet
+  
 ```bash
-sh ./start.sh
+sh start.sh --dev
 ```
-- Ez **elindít minden szervert, adatbázist és a függőségek telepítését is elvégzi**!
+- **elindít minden szervert, adatbázist és a függőségek telepítését is elvégzi, a backend storage elérését publikálja**!
+
 
 ### 🛑 Leállítás:
 ```bash
@@ -59,13 +69,18 @@ docker compose down -v
 
 ## 4️⃣ Mit tartalmaz a projekt?
 
-- `frontend/` – felhasználói (Vue.js) alkalmazás
-- `backend/` – szerver és adatbázis (PHP/Laravel)
-- `nginx/` – kiszolgáló beállítások
-- `start.sh` – **mindent elindít** egyszerre!
+- `frontend` – felhasználói (Vue.js) webalkalmazás
+- `backend` – **szerver** és adatbázis (PHP/Laravel)
+- `pma` – adatbázis (PhpMyAdmin vizuális felületét az **adatbázis állomány** eléréséhez)
+- `docs` – NextJs által beépített **dokumentációs oldalt** teszi elérhetővé.
+- `nginx/` – kiszolgáló beállítások - szerverek közötti kommunikációra.
+- `start.sh [típus]` – **mindent szerver elindítását teszi lehető** egyszerre - függően a típus beállításától!
 
 **Elérés böngészőben:**  
-[http://localhost](http://localhost)
+- [Frontend](http://frontend.cinemaroad)
+- [Backend](http://backend.cinemaroad)
+- [Database](http://pma.cinemaroad)
+- [Documentations](http://docs.cinemaroad)
 
 ---
 

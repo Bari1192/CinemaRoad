@@ -37,6 +37,7 @@ const saveEdit = async (movie) => {
         director: movie.director,
         duration_min: Number(movie.duration_min),
         poster_url: movie.poster_url,
+        is_premier: movie.is_premier
     }
     try {
         await movieStore.updateMovie(movie.id, movieData);
@@ -115,10 +116,14 @@ const deleteMovie = async (movie) => {
                         <input v-model="movie.release_date" type="date"
                             class="w-full py-2 px-2 sm:px-3 text-sm sm:text-base border border-gray-300 rounded text-black" />
                     </div>
-                    <div class="sm:col-span-2">
+                    <div>
                         <label class="block text-xs sm:text-sm font-medium text-pink-100 mb-1">Rendező:</label>
                         <input v-model="movie.director"
                             class="w-full py-2 px-2 sm:px-3 text-sm sm:text-base border border-gray-300 rounded text-black" />
+                    </div>
+                    <div>
+                        <label class="block text-xs sm:text-sm font-medium text-pink-100 mb-1" for="isPremier">Premier</label>
+                        <input type="checkbox" name="isPremier" v-model="movie.is_premier" class="flex mt-4 transform scale-[2] p-2 accent-pink-600" />
                     </div>
                 </div>
 
@@ -147,6 +152,7 @@ const deleteMovie = async (movie) => {
                         <th class="py-4 px-3 text-center font-bold text-sm lg:text-lg">Korhatár</th>
                         <th class="py-4 px-3 text-center font-bold text-sm lg:text-lg">Megjelenés</th>
                         <th class="py-4 px-3 text-center font-bold text-sm lg:text-lg">Rendező</th>
+                        <th class="py-4 px-3 text-center font-bold text-sm lg:text-lg">Premier</th>
                         <th class="py-4 px-3 text-center rounded-tr-lg font-bold text-sm lg:text-lg">Műveletek</th>
                     </tr>
                 </thead>
@@ -183,6 +189,9 @@ const deleteMovie = async (movie) => {
                         <td class="py-3 px-2">
                             <input v-model="movie.director"
                                 class="w-full py-2 px-2 xl:px-3 text-sm xl:text-base border border-gray-300 rounded text-black" />
+                        </td>
+                        <td class="py-3 px-2 flex justify-center items-center my-16 h-full">
+                            <input type="checkbox" :true-value="1" :false-calue="0" v-model="movie.is_premier" class="transform scale-150 p-2 accent-pink-600" />
                         </td>
                         <td class="p-2">
                             <div class=" flex justify-center flex-col lg:flex-row gap-1 lg:gap-4">

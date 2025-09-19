@@ -83,16 +83,16 @@ const deleteMovie = async (movie) => {
                     <img :src="storage.url(`${movie.poster_url}`)"
                         class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-cover rounded" />
                     <div class="flex-1">
-                        <label class="block text-xs sm:text-sm font-medium text-pink-100 mb-1">Film neve:</label>
+                        <label class="block text-base font-medium text-pink-100 mb-1">Film neve:</label>
                         <input v-model="movie.title"
                             class="w-full p-2 sm:px-3 text-sm sm:text-base border border-gray-300 rounded text-black" />
                     </div>
                     <div class="md:flex md:mt-6 space-x-2 space-y-1 md:space-y-0 mx-auto align-middle">
                         <label
-                            class="block mb-1 md:mb-0 text-xs sm:text-sm font-medium md:bg-indigo-900/75 md:border-yellow-400 md:border-2 md:py-3 md:px-2 rounded-md text-pink-100">Korhatár
+                            class="block mb-1 md:mb-0 text-base font-medium md:bg-indigo-900/75 md:border-yellow-400 md:border-2 md:py-3 md:px-2 rounded-md text-pink-100">Korhatár
                             besorolás:</label>
                         <input v-model="movie.age_limit" type="number"
-                            class="w-full max-w-[95px] md:max-w-[75px] flex justify-center md:bg-gray-200 bg-black/45 md:mx-auto text-center py-1.5 h-fit md:py-2 font-semibold text-base md:text-lg xl:px-3 border border-gray-300 rounded"
+                            class="w-full max-w-[95px] md:max-w-[75px] flex justify-center md:bg-gray-200 bg-black/45 mx-auto text-center py-1.5 h-fit md:py-2 font-semibold text-base md:text-lg xl:px-3 border border-gray-300 rounded"
                             :class="movie.age_limit == 18 ? 'text-red-400 md:text-red-600' : 'text-amber-500'" />
                     </div>
                 </div>
@@ -101,7 +101,7 @@ const deleteMovie = async (movie) => {
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-4">
                     <div>
-                        <label class="block text-xs sm:text-sm font-medium text-pink-100 mb-1">
+                        <label class="block text-base font-medium text-pink-100 mb-1">
                             Típus:
                         </label>
                         <select v-model="movie.type"
@@ -112,19 +112,23 @@ const deleteMovie = async (movie) => {
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs sm:text-sm font-medium text-pink-100 mb-1">Megjelenés:</label>
+                        <label class="block text-base font-medium text-pink-100 mb-1">Megjelenés:</label>
                         <input v-model="movie.release_date" type="date"
                             class="w-full py-2 px-2 sm:px-3 text-sm sm:text-base border border-gray-300 rounded text-black" />
                     </div>
                     <div>
-                        <label class="block text-xs sm:text-sm font-medium text-pink-100 mb-1">Rendező:</label>
+                        <label class="block text-base font-medium text-pink-100 mb-1">Rendező:</label>
                         <input v-model="movie.director"
                             class="w-full py-2 px-2 sm:px-3 text-sm sm:text-base border border-gray-300 rounded text-black" />
                     </div>
-                    <div>
-                        <label class="block text-xs sm:text-sm font-medium text-pink-100 mb-1" for="isPremier">Premier</label>
-                        <input type="checkbox" name="isPremier" v-model="movie.is_premier" class="flex mt-4 transform scale-[2] p-2 accent-pink-600" />
+                    <div class="w-[90%] mt-2 mx-auto h-[3px] rounded-full bg-gradient-to-r from-indigo-900/5 via-indigo-900/75 to-indigo-900/5"></div>
+                    <div class="grid grid-cols-2 justify-between mx-auto">
+                        <label class="block text-base font-medium text-amber-400" for="isPremier">Premier bemutató lesz?
+                        <p class="text-xs text-pink-100 italic pb-2">(<span class="font-bold text-lime-400 tracking-wide italic">Igen</span> esetén kérjük bepipálni!)</p>
+                        </label>
+                        <input type="checkbox" name="isPremier" v-model="movie.is_premier" class="h-6 inline-block my-auto p-2 accent-pink-600" />
                     </div>
+                    <div class="w-[90%] mb-2 mx-auto h-[3px] rounded-full bg-gradient-to-r from-indigo-900/5 via-indigo-900/75 to-indigo-900/5"></div>
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-4 sm:gap-4">
@@ -158,7 +162,7 @@ const deleteMovie = async (movie) => {
                 </thead>
                 <tbody>
                     <tr v-for="(movie, idx) in editableMovies" :key="movie.id" class="text-white md:font-semibold border-b border-white/20
-                    hover:bg-purple-500 transition-colors duration-150 cursor-pointer">
+                    cursor-pointer">
                         <td class="w-fit">
                             <div class="flex justify-center w-fit">
                                 <img :src="storage.url(`${movie.poster_url}`)" :alt="movie.title"
@@ -179,7 +183,7 @@ const deleteMovie = async (movie) => {
                         </td>
 
                         <td class="py-3 px-2">
-                            <select class="text-pink-600 p-2" v-model="movie.age_limit" name="ageLimit" id="ageLimit">
+                            <select class="text-pink-600 p-2 rounded flex mx-auto" v-model="movie.age_limit" name="ageLimit" id="ageLimit">
                                 <option class="text-pink-600" value="0">0+</option>
                                 <option class="text-pink-600" value="4">4+</option>
                                 <option class="text-pink-600" value="6">6+</option>
@@ -198,7 +202,7 @@ const deleteMovie = async (movie) => {
                                 class="w-full py-2 px-2 xl:px-3 text-sm xl:text-base border border-gray-300 rounded text-black" />
                         </td>
                         <td class="py-3 px-2 flex justify-center items-center my-16 h-full">
-                            <input type="checkbox" :true-value="1" :false-calue="0" v-model="movie.is_premier" class="transform scale-150 p-2 accent-pink-600" />
+                            <input type="checkbox" :true-value="1" :false-calue="0" v-model="movie.is_premier" class="inline-block min-h-5 min-w-6 accent-pink-600" />
                         </td>
                         <td class="p-2">
                             <div class=" flex justify-center flex-col lg:flex-row gap-1 lg:gap-4">

@@ -177,11 +177,18 @@ const deleteMovie = async (movie) => {
                                 <option value="horror">Horrorfilm</option>
                             </select>
                         </td>
+
                         <td class="py-3 px-2">
-                            <input v-model="movie.age_limit" type="number"
-                                class="w-full max-w-[95px] md:max-w-[75px] flex justify-center md:bg-gray-200 bg-black/45 md:mx-auto text-center py-1.5 h-fit md:py-2 font-semibold text-base md:text-lg xl:px-3 border border-gray-300 rounded"
-                                :class="movie.age_limit == 18 ? 'text-red-400 md:text-red-600' : 'text-amber-500'" />
+                            <select class="text-pink-600 p-2" v-model="movie.age_limit" name="ageLimit" id="ageLimit">
+                                <option class="text-pink-600" value="0">0+</option>
+                                <option class="text-pink-600" value="4">4+</option>
+                                <option class="text-pink-600" value="6">6+</option>
+                                <option class="text-pink-600" value="12">12+</option>
+                                <option class="text-pink-600" value="16">16+</option>
+                                <option class="text-pink-600" value="18">18+</option>
+                            </select>
                         </td class="py-3 px-2">
+
                         <td class="py-3 px-2">
                             <input v-model="movie.release_date" type="date"
                                 class="w-full py-2 px-2 xl:px-3 text-sm xl:text-base border border-gray-300 rounded text-black" />

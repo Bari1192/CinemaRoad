@@ -42,6 +42,7 @@ class MovieController extends Controller
         $movie->delete();
         return response()->json(null, 204);
     }
+    
 
     public function storePoster(Request $request)
     {
@@ -56,10 +57,12 @@ class MovieController extends Controller
             $file = $request->file('poster');
             $type = $request->input('type');
 
-            $basename = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
-            $extension = $file->getClientOriginalExtension();
+            $basename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $basename = str_replace(' ', '_', iconv('UTF-8', 'ASCII//TRANSLIT', $basename));
+            $basename = implode('_', array_map(fn($w) => ucfirst($w), explode('_', $basename)));
+                        $extension = $file->getClientOriginalExtension();
 
-            $folder = "moviePosters/{$type}_Movies_img";
+            $folder = "img/{$type}_Movies_img";
 
             $filename = $basename . '.' . $extension;
 
@@ -69,7 +72,7 @@ class MovieController extends Controller
             // Térjen vissza a relativePath-el
             return response()->json([
                 'message' => 'Poster uploaded successfully',
-                'poster_url' => asset('storage/' . $path),
+                'poster_url' => "/{$path}",
                 'path' => $path,
             ]);
         }

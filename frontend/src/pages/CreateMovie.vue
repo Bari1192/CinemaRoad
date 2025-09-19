@@ -211,7 +211,7 @@ const handleCreateMovie = async () => {
     // poster_url név létrehozása
     const fileName = selectedFile.value.name;
     const extension = fileName.split('.').pop().toLowerCase();
-    let posterUrl = '/' + movieType.value + '_Movies_img/' + normalizeString(movieTitle.value) + '.' + extension;
+    let posterUrl = '/img/' + movieType.value + '_Movies_img/' + normalizeString(movieTitle.value) + '.' + extension;
     formData.append("poster_url", posterUrl);
 
 
@@ -278,8 +278,14 @@ function normalizeFile(file) {
 
 
 function normalizeString(str) {
-    let normalized = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    normalized = normalized.replace(/\s+/g, '_'); return normalized;
+    return str
+    .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-zA-Z0-9\s]/g, " ")
+        .split(/\s+/)
+        .filter(Boolean)
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join("_");
 }
 
 onMounted(async () => {

@@ -80,7 +80,7 @@ docker compose down -v
 - `Adatbázis` – adatbázis (PhpMyAdmin vizuális felületét az **adatbázis állomány** eléréséhez)
 - `Dokumentációs oldal` – NextJs által beépített **dokumentációs oldal** - (docs). teszi elérhetővé.
 - `nginx/` – kiszolgáló beállítások - szerverek közötti kommunikációra.
-- `sh start.sh [--típus]` – **Típusbeállítástól függő éles és fejlesztési projekt elindítását teszi lehetővé!
+- `sh start.sh [--típus]` – **Típusbeállítástól** függő éles és fejlesztési projekt elindítását teszi lehetővé!
 
 **Elérés böngészőben:**  
 - [Frontend](http://frontend.cinemaroad)

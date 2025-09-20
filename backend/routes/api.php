@@ -16,7 +16,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::apiResource("screenings", ScreeningController::class);
 Route::apiResource("drive_in_cinemas", DriveInCinemaController::class);
 
 
@@ -25,11 +24,11 @@ Route::apiResource("drive_in_cinemas", DriveInCinemaController::class);
 Route::apiResource("/reservations", ReservationController::class)->only(['index', 'show']);
 
 Route::middleware(['auth:sanctum'])->group(function() {
-
+    
     Route::post("/reservations", [ReservationController::class, "store"]);
-
+    
     Route::put("/reservations/{reservation}", [ReservationController::class, "update"]);
-
+    
     Route::delete("/reservations/{reservation}", [ReservationController::class, "destroy"]);
 });
 // ----------------------------------------------------------------------------------------
@@ -41,16 +40,16 @@ Route::middleware(['auth:sanctum'])->group(function() {
 Route::apiResource('movies', MovieController::class)->except("store", "update");
 
 Route::middleware(['auth:sanctum'])->group(function () {
-
+    
     // Film feltöltés védve
     Route::post("/movies", [MovieController::class, "store"]);
-
+    
     // Film módosítása
     Route::put("/movies/{movie}", [MovieController::class, "update"]);
-
+    
     // Kép feltöltés védve
     Route::post('/movies/upload-poster', [MovieController::class, 'storePoster'])
-        ->can('uploadPoster', Movie::class);
+    ->can('uploadPoster', Movie::class);
 });
 // ----------------------------------------------------------------------------------------
 
@@ -59,6 +58,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::post("/register", [RegisterController::class, "store"]);
 Route::post("/authenticate", [AuthController::class, "authenticate"])->name("auth.authenticate");
 Route::apiResource('/users', UserController::class);
+
+// ----------------------------------------------------------------------------------------
+// V E T Í T É S E K
+Route::apiResource("screenings", ScreeningController::class)->except("store");
+Route::post("/screenings", [ScreeningController::class, "store"])->middleware("auth:sanctum");
+// ----------------------------------------------------------------------------------------
+
+
 
 
 // ----------------------------------------------------------------------------------------

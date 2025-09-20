@@ -2,13 +2,16 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Screening;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class StoreScreeningRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::authorize('create', Screening::class)->allowed();
+
     }
 
     public function rules(): array

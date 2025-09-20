@@ -1,0 +1,29 @@
+# **LocationNameDetails komponens dokumentációja**
+
+## **1. Komponens áttekintése**
+- **Célja és funkciója**: A `LocationNameDetails` komponens a helyszín részleteit jeleníti meg, lehetővé téve a felhasználók számára, hogy információkat kapjanak a kiválasztott helyszínről.
+- **Fő felhasználói interakciók**:
+  - Helyszín kiválasztása
+  - Információ megtekintése
+
+## **2. Külső függőségek**
+- **Importok, csomagok**:
+  - `BaseLayout` a layout struktúrához
+  - `LocationNameDetails` a helyszín információinak megjelenítéséhez
+- **Betűtípusok, CDN-ek**: Nincs
+
+## **3. Strukturális elemek**
+**Táblázat minden HTML/Vue elemről:**
+
+| **Elem**                  | **Funkció, stílusjegyek**                   |
+| ------------------------- | ------------------------------------------- |
+| `<BaseLayout>`            | A fő elrendezés komponens.                  |
+| `<LocationNameDetails />` | A helyszín részleteit tartalmazó komponens. |
+
+## **4. Logika és interakciók**
+- **Script setup tartalom**: Importok definiálására használatos, nem tartalmaz további logikát.
+- **Eseménykezelés**: Nincs definiálva eseménykezelés.
+- **Reaktív adatok**: Nincs definiálva reaktív adat.
+
+## **A komponens tartalmi összefoglalója**
+A `LocationNameDetails` komponens célja a helyszín részletes információinak megjelenítése szülő komponensként, lehetővé téve a felhasználók számára, hogy a kiválasztott helyszínnel kapcsolatos adatokat megtekintsék a LocationNameDetails gyermek-komponensben.

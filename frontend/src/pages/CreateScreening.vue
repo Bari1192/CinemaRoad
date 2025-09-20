@@ -4,7 +4,8 @@
         <h1 class="text-3xl font-semibold text-center py-10">
             Vetítési nap összeállító
         </h1>
-        <div class="mx-12 bg-indigo-700/45 border border-purple-700 shadow-md shadow-pink-500 p-3 my-4 rounded-lg text-white">
+        <div
+            class="mx-12 bg-indigo-700/45 border border-purple-700 shadow-md shadow-pink-500 p-3 my-4 rounded-lg text-white">
             <div class="grid grid-cols-2 lg:w-fit mx-auto lg:gap-12 lg:mt-2">
                 <div class="col-span-1 w-fit flex flex-col justify-around m-2 gap-4">
                     <label class="text-xl font-semibold" for="driveInCinema">
@@ -74,14 +75,17 @@
                         </option>
                     </select>
                 </div>
-                <div class="col-span-1 w-full mx-auto flex flex-col justify-around gap-4 p-4">
+                <div :class="{ 'opacity-50 pointer-events-none': !selectedCinema }"
+                    class="col-span-1 w-full mx-auto flex flex-col justify-around gap-4 p-4">
                     <label class="text-xl font-semibold text-white" for="date">
-                        Válassza ki melyik nap moziműsorát tervezi:
+                        Válassza ki, mely nap moziműsorát szeretné tervezi:
                     </label>
                     <div class="relative">
-                        <input name="date" id="date" type="date" v-model="selectedDate"
-                            class="w-full text-lg font-semibold p-3 rounded-lg border-2 border-pink-600 bg-white text-pink-950 focus:ring-2 focus:ring-pink-300
+
+                        <input name="date" :min="minDate" id="date" type="date" v-model="selectedDate"
+                            @change="validateDate" class="w-full bg-white text-lg font-semibold p-3 rounded-lg border-2 border-pink-600  text-pink-950 focus:ring-2 focus:ring-pink-300
                              focus:border-pink-700 transition-all duration-200 hover:bg-sky-50" />
+
                         <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
                         </div>
                     </div>
@@ -97,7 +101,9 @@
 
             <div class="grid grid-cols-4 mt-4 gap-8 mb-8"> <!-- térközzel itt a gap-pel játsz, ne a width-del! -->
                 <div v-for="(movie, i) in selectedMovieObjects" :key="i" class="p-1 mx-auto rounded">
-                    <h2 class="text-lg font-semibold text-center mb-2 text-pink-700 py-2 px-3 bg-sky-50 rounded-md w-fit mx-auto cursor-default">{{ i + 1 }}. Vetítés létrehozása</h2>
+                    <h2
+                        class="text-lg font-semibold text-center mb-2 text-pink-700 py-2 px-3 bg-sky-50 rounded-md w-fit mx-auto cursor-default">
+                        {{ i + 1 }}. Vetítés létrehozása</h2>
 
                     <select v-model="selectedMovies[i]" class="w-full p-2 border mt-2 text-pink-950 rounded">
                         <option disabled value="">Válassza ki a filmet!</option>
@@ -113,7 +119,8 @@
                         <div class="card-body mt-2">
                             <div
                                 class="grid grid-cols-2 mt-2 text-center text-gray-800 font-semibold border-b border-black/10 pl-1 pb-2">
-                                <div class="bg-amber-300 my-auto px-2 py-2 border-r-2 border-black/10 text-black rounded-md">
+                                <div
+                                    class="bg-amber-300 my-auto px-2 py-2 border-r-2 border-black/10 text-black rounded-md">
                                     Film címe:
                                 </div>
                                 <h2 class="card-title text-base px-2 py-2 text-black font-semibold">
@@ -149,23 +156,42 @@
                     </div>
                 </div>
             </div>
+
+            <button @click="handleCreateScreeningDay"
+                class="bg-white p-2 px-4 rounded-lg text-pink-600 font-semibold block mx-auto text-xl">Vetítési nap
+                mentése</button>
         </div>
     </BaseLayout>
 </template>
 
 <script setup>
 import { computed, ref, onMounted, onUnmounted } from "vue";
+import { storage } from "@utils/http.mjs";
+import { ToastService } from "@stores/ToastService";
+import BaseLayout from "@layouts/BaseLayout.vue";
+import { useRouter } from 'vue-router';
 import { useMovieStore } from "@stores/MovieStore.mjs";
 import { useDriveInCinemaStore } from "@stores/DriveInCinemaStore";
-import { storage } from "@utils/http.mjs";
-import BaseLayout from "@layouts/BaseLayout.vue";
+import { useUserStore } from "@stores/UserStore";
+import { useScreeningStore } from "@stores/ScreeningStore.mjs";
 
 const movieStore = useMovieStore();
 const driveInCinemaStore = useDriveInCinemaStore();
+const screeningStore = useScreeningStore();
+const userStore = useUserStore();
 
 const selectedMovies = ref(["", "", "", ""]);
 const isOpen = ref(false);
 const selectedValue = ref("");
+const router = useRouter();
+const selectedDate = ref('');
+const screeningsArray = ref([]);
+const baseStart = { hour: 16, minute: 30 };
+const maxScreeningsPerDay = 4;
+const startTimes = ref([]);
+
+
+
 
 const selectedMovieObjects = computed(() =>
     selectedMovies.value.map((id) =>
@@ -177,6 +203,22 @@ const selectedCinema = computed(() => {
     if (!selectedValue.value) return null
     return driveInCinemaStore.driveInCinemas.find(cinema => cinema.id === selectedValue.value)
 });
+
+const minDate = computed(() => {
+    if (!selectedCinema.value) return '';
+
+    let date = new Date();
+
+    while (screeningsArray.value.some(
+        s => s.drive_in_cinema_id === selectedCinema.value.id &&
+            s.start_time.startsWith(date.toISOString().split("T")[0])
+    )) {
+        date.setDate(date.getDate() + 1);
+    }
+
+    return date.toISOString().split("T")[0];
+});
+
 
 const toggleDropdown = () => {
     isOpen.value = !isOpen.value
@@ -198,16 +240,15 @@ const closeDropdown = (event) => {
     }
 };
 
-const baseStart = { hour: 16, minute: 30 };
 const getSchedule = (index, duration) => {
 
     let currentHour = baseStart.hour;
     let currentMinute = baseStart.minute;
 
     for (let j = 0; j < index; j++) {
-        const prevMovie = selectedMovieObjects.value[j];
-        if (prevMovie?.duration_min) {
-            currentMinute += prevMovie.duration_min + 20;
+        const movie = selectedMovieObjects.value[j];
+        if (movie?.duration_min) {
+            currentMinute += movie.duration_min + 20;
             while (currentMinute >= 60) {
                 currentMinute -= 60;
                 currentHour++;
@@ -227,16 +268,82 @@ const getSchedule = (index, duration) => {
     return `${pad(currentHour)}:${pad(currentMinute)} - ${pad(endHour)}:${pad(endMinute)}`;
 };
 
+const getStartTimes = () => {
+    let currentHour = baseStart.hour;
+    let currentMinute = baseStart.minute;
+
+    startTimes.value = selectedMovieObjects.value.map(movie => {
+        if (!movie) return null;
+
+        const pad = n => (n < 10 ? "0" + n : n);
+        const startTimeStr = `${pad(currentHour)}:${pad(currentMinute)}`;
+
+        let totalMinutes = currentMinute + movie.duration_min + 20;
+        while (totalMinutes >= 60) {
+            totalMinutes -= 60;
+            currentHour++;
+        }
+        currentMinute = totalMinutes;
+
+        return startTimeStr;
+    });
+};
+
+
+const computeAvailableDate = (date) => {
+    const dateStr = date.toISOString().split("T")[0];
+
+    const count = screeningsArray.value.filter(s =>
+        s.drive_in_cinema_id === selectedCinema.value.id &&
+        s.start_time.split(" ")[0] === dateStr
+    ).length;
+
+    if (count >= maxScreeningsPerDay) {
+        const nextDate = new Date(date);
+        nextDate.setDate(date.getDate() + 1);
+        return computeAvailableDate(nextDate);
+    }
+
+    return dateStr;
+};
+
+const handleCreateScreeningDay = async () => {
+    getStartTimes();
+
+    const datePrefix = selectedDate.value;
+    await Promise.all(selectedMovies.value.map((movieId, i) => {
+        if (!movieId) return;
+        return screeningStore.createScreening({
+            movie_id: movieId,
+            drive_in_cinema_id: selectedCinema.value.id,
+            start_time: `${datePrefix} ${startTimes.value[i]}:00`
+        });
+    }));
+
+    ToastService.showSuccess(`Vetítések sikeresen létrehozva a ${datePrefix} napra!`)
+}
+
 onMounted(async () => {
+    await userStore.getUser();
+    if (!userStore.isAdmin) {
+        router.replace("/");
+    };
+
     await movieStore.getMovies();
     await driveInCinemaStore.getDriveInCinemas();
-    document.addEventListener('click', closeDropdown);
+
+    const screeningsResponse = await screeningStore.getScreenings();
+    screeningsArray.value = screeningsResponse.data;
 });
 
 onUnmounted(() => {
     document.removeEventListener('click', closeDropdown);
 });
 </script>
+
+
+
+
 
 <style scoped>
 .max-h-60::-webkit-scrollbar {

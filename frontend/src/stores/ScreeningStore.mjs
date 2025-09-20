@@ -30,7 +30,7 @@ export const useScreeningStore = defineStore("screenings", () => {
   async function createScreening(data) {
     try {
       await http.post("/screenings", data);
-      screenings.value.push(data);
+      //screenings.value.push(data);
       return data;
     } catch (err) {
       console.error("Hiba a vetítés létrehozásakor", err);

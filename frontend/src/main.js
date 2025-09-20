@@ -14,6 +14,7 @@ import PrimeVue from 'primevue/config';
 import Paginator from 'primevue/paginator';
 import FileUpload from 'primevue/fileupload'
 import Aura from '@primeuix/themes/aura';
+import DatePicker from 'primevue/datepicker';
 
 const CinemaRoadPreset = definePreset(Aura, {
     semantic:{

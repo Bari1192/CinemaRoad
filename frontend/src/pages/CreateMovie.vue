@@ -76,9 +76,9 @@
                             <select v-model="movieType"
                                 class="w-full p-2 text-pink-600 rounded-lg border-2 border-pink-300">
                                 <option value="" disabled>Válassz műfajt</option>
-                                <option value="Action">Akció</option>
-                                <option value="Family">Családi</option>
-                                <option value="Horror">Horror</option>
+                                <option value="action">Akció</option>
+                                <option value="family">Családi</option>
+                                <option value="horror">Horror</option>
                             </select>
                         </div>
 

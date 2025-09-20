@@ -1,20 +1,6 @@
-# Migration names & differences
+# Projekt URL elérés - lokális környezet - beállítása
 
-## Fullstack szerkezeti átalakítása
-| <l>Original URL</l>           | ⠀ ⠀ ⠀ ⠀ ⠀ 󠀠󠀠<o>❯❯❯❯</o>⠀ ⠀ ⠀ ⠀ ⠀ |      <ac>New URL site</ac>      |
-| :---------------------------- | :----------------------------: | :---------------------------: |
-| <do>backend.vm1.test</do>     |          <o>❯❯❯❯</o>           |   <w>backend.cinemaroad</w>   |
-| <do>frontend.vm1.test</do>    |          <o>❯❯❯❯</o>           |  <w>frontend.cinemaroad</w>   |
-| <do>pma.vm1.test</do>         |          <o>❯❯❯❯</o>           |     <w>pma.cinemaroad</w>     |
-| <do>mailcatcher.vm1.test</do> |          <o>❯❯❯❯</o>           | <w>mailcatcher.cinemaroad</w> |
-| <do>docs.vm1.test</do>        |          <o>❯❯❯❯</o>           |    <w>docs.cinemaroad</w>     |
-| <do>api.vm1.test</do>         |          <o>❯❯❯❯</o>           |     <w>api.cinemaroad</w>     |
-| <do>jsonserver.vm1.test</do>  |          <o>❯❯❯❯</o>           | <w>jsonserver.cinemaroad</w>  |
-| <do>swagger.vm1.test</do>     |          <o>❯❯❯❯</o>           |   <w>swagger.cinemaroad</w>   |
-
-## Projekt URL elérés - lokális környezet - beállítása
-
-### Host fájl frissítése:
+## Host fájl frissítése:
 1. Nyissa meg a **Fájlkezelőt** *(windows környezetben)* a tálcán található mappa ikonra kattintva. 
 
 2. Kattintson a lokációs cím beírásához a megjelenő ablak tetejénél lévő 🏠︎ ikon melletti címsávba.

@@ -1,29 +1,37 @@
 # 🎬 Cinema Road – Drive-in Mozi 
 
-## 1️⃣ A projekt letöltése (klónozás)
+## 1️⃣ A projekt inicializálása *(klónozása lokálisan)*
 
-1. VS Code-ban **nyiss Terminált** (lásd fent).
-2. Válaszd ki a mappát, ahova mented:
+1. Nyissa meg a Visual Studio Code programot!
+2. A program megnyitása után a Visual Studio Code -ban **nyissa meg terminált** 
+   
+   ![terminal](/resources/terminal.png)
+
+**3. Lépjen át abba a mappába, ahova menteni kívánja a projektet:**
    ```bash
-   cd /altalad_valasztott_mappa/
+   cd /projektek/kivalasztott_mappa/
    ```
-3. Írd be:
+   > **Git szükséges** a további lépésekhez! Amennyiben nincs telepítve a *git*, töltse le **[ide kattintva](https://git-scm.com/downloads)** a következő lépések **folytatása előtt**!
+
+**4. Írja be a terminálba a következő parancsot:**
    ```bash
    git clone https://github.com/Bari1192/CinemaRoad
    ```
-4. Lépj be a mappába:
+**5. Majd lépjen be a projekt fő mappájába az alábbi paranccsal:**
    ```bash
    cd CinemaRoad
    ```
-
 ---
 
 ## 2️⃣ Környezeti változók beállítása (.env)
 
 1. Az alapértelmezett beállításokat a `.env.example` fájl tartalmazza a projekthez.
-2. Amennyiben változtatni szeretnéd, **szerkeszd a .env** fájlt *(pl. jelszó, email)*
-3. A változtatásaid alapján jön létre a gyökérkönyvtárban a `.env` fájl, melyre a projekt épül.
-4. Első indításhoz az alapértelmezett értékekkel elegendő futtatni!
+
+2. Amennyiben változtatni kívánja ezeket, a **.env** fájl módosításával megteheti. *(pl.: jelszó, email, stb.)*
+
+3. Alapértelmezetten *- módosítások nélkül -* a `.env.example` alapján jön létre a gyökérkönyvtárban a `.env` fájl, melyre a projekt alapjai épülnek.
+4. 
+5. Első indításhoz az alapértelmezett értékekkel elegendő futtatni, ***módosítások eszközölése ebben nem szükséges!***
 
 ---
 
@@ -31,73 +39,68 @@
 
 ### 🚦 Indítás (bármikor):
 
-1. Ahhoz, hogy az előre beállított URL címeken elérhető legyen a projekt, szükséges a windows `host` fájl megfelelő beállítása az alábbiak szerint (Alapértelmezetten a `C:\Windows\System32\drivers\etc` mappában található a `host` fájl.
-   -  Jobb klikk segítségével ***Notepad***-dal megnyitva a fájl végéhez görgetve a **Host_Setup.md** fájlban található, az "***# End of section"*** rész alatti beállítások átmásolása szükséges! 🛠️
+1. Ahhoz, hogy az előre beállított URL címeken elérhető legyen a projekt, szükséges a windows `host` fájl megfelelő beállítása az alábbi dokumentáció szerint:
+   
+   > [Hosts projekt beállítások](/Host_Setup.md)
 
-Mindezek után a *CinemaRoad* mappájában adjuk ki a terminálban a következő parancsokat:
-
-1. Amennyiben demo környezetben szeretnénk futtatni a projektet
+2. A projektsturktúrát és annak funkcióit a **demo indítási környezettel** érhetjük el, melyhez az alábbi parancs kiadása szükséges:
 
 ```bash
 sh start.sh --demo
 ```
-- **elindít minden szervert, adatbázist és a függőségek telepítését is elvégzi a tesztesetekkel, a backend storage elérését publikálja**!
+*Elindít minden szervert, adatbázist és a függőségek telepítését is elvégzi a tesztesetekkel, a backend storage elérését publikálja*!
 
-***VAGY***
-
-1. Amennyiben fejlesztői *(dev)* környezetben szeretnénk futtatni a projektet
+3. Amennyiben **fejlesztői** *(dev)* **környezetben** szeretnénk futtatni a projektet, az alábbi parancs kiadása szükséges:
   
 ```bash
 sh start.sh --dev
 ```
-- **elindít minden szervert, adatbázist és a függőségek telepítését is elvégzi, a backend storage elérését publikálja**!
+
+*Elindít minden szervert, adatbázist és a függőségek telepítését is elvégzi a **tesztesetek futtatása nélkül**, a backend storage elérését publikálásával.*
 
 
 ### 🛑 Leállítás:
 ```bash
 docker compose stop
 ```
-- Könnyű, gyors, mindent megőriz!
+- Könnyű, gyors és hatékony leállást eredményez a generált adatok megőrzésével.
 
-### ❌ Teljes törlés (adatok is törlődnek!)
+### ❌ Teljes törlés 
 ```bash
 docker compose down -v
 ```
-- Ezzel *minden újraindul*, minden eddigi adat *(felhasználók, filmek stb.)* elveszik.
+- Hatékony teljes leállást eredményez, ugyanakkor minden generált adat törlésével jár.
 
 ---
 
 ## 4️⃣ Mit tartalmaz a projekt?
 
-- `frontend` – felhasználói (Vue.js) webalkalmazás
-- `backend` – **szerver** és adatbázis (PHP/Laravel)
-- `pma` – adatbázis (PhpMyAdmin vizuális felületét az **adatbázis állomány** eléréséhez)
-- `docs` – NextJs által beépített **dokumentációs oldalt** teszi elérhetővé.
+- `Frontend` – felhasználói (Vue.js) webalkalmazás
+- `Backend` – **szerver** és adatbázis (PHP/Laravel)
+- `Adatbázis` – adatbázis (PhpMyAdmin vizuális felületét az **adatbázis állomány** eléréséhez)
+- `Dokumentációs oldal` – NextJs által beépített **dokumentációs oldal** - (docs). teszi elérhetővé.
 - `nginx/` – kiszolgáló beállítások - szerverek közötti kommunikációra.
-- `start.sh [típus]` – **mindent szerver elindítását teszi lehető** egyszerre - függően a típus beállításától!
+- `sh start.sh [--típus]` – **Típusbeállítástól függő éles és fejlesztési projekt elindítását teszi lehetővé!
 
 **Elérés böngészőben:**  
 - [Frontend](http://frontend.cinemaroad)
 - [Backend](http://backend.cinemaroad)
 - [Database](http://pma.cinemaroad)
 - [Documentations](http://docs.cinemaroad)
-
 ---
 
 ## 5️⃣ Hibakeresés és karbantartás 🛠️
 
 - Logok: `backend/storage/logs`
-- Ha valami nem jó: leállítás + újraindítás!
-```bash
-docker compose down -v
-./start.sh
-```
+- Probléma / Hiba / rendellenes működés esetén : teljes leállítást kell eszközölni és a projektet `--demo` utótaggal indítsa újra!
+   ```bash
+   docker compose down -v
+   ./start.sh --demo
+   ```
 - Gyors újraindítás (*nem javasolt*):
-```bash
-    docker compose restart
-```
-- Frissítés előtt mindig **ments le mindent**!
----
+   ```bash
+       docker compose restart
+   ```
 
 ## ℹ️ Források és további segítségekért
 

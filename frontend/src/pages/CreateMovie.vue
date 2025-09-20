@@ -76,9 +76,9 @@
                             <select v-model="movieType"
                                 class="w-full p-2 text-pink-600 rounded-lg border-2 border-pink-300">
                                 <option value="" disabled>Válassz műfajt</option>
-                                <option value="action">Akció</option>
-                                <option value="family">Családi</option>
-                                <option value="horror">Horror</option>
+                                <option value="Action">Akció</option>
+                                <option value="Family">Családi</option>
+                                <option value="Horror">Horror</option>
                             </select>
                         </div>
 
@@ -197,7 +197,7 @@ const handleCreateMovie = async () => {
     const formData = new FormData();
     formData.append("title", movieTitle.value);
     formData.append("description", movieDescription.value);
-    formData.append("type", movieType.value);
+    formData.append("type", movieType.value.toLowerCase());
     formData.append("director", movieDirector.value);
     formData.append("release_date", movieReleaseDate.value);
     formData.append("duration_min", movieDurationMin.value);

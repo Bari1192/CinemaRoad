@@ -47,7 +47,7 @@ export const ToastService = {
 
           const toastBody = toastEl.querySelector(".Toastify__toast-body");
           toastBody.style.cssText =
-            "display: flex; flex-direction: column; align-items: center;";
+            "display: flex; flex-direction: column; align-items: center; text-align:center;";
 
           const messageDiv = toastBody.querySelector("div");
           messageDiv.style.cssText =

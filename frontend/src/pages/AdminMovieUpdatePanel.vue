@@ -5,18 +5,28 @@ import { ToastService } from '@stores/ToastService'
 import { useUserStore } from '@stores/UserStore'
 import { toast } from 'vue3-toastify';
 import { storage } from '@utils/http.mjs';
+import BaseSpinner from '@components/layout/BaseSpinner.vue';
 
 const userStore = useUserStore();
 const movieStore = useMovieStore()
 const editableMovies = ref([])
+const loading = ref(false);
 
 onMounted(async () => {
-    await userStore.getUser();
-    if (!userStore.isAdmin) {
-        router.replace("/");
-    };
-    await movieStore.getMovies()
-    editableMovies.value = [...movieStore.movies]
+    loading.value = true;
+    try {
+        await userStore.getUser();
+        if (!userStore.isAdmin) {
+            router.replace("/");
+        };
+        await movieStore.getMovies()
+        editableMovies.value = [...movieStore.movies]
+    } catch (error) {
+        ToastService.showError('Hiba történt a betöltés közben. Próbálja újra később!');
+    }
+    finally {
+        loading.value = false;
+    }
 })
 const formatDate = (d) => {
     if (!d) return null;
@@ -66,7 +76,7 @@ const deleteMovie = async (movie) => {
 </script>
 
 <template>
-    <div class="w-full mx-auto my-4 px-2 sm:px-4 lg:px-8">
+    <div v-if="!loading" class="w-full mx-auto my-4 px-2 sm:px-4 lg:px-8">
         <div class="w-full sm:w-2/3 lg:w-1/3 mb-6 sm:mb-8 mt-6 sm:mt-12 mx-auto block relative">
             <div class="absolute inset-0 bg-purple-400 blur-2xl -z-10"></div>
             <h1
@@ -132,7 +142,7 @@ const deleteMovie = async (movie) => {
                         <div class="col-span-1 flex justify-center">
                             <select v-model.number="movie.is_premier" name="isPremier"
                                 class="w-fit py-1 px-2 font-semibold rounded border-2 border-black/65"
-                                :class="movie.is_premier?'text-lime-600':'text-red-600'">
+                                :class="movie.is_premier ? 'text-lime-600' : 'text-red-600'">
                                 <option :value="0" class="text-red-600 font-semibold text-base">Nem</option>
                                 <option :value="1" class="text-lime-600 font-semibold text-base">Igen</option>
                             </select>
@@ -234,5 +244,11 @@ const deleteMovie = async (movie) => {
                 </tbody>
             </table>
         </div>
+    </div>
+    <div v-else class="w-full my-24 h-full flex justify-center items-top mx-auto font-semibold text-white text-center">
+        <p class="inline-flex">
+            <BaseSpinner />
+            <span class="pl-4 text-lg">Adatok szinkronizációja folyamatban...</span>
+        </p>
     </div>
 </template>

@@ -249,9 +249,36 @@
                     }" />
             </div>
         </div>
+        <div class="flex items-center justify-center gap-8 mx-auto my-2 max-w-5xl">
+            <button @click="selectedPanel = selectedPanel === 'movie' ? null : 'movie'" :class="[
+                'transition-colors duration-300 ease-in-out inline-flex gap-2 py-4 px-6 rounded font-semibold text-base',
+                'bg-gradient-to-b from-sky-700 via-indigo-600 to-purple-600 hover:from-pink-600 hover:to-purple-700',
+                {
+                    'from-pink-600 to-purple-700 ring-2 ring-rose-300': selectedPanel === 'movie'
+                }
+            ]">
+                <i class="fa-solid fa-clapperboard text-2xl text-white"></i>
+                <p class="text-white">Film módosítása</p>
+            </button>
 
+            <!-- Elválasztó -->
+            <span class="h-12 w-[4px] rounded-full bg-gradient-to-b from-sky-400 via-white to-purple-400"></span>
 
-        <AdminMovieUpdatePanel />
+            <!-- Vetítés szerkesztése gomb -->
+            <button @click="selectedPanel = selectedPanel === 'screening' ? null : 'screening'" :class="[
+                'transition-colors duration-300 ease-in-out inline-flex gap-2 py-4 px-6 rounded font-semibold text-base',
+                'bg-gradient-to-b from-sky-700 via-indigo-600 to-purple-600 hover:from-pink-600 hover:to-purple-700',
+                {
+                    'from-pink-600 to-purple-700 ring-2 ring-rose-300': selectedPanel === 'screening'
+                }
+            ]">
+                <i class="fa-solid fa-video text-2xl text-white"></i>
+                <p class="text-white">Moziműsor Szerkesztő</p>
+            </button>
+        </div>
+        <AdminMovieUpdatePanel v-if="selectedPanel === 'movie'" />
+        <CreateScreeningComponent v-if="selectedPanel === 'screening'" />
+
     </BaseLayout>
 </template>
 
@@ -261,6 +288,7 @@ import Paginator from 'primevue/paginator'
 import { onMounted, ref, computed } from 'vue';
 import { ToastService } from '@stores/ToastService';
 import AdminMovieUpdatePanel from './AdminMovieUpdatePanel.vue';
+import CreateScreeningComponent from '@components/CreateScreeningComponent.vue';
 
 import { useTicketStore } from '@stores/TicketStore';
 import { useMovieStore } from '@stores/MovieStore.mjs';
@@ -278,6 +306,7 @@ const viewMode = ref('reservations');
 const emailFilter = ref('');
 const selectedMovie = ref('');
 const selectedLocation = ref('');
+const selectedPanel = ref(null);
 
 const locationNames = {
     1: "Starfield",

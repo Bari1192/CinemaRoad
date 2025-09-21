@@ -1,23 +1,26 @@
 <template>
     <BaseLayout>
 
-        <h1 class="text-3xl font-semibold text-center py-10">
-            Vetítési nap összeállító
-        </h1>
         <div
-            class="mx-12 bg-indigo-700/45 border border-purple-700 shadow-md shadow-pink-500 p-3 my-4 rounded-lg text-white">
-            <div class="grid grid-cols-2 lg:w-fit mx-auto lg:gap-12 lg:mt-2">
-                <div class="col-span-1 w-fit flex flex-col justify-around m-2 gap-4">
+            class="mb-28 mx-12 bg-indigo-700/45 border border-purple-700 shadow-md shadow-pink-500 p-3 my-4 rounded-lg text-white">
+
+            <h1 class="text-3xl lg:text-4xl font-semibold text-center my-8 underline underline-offset-8">
+                Moziműsor szerkesztő felület
+            </h1>
+            <div class="grid grid-cols-2 w-fit mx-auto lg:gap-12 lg:mt-2">
+
+                <div class="col-span-1 w-fit  flex flex-col mx-auto justify-normal gap-4 p-4 md:min-h-[220px]">
                     <label class="text-xl font-semibold" for="driveInCinema">
                         Válassza ki a mozi helyszínét a vetítési nap összeállításához:
                     </label>
 
                     <div class="relative">
                         <button type="button" @click="toggleDropdown"
-                            class="w-full text-lg border border-pink-600 text-pink-950 font-semibold p-2 rounded-lg bg-white flex items-center justify-between cursor-pointer hover:bg-indigo-50 transition-colors"
+                            class="w-full text-lg border border-pink-600 text-pink-950 font-semibold p-2 rounded-lg bg-white flex
+                             items-center justify-between lg:px-3 align-top cursor-pointer hover:bg-indigo-50 transition-colors"
                             :class="{ 'ring-2 ring-pink-300': isOpen }">
 
-                            <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-3 py-1">
                                 <img v-if="selectedCinema" :src="storage.url(`img/${selectedCinema.name}.jpg`)"
                                     :alt="selectedCinema.name"
                                     class="w-8 h-8 rounded-full object-cover border border-gray-300" />
@@ -26,7 +29,8 @@
                                     <span class="text-base">📍</span>
                                 </div>
 
-                                <span>{{ selectedCinema ? selectedCinema.name : 'Mozihelyszín kiválasztása...' }}</span>
+                                <span class="md:text-base lg:text-lg lg:text-center">{{ selectedCinema ?
+                                    selectedCinema.name : 'Mozihelyszín kiválasztása...' }}</span>
                             </div>
 
                             <svg class="w-5 h-5 transition-transform duration-300" :class="{ 'rotate-180': isOpen }"
@@ -74,9 +78,16 @@
                             {{ cinema.name }}
                         </option>
                     </select>
+
+                    <div v-if="selectedValue"
+                        class="bg-white/10 rounded-lg w-fit ml-auto flex-col items-end justify-end p-3 backdrop-blur-sm">
+                        <div class="text-right text-sm text-white font-semibold">Kiválasztott helyszín</div>
+                        <div class="text-right text-lg font-bold text-amber-400">{{
+                            driveInCinemaStore.driveInCinemas[selectedValue - 1].name }}</div>
+                    </div>
                 </div>
                 <div :class="{ 'opacity-50 pointer-events-none': !selectedCinema }"
-                    class="col-span-1 w-full mx-auto flex flex-col justify-around gap-4 p-4">
+                    class="col-span-1 w-full mx-auto flex flex-col justify-normal gap-4 p-4 md:min-h-[220px]">
                     <label class="text-xl font-semibold text-white" for="date">
                         Válassza ki, mely nap moziműsorát szeretné tervezi:
                     </label>
@@ -86,26 +97,29 @@
                             @change="validateDate" class="w-full bg-white text-lg font-semibold p-3 rounded-lg border-2 border-pink-600  text-pink-950 focus:ring-2 focus:ring-pink-300
                              focus:border-pink-700 transition-all duration-200 hover:bg-sky-50" />
 
-                        <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                        </div>
+                        <!-- <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                        </div> -->
                     </div>
-                    <div v-if="selectedDate" class="bg-white/10 rounded-lg p-3 backdrop-blur-sm">
-                        <div class="text-sm text-white/80">Kiválasztott dátum:</div>
-                        <div class="text-lg font-bold text-white">{{ formatSelectedDate }}</div>
+                    <div v-if="selectedDate" class="bg-white/10 rounded-lg p-3 w-fit backdrop-blur-sm">
+                        <div class="text-sm text-white font-semibold">Kiválasztott dátum</div>
+                        <div class="text-lg font-bold text-amber-400">{{ selectedDate }}</div>
                     </div>
                 </div>
             </div>
 
-            <div class="w-full h-[5px] bg-gradient-to-r from-transparent via-sky-300 to-transparent my-8">
+            <div
+                :class="selectedDate == '' ? 'hidden' : 'w-11/12 rounded-full h-[4px] bg-gradient-to-r from-transparent via-sky-300 to-transparent my-6 mx-auto'">
             </div>
 
-            <div class="grid grid-cols-4 mt-4 gap-8 mb-8"> <!-- térközzel itt a gap-pel játsz, ne a width-del! -->
+            <div :class="selectedDate ? 'grid grid-cols-4 mt-4 gap-8 mb-8 ' : 'hidden'">
+                <!-- térközzel itt a gap-pel játsz, ne a width-del! -->
                 <div v-for="(movie, i) in selectedMovieObjects" :key="i" class="p-1 mx-auto rounded">
                     <h2
-                        class="text-lg font-semibold text-center mb-2 text-pink-700 py-2 px-3 bg-sky-50 rounded-md w-fit mx-auto cursor-default">
+                        class="text-lg font-semibold w-full text-center mb-2 text-pink-100 py-2 px-3 bg-gradient-to-r from-pink-600/55 via-rose-500/75 to-pink-600/55 shadow-md shadow-sky-200/90 slate-400 rounded-md mx-auto cursor-default">
                         {{ i + 1 }}. Vetítés létrehozása</h2>
 
-                    <select v-model="selectedMovies[i]" class="w-full p-2 border mt-2 text-pink-950 rounded">
+                    <select v-model="selectedMovies[i]"
+                        class="w-full p-2 border mt-2 text-pink-950 font-semibold rounded">
                         <option disabled value="">Válassza ki a filmet!</option>
                         <option v-for="movie in movieStore.movies" :key="movie.id" :value="movie.id">
                             {{ movie.title }}
@@ -157,9 +171,27 @@
                 </div>
             </div>
 
-            <button @click="handleCreateScreeningDay"
-                class="bg-white p-2 px-4 rounded-lg text-pink-600 font-semibold block mx-auto text-xl">Vetítési nap
-                mentése</button>
+            <div
+                :class="selectedMovieObjects.filter(Boolean).length < 1 ? 'hidden' : 'w-11/12 rounded-full h-[4px] bg-gradient-to-r from-transparent via-sky-300 to-transparent mt-14 mx-auto'">
+            </div>
+
+            <div :class="'flex w-full h-fit mt-8 mb-12'">
+                <button @click="handleCreateScreeningDay"
+                    :class="selectedMovieObjects.filter(Boolean).length < 3 ? 'hidden' : 'order-2 bg-emerald-500 shadow-lg shadow-sky-100/50 hover:bg-emerald-500/90 transition-colors duration-200 ease-in-out p-2 px-4 rounded-lg text-white font-semibold block mx-auto border-2 border-sky-300 text-xl'">Vetítési
+                    nap
+                    mentése
+                    <div class="inline-block mx-auto px-2 py-3">
+                        <i class="fa-solid fa-download"></i>
+                    </div>
+                </button>
+                <button @click="handleDeleteScreeningDay"
+                    :class="selectedMovieObjects.filter(Boolean).length > 0 ? 'order-1 bg-yellow-600 shadow-lg shadow-yellow-100/50 hover:bg-yellow-600/90 transition-colors duration-200 ease-in-out p-2 px-4 rounded-lg text-white font-semibold block mx-auto border-2 border-white/30 text-xl' : 'hidden'">
+                    Összeállítás újrakezdése
+                    <div class="inline-block mx-auto px-2 py-3">
+                        <i class="fa-solid fa-repeat"></i>
+                    </div>
+                </button>
+            </div>
         </div>
     </BaseLayout>
 </template>
@@ -322,6 +354,15 @@ const handleCreateScreeningDay = async () => {
 
     ToastService.showSuccess(`Vetítések sikeresen létrehozva a ${datePrefix} napra!`)
 }
+const handleDeleteScreeningDay = async () => {
+    const confirmed = await ToastService.showConfirm('Módosítások visszavonása', 'Biztosan újra szeretné kezdeni? Eszközölt módosításai törlésre kerülnek.');
+    if (confirmed) {
+        selectedMovies.value = [null, null, null, null]; // null-t simán sajni nem engedi mert computed-es.
+        selectedValue.value = "";
+        selectedDate.value = '';
+        ToastService.showSuccess('A módosítások visszavonásra kerültek.');
+    }
+};
 
 onMounted(async () => {
     await userStore.getUser();
@@ -340,11 +381,6 @@ onUnmounted(() => {
     document.removeEventListener('click', closeDropdown);
 });
 </script>
-
-
-
-
-
 <style scoped>
 .max-h-60::-webkit-scrollbar {
     width: 6px;

@@ -2,10 +2,11 @@
     <BaseLayout>
         <div class="w-11/12 mx-auto my-10">
             <h1 v-if="viewMode === 'reservations'"
-                class="mt-10 text-pink-600 mb-5 font-bold text-2xl sm:text-3xl text-center">
+                class="text-lg sm:text-xl lg:text-3xl font-extrabold text-center text-pink-50 tracking-wider py-2 sm:py-3 mb-4 sm:mb-6 relative z-10">
                 Foglalási áttekintő
             </h1>
-            <h1 v-else class="mt-10 text-pink-600 mb-5 font-bold text-2xl sm:text-3xl text-center">
+            <h1 v-else
+                class="text-lg sm:text-xl lg:text-3xl font-extrabold text-center text-pink-50 tracking-wider py-2 sm:py-3 mb-4 sm:mb-6 relative z-10">
                 Vásárlási áttekintő
             </h1>
 
@@ -60,7 +61,7 @@
                 <div v-for="reservation in filteredItems" :key="reservation.id"
                     class="bg-gray-100 py-4 pl-2 rounded-lg shadow">
                     <p class="font-semibold pl-2">Helyszín: <span class="px-2">{{ locationNames[reservation.location_id]
-                            }}</span></p>
+                    }}</span></p>
                     <p class="font-semibold pl-2">Email: <span class="px-2">{{ reservation.guest_email ||
                         reservation.userEmail }}</span></p>
                     <p class="font-semibold pl-2">Film: <span class="px-2">Film</span></p>
@@ -114,12 +115,12 @@
                     <p class="font-semibold text-pink-600 pl-2">Film: <span class="px-2">Film</span></p>
                     <td class="font-semibold text-pink-600 p-2">
                         <span v-if="editingDataId !== purchase.id"> Jegyek: {{ purchase.parkingspot
-                            }}</span>
+                        }}</span>
                         <input v-else v-model="editableData.parkingspot" class="border rounded px-1 w-20 text-center" />
                     </td>
                     <p class="font-semibold text-pink-600 pl-2">Azonosító: <span class="px-2">{{ purchase.confirmation
                         ||
-                            purchase.ticket_code }}</span>
+                        purchase.ticket_code }}</span>
                     </p>
 
                     <div v-if="editingDataId !== purchase.id" class="flex justify-end gap-2 mt-3">

@@ -357,7 +357,7 @@ const handleCreateScreeningDay = async () => {
 const handleDeleteScreeningDay = async () => {
     const confirmed = await ToastService.showConfirm('Módosítások visszavonása', 'Biztosan újra szeretné kezdeni? Eszközölt módosításai törlésre kerülnek.');
     if (confirmed) {
-        selectedMovies.value = [null, null, null, null]; // null-t simán sajni nem engedi mert computed-es.
+        selectedMovies.value = [null, null, null, null];
         selectedValue.value = "";
         selectedDate.value = '';
         ToastService.showSuccess('A módosítások visszavonásra kerültek.');

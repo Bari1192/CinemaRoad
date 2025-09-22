@@ -5,6 +5,7 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\DriveInCinema;
 use App\Models\Movie;
 use App\Models\Screening;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -65,6 +66,12 @@ class ScreeningControllerTest extends TestCase
 
     public function test_it_returns_201_when_creating_a_screening()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+
         $screeningData = [
             'movie_id' => $this->movie->id,
             'drive_in_cinema_id' => $this->cinema->id,
@@ -76,6 +83,12 @@ class ScreeningControllerTest extends TestCase
 
     public function test_it_stores_screening_in_database_when_creating_it()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+        
         $screeningData = [
             'movie_id' => $this->movie->id,
             'drive_in_cinema_id' => $this->cinema->id,
@@ -87,6 +100,12 @@ class ScreeningControllerTest extends TestCase
 
     public function test_it_returns_correct_json_structure_after_creating_screening()
     {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum');
+        
         $screeningData = [
             'movie_id' => $this->movie->id,
             'drive_in_cinema_id' => $this->cinema->id,

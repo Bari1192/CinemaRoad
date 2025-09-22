@@ -8,6 +8,8 @@
   - Szűrők használata a lista szűkítésére
   - Foglalások és vásárlások módosítása
   - Foglalások és vásárlások törlése
+  - Film adatok módosítása
+  - Moziműsor létrehozása
 
 ## **2. Külső függőségek**
 - **Importok, csomagok**:

@@ -3,13 +3,29 @@
 ## **1. Komponens áttekintése**
 - **Célja és funkciója**: Az áttekintő komponens lehetővé teszi az adminok, moderátorok számára a felhasználók, vendégek **foglalás ,- és vásárlásaik** **kezelését**, megjelenítve a foglalt helyeket és lehetőséget **biztosítva** azok **módosítására vagy törlésére**.
 
-- **Fő felhasználói interakciók**:
-  - Foglalási és vásárlási áttekintés megtekintése
-  - Szűrők használata a lista szűkítésére
-  - Foglalások és vásárlások módosítása
-  - Foglalások és vásárlások törlése
-  - Film adatok módosítása
-  - Moziműsor létrehozása
+- **Adminpanel elérése és admin funkciók használata**
+- Admin jogosultságot a backend oldali ***UserSeeder*** adatainak megfelelően jön létre a(z):
+  
+  - **SuperAdmin** bejelentkezési adatai
+    > - **Email cím**: superadmin@gmail.com
+    > - **Jelszó**: superadminZ
+  
+  - **Admin** bejelentkezési adatai
+    > - **Email cím**: admin@gmail.com
+    > - **Jelszó**: Admin1234_
+
+A fenti hitelesítő adatok *(profilok)* egyikével történő bejelentkezés biztosítja a `demo üzemmódban` való webapplikáció tesztelését, jogosultságok áttekintését, a funkcionalitásokhoz való hozzáférést.
+
+- **Főbb adminsztrátori interakciók és funkciók**:
+  - Foglalások és vásárlások áttekintés, megtekintése,
+  - Szűrők használata az egyes lista/listák szűkítésére,
+  - Foglalások és vásárlások módosítása,
+  - Foglalások és vásárlások törlése.
+  - A mozikínálatban lévő filmek áttekintés, megtekintése,
+  - Mozifilmek adatainak szerkesztése,
+  - Mozifilmek törlése,
+  - Moziműsor létrehozása aktuális helyszínre, napra pontosan,
+  - Moziműsor létrehozásának újrakezdése / visszavonása véglegesítés előtt.
 
 ## **2. Külső függőségek**
 - **Importok, csomagok**:

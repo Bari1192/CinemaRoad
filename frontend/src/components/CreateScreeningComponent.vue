@@ -97,8 +97,7 @@
                     <!-- <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
                         </div> -->
                 </div>
-                <div v-if="selectedDate" 
-                class="bg-stone-400/70 border-r-2 p-3 w-fit border-gray-300/70 rounded-lg">
+                <div v-if="selectedDate" class="bg-stone-400/70 border-r-2 p-3 w-fit border-gray-300/70 rounded-lg">
                     <div class="text-sm text-white font-semibold">Kiválasztott dátum</div>
                     <div class="text-lg font-semibold text-amber-400">{{ selectedDate }}</div>
                 </div>
@@ -109,14 +108,16 @@
             :class="selectedDate == '' ? 'hidden' : 'w-11/12 rounded-full h-[4px] bg-gradient-to-r from-transparent via-sky-300 to-transparent my-6 mx-auto'">
         </div>
 
-        <div :class="selectedDate ? 'grid md:grid-cols-2 lg:grid-cols-4 mt-4 md:w-11/12 md:mx-auto gap-8 mb-8 ' : 'hidden'">
+        <div
+            :class="selectedDate ? 'grid md:grid-cols-2 lg:grid-cols-4 mt-4 md:w-11/12 md:mx-auto gap-8 mb-8 ' : 'hidden'">
             <!-- térközzel itt a gap-pel játsz, ne a width-del! -->
             <div v-for="(movie, i) in selectedMovieObjects" :key="i" class="p-1 mx-auto rounded">
                 <h2
                     class="text-sm lg:text-lg font-semibold w-full text-center mb-2 text-pink-100 py-2 px-3 bg-gradient-to-r from-pink-600/75 via-pink-700/70 to-pink-600/75 shadow-md shadow-sky-200/90 slate-400 rounded-md mx-auto cursor-default">
                     {{ i + 1 }}. Vetítés létrehozása</h2>
 
-                <select v-model="selectedMovies[i]" class="w-full text-sm lg:text-base font-medium py-1 px-1 lg:p-2 border mt-2 text-pink-950 lg:font-semibold rounded cursor-pointer">
+                <select v-model="selectedMovies[i]"
+                    class="w-full text-sm lg:text-base font-medium py-1 px-1 lg:p-2 border mt-2 text-pink-950 lg:font-semibold rounded cursor-pointer">
                     <option disabled value="">Film kiválasztása</option>
                     <option v-for="movie in movieStore.movies" :key="movie.id" :value="movie.id">
                         {{ movie.title }}
@@ -127,15 +128,16 @@
                      shadow-md shadow-sky-300 mt-3 p-2 flex flex-col justify-between">
                     <img v-if="movie.poster_url" :src="storage.url(movie.poster_url)" :alt="movie.title"
                         class="lg:w-full lg:h-64 lg:object-cover object-fit mt-2 mx-auto rounded-md" />
-                    
+
                     <div class="grid grid-cols-1 card-body md:mb-1 lg:mb-0 lg:mt-2">
-                        
+
                         <div class="grid grid-cols-1 md:mt-2 md:gap-3 text-center text-gray-800 pl-1">
                             <div
                                 class="bg-amber-300 text-sm my-auto lg:text-base font-semibold px-2 py-2 border-r-2 border-black/10 text-black rounded-md">
                                 Film címe:
                             </div>
-                            <h2 class="card-title pt-2 md:pt-0 text-sm lg:text-base my-auto px-1 lg:px-2 pb-0 lg:pb-2 text-black font-semibold">
+                            <h2
+                                class="card-title pt-2 md:pt-0 text-sm lg:text-base my-auto px-1 lg:px-2 pb-0 lg:pb-2 text-black font-semibold">
                                 {{ movie.title }}</h2>
                         </div>
                     </div>
@@ -150,16 +152,19 @@
 
                     <div class="grid grid-cols-2 align-middle md:inline-flex md:gap-4 md:justify-around md:mt-2 text-center text-gray-800 font-semibold border-b border-black/10 pb-3 md:pb-2
                     lg:border-b-0 lg:pb-0">
-                        
-                        <div class="bg-amber-300 w-full md:w-1/3 lg:w-1/2 mr-auto h-fit px-1 lg:px-2 py-2 border-r-2 border-black/10 text-black rounded-md">
+
+                        <div
+                            class="bg-amber-300 w-full md:w-1/3 lg:w-1/2 mr-auto h-fit px-1 lg:px-2 py-2 border-r-2 border-black/10 text-black rounded-md">
                             Vetítés:
                         </div>
                         <div class="px-2 py-2  lg:font-semibold text-black">
                             {{ getSchedule(i, movie.duration_min) }}
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 align-middle md:inline-flex md:gap-4 md:justify-around items-center md:mt-2 text-center text-gray-800 font-semibold">
-                        <div class="bg-amber-300 w-full md:w-fit lg:w-1/2 p-2 mr-auto text-black rounded-md border-r-2 border-black/10">
+                    <div
+                        class="grid grid-cols-2 align-middle md:inline-flex md:gap-4 md:justify-around items-center md:mt-2 text-center text-gray-800 font-semibold">
+                        <div
+                            class="bg-amber-300 w-full md:w-fit lg:w-1/2 p-2 mr-auto text-black rounded-md border-r-2 border-black/10">
                             Kategória:
                         </div>
                         <div class="px-2 py-2 text-black capitalize mx-auto">
@@ -337,19 +342,29 @@ const computeAvailableDate = (date) => {
 };
 
 const handleCreateScreeningDay = async () => {
-    getStartTimes();
-
-    const datePrefix = selectedDate.value;
-    await Promise.all(selectedMovies.value.map((movieId, i) => {
-        if (!movieId) return;
-        return screeningStore.createScreening({
-            movie_id: movieId,
-            drive_in_cinema_id: selectedCinema.value.id,
-            start_time: `${datePrefix} ${startTimes.value[i]}:00`
-        });
-    }));
-
-    ToastService.showSuccess(`Vetítések sikeresen létrehozva a ${datePrefix} napra!`)
+    const confirmREQUIRED = await ToastService.showConfirm('Moziműsör Létrehozásának Megerősítése',
+        'Biztosan létre szeretné hozni a moziműsort ezekkel az adatokkal? A létrehozás később nem visszavonható!');
+    if (confirmREQUIRED) {
+        try {
+            getStartTimes();
+            const datePrefix = selectedDate.value;
+            await Promise.all(selectedMovies.value.map((movieId, i) => {
+                if (!movieId) return;
+                return screeningStore.createScreening({
+                    movie_id: movieId,
+                    drive_in_cinema_id: selectedCinema.value.id,
+                    start_time: `${datePrefix} ${startTimes.value[i]}:00`
+                });
+            }));
+        } catch (error) {
+            ToastService.showError('Hiba történt a moziműsor létrehozásakor!')
+        } finally {
+            ToastService.showSuccess(`Vetítések sikeresen létrehozva a ${datePrefix} napra!`)
+        }
+    }
+    else {
+        ToastService.showSuccess('Moziműsor létrehozása visszavonásra került!')
+    }
 }
 const handleDeleteScreeningDay = async () => {
     const confirmed = await ToastService.showConfirm('Módosítások visszavonása', 'Biztosan újra szeretné kezdeni? Eszközölt módosításai törlésre kerülnek.');

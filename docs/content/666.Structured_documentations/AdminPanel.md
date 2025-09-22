@@ -66,4 +66,4 @@ A fenti hitelesítő adatok *(profilok)* egyikével történő bejelentkezés bi
 | **Effektek**       | Hover és animációs effektusok a gombokon  |
 
 ## **A komponenst tartalmi összefoglalója**
-A komponens célja, hogy a felhasználók áttekintést kapjanak a foglalásaikról és vásárlásaikról, kezeli a szűréseket és lehetővé teszi a módosításokat vagy törléseket az elemzett információk alapján.
+A komponens célja, hogy az adminok és a moderátorok átfogó képet kapjanak a előfoglalásokról és a felhasználók vásárlásaikról. Kezeli a szűréseket és lehetővé teszi a módosításokat vagy törléseket. Továbbá lehetőséget nyújtson a mozifilmek módosítására, javítására, illetve moziműsor létrehozására a kiválasztott helyszínre és napra a filmkatalógus alapján.

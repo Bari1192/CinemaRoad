@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-28 mx-12 bg-gradient-to-r from-indigo-500 via-purple-700 to-indigo-600 p-4 sm:p-6 rounded-lg shadow-md
+    <div v-if="!loading" class="mb-28 mx-12 bg-gradient-to-r from-indigo-500 via-purple-700 to-indigo-600 p-4 sm:p-6 rounded-lg shadow-md
  border border-purple-700 shadow-pink-500 my-4 text-white">
 
         <h1 class="text-3xl lg:text-4xl font-semibold text-center my-8 underline underline-offset-8">
@@ -197,6 +197,12 @@
             </button>
         </div>
     </div>
+    <div v-else class="w-full my-24 h-full flex justify-center items-top mx-auto font-semibold text-white text-center">
+        <p class="inline-flex">
+            <BaseSpinner />
+            <span class="pl-4 text-lg">Betöltés folyamatban...</span>
+        </p>
+    </div>
 </template>
 
 <script setup>
@@ -208,6 +214,7 @@ import { useMovieStore } from "@stores/MovieStore.mjs";
 import { useDriveInCinemaStore } from "@stores/DriveInCinemaStore";
 import { useUserStore } from "@stores/UserStore";
 import { useScreeningStore } from "@stores/ScreeningStore.mjs";
+import BaseSpinner from "./layout/BaseSpinner.vue";
 
 const movieStore = useMovieStore();
 const driveInCinemaStore = useDriveInCinemaStore();
@@ -223,9 +230,7 @@ const screeningsArray = ref([]);
 const baseStart = { hour: 16, minute: 30 };
 const maxScreeningsPerDay = 4;
 const startTimes = ref([]);
-
-
-
+const loading = ref(false);
 
 const selectedMovieObjects = computed(() =>
     selectedMovies.value.map((id) =>
@@ -377,16 +382,23 @@ const handleDeleteScreeningDay = async () => {
 };
 
 onMounted(async () => {
-    await userStore.getUser();
-    if (!userStore.isAdmin) {
-        router.replace("/");
-    };
+    loading.value = true;
+    try {
+        await userStore.getUser();
+        if (!userStore.isAdmin) {
+            router.replace("/");
+        };
 
-    await movieStore.getMovies();
-    await driveInCinemaStore.getDriveInCinemas();
+        await movieStore.getMovies();
+        await driveInCinemaStore.getDriveInCinemas();
 
-    const screeningsResponse = await screeningStore.getScreenings();
-    screeningsArray.value = screeningsResponse.data;
+        const screeningsResponse = await screeningStore.getScreenings();
+        screeningsArray.value = screeningsResponse.data;
+    } catch (error) {
+        ToastService.showError('Hiba történt a betöltés közben, próbálja újra később!');
+    } finally {
+        loading.value = false;
+    }
 });
 
 onUnmounted(() => {

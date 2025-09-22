@@ -61,7 +61,7 @@
                 <div v-for="reservation in filteredItems" :key="reservation.id"
                     class="bg-gray-100 py-4 pl-2 rounded-lg shadow">
                     <p class="font-semibold pl-2">Helyszín: <span class="px-2">{{ locationNames[reservation.location_id]
-                    }}</span></p>
+                            }}</span></p>
                     <p class="font-semibold pl-2">Email: <span class="px-2">{{ reservation.guest_email ||
                         reservation.userEmail }}</span></p>
                     <p class="font-semibold pl-2">Film: <span class="px-2">Film</span></p>
@@ -115,7 +115,7 @@
                     <p class="font-semibold text-pink-600 pl-2">Film: <span class="px-2">Film</span></p>
                     <td class="font-semibold text-pink-600 p-2">
                         <span v-if="editingDataId !== purchase.id"> Jegyek: {{ purchase.parkingspot
-                        }}</span>
+                            }}</span>
                         <input v-else v-model="editableData.parkingspot" class="border rounded px-1 w-20 text-center" />
                     </td>
                     <p class="font-semibold text-pink-600 pl-2">Azonosító: <span class="px-2">{{ purchase.confirmation
@@ -249,7 +249,7 @@
                     }" />
             </div>
         </div>
-        <div class="flex items-center justify-center gap-8 mx-auto my-2 max-w-5xl">
+        <div class="flex items-center justify-center gap-8 mx-auto my-2 max-w-5xl lg:mt-12">
             <button @click="selectedPanel = selectedPanel === 'movie' ? null : 'movie'" :class="[
                 'transition-colors duration-300 ease-in-out inline-flex gap-2 py-4 px-6 rounded font-semibold text-base',
                 'bg-gradient-to-b from-sky-700 via-indigo-600 to-purple-600 hover:from-pink-600 hover:to-purple-700',
@@ -261,10 +261,8 @@
                 <p class="text-white">Film módosítása</p>
             </button>
 
-            <!-- Elválasztó -->
             <span class="h-12 w-[4px] rounded-full bg-gradient-to-b from-sky-400 via-white to-purple-400"></span>
 
-            <!-- Vetítés szerkesztése gomb -->
             <button @click="selectedPanel = selectedPanel === 'screening' ? null : 'screening'" :class="[
                 'transition-colors duration-300 ease-in-out inline-flex gap-2 py-4 px-6 rounded font-semibold text-base',
                 'bg-gradient-to-b from-sky-700 via-indigo-600 to-purple-600 hover:from-pink-600 hover:to-purple-700',
@@ -275,25 +273,44 @@
                 <i class="fa-solid fa-video text-2xl text-white"></i>
                 <p class="text-white">Moziműsor Szerkesztő</p>
             </button>
+
+            <span class="h-12 w-[4px] rounded-full bg-gradient-to-b from-sky-400 via-white to-purple-400"></span>
+
+            <button @click="selectedPanel = selectedPanel === 'createMovie' ? null : 'createMovie'" :class="[
+                'transition-colors duration-300 ease-in-out inline-flex gap-2 py-4 px-6 rounded font-semibold text-base',
+                'bg-gradient-to-b from-sky-700 via-indigo-600 to-purple-600 hover:from-pink-600 hover:to-purple-700',
+                {
+                    'from-pink-600 to-purple-700 ring-2 ring-rose-300': selectedPanel === 'createMovie'
+                }
+            ]">
+                <i class="fa-solid fa-plus text-2xl text-white"></i>
+                <p class="text-white">Mozifilm Felvitele</p>
+            </button>
         </div>
-        <AdminMovieUpdatePanel v-if="selectedPanel === 'movie'" />
-        <CreateScreeningComponent v-if="selectedPanel === 'screening'" />
+
+        <div v-if="selectedPanel == null" class="w-full min-h-[50dvh]"></div>
+        <div v-else>
+            <AdminMovieUpdatePanel v-if="selectedPanel === 'movie'" />
+            <CreateScreeningComponent v-if="selectedPanel === 'screening'" />
+            <CreateMovie v-if="selectedPanel == 'createMovie'" />
+        </div>
 
     </BaseLayout>
 </template>
 
 <script setup>
-import BaseLayout from '@layouts/BaseLayout.vue';
-import Paginator from 'primevue/paginator'
-import { onMounted, ref, computed } from 'vue';
 import { ToastService } from '@stores/ToastService';
-import AdminMovieUpdatePanel from './AdminMovieUpdatePanel.vue';
-import CreateScreeningComponent from '@components/CreateScreeningComponent.vue';
-
+import { onMounted, ref, computed } from 'vue';
 import { useTicketStore } from '@stores/TicketStore';
 import { useMovieStore } from '@stores/MovieStore.mjs';
 import { useUserStore } from '@stores/UserStore';
 import { useRouter } from 'vue-router';
+
+import BaseLayout from '@layouts/BaseLayout.vue';
+import Paginator from 'primevue/paginator'
+import AdminMovieUpdatePanel from '@components/AdminMovieUpdatePanel.vue';
+import CreateScreeningComponent from '@components/CreateScreeningComponent.vue';
+import CreateMovie from '@components/CreateMovie.vue';
 
 const movieStore = useMovieStore();
 const ticketStore = useTicketStore();

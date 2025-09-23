@@ -2,12 +2,12 @@
     <div v-if="!loading" class="max-w-4xl mx-auto my-8 px-4">
         <h1 class="text-center text-pink-600 font-bold text-3xl my-6">Film létrehozása</h1>
 
-        <div class="bg-gray-300 rounded-lg p-4">
+        <div class="bg-gradient-to-r from-indigo-500 via-purple-700 to-indigo-600 rounded-lg p-4">
             <div class="flex flex-col md:flex-row gap-4">
 
                 <!-- Poszter -->
-                <div class="w-full md:w-4/12">
-                    <h2 class="text-center text-pink-600 text-2xl font-semibold mb-2">Poszter</h2>
+                <div class="w-full md:w-4/12 text-center">
+                    <h2 class="text-center text-pink-600 text-xl bg-white inline-block rounded-lg p-2 font-semibold mb-2">Poszter</h2>
 
                     <label class="block mb-2">
                         <input type="file" method="post" name="poster" ref="fileInput" enctype="multipart/form-data"
@@ -15,41 +15,40 @@
                             class="block w-full text-sm text-gray-900 bg-white rounded-lg cursor-pointer" />
                     </label>
 
-                    <img v-if="src" :src="src" alt="Image preview" class="shadow-md h-80 rounded-xl mt-3 sm:w-64" />
+                    <img v-if="src" :src="src" alt="Image preview" class="h-80 rounded-xl mt-3 sm:w-64" />
                 </div>
 
                 <div class="w-full md:w-8/12 space-y-4">
                     <!-- Cím és Hossz -->
-                    <div class="flex flex-col sm:flex-row gap-3 items-center">
+                    <div class="flex flex-col sm:flex-row gap-3 text-center">
                         <div class="flex-1">
-                            <label class="block text-pink-600 text-xl font-semibold mb-2">Cím</label>
+                            <label class="inline-block text-pink-600 bg-white p-2 rounded-lg text-xl font-semibold mb-2">Cím</label>
                             <FormKit type="text" v-model="movieTitle"
                                 input-class="w-full p-2 rounded-lg border-2 border-pink-300" />
                         </div>
 
-                        <div class="w-24 sm:w-28">
-                            <label class="block text-xl text-pink-600 font-semibold mb-2 text-center">Hossz
-                                (perc)</label>
+                        <div class="lg:w-24 sm:w-28 text-center">
+                            <label class="inline-block text-xl text-pink-600 bg-white p-2 rounded-lg font-semibold mb-2">Hossz</label>
                             <FormKit type="number" v-model="movieDurationMin"
-                                input-class="w-full p-2 rounded-lg border-2 border-pink-300 text-center" />
+                                input-class="w-full p-2 rounded-lg border-2 border-pink-300" />
                         </div>
                     </div>
 
-                    <div>
-                        <label class="block text-xl font-semibold text-pink-600 mb-2">Leírás</label>
+                    <div class="text-center">
+                        <label class="inline-block text-xl font-semibold bg-white p-2 rounded-lg text-pink-600 mb-2">Leírás</label>
                         <textarea v-model="movieDescription"
                             class="w-full rounded-lg p-3 border-2 border-pink-300 text-lg min-h-[120px]"
                             name="movieDescription" id="movieDescription"></textarea>
                     </div>
 
                     <div>
-                        <label class="block text-xl font-semibold text-pink-600 mb-2" for="isPremier">Premier</label>
-                        <label class="text-lg">
+                        <label class="inline-block text-xl font-semibold text-pink-600 bg-white p-2 rounded-lg mb-2" for="isPremier">Premier?</label>
+                        <label class="text-lg text-white mx-1">
                             <input class="accent-pink-600" type="radio" v-model="isPremier" name="isPremier"
                                 :value="true">
                             Igen
                         </label>
-                        <label class="text-lg">
+                        <label class="text-lg text-white mx-1">
                             <input class="accent-pink-600" type="radio" v-model="isPremier" name="isPremier"
                                 :value="false" checked>
                             Nem
@@ -62,14 +61,14 @@
             <!-- Műfaj / Rendező -->
             <div class="mt-4 grid grid-cols-1 sm:grid-cols-4 gap-4">
 
-                <div>
-                    <h3 class="text-center text-pink-600 text-xl font-semibold mb-2">Megjelenés</h3>
+                <div class="text-center">
+                    <h3 class="text-center text-pink-600 bg-white inline-block p-2 rounded-lg text-xl font-semibold mb-2">Megjelenés</h3>
                     <input type="date" v-model="movieReleaseDate"
                         class="w-full text-pink-600 p-2 rounded-lg border-2 border-pink-300 text-lg" />
                 </div>
 
-                <div>
-                    <h3 class="text-center text-pink-600 text-xl font-semibold mb-2">Műfaj</h3>
+                <div class="text-center">
+                    <h3 class="text-pink-600 inline-block bg-white p-2 rounded-lg text-xl font-semibold mb-2">Műfaj</h3>
                     <select v-model="movieType" class="w-full p-2 text-pink-600 rounded-lg border-2 border-pink-300">
                         <option value="" disabled>Válassz műfajt</option>
                         <option value="Action">Akció</option>
@@ -78,8 +77,8 @@
                     </select>
                 </div>
 
-                <div>
-                    <h3 class="text-center text-pink-600 text-xl font-semibold mb-2">Korhatár besorolás</h3>
+                <div class="text-center">
+                    <h3 class="text-pink-600 inline-block text-xl bg-white p-2 rounded-lg font-semibold mb-2">Korhatár</h3>
                     <select v-model="ageLimit" class="w-full p-2 text-pink-600 rounded-lg border-2 border-pink-300">
                         <option value="" disabled>Válassz korhatárt</option>
                         <option value="0">0+</option>
@@ -91,15 +90,15 @@
                     </select>
                 </div>
 
-                <div>
-                    <h3 class="text-center text-pink-600 text-xl font-semibold mb-2">Rendező</h3>
+                <div class="text-center">
+                    <h3 class="inline-block text-pink-600 bg-white p-2 rounded-lg text-xl font-semibold mb-2">Rendező</h3>
                     <FormKit type="text" v-model="movieDirector"
                         input-class="w-full p-2 rounded-lg border-2 border-pink-300" />
                 </div>
             </div>
 
-            <div class="mt-4">
-                <h3 class="text-center text-2xl text-pink-600 font-semibold mb-2">Színészek</h3>
+            <div class="mt-4 text-center">
+                <h3 class="inline-block text-2xl text-pink-600 bg-white p-2 rounded-lg font-semibold mb-2">Színészek</h3>
                 <textarea v-model="movieActors"
                     class="w-full rounded-lg p-3 border-2 border-pink-300 text-lg min-h-[100px]" name="actors"
                     id="actors"></textarea>
@@ -107,7 +106,7 @@
 
             <div class="mt-4 flex justify-end gap-3">
                 <button type="button" @click="handleCreateMovie"
-                    class="px-5 py-2 rounded-md bg-pink-600 text-white">Mentés</button>
+                    class="px-5 py-2 rounded-md bg-pink-600 font-bold text-white">Mentés</button>
             </div>
         </div>
     </div>
@@ -120,7 +119,6 @@
 </template>
 
 <script setup>
-import BaseLayout from '@layouts/BaseLayout.vue';
 import { ToastService } from '@stores/ToastService';
 import { onMounted, ref, computed } from 'vue';
 import { useUserStore } from '@stores/UserStore';

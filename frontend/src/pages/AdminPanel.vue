@@ -249,7 +249,7 @@
                     }" />
             </div>
         </div>
-        <div class="flex items-center justify-center gap-8 mx-auto my-2 max-w-5xl lg:mt-12">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8 mx-auto my-2 max-w-5xl lg:mt-12">
             <button @click="selectedPanel = selectedPanel === 'movie' ? null : 'movie'" :class="[
                 'transition-colors duration-300 ease-in-out inline-flex gap-2 py-4 px-6 rounded font-semibold text-base',
                 'bg-gradient-to-b from-sky-700 via-indigo-600 to-purple-600 hover:from-pink-600 hover:to-purple-700',
@@ -261,7 +261,7 @@
                 <p class="text-white">Film módosítása</p>
             </button>
 
-            <span class="h-12 w-[4px] rounded-full bg-gradient-to-b from-sky-400 via-white to-purple-400"></span>
+            <span class="hidden md:block h-12 w-[4px] rounded-full bg-gradient-to-b from-sky-400 via-white to-purple-400"></span>
 
             <button @click="selectedPanel = selectedPanel === 'screening' ? null : 'screening'" :class="[
                 'transition-colors duration-300 ease-in-out inline-flex gap-2 py-4 px-6 rounded font-semibold text-base',
@@ -274,7 +274,7 @@
                 <p class="text-white">Moziműsor Szerkesztő</p>
             </button>
 
-            <span class="h-12 w-[4px] rounded-full bg-gradient-to-b from-sky-400 via-white to-purple-400"></span>
+            <span class="hidden md:block h-12 w-[4px] rounded-full bg-gradient-to-b from-sky-400 via-white to-purple-400"></span>
 
             <button @click="selectedPanel = selectedPanel === 'createMovie' ? null : 'createMovie'" :class="[
                 'transition-colors duration-300 ease-in-out inline-flex gap-2 py-4 px-6 rounded font-semibold text-base',

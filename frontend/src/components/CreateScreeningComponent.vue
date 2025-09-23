@@ -364,7 +364,7 @@ const handleCreateScreeningDay = async () => {
         } catch (error) {
             ToastService.showError('Hiba történt a moziműsor létrehozásakor!')
         } finally {
-            ToastService.showSuccess(`Vetítések sikeresen létrehozva a ${datePrefix} napra!`)
+            ToastService.showSuccess(`Vetítések sikeresen létrehozva a ${selectedDate.value} napra!`)
         }
     }
     else {

@@ -58,7 +58,18 @@
 
             <!-- MOBIL KÁRTYÁK, FOGLALÁS -->
             <div v-if="viewMode === 'reservations'" class="space-y-4 lg:hidden">
-                <div v-for="reservation in filteredItems" :key="reservation.id"
+                <div>
+                    <Paginator :rows="rows"  :totalRecords="filteredItems.length"
+                        :rowsPerPageOptions="[5, 10, 20, 30]" @page="onPage" :pt="{
+                            root: 'flex justify-center rounded-lg items-center gap-2 my-4',
+                            page: 'p-2 px-4 m-1 rounded-full bg-white text-black font-semibold hover:bg-gray-300 cursor-pointer',
+                            pageLink: 'w-full h-full flex justify-center items-center',
+                            pageActive: 'bg-pink-500 text-white',
+                            prev: 'px-3 py-1 m-1 bg-blue-500 text-white rounded-full hover:bg-blue-600',
+                            next: 'px-3 py-1 m-1 bg-blue-500 text-white rounded-full hover:bg-blue-600'
+                        }" />
+                </div>
+                <div v-for="reservation in paginatedItems" :key="reservation.id"
                     class="bg-gray-100 py-4 pl-2 rounded-lg shadow">
                     <p class="font-semibold pl-2">Helyszín: <span class="px-2">{{ locationNames[reservation.location_id]
                             }}</span></p>
@@ -94,9 +105,9 @@
 
             <!-- MOBIL KÁRTYÁK, VÁSÁRLÁS -->
             <div v-if="viewMode === 'purchases'" class="space-y-4 lg:hidden">
-                <div class="hidden sm:block">
-                    <Paginator :rows="rows" :first="currentPage * rows" :totalRecords="filteredItems.length"
-                        :rowsPerPageOptions="[10, 20, 30]" @page="onPage" :pt="{
+                <div>
+                    <Paginator :rows="rows"  :totalRecords="filteredItems.length"
+                        :rowsPerPageOptions="[5, 10, 20, 30]" @page="onPage" :pt="{
                             root: 'flex justify-center rounded-lg items-center gap-2 my-4',
                             page: 'p-2 px-4 m-1 rounded-full bg-white text-black font-semibold hover:bg-gray-300 cursor-pointer',
                             pageLink: 'w-full h-full flex justify-center items-center',

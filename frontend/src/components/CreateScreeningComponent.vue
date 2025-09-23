@@ -7,7 +7,7 @@
         </h1>
         <div class="grid grid-cols-2 w-fit mx-auto lg:gap-12 lg:mt-2">
 
-            <div class="col-span-1 w-fit  flex flex-col mx-auto justify-normal gap-4 p-4 md:min-h-[220px]">
+            <div class="col-span-2 md:col-span-1 w-fit  flex flex-col mx-auto justify-normal gap-4 p-4 md:min-h-[220px]">
                 <label class="text-sm md:text-base lg:text-xl font-semibold text-white" for="driveInCinema">
                     Válassza ki a mozi helyszínét a vetítési nap összeállításához:
                 </label>
@@ -83,8 +83,10 @@
                         driveInCinemaStore.driveInCinemas[selectedValue - 1].name }}</div>
                 </div>
             </div>
+
+
             <div :class="{ 'opacity-50 pointer-events-none': !selectedCinema }"
-                class="col-span-1 w-full mx-auto flex flex-col justify-normal gap-4 p-4 md:min-h-[220px]">
+                class="col-span-2 md:col-span-1 w-full mx-auto flex flex-col justify-normal gap-4 p-4 md:min-h-[220px]">
                 <label class="text-sm md:text-base lg:text-xl font-semibold text-white" for="date">
                     Válassza ki, mely nap moziműsorát szeretné tervezi:
                 </label>

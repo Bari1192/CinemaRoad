@@ -59,8 +59,8 @@
             <!-- MOBIL KÁRTYÁK, FOGLALÁS -->
             <div v-if="viewMode === 'reservations'" class="space-y-4 lg:hidden">
                 <div>
-                    <Paginator :rows="rows"  :totalRecords="filteredItems.length"
-                        :rowsPerPageOptions="[5, 10, 20, 30]" @page="onPage" :pt="{
+                    <Paginator :rows="rows" :totalRecords="filteredItems.length" :rowsPerPageOptions="[5, 10, 20, 30]"
+                        @page="onPage" :pt="{
                             root: 'flex justify-center rounded-lg items-center gap-2 my-4',
                             page: 'p-2 px-4 m-1 rounded-full bg-white text-black font-semibold hover:bg-gray-300 cursor-pointer',
                             pageLink: 'w-full h-full flex justify-center items-center',
@@ -72,7 +72,7 @@
                 <div v-for="reservation in paginatedItems" :key="reservation.id"
                     class="bg-gray-100 py-4 pl-2 rounded-lg shadow">
                     <p class="font-semibold pl-2">Helyszín: <span class="px-2">{{ locationNames[reservation.location_id]
-                            }}</span></p>
+                    }}</span></p>
                     <p class="font-semibold pl-2">Email: <span class="px-2">{{ reservation.guest_email ||
                         reservation.userEmail }}</span></p>
                     <p class="font-semibold pl-2">Film: <span class="px-2">Film</span></p>
@@ -106,8 +106,8 @@
             <!-- MOBIL KÁRTYÁK, VÁSÁRLÁS -->
             <div v-if="viewMode === 'purchases'" class="space-y-4 lg:hidden">
                 <div>
-                    <Paginator :rows="rows"  :totalRecords="filteredItems.length"
-                        :rowsPerPageOptions="[5, 10, 20, 30]" @page="onPage" :pt="{
+                    <Paginator :rows="rows" :totalRecords="filteredItems.length" :rowsPerPageOptions="[5, 10, 20, 30]"
+                        @page="onPage" :pt="{
                             root: 'flex justify-center rounded-lg items-center gap-2 my-4',
                             page: 'p-2 px-4 m-1 rounded-full bg-white text-black font-semibold hover:bg-gray-300 cursor-pointer',
                             pageLink: 'w-full h-full flex justify-center items-center',
@@ -126,7 +126,7 @@
                     <p class="font-semibold text-pink-600 pl-2">Film: <span class="px-2">Film</span></p>
                     <td class="font-semibold text-pink-600 p-2">
                         <span v-if="editingDataId !== purchase.id"> Jegyek: {{ purchase.parkingspot
-                            }}</span>
+                        }}</span>
                         <input v-else v-model="editableData.parkingspot" class="border rounded px-1 w-20 text-center" />
                     </td>
                     <p class="font-semibold text-pink-600 pl-2">Azonosító: <span class="px-2">{{ purchase.confirmation
@@ -260,42 +260,51 @@
                     }" />
             </div>
         </div>
-        <div class="flex flex-col md:flex-row items-center justify-center gap-8 mx-auto my-2 max-w-5xl lg:mt-12">
+        <div
+            class="flex flex-col gap-4 md:flex-row items-center justify-center md:gap-3 lg:gap-8 mx-auto lg:my-2 lg:max-w-5xl lg:mt-12">
             <button @click="selectedPanel = selectedPanel === 'movie' ? null : 'movie'" :class="[
-                'transition-colors duration-300 ease-in-out inline-flex gap-2 py-4 px-6 rounded font-semibold text-base',
+                'transition-colors duration-300 ease-in-out inline-flex gap-2 py-4 px-4 md:px-2 lg:px-6 rounded font-semibold text-base',
                 'bg-gradient-to-b from-sky-700 via-indigo-600 to-purple-600 hover:from-pink-600 hover:to-purple-700',
                 {
                     'from-pink-600 to-purple-700 ring-2 ring-rose-300': selectedPanel === 'movie'
                 }
             ]">
-                <i class="fa-solid fa-clapperboard text-2xl text-white"></i>
-                <p class="text-white">Film módosítása</p>
+                <div class="flex w-[200px] justify-center gap-3 mx-auto">
+                    <i class="fa-solid fa-clapperboard text-2xl text-white"></i>
+                    <p class="text-white">Film módosítása</p>
+                </div>
             </button>
 
-            <span class="hidden md:block h-12 w-[4px] rounded-full bg-gradient-to-b from-sky-400 via-white to-purple-400"></span>
+            <span
+                class="hidden md:block h-12 w-[4px] rounded-full bg-gradient-to-b from-sky-400 via-white to-purple-400"></span>
 
             <button @click="selectedPanel = selectedPanel === 'screening' ? null : 'screening'" :class="[
-                'transition-colors duration-300 ease-in-out inline-flex gap-2 py-4 px-6 rounded font-semibold text-base',
+                'transition-colors duration-300 ease-in-out inline-flex gap-2 py-4 px-4 md:px-2 lg:px-6 rounded font-semibold text-base',
                 'bg-gradient-to-b from-sky-700 via-indigo-600 to-purple-600 hover:from-pink-600 hover:to-purple-700',
                 {
                     'from-pink-600 to-purple-700 ring-2 ring-rose-300': selectedPanel === 'screening'
                 }
             ]">
-                <i class="fa-solid fa-video text-2xl text-white"></i>
-                <p class="text-white">Moziműsor Szerkesztő</p>
+                <div class="flex w-[200px] justify-center gap-2.5 mx-auto">
+                    <i class="fa-solid fa-video text-2xl text-white"></i>
+                    <p class="text-white">Moziműsor Szerkesztő</p>
+                </div>
             </button>
 
-            <span class="hidden md:block h-12 w-[4px] rounded-full bg-gradient-to-b from-sky-400 via-white to-purple-400"></span>
+            <span
+                class="hidden md:block h-12 w-[4px] rounded-full bg-gradient-to-b from-sky-400 via-white to-purple-400"></span>
 
             <button @click="selectedPanel = selectedPanel === 'createMovie' ? null : 'createMovie'" :class="[
-                'transition-colors duration-300 ease-in-out inline-flex gap-2 py-4 px-6 rounded font-semibold text-base',
+                'transition-colors duration-300 ease-in-out inline-flex gap-2 py-4 px-4 md:px-2 lg:px-6 rounded font-semibold text-base',
                 'bg-gradient-to-b from-sky-700 via-indigo-600 to-purple-600 hover:from-pink-600 hover:to-purple-700',
                 {
                     'from-pink-600 to-purple-700 ring-2 ring-rose-300': selectedPanel === 'createMovie'
                 }
             ]">
-                <i class="fa-solid fa-plus text-2xl text-white"></i>
-                <p class="text-white">Mozifilm Felvitele</p>
+                <div class="flex w-[200px] justify-center gap-2.5 mx-auto">
+                    <i class="fa-solid fa-plus text-2xl text-white"></i>
+                    <p class="text-white">Mozifilm Felvitele</p>
+                </div>
             </button>
         </div>
 

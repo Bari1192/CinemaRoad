@@ -132,7 +132,7 @@ const deleteMovie = async (movie) => {
                             class="w-full py-2 px-2 sm:px-3 text-sm sm:text-base border border-gray-300 rounded text-black" />
                     </div>
 
-                    <div class="grid grid-cols-3 items-center gap-0 pt-5 w-full h-full justify-center align-middle">
+                    <div class="grid grid-cols-3 items-center gap-0 md:pt-5 w-full h-full justify-center align-middle">
                         <div class="col-span-2 justify-center mx-auto">
                             <label class="w-full text-[18px] font-medium text-white underline underline-offset-4"
                                 for="isPremier">
@@ -150,14 +150,14 @@ const deleteMovie = async (movie) => {
                     </div>
                 </div>
 
-                <div class="flex flex-col sm:flex-row gap-4 sm:gap-4">
-                    <button @click="saveEdit(movie)"
-                        class="flex-1 bg-green-500 w-2/3 border-2 border-indigo-500/55 mx-auto text-white font-semibold py-2 px-4 text-sm sm:text-base rounded-lg hover:bg-green-500/80 transition-colors duration-200">
-                        Mentés
-                    </button>
-                    <button @click="deleteMovie(movie)" class="flex-1 bg-red-500 w-2/3 mx-auto text-white font-semibold py-2 px-4 text-sm sm:text-base border-2 border-indigo-700/55 
+                <div class="flex mt-8 mb-2 flex-row md:gap-12 md:w-full md:mx-auto md:justify-between gap-4">
+                    <button @click="deleteMovie(movie)" class="bg-red-500 w-full mx-auto text-white font-semibold py-2 px-4 text-sm sm:text-base border-2 border-indigo-700/55 
                             rounded-lg hover:bg-red-500/80 transition-colors duration-200">
                         Törlés
+                    </button>
+                    <button @click="saveEdit(movie)"
+                        class="bg-green-500 border-2 border-indigo-500/55 w-full mx-auto text-white font-semibold py-2 px-4 text-sm sm:text-base rounded-lg hover:bg-green-500/80 transition-colors duration-200">
+                        Mentés
                     </button>
                 </div>
             </div>

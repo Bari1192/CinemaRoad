@@ -183,7 +183,7 @@ const handleCreateMovie = async () => {
         ToastService.showError("Nincs kép kiválasztva!")
         return;
     } else {
-        src.value = fallbackImage;
+        src.value = URL.createObjectURL(selectedFile.value);
     }
 
     if (missingInputs.value.length > 0) {

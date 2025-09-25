@@ -128,12 +128,10 @@ const distinctScreenings = computed(() => {
         if (!screening.movie) continue;
 
         if (!seenMovieIds.has(screening.movie.id)) {
-            // ha a movie.type = horror akkor push, utána break. Több if, ha break-el akkor megy a kövi típusra
             seenMovieIds.add(screening.movie.id);
             filtered.push(screening);
         }
     }
-
     return filtered.slice(0, 4);
 })
 </script>

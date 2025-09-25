@@ -7,15 +7,12 @@ import { useScreeningStore } from '@stores/ScreeningStore.mjs';
 import { computed, onMounted, ref } from 'vue';
 import { storage } from '@utils/http.mjs';
 
-
-
 const loading = ref(true);
 const ScreeningStore = useScreeningStore();
 onMounted(async () => {
     await ScreeningStore.getScreenings().data;
     loading.value = false;
 });
-
 
 const films = computed(() => {
     const raw = ScreeningStore.screenings;

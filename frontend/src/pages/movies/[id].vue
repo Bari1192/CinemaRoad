@@ -20,7 +20,7 @@ const loading = ref(true);
 
 const movieId = computed(() => Number(route.params.id));
 const movie = computed(() => movieStore.movies.find(m => Number(m.id) === movieId.value));
-const screenings = ref([]); // Majd kell a ".data" mert a store-ban csak .data-val térünk vissza
+const screenings = ref([]);
 const selectedScreening = ref(null);
 
 
@@ -29,30 +29,23 @@ const enrichedScreenings = computed(() => {
     return screenings.value.filter(screening => screening.movie_id === movie.value.id);
 });
 
-const selectScreening = async() => {
+const selectScreening = async () => {
     try {
         await screeningStore.getScreening(selectedScreening.value);
         const screening = screeningStore.screening;
-        
-    
-        // Jegy adatok mentése
         await ticketStore.setLocationName(screening.drivein_cinema.name);
         await ticketStore.setLocation(screening.drivein_cinema);
         await ticketStore.setMovie(screening.movie);
-
         ticketStore.setTime(screening);
-    
         router.push("/ParkingSpotChooser")
     } catch (error) {
         console.log("Hiba az időpont kiválasztása közben: ", error);
         ToastService.showError("Nincs időpont kiválasztva!");
     }
 }
-
 const onSelectScreening = (screening) => {
     selectedScreening.value = screening;
 }
-
 
 onMounted(async () => {
     loading.value = true;
@@ -61,8 +54,6 @@ onMounted(async () => {
     screenings.value = resp.data;
     loading.value = false;
 });
-
-
 </script>
 
 <template>
@@ -175,7 +166,6 @@ onMounted(async () => {
 
         </div>
 
-        <!-- Vetítések! -->
         <div v-if="enrichedScreenings.length"
             class="w-full mx-auto max-w-md md:max-w-7xl mt-2 md:mt-6 px-4 lg:px-0 mb-10">
             <div v-if="movie.is_premier"
@@ -186,16 +176,12 @@ onMounted(async () => {
                 class="flex px-4 py-2 rounded-md justify-center text-center lg:mb-4 md:text-left text-base md:text-lg lg:text-2xl font-medium text-white uppercase tracking-wide col-span-1 bg-pink-300/45 w-fit">
                 Aktuális vetítéseink
             </div>
-
             <Calendar :screenings="enrichedScreenings" @select-screening="onSelectScreening" :showLocations="true"
                 class="mb-5" />
-
             <div class="flex justify-end mb-10">
                 <button class="bg-white font-semibold text-lg p-2 rounded-lg" @click="selectScreening">Időpont
                     kiválasztása</button>
             </div>
-
         </div>
-
     </BaseLayout>
 </template>

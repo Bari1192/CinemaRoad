@@ -52,17 +52,14 @@ import { ref, computed, onMounted } from 'vue';
 import { useMovieStore } from '@stores/MovieStore.mjs';
 import { useScreeningStore } from '@stores/ScreeningStore.mjs';
 import { useRouter } from 'vue-router';
+import { storage } from '@utils/http.mjs';
+
 import BaseLayout from '@layouts/BaseLayout.vue';
 import Stepper from '@components/layout/Stepper.vue';
 import BaseSpinner from '@components/layout/BaseSpinner.vue';
-//import BaseCard from '@components/BaseCard.vue';
 import ScreenTimePicker from '@components/ScreenTimePicker.vue';
-import { storage } from '@utils/http.mjs';
 
 const EasierLabelsGenerate = { action: 'Akció', family: 'Családi', horror: 'Horror' }
-
-
-
 const router = useRouter();
 const movieStore = useMovieStore();
 const screeningStore = useScreeningStore();

@@ -22,19 +22,15 @@ if (!ticketStore.time && localStorage.getItem('time')) {
 if (!ticketStore.parkingSpot && localStorage.getItem('parkingSpot')) {
     ticketStore.parkingSpot = JSON.parse(localStorage.getItem('parkingSpot'));
 }
-
-
-
 </script>
-
 
 <template>
     <BaseHeader />
-    <Stepper :currentStep="4" />
     
+    <Stepper :currentStep="4" />
     <h1 class="text-4xl text-center font-bold">{{ ticketStore.locationName }}: {{ ticketStore.movie.title }}</h1>
     <div class="w-full h-full px-4 mx-auto ">
-    <BaseSeats />
+        <BaseSeats />
     </div>
     
     <BaseFooter />

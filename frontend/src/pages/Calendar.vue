@@ -104,7 +104,6 @@ const toggleDay = (dayKey) => {
 
 <template>
   <div class="w-full h-full">
-    <!-- LG MÉRET FELETT!!!! -->
     <table class="w-full bg-slate-900 rounded-xl shadow-lg select-none hidden lg:table">
       <thead>
         <tr>
@@ -119,13 +118,11 @@ const toggleDay = (dayKey) => {
           <td v-for="(day, di) in week" :key="day.dateKey"
             class="align-top p-3 bg-gray-700/40 border border-slate-700 hover:bg-slate-600/50 transition-colors duration-200 ease-in-out">
 
-            <!-- Dátum -->
             <div
               class="font-semibold text-pink-500 text-sm md:text-base lg:text-lg bg-slate-100 rounded px-3 py-1 text-center shadow-sm">
               {{ magyarDatum(day.localDate) }}
             </div>
 
-            <!-- Vetítések -->
             <div class="flex flex-col gap-2 w-full h-full mt-6">
               <template v-if="day.screenings.length">
                 <button v-for="screening in day.screenings" :key="screening.id"
@@ -153,16 +150,13 @@ const toggleDay = (dayKey) => {
     </table>
 
 
-    <!-- LISTA nézet, csak md-tól lefelé -->
     <div class="block lg:hidden w-full md:w-4/5 md:mx-auto space-y-4 px-2 py-4">
       <template v-for="(week, wi) in weekRows" :key="'mweek'+wi">
         <template v-for="(day, di) in week" :key="day.dateKey">
 
-          <!-- VAN VETÍTÉS -->
           <div v-if="day.screenings.length > 0"
             class="bg-slate-800 rounded-lg shadow border border-slate-700 overflow-hidden">
 
-            <!-- Fejléc -->
             <button @click="toggleDay(day.dateKey)"
               class="flex items-center justify-between w-full p-3 hover:bg-slate-700 transition-colors">
               <div class="flex items-center gap-2">
@@ -180,7 +174,6 @@ const toggleDay = (dayKey) => {
               </svg>
             </button>
 
-            <!-- Lenyíló rész -->
             <transition name="fade">
               <div v-if="openedDayKey === day.dateKey" class="p-3 flex flex-wrap gap-2 bg-slate-900">
                 <button v-for="screening in day.screenings" :key="screening.id"
@@ -199,7 +192,6 @@ const toggleDay = (dayKey) => {
             </transition>
           </div>
 
-          <!-- NINCS VETÍTÉS -->
           <div v-else class="hidden bg-slate-700 rounded-lg shadow p-3 items-center gap-2 opacity-60 cursor-not-allowed">
             <span class="bg-gray-500 text-white font-bold px-3 py-1 rounded-md text-sm">
               {{ magyarDatum(day.localDate) }}

@@ -51,7 +51,6 @@ import { storage } from '@utils/http.mjs';
 
 const router = useRouter();
 const userStore = useUserStore();
-
 const email = ref('');
 const password = ref('');
 const errorMessage = ref('');
@@ -65,14 +64,10 @@ const handleLogin = async () => {
             email: email.value,
             password: password.value
         });
-
         router.push("/");
     } catch (error) {
         errorMessage.value = 'Hibás E-mail vagy jelszó.';
-
     }
-
-
 }
 </script>
 

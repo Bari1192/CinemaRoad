@@ -7,7 +7,8 @@
         </h1>
         <div class="grid grid-cols-2 w-fit mx-auto lg:gap-12 lg:mt-2">
 
-            <div class="col-span-2 md:col-span-1 w-fit  flex flex-col mx-auto justify-normal gap-4 p-4 md:min-h-[220px]">
+            <div
+                class="col-span-2 md:col-span-1 w-fit  flex flex-col mx-auto justify-normal gap-4 p-4 md:min-h-[220px]">
                 <label class="text-sm md:text-base lg:text-xl font-semibold text-white" for="driveInCinema">
                     Válassza ki a mozi helyszínét a vetítési nap összeállításához:
                 </label>
@@ -91,13 +92,9 @@
                     Válassza ki, mely nap moziműsorát szeretné tervezi:
                 </label>
                 <div class="relative">
-
                     <input name="date" :min="minDate" id="date" type="date" v-model="selectedDate"
                         @change="validateDate" class="w-full bg-white text-lg font-semibold p-3 rounded-lg border-2 border-pink-600  text-pink-950 focus:ring-2 focus:ring-pink-300
                              focus:border-pink-700 transition-all duration-200 hover:bg-sky-50" />
-
-                    <!-- <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                        </div> -->
                 </div>
                 <div v-if="selectedDate" class="bg-stone-400/70 border-r-2 p-3 w-fit border-gray-300/70 rounded-lg">
                     <div class="text-sm text-white font-semibold">Kiválasztott dátum</div>
@@ -112,7 +109,6 @@
 
         <div
             :class="selectedDate ? 'grid md:grid-cols-2 lg:grid-cols-4 mt-4 md:w-11/12 md:mx-auto gap-8 mb-8 ' : 'hidden'">
-            <!-- térközzel itt a gap-pel játsz, ne a width-del! -->
             <div v-for="(movie, i) in selectedMovieObjects" :key="i" class="p-1 mx-auto rounded">
                 <h2
                     class="text-sm lg:text-lg font-semibold w-full text-center mb-2 text-pink-100 py-2 px-3 bg-gradient-to-r from-pink-600/75 via-pink-700/70 to-pink-600/75 shadow-md shadow-sky-200/90 slate-400 rounded-md mx-auto cursor-default">

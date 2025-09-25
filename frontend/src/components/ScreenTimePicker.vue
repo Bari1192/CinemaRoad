@@ -1,18 +1,11 @@
 <template>
-    <!-- Fő tároló -->
     <div class="bg-slate-800 rounded-lg">
-
-        <!-- Első tároló row-ban. Képnek meg leírásnak. -->
         <div class="flex flex-row">
-            <!-- Kép, adatok sora -->
             <div class="grid grid-cols-2 lg:grid-cols-3">
-                <!-- Kép -->
                 <div class="p-2">
                     <img class="lg:h-[200px] lg:w-[200px] object-cover" :src="storage.url(props.moviePosterUrl)"
                         :alt="props.movieTitle">
                 </div>
-
-                <!-- Adatok -->
                 <div class="flex flex-col lg:col-span-2">
                     <h1 class="font-bold my-1 text-pink-600 text-lg md:text-2xl hover:underline">
                         <RouterLink :to="`/movies/${props.movieId}`">{{ props.movieTitle }}</RouterLink>

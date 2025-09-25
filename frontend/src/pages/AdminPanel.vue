@@ -235,8 +235,6 @@
                                     Törlés
                                 </button>
                             </div>
-
-                            <!-- Szerkesztés módban: csak Mentés -->
                             <div v-else class="flex justify-center">
                                 <button @click="handleUpdatePurchase(purchase.id)"
                                     class="text-white font-semibold bg-green-600 px-3 py-1 rounded-lg">

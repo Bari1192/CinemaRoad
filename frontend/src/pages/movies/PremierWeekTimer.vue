@@ -16,7 +16,6 @@ function formatDateHu(date) {
         day: 'numeric'
     })
 }
-// Ezt kapja a szülőtől -> így fix premier dátum + óra-perc számolja!
 const premierDate = computed(() => new Date(props.premierDateTime))
 
 const nextThursdayLabel = computed(() => formatDateHu(premierDate.value))
@@ -98,9 +97,7 @@ const scrollToPremierFilms = () => {
             <div class="space-y-8 lg:space-y-12 mx-auto text-center" id="premierWeekSection">
                 <p class="relative -mt-8 lg:mt-0 text-2xl lg:text-3xl font-bold text-white backdrop-blur-sm rounded-lg">
                     Jegyvásárlás megnyílik:</p>
-                <!-- Dátum kijelző -->
                 <div class="text-center">
-
                     <div class="relative inline-block">
                         <div
                             class="absolute inset-0 bg-gradient-to-r from-amber-500/30 to-orange-500/30 blur-xl rounded-xl">
@@ -113,10 +110,7 @@ const scrollToPremierFilms = () => {
                         </div>
                     </div>
                 </div>
-
-                <!-- Visszaszámláló -->
                 <div class="relative">
-                    <!-- Visszaszámláló cím -->
                     <div class="text-center mb-8">
                         <div class="relative inline-block">
                             <div
@@ -129,9 +123,7 @@ const scrollToPremierFilms = () => {
                         </div>
                     </div>
 
-                    <!-- Számláló dobozok -->
                     <div class="flex items-center justify-center gap-4 lg:gap-8 flex-wrap">
-                        <!-- Napok -->
                         <div class="relative group">
                             <div
                                 class="absolute inset-0 bg-gradient-to-br from-rose-500/30 to-pink-600/30 blur-lg rounded-2xl group-hover:blur-xl transition-all duration-500">
@@ -152,10 +144,8 @@ const scrollToPremierFilms = () => {
                             </div>
                         </div>
 
-                        <!-- Elválasztó -->
                         <div class="text-white/30 text-3xl font-bold hidden sm:block">:</div>
 
-                        <!-- Órák -->
                         <div class="relative group">
                             <div
                                 class="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-violet-600/30 blur-lg rounded-2xl group-hover:blur-xl transition-all duration-500">
@@ -176,10 +166,8 @@ const scrollToPremierFilms = () => {
                             </div>
                         </div>
 
-                        <!-- Elválasztó -->
                         <div class="text-white/30 text-3xl font-bold hidden sm:block">:</div>
 
-                        <!-- Percek -->
                         <div class="relative group">
                             <div
                                 class="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-indigo-600/30 blur-lg rounded-2xl group-hover:blur-xl transition-all duration-500">
@@ -200,10 +188,8 @@ const scrollToPremierFilms = () => {
                             </div>
                         </div>
 
-                        <!-- Elválasztó -->
                         <div class="text-white/30 text-3xl font-bold hidden sm:block">:</div>
 
-                        <!-- Másodpercek -->
                         <div class="relative group">
                             <div
                                 class="absolute inset-0 bg-gradient-to-br from-emerald-500/30 to-teal-600/30 blur-lg rounded-2xl group-hover:blur-xl transition-all duration-500">
@@ -225,7 +211,6 @@ const scrollToPremierFilms = () => {
                         </div>
                     </div>
 
-                    <!-- Alsó szöveg -->
                     <div class="text-center mt-12">
                         <p class="text-white/70 text-lg">
                             <span class="w-full mx-auto gap-2 italic">

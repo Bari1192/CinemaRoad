@@ -10,7 +10,7 @@ import EighteenPlus from '@assets/svg/EighteenPlus.vue'
 
 const props = defineProps({
   age: { type: [Number, String], default: null },  
-  klassz: { type: String, default: 'w-8 h-8' }      // stílust így átadva, de amúgy az alap is jó, csak ha vmi változtatás kell
+  klassz: { type: String, default: 'w-8 h-8' }      
 })
 
 const AGE_MAP = {
@@ -20,7 +20,7 @@ const AGE_MAP = {
   12: TwelvePlus,
   16: SixteenPlus,
   18: EighteenPlus
-} // lehet bővíteni is amm.
+} 
 
 const badgeComp = computed(() => {
   const key = Number(props.age)

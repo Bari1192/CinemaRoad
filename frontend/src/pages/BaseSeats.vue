@@ -8,7 +8,6 @@ import BaseSpinner from '@components/layout/BaseSpinner.vue'
 const rows = ['X', 'A', 'X', 'B', 'X', 'C', 'X', 'D', 'X', 'E']
 const cols = 9
 
-// Állapot
 const seats = ref([])
 const selectedSeats = ref([])
 const reservations = ref([])
@@ -67,14 +66,12 @@ const foglaltParkolok = computed(() => {
 })
 
 
-// Foglaltak beállítása
 function updateOccupiedSeats() {
     seats.value.forEach(seat => {
         seat.occupied = foglaltParkolok.value.includes(seat.id)
     })
 }
 
-// kijelölés vásárlásra
 function toggleSeat(seatID) {
     const seat = seats.value.find(s => s.id === seatID)
     if (!seat || seat.occupied) return
@@ -89,7 +86,6 @@ function toggleSeat(seatID) {
     }
 }
 
-// Tovább gomb
 function handleNext() {
     if (!selectedSeats.value.length) {
         alert('Nem választott ki parkolóhelyet a nézőtéren!')
@@ -118,10 +114,8 @@ onMounted(async () => {
     <div v-else
         class="container w-full h-full lg:max-w-3xl xl:max-w-5xl mx-auto my-12 lg:my-0 bg-gray-800/80 rounded-3xl shadow-xl">
 
-        <!-- Cím -->
         <h2 class="text-3xl text-slate-400 font-bold mb-8 text-center uppercase"></h2>
 
-        <!-- Vászon -->
         <div class="grid grid-cols-8 w-full h-full text-center pt-4">
             <div></div>
             <div
@@ -136,12 +130,10 @@ onMounted(async () => {
             </div>
         </div>
 
-        <!-- Helyek -->
         <div class="mx-auto w-full h-full px-8">
             <div
                 class="container mx-auto w-full my-12 lg:mb-12 lg:mt-0 bg-gray-800/80 shadow-slate-900/65 border-t-4 border-t-slate-900/65 rounded-3xl shadow-2xl">
 
-                <!-- Fejléc (oszlopszámok) -->
                 <div class="grid grid-cols-11 justify-center text-center mb-2 md:mb-4">
                     <div></div>
                     <div></div>
@@ -152,18 +144,15 @@ onMounted(async () => {
                     <div></div>
                 </div>
 
-                <!-- Sorok -->
                 <div v-for="row in rows" :key="'row-' + row"
                     class="grid grid-cols-11 gap-2 items-center justify-center mx-auto text-center w-full h-full">
 
-                    <!-- Sorok betűkel -->
                     <div v-if="row !== 'X'"
                         class="font-semibold text-yellow-500 border-2 md:border-4 border-pink-700/50 rounded-full w-fit h-fit px-1 text-[10px] sm:text-xs md:text-sm lg:text-lg sm:px-2 mx-auto -mr-1 md:ml-3 lg:px-2 xl:ml-4 text-center">
                         {{ row }}
                     </div>
                     <div v-else></div>
 
-                    <!-- Út - Ahol nincs semmi / Csak útjel -->
                     <div v-if="row === 'X'" class="bg-gray-600/30 col-span-10 h-4 md:h-10 w-full"></div>
                     <div v-else class="bg-gray-600/30 h-full w-full mx-auto justify-center items-center rounded-none">
                         <div class="flex w-full h-full mx-auto justify-center items-center opacity-85">
@@ -171,7 +160,6 @@ onMounted(async () => {
                         </div>
                     </div>
 
-                    <!-- Parkolóhelyek, ahová kattinthat (autós ikonnal) -->
                     <template v-if="row !== 'X'">
                         <div v-for="col in 8" :key="`${row}${col}`" @click="toggleSeat(`${row}${col}`)"
                             class="flex items-center justify-center cursor-pointer border-b-2 border-r-2 md:border-b-4 md:border-r-4 border-slate-600 rounded-lg transition duration-300 aspect-square w-6 h-6 sm:w-10 sm:h-10 md:w-14 md:h-14 mx-auto my-2 select-none text-center bg-gray-900/40 md:bg-[url('../assets/img/car_80x50.webp')] md:bg-no-repeat md:bg-center md:bg-contain"

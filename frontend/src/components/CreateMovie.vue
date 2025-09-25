@@ -5,7 +5,6 @@
         <div class="bg-gradient-to-r from-indigo-500 via-purple-700 to-indigo-600 rounded-lg p-4">
             <div class="flex flex-col md:flex-row gap-4">
 
-                <!-- Poszter -->
                 <div class="w-full md:w-4/12 text-center">
                     <h2
                         class="text-center text-pink-600 text-xl bg-white inline-block rounded-lg p-2 font-semibold mb-2">
@@ -21,7 +20,6 @@
                 </div>
 
                 <div class="w-full md:w-8/12 space-y-4">
-                    <!-- Cím és Hossz -->
                     <div class="flex flex-col sm:flex-row gap-3 text-center">
                         <div class="flex-1">
                             <label
@@ -64,9 +62,7 @@
                 </div>
             </div>
 
-            <!-- Műfaj / Rendező -->
             <div class="mt-4 grid grid-cols-1 sm:grid-cols-4 gap-4">
-
                 <div class="text-center">
                     <h3
                         class="text-center text-pink-600 bg-white inline-block p-2 rounded-lg text-xl font-semibold mb-2">
@@ -74,7 +70,6 @@
                     <input type="date" v-model="movieReleaseDate"
                         class="w-full text-pink-600 p-2 rounded-lg border-2 border-pink-300 text-lg" />
                 </div>
-
                 <div class="text-center">
                     <h3 class="text-pink-600 inline-block bg-white p-2 rounded-lg text-xl font-semibold mb-2">Műfaj</h3>
                     <select v-model="movieType" class="w-full p-2 text-pink-600 rounded-lg border-2 border-pink-300">
@@ -84,7 +79,6 @@
                         <option value="Horror">Horror</option>
                     </select>
                 </div>
-
                 <div class="text-center">
                     <h3 class="text-pink-600 inline-block text-xl bg-white p-2 rounded-lg font-semibold mb-2">Korhatár
                     </h3>
@@ -218,7 +212,6 @@ const handleCreateMovie = async () => {
         formData.append(`actors[${index}]`, actor);
     });
 
-    // poster_url név létrehozása
     const fileName = selectedFile.value.name;
     const extension = fileName.split('.').pop().toLowerCase();
     let posterUrl = '/img/' + movieType.value + '_Movies_img/' + normalizeString(movieTitle.value) + '.' + extension;

@@ -53,9 +53,6 @@ const formattedTime = computed(() => {
     return `${dateObj.toLocaleDateString('hu-HU', { year: 'numeric', month: '2-digit', day: '2-digit' })} (${dateObj.toLocaleDateString('hu-HU', { weekday: "long" })}) ${dateObj.toLocaleTimeString('hu-HU', { hour: '2-digit', minute: '2-digit' })}`
 });
 
-
-
-
 const handleConfirmation = async () => {
     if (!bookingType.value && userStore.userID) {
         ToastService.showError("Kérlek válasszon! Foglalni, vagy vásárolni szeretne?")

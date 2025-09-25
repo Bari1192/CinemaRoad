@@ -55,7 +55,6 @@ const movies = ref([]);
 const isLoading = ref(false);
 
 function selectMovie(movie) {
-    //ticketStore.setMovie(movie);
     router.push(`/movies/${movie.id}`);
 }
 

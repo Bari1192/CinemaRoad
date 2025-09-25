@@ -4,56 +4,106 @@
                 <BaseSpinner class="mx-auto my-32" />
             </div>
 
-            <div v-else>
-                <!-- Ha be van jelentkezve, de nincs aktív foglalása -->
-                <div v-if="reservations.length == 0">
-                    <h1 class="text-center text-3xl my-20">Nincs aktív foglalásod</h1>
-                </div>
+            <div v-else class="h-screen">
+                <div>
 
-                <!-- Ha be van jelentkezve és van aktív foglalása -->
-                <div v-else>
-                    <h1 class="text-3xl font-bold mt-20 mb-10" v-if="userStore.userData && userStore.userData.name">
-                        {{ userStore.userData.name }} aktív foglalásai:
-                    </h1>
+                    <div class="mt-20 mb-10 mx-3">
+                        <h1 class="text-3xl px-2 font-bold"
+                            v-if="userStore.userData && view == 'Foglalások' && userStore.userData.name">
+                            {{ userStore.userData.name }} aktív foglalásai:
+                        </h1>
+                        <h1 class="text-3xl px-2 font-bold"
+                            v-if="userStore.userData && view == 'Vásárlások' && userStore.userData.name">
+                            {{ userStore.userData.name }} aktív vásárlásai:
+                        </h1>
+                        <div class="mt-2">
+                            <button :class="view === 'Foglalások' ? 'bg-pink-600 text-white' : 'bg-white text-pink-600'"
+                                @click="changeView('Foglalások')"
+                                class="mx-1 p-2 font-semibold rounded-lg">Foglalások</button>
+                            <button :class="view === 'Vásárlások' ? 'bg-pink-600 text-white' : 'bg-white text-pink-600'"
+                                @click="changeView('Vásárlások')"
+                                class="mx-1 p-2 font-semibold rounded-lg">Vásárlások</button>
+                        </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+                    </div>
+                    
+                    <div v-if="view == 'Foglalások'">
 
-                        <div class="p-3 bg-gray-300 m-3 md:m-3 card max-w-[350px] mx-auto rounded-lg"
-                            v-for="reservation in filteredReservations" :key="reservation.id">
+                        <div v-if="filteredReservations.length === 0" class="text-center my-10">
+                            <h1 class="text-center text-3xl font-semibold text-pink-600">Jelenleg nincsen egyetlen aktív foglalása sem.</h1>
+                        </div>
 
-                            <div class="card-body">
+                        <div v-else class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
 
-                                <!-- Film címe -->
-                                <h1 class="text-3xl card-title font-bold text-center">{{
-                                    screeningsById[reservation.screening_id]?.movie?.title || 'Ismeretlen' }}</h1>
+                            <div class="p-3 bg-gray-300 m-3 md:m-3 card max-w-[350px] mx-auto rounded-lg"
+                                v-for="reservation in filteredReservations" :key="reservation.id">
 
-                                <!-- Mozi neve -->
-                                <p class="card-text text-center"><b>{{
-                                    screeningsById[reservation.screening_id]?.drivein_cinema?.name ||
-                                    'Ismeretlen' }}</b></p>
+                                <div class="card-body">
 
-                                <!-- Parkolóhelyek -->
-                                <p class="card-text text-center"><b>{{ reservation.parkingspot }}</b></p>
+                                    <h1 class="text-3xl card-title font-bold text-center">{{
+                                        screeningsById[reservation.screening_id]?.movie?.title || 'Ismeretlen' }}</h1>
 
-                                <!-- Vetítés ideje -->
-                                <p class="card-text px-10 text-center"><b>{{
-                                    screeningsById[reservation.screening_id]?.start_time || 'Ismeretlen' }}</b></p>
+                                    <p class="card-text text-center"><b>{{
+                                        screeningsById[reservation.screening_id]?.drivein_cinema?.name ||
+                                            'Ismeretlen' }}</b></p>
+
+                                    <p class="card-text text-center"><b>{{ reservation.parkingspot }}</b></p>
+
+                                    <p class="card-text px-10 text-center"><b>{{
+                                        screeningsById[reservation.screening_id]?.start_time || 'Ismeretlen' }}</b>
+                                    </p>
+                                </div>
+                                <div class="card-footer text-center mt-5">
+                                    <button class="bg-gray-700 font-semibold p-2 rounded-lg"
+                                        @click="deleteMyReservation(reservation.id)">
+                                        Foglalás törlése
+                                    </button>
+                                </div>
                             </div>
+                        </div>
+                    </div>
 
-                            <div class="card-footer text-center mt-5">
-                                <button class="bg-gray-700 font-semibold p-2 rounded-lg"
-                                    @click="deleteMyReservation(reservation.id)">
-                                    Foglalás törlése
-                                </button>
+
+                    <div v-if="view == 'Vásárlások'">
+
+                        <div v-if="filteredPurchases.length === 0" class="text-center my-10">
+                            <h1 class="text-center text-3xl font-semibold text-pink-600">Jelenleg nincsen egyetlen aktív vásárlása sem.</h1>
+                        </div>
+
+                        <div v-else class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+                            <div class="p-3 bg-gray-300 m-3 md:m-3 card max-w-[350px] mx-auto rounded-lg"
+                                v-for="purchase in filteredPurchases" :key="purchase.id">
+
+                                <div class="card-body">
+                                    <h1 class="text-3xl card-title font-bold text-center">
+                                        {{ screeningsById[purchase.screening_id]?.movie?.title || 'Ismeretlen' }}
+                                    </h1>
+
+                                    <p class="card-text text-center">
+                                        <b>{{ screeningsById[purchase.screening_id]?.drivein_cinema?.name ||
+                                            'Ismeretlen' }}</b>
+                                    </p>
+
+                                    <p class="card-text text-center">
+                                        <b>{{ purchase.parkingspot }}</b>
+                                    </p>
+
+                                    <p class="card-text px-10 text-center">
+                                        <b>{{ screeningsById[purchase.screening_id]?.start_time || 'Ismeretlen' }}</b>
+                                    </p>
+                                </div>
+
+                                <div class="card-footer text-center mt-5">
+                                    <button class="bg-gray-700 font-semibold p-2 rounded-lg"
+                                        @click="deleteMyPurchase(purchase.id)">
+                                        Vásárlás törlése
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-
         </BaseLayout>
     </template>
 
@@ -64,7 +114,8 @@ import { useTicketStore } from '@stores/TicketStore';
 import { useScreeningStore } from '@stores/ScreeningStore.mjs';
 import { onMounted, computed, ref } from 'vue';
 import BaseSpinner from '@components/layout/BaseSpinner.vue';
-import { router } from '../router';
+import { useRouter } from 'vue-router';
+import { ToastService } from '@stores/ToastService';
 
 const userStore = useUserStore();
 const ticketStore = useTicketStore();
@@ -73,34 +124,56 @@ const screeningStore = useScreeningStore();
 const screeningsById = ref({});
 const loading = ref(true);
 const reservations = ref([]);
+const purchases = ref([]);
+const router = useRouter();
+const view = ref('Foglalások');
 
-
+const changeView = (type) => {
+    view.value = type;
+};
 
 
 const filteredReservations = computed(() => {
     return reservations.value.filter(r => Number(r.user_id) === Number(userStore.userData.id));
 });
 
+const filteredPurchases = computed(() => {
+    return purchases.value.filter(p => p.userEmail === userStore.userData.email);
+})
+
 const deleteMyReservation = async (id) => {
-    if (confirm("Biztosan törlöd a foglalásod?") === true) {
+    const confirmed = await ToastService.showConfirm("Foglalás törlése", "Biztosan törlöd a foglalásod?");
+    if (confirmed) {
         await ticketStore.deleteReservation(id);
         reservations.value = reservations.value.filter(r => r.id !== id);
-        console.log('Foglalás törölve!');
-        alert("Foglalás törölve!");
+        ToastService.showSuccess("Foglalás törölve!");
     } else {
-        alert("Foglalás törlése megszakítva!");
+        ToastService.showError("Foglalás törlése megszakítva.")
     }
 }
 
-const loadReservationsAndScreenings = async () => {
+const deleteMyPurchase = async (id) => {
+    const confirmed = await ToastService.showConfirm("Vásárlás törlése", "Biztosan törlöd a vásárlásod?");
+    if (confirmed) {
+        await ticketStore.deletePurchase(id);
+        purchases.value = purchases.value.filter(r => r.id !== id);
+        ToastService.showSuccess("Vásárlás törölve!");
+    } else {
+        ToastService.showError("Vásálrás törlése megszakítva.")
+    }
+}
+
+const loadReservationsPurchasesScreenings = async () => {
     loading.value = true;
     try {
-        const [reservationsArray, screeningsArray] = await Promise.all([
+        const [reservationsArray, screeningsArray, purchasesArray] = await Promise.all([
             ticketStore.getReservations(),
-            screeningStore.getScreenings()
+            screeningStore.getScreenings(),
+            ticketStore.getPurchases()
         ]);
 
         reservations.value = reservationsArray;
+        purchases.value = purchasesArray;
 
         screeningsById.value = Object.fromEntries(
             screeningsArray.data.map(s => [s.id, s])
@@ -123,7 +196,7 @@ onMounted(async () => {
             return;
         }
 
-        await loadReservationsAndScreenings();
+        await loadReservationsPurchasesScreenings();
     } catch (error) {
         router.push("/")
     }

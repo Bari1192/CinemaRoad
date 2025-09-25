@@ -42,6 +42,14 @@ export const useMovieStore = defineStore("movies", () => {
     }
   }
 
+  async function uploadMoviePoster(data) {
+    const response = await http.post("/movies/upload-poster", data, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }});
+    return response.data.data
+  }
+
   async function updateMovie(id, data) {
     try {
       const resp = await http.put(`/movies/${id}`, data);
@@ -99,5 +107,6 @@ export const useMovieStore = defineStore("movies", () => {
     setMovieRoute,
     storeMovieToLocalStore,
     clearMovieDetails,
+    uploadMoviePoster
   };
 });

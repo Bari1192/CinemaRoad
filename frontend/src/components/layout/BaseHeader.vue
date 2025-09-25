@@ -33,6 +33,10 @@
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 text-pink-600 hover:text-white rounded">
             <RouterLink to="/LocationViewer">Helyszínek</RouterLink>
           </li>
+          <li v-if="userIsLoggedIn"
+            class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 text-pink-600 hover:text-white rounded">
+            <RouterLink to="/MyTickets">Jegyeim</RouterLink>
+          </li>
           <li v-if="!userIsLoggedIn"
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 px-3 transition-colors duration-150 text-pink-600 hover:text-white rounded">
             <RouterLink to="/Login">Bejelentkezés</RouterLink>
@@ -86,6 +90,10 @@
           <li
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 transition-colors duration-150 text-pink-600 hover:text-white rounded">
             <RouterLink to="/LocationViewer">Helyszínek</RouterLink>
+          </li>
+          <li v-if="userIsLoggedIn"
+            class="md:text-3xl lg:text-4xl tracking-wider block py-2 transition-colors duration-150 text-pink-600 hover:text-white rounded">
+            <RouterLink to="/MyTickets">Jegyeim</RouterLink>
           </li>
           <li v-if="!userIsLoggedIn"
             class="md:text-3xl lg:text-4xl tracking-wider block py-2 transition-colors duration-150 text-pink-600 hover:text-white rounded">

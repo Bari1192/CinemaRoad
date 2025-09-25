@@ -1,4 +1,4 @@
-# **MyReservations komponens dokumentációja**
+# **MyTickets komponens dokumentációja**
 
 ## **1. Komponens áttekintése**
 - **Célja és funkciója**: A komponens a **felhasználók** saját **foglalásainak és vásárlásainak áttekintésére** szolgál.

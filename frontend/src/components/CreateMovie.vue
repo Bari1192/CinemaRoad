@@ -7,7 +7,9 @@
 
                 <!-- Poszter -->
                 <div class="w-full md:w-4/12 text-center">
-                    <h2 class="text-center text-pink-600 text-xl bg-white inline-block rounded-lg p-2 font-semibold mb-2">Poszter</h2>
+                    <h2
+                        class="text-center text-pink-600 text-xl bg-white inline-block rounded-lg p-2 font-semibold mb-2">
+                        Poszter</h2>
 
                     <label class="block mb-2">
                         <input type="file" method="post" name="poster" ref="fileInput" enctype="multipart/form-data"
@@ -22,27 +24,31 @@
                     <!-- Cím és Hossz -->
                     <div class="flex flex-col sm:flex-row gap-3 text-center">
                         <div class="flex-1">
-                            <label class="inline-block text-pink-600 bg-white p-2 rounded-lg text-xl font-semibold mb-2">Cím</label>
+                            <label
+                                class="inline-block text-pink-600 bg-white p-2 rounded-lg text-xl font-semibold mb-2">Cím</label>
                             <FormKit type="text" v-model="movieTitle"
                                 input-class="w-full p-2 rounded-lg border-2 border-pink-300" />
                         </div>
 
                         <div class="lg:w-24 sm:w-28 text-center">
-                            <label class="inline-block text-xl text-pink-600 bg-white p-2 rounded-lg font-semibold mb-2">Hossz</label>
+                            <label
+                                class="inline-block text-xl text-pink-600 bg-white p-2 rounded-lg font-semibold mb-2">Hossz</label>
                             <FormKit type="number" v-model="movieDurationMin"
                                 input-class="w-full p-2 rounded-lg border-2 border-pink-300" />
                         </div>
                     </div>
 
                     <div class="text-center">
-                        <label class="inline-block text-xl font-semibold bg-white p-2 rounded-lg text-pink-600 mb-2">Leírás</label>
+                        <label
+                            class="inline-block text-xl font-semibold bg-white p-2 rounded-lg text-pink-600 mb-2">Leírás</label>
                         <textarea v-model="movieDescription"
                             class="w-full rounded-lg p-3 border-2 border-pink-300 text-lg min-h-[120px]"
                             name="movieDescription" id="movieDescription"></textarea>
                     </div>
 
                     <div>
-                        <label class="inline-block text-xl font-semibold text-pink-600 bg-white p-2 rounded-lg mb-2" for="isPremier">Premier?</label>
+                        <label class="inline-block text-xl font-semibold text-pink-600 bg-white p-2 rounded-lg mb-2"
+                            for="isPremier">Premier?</label>
                         <label class="text-lg text-white mx-1">
                             <input class="accent-pink-600" type="radio" v-model="isPremier" name="isPremier"
                                 :value="true">
@@ -62,7 +68,9 @@
             <div class="mt-4 grid grid-cols-1 sm:grid-cols-4 gap-4">
 
                 <div class="text-center">
-                    <h3 class="text-center text-pink-600 bg-white inline-block p-2 rounded-lg text-xl font-semibold mb-2">Megjelenés</h3>
+                    <h3
+                        class="text-center text-pink-600 bg-white inline-block p-2 rounded-lg text-xl font-semibold mb-2">
+                        Megjelenés</h3>
                     <input type="date" v-model="movieReleaseDate"
                         class="w-full text-pink-600 p-2 rounded-lg border-2 border-pink-300 text-lg" />
                 </div>
@@ -78,7 +86,8 @@
                 </div>
 
                 <div class="text-center">
-                    <h3 class="text-pink-600 inline-block text-xl bg-white p-2 rounded-lg font-semibold mb-2">Korhatár</h3>
+                    <h3 class="text-pink-600 inline-block text-xl bg-white p-2 rounded-lg font-semibold mb-2">Korhatár
+                    </h3>
                     <select v-model="ageLimit" class="w-full p-2 text-pink-600 rounded-lg border-2 border-pink-300">
                         <option value="" disabled>Válassz korhatárt</option>
                         <option value="0">0+</option>
@@ -91,14 +100,16 @@
                 </div>
 
                 <div class="text-center">
-                    <h3 class="inline-block text-pink-600 bg-white p-2 rounded-lg text-xl font-semibold mb-2">Rendező</h3>
+                    <h3 class="inline-block text-pink-600 bg-white p-2 rounded-lg text-xl font-semibold mb-2">Rendező
+                    </h3>
                     <FormKit type="text" v-model="movieDirector"
                         input-class="w-full p-2 rounded-lg border-2 border-pink-300" />
                 </div>
             </div>
 
             <div class="mt-4 text-center">
-                <h3 class="inline-block text-2xl text-pink-600 bg-white p-2 rounded-lg font-semibold mb-2">Színészek</h3>
+                <h3 class="inline-block text-2xl text-pink-600 bg-white p-2 rounded-lg font-semibold mb-2">Színészek
+                </h3>
                 <textarea v-model="movieActors"
                     class="w-full rounded-lg p-3 border-2 border-pink-300 text-lg min-h-[100px]" name="actors"
                     id="actors"></textarea>
@@ -126,12 +137,12 @@ import { useRouter } from 'vue-router';
 import { storage } from '@utils/http.mjs';
 import BaseSpinner from './layout/BaseSpinner.vue';
 
-import { http } from '@utils/http.mjs';
 import { FormKit } from '@formkit/vue';
-import Toast from 'primevue/toast';
+import { useMovieStore } from '@stores/MovieStore.mjs';
 const router = useRouter();
 
 const userStore = useUserStore();
+const movieStore = useMovieStore();
 
 const movieTitle = ref('');
 const movieDurationMin = ref(null);
@@ -215,45 +226,18 @@ const handleCreateMovie = async () => {
 
 
     try {
-        // Filmfeltöltés!
-        const token = sessionStorage.getItem("token");
-
-        const response = await http.post("/movies", formData, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+        await movieStore.createMovie(formData);
         ToastService.showSuccess("Film sikeresen létrehozva!")
 
-
-        // Képfeltöltés!! plusz a film típus fájlnév miatt
         const posterFormData = new FormData();
+
         const normalizedFile = normalizeFile(selectedFile.value);
         posterFormData.append('poster', normalizedFile);
         posterFormData.append('type', movieType.value);
 
-        const posterResponse = await http.post("/movies/upload-poster", posterFormData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                Authorization: `Bearer ${token}`
-            }
-        });
+        await movieStore.uploadMoviePoster(posterFormData);
 
-        movieTitle.value = "";
-        movieDescription.value = "";
-        movieType.value = "";
-        movieDirector.value = "";
-        movieReleaseDate.value = "";
-        movieDurationMin.value = "";
-        ageLimit.value = "";
-        movieActors.value = "";
-        actorsArray.value = [];
-        selectedFile.value = null;
-        isPremier.value = false;
-        if (fileInput.value) {
-            fileInput.value.value = "";
-        }
-
+        clearOutInputs();
     } catch (err) {
         console.error("Error", err.response?.data || err);
         alert("Sikertelen film létrehozás!");
@@ -281,6 +265,24 @@ function normalizeString(str) {
         .filter(Boolean)
         .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
         .join("_");
+}
+
+function clearOutInputs() {
+    movieTitle.value = "";
+    movieDescription.value = "";
+    movieType.value = "";
+    movieDirector.value = "";
+    movieReleaseDate.value = "";
+    movieDurationMin.value = "";
+    ageLimit.value = "";
+    movieActors.value = "";
+    actorsArray.value = [];
+    selectedFile.value = null;
+    isPremier.value = false;
+    if (fileInput.value) {
+        fileInput.value.value = "";
+    }
+    src.value = fallbackImage;
 }
 
 onMounted(async () => {

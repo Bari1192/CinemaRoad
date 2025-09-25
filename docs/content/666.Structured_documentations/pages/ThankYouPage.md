@@ -1,7 +1,8 @@
-# **Foglalás/Vásárlás Utáni visszaigazoló komponens (ThankYouPage) dokumentációja**
+# **ThankYouPage *(foglalás/vásárlás visszaigazoló)* komponens dokumentációja**
 
 ## **1. Komponens áttekintése**
 - **Célja és funkciója**: A komponens megköszöni a felhasználónak a foglalását vagy vásárlását, és megjeleníti a megerősítő információkat.
+
 - **Fő felhasználói interakciók**:
   - Foglalás vagy vásárlás kódjának megtekintése
   - Visszalépés a főoldalra
@@ -14,7 +15,6 @@
   - `useRouter`
   - `ToastService`
   - `Toast` (PrimeVue)
-- **Betűtípusok, CDN-ek**: Nincs
 
 ## **3. Strukturális elemek**
 **Táblázat minden HTML/Vue elemről:**

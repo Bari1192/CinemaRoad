@@ -1,16 +1,17 @@
 # **BaseSeats komponens dokumentációja**
 
 ## **1. Komponens áttekintése**
-- **Célja és funkciója**: A komponens a mozihelyszínek kiválasztására épül, lehetőséget nyújt a felhasználóknak, hogy kijelöljék a kívánt parkolóhelyeket.
+- **Célja és funkciója**: A komponens a **mozihelyszínre** és a **vetítés időpontjára** épül. Lehetőséget nyújt a felhasználóknak, hogy kijelöljék a kívánt parkolóhelye(ke)t, ahonnan a mozifilmet kívánják megtekinteni.
 
 - **Fő felhasználói interakciók**:
-  - Helyszínek kijelölése
-  - Parkolóhelyek foglalása
-  - Helyszínek vizuális megjelenítése
+  - Parkolóhely(ek) áttekintése,
+  - Parkolóhely(ek) kijelölése,
+  - Parkolóhely(ek) foglalása / várásárlási szándék jelzése,
+  - Helyszínek vizuális megjelenítése, interakciója,
+  - Már megvásárolt / lefoglalt helyszínek vizuális megjelenítése a felhasználó(k) számára,
 
 ## **2. Külső függőségek**
 - **Importok, csomagok**: `useTicketStore` (bolt), `useRouter` (útvonalkezelés), `http` (HTTP kérések), `BaseSpinner` (betöltő animáció)
-- **Betűtípusok, CDN-ek**: Nincs
 
 ## **3. Strukturális elemek**
 **Táblázat minden HTML/Vue elemről:**
@@ -25,8 +26,8 @@
 | `<template>`    | Helyek infóinak vizuális megjelenítése         |
 
 ## **4. Logika és interakciók**
-- **Script setup tartalom**: A komponens a székek inicializálásával és betöltésével foglalkozik.
-- **Eseménykezelés**: A helyek kijelölése a `toggleSeat` metódussal, a „Tovább” gomb eseménykezelése.
+- **Script setup tartalom**: A komponens a "parkolóhelyek" inicializálásával és betöltésével foglalkozik.
+- **Eseménykezelés**: A helyek kijelölése a `toggleSeat` metódussal, a „***Tovább***” gomb eseménykezelése.
 - **Reaktív adatok**: `seats`, `selectedSeats`, `reservations`, `purchases`, `loading`, valamint `foglaltParkolok` számítása.
 
 ## **5. Stílus összefoglaló**

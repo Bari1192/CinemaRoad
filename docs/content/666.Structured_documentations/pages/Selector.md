@@ -1,4 +1,4 @@
-# **Selector komponens dokumentációja**
+# **Selector *(mozihelyszín választó)* komponens dokumentációja**
 
 ## **1. Komponens áttekintése**
 - **Célja és funkciója**: A komponens lehetőséget nyújt a felhasználóknak, hogy kiválasszanak egy mozihelyszínt, ahol különböző mozifilmek vetítései, filmtípusok szűrései érhetőek el.

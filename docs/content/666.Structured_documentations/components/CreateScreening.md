@@ -1,7 +1,8 @@
-# **Vetítési nap összeállító komponens dokumentációja**
+# **CreateScreening *(vetítési nap összeállító)* komponens dokumentációja**
 
 ## **1. Komponens áttekintése**
 - **Célja és funkciója**: Ez a komponens lehetővé teszi, hogy a felhasználó kiválassza a mozi helyszínét és a vetítési napját, valamint kezelje a filmajánlatokat.
+
 - **Fő felhasználói interakciók**:
   - Mozi helyszínének kiválasztása.
   - Vetítési nap kiválasztása.
@@ -19,7 +20,6 @@
   - `@stores/DriveInCinemaStore`
   - `@stores/UserStore`
   - `@stores/ScreeningStore.mjs`
-- **Betűtípusok, CDN-ek**: Nincs.
 
 ## **3. Strukturális elemek**
 **Táblázat minden HTML/Vue elemről:**

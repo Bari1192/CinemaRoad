@@ -1,7 +1,7 @@
-# **Calendar komponens dokumentációja**
+# **Calendar *(vetatési naptár)* komponens dokumentációja**
 
 ## **1. Komponens áttekintése**
-- **Célja és funkciója**: A komponens vetítési időpontokat jelenít meg a hét adott mozifilm / mozihelyszín vetítései alapján függően a felhasználás helyszínétől. Lehetőséget biztosít a felhasználóknak, hogy kiválasszák a vetítési időpontot, egy beépített naptár segítségével.
+- **Célja és funkciója**: A komponens időpontokat jelenít meg előre kettő héttel a tervezett mozifilm / mozihelyszín vetítései alapján. Lehetőséget biztosít a felhasználóknak, hogy kiválasszák a vetítési időpontot, egy beépített naptár segítségével.
 
 - **Fő felhasználói interakciók**:
   - Vetítési időpontok kiválasztása

@@ -1,4 +1,4 @@
-# **Registration komponens dokumentációja**
+# **Registration *(regisztrációs)* komponens dokumentációja**
 
 ## **1. Komponens áttekintése**
 - **Célja és funkciója**: A komponens a vendégek regisztrációját szolgálja, lehetővé téve az adatainak megadását és további funkciókhoz való hozzáférés biztosítása, mint például a jegyfoglalás.

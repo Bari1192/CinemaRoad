@@ -1,4 +1,4 @@
-# **LocationViewer komponens dokumentációja**
+# **LocationViewer *(helyszínválasztó)* komponens dokumentációja**
 
 ## **1. Komponens áttekintése**
 - **Célja és funkciója**: A komponens lehetővé teszi, hogy a felhasználók áttekinthessék a mozihelyszínek kínálatát, elhelyezkedéseiket.

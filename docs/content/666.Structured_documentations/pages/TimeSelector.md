@@ -1,4 +1,4 @@
-# **TimeSelector komponens dokumentációja**
+# **TimeSelector *(vetítési időpont választó)* komponens dokumentációja**
 
 ## **1. Komponens áttekintése**
 - **Célja és funkciója**: A komponens lehetővé teszi a felhasználók számára, hogy kiválasszanak egy vetítési időpontot a megadott mozihelyszínen.

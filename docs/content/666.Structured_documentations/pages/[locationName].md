@@ -2,6 +2,7 @@
 
 ## **1. Komponens áttekintése**
 - **Célja és funkciója**: A `LocationNameDetails` komponens a helyszín részleteit jeleníti meg, lehetővé téve a felhasználók számára, hogy információkat kapjanak a kiválasztott helyszínről.
+
 - **Fő felhasználói interakciók**:
   - Helyszín kiválasztása
   - Információ megtekintése

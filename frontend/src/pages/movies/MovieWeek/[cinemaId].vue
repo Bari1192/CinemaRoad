@@ -15,7 +15,6 @@ const screenings = ref([])
 const loading = ref(false)
 const error = ref(null)
 
-// EZ A LÉNYEG: computed, hogy REAKTÍV legyen!
 const cinemaId = computed(() => route.params.cinemaId)
 
 async function loadScreenings() {
@@ -31,7 +30,6 @@ async function loadScreenings() {
     loading.value = false
   }
 }
-// Watch cinemaId, hogy route váltáskor mindig töltsön! (IMMEDIATE!)
 watch(cinemaId, () => loadScreenings(), { immediate: true })
 
 const filteredLocationScreenings = computed(() =>

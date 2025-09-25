@@ -6,6 +6,7 @@
   - Mozi helyszínének kiválasztása.
   - Vetítési nap kiválasztása.
   - Filmek kiválasztása a vetítési napra.
+  - Összeállítás újrakezdése.
   - Vetítési nap mentése.
 
 ## **2. Külső függőségek**

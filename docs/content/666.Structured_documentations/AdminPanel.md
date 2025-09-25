@@ -1,7 +1,9 @@
 # **Adminpanel (Foglalási és Vásárlási Áttekintő) komponens dokumentációja**
 
 ## **1. Komponens áttekintése**
-- **Célja és funkciója**: Az áttekintő komponens lehetővé teszi az adminok, moderátorok számára a felhasználók, vendégek **foglalás ,- és vásárlásaik** **kezelését**, megjelenítve a foglalt helyeket és lehetőséget **biztosítva** azok **módosítására vagy törlésére**.
+- **Célja és funkciói**: 
+    - Az áttekintő komponens lehetővé teszi az adminok, moderátorok számára a felhasználók, vendégek **foglalás ,- és vásárlásaik** **kezelését**, megjelenítve a foglalt helyeket és lehetőséget **biztosítva** azok **módosítására vagy törlésére**.
+    - Lehetőséget nyújt meglévő filmet **létrehozni**, vagy akár egy már meglévőt **módosítani**, továbbá felületet ad a **moziműsor szerkesztéséhez**.
 
 - **Adminpanel elérése és admin funkciók használata**
 - Admin jogosultságot a backend oldali ***UserSeeder*** adatainak megfelelően jön létre a(z):
@@ -25,7 +27,8 @@ A fenti hitelesítő adatok *(profilok)* egyikével történő bejelentkezés bi
   - Mozifilmek adatainak szerkesztése,
   - Mozifilmek törlése,
   - Moziműsor létrehozása aktuális helyszínre, napra pontosan,
-  - Moziműsor létrehozásának újrakezdése / visszavonása véglegesítés előtt.
+  - Moziműsor létrehozásának újrakezdése / visszavonása véglegesítés előtt,
+  - Mozifilm létrehozása.
 
 ## **2. Külső függőségek**
 - **Importok, csomagok**:
@@ -53,7 +56,7 @@ A fenti hitelesítő adatok *(profilok)* egyikével történő bejelentkezés bi
 ## **4. Logika és interakciók**
 - **Script setup tartalom**: A komponens tartalmazza a különböző boltok és reaktív változók kezelését.
 - **Eseménykezelés**: Módosítási és törlési események kezelése a foglalások és vásárlások esetében.
-- **Reaktív adatok**: `viewMode`, `selectedLocation`, `selectedMovie`, `emailFilter`, `editableData`.
+- **Reaktív adatok**: `viewMode`, `selectedLocation`, `selectedMovie`, `emailFilter`, `editableData`, `editingDataId`, `selectedPanel`.
 
 ## **5. Stílus összefoglaló**
 **Táblázat:**

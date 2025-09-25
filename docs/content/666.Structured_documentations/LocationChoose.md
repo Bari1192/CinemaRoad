@@ -8,10 +8,7 @@
 
 ## **2. Külső függőségek**
 - **Importok, csomagok**:
-  - `BaseHeader`
-  - `MovieThemes`
-  - `ClickBanner`
-  - `BaseFooter`
+  - `BaseLayout`
   - `BaseCard`
   - `useDriveInCinemaStore`
   - `useTicketStore`
@@ -32,7 +29,7 @@
 ## **4. Logika és interakciók**
 - **Script setup tartalom**: Helyszínek betöltése és kiválasztásuk kezelése.
 - **Eseménykezelés**: Kattintás a kiválasztott helyszínekre.
-- **Reaktív adatok**: `driveInCinemas`, `ticketStore`, `loading`.
+- **Reaktív adatok**: Nincs.
 
 ## **5. Stílus összefoglaló**
 **Táblázat:**

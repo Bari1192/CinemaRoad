@@ -3,8 +3,7 @@
 ## **1. Komponens áttekintése**
 - **Célja és funkciója**: A komponens lehetővé teszi a felhasználók számára, hogy az adott vetítésre és mozihelyszínre még elérhető parkolóhelyeket böngésszenek, kiválasztott szabad parkolóhelyet / nézőtéri területet foglalhassanak.
 - **Fő felhasználói interakciók**:
-  - Helyszín és vetítés kiválasztása
-  - Parkolóhelyek megtekintése
+  - Parkolóhelyek megtekintése és kiválasztása
 
 ## **2. Külső függőségek**
 - **Importok, csomagok**:
@@ -20,7 +19,7 @@
 
 | **Elem**       | **Funkció, stílusjegyek**       |
 | -------------- | ------------------------------- |
-| `<BaseLayout>` | Az oldal vázát biztosítja       |
+| `<BaseHeader>` | Az oldal fejlécét biztosítja    |
 | `<Stepper>`    | A kiválasztott lépések mutatója |
 | `<h1>`         | Helyszínválasztási cím          |
 | `<BaseSeats>`  | Parkolóhelyek megjelenítése     |
@@ -29,14 +28,14 @@
 ## **4. Logika és interakciók**
 - **Script setup tartalom**: A helyszín, vetítés és parkolóhelyek betöltése.
 - **Eseménykezelés**: Kattintás a kiválasztott helyszínekre.
-- **Reaktív adatok**: `ticketStore`, `storage`.
+- **Reaktív adatok**: Store-ban tárolt adatok reaktív kezelése localStorage-en keresztül.
 
 ## **5. Stílus összefoglaló**
 **Táblázat:**
 
 | **Kategória**      | **Részletek**                        |
 | ------------------ | ------------------------------------ |
-| **Színek**         | Szürke és indigó háttér              |
+| **Színek**         | Szürke háttér                        |
 | **Betűtípus**      | Nincs specifikálva                   |
 | **Reszponzivitás** | Mobilbarát elrendezés                |
 | **Effektek**       | Átmeneti effektek a parkolóhelyeknél |

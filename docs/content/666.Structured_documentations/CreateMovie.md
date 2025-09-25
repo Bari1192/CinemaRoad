@@ -7,12 +7,13 @@
   - Poszter feltöltése
   - Film címének és leírásának megadása
   - Film műfajának és korhatár-besorolásának kiválasztása
+  - Film rendezőjének, és színészeinek feltöltése
   - Kész filminformációk mentése
 
 ## **2. Külső függőségek**
 - **Importok, csomagok**:
   - `BaseLayout` (vázlat)
-  - `ToastService`, `useUserStore`, `router`, `storage`, `http` (különböző funkciók)
+  - `ToastService`, `useUserStore`, `useMovieStore`, `router`, `storage`, `http` (különböző funkciók)
   - `FormKit` (űrlapkezelés)
   - `Toast` (értesítések)
 - **Betűtípusok, CDN-ek**: Nincs
@@ -26,7 +27,7 @@
 | `<input type="file">` | Poszter feltöltésére szolgáló fájlbeviteli mező                      |
 | `<img>`               | Feltöltött poszter előnézeti képe                                    |
 | `<Input>` (FilmKit)   | Film címe és hossza, beviteli mezők, rózsaszín kerettel              |
-| `<textarea>`          | Film leírása, szöveget tartalmazó mező                               |
+| `<textarea>`          | Film leírására és a színészek bevitelére szolgáló szöveget tartalmazó mező                               |
 | `<select>`            | Műfaj és korhatár-besorolás választása                               |
 | `<button>`            | Film mentése, interaktív gomb                                        |
 
@@ -43,7 +44,7 @@
 
 | **Kategória**      | **Részletek**                                                       |
 | ------------------ | ------------------------------------------------------------------- |
-| **Színek**         | Rózsaszín (címek), szürke (háttér)                                  |
+| **Színek**         | Rózsaszín betűszín fehér háttérrel (címek), lila színátmenetes (háttér)                                  |
 | **Betűtípus**      | Nincs specifikálva a kódban                                         |
 | **Reszponzivitás** | Mobilra optimalizált, változó elrendezés különböző képernyőmérethez |
 | **Effektek**       | Hover állapotok a gomboknál                                         |

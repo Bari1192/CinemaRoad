@@ -9,7 +9,7 @@
   - Vetítések információinak megjelenítése
 
 ## **2. Külső függőségek**
-- **Importok, csomagok**: `ref`, `computed` (Vue)
+- **Importok, csomagok**: `ref`, `computed` (Vue), `useNow` (@vueuse/core)
 - **Betűtípusok, CDN-ek**: Nincs
 
 ## **3. Strukturális elemek**

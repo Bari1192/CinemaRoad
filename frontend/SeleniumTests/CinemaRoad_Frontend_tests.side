@@ -121,9 +121,9 @@
         {
           "id": "c23f8da1-88a0-4e19-b98a-67a5fb623e61",
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
-          "comment": "A főoldal betöltésére kísérletet tesz a http://frontend.vm1.test/ címen. "
+          "comment": "A főoldal betöltésére kísérletet tesz a http://frontend.cinemaroad/ címen. "
         },
         {
           "command": "pause",
@@ -162,7 +162,7 @@
         {
           "id": "2f6cee1e-146a-49b6-a946-a808b415ef59",
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": ""
         },
         {
@@ -201,7 +201,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "8c2a571e-8c98-4774-9a1a-9c5c6fe898b3"
         },
@@ -242,7 +242,7 @@
         {
           "id": "37ba673c-655c-419c-a991-2518a2e78a0c",
           "command": "open",
-          "target": "http://frontend.vm1.test/movies/movie",
+          "target": "http://frontend.cinemaroad/movies/movie",
           "value": ""
         },
         {
@@ -272,7 +272,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/movies/movie",
+          "target": "http://frontend.cinemaroad/movies/movie",
           "value": "",
           "id": "06c01a58-c3d1-4a2d-97b0-461d8c9f423d"
         },
@@ -303,7 +303,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/movies/movie",
+          "target": "http://frontend.cinemaroad/movies/movie",
           "value": "",
           "id": "733ee9fd-efbc-4d8f-9a14-9c1d4ff7f9b0"
         },
@@ -335,7 +335,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/movies/movie",
+          "target": "http://frontend.cinemaroad/movies/movie",
           "value": "",
           "id": "088f49cb-3484-4a68-87c2-609860f34041"
         },
@@ -367,7 +367,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/movies/movie",
+          "target": "http://frontend.cinemaroad/movies/movie",
           "value": "",
           "id": "baf815da-0f0d-4e14-b45f-847d60410613"
         },
@@ -420,7 +420,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/movies/movie",
+          "target": "http://frontend.cinemaroad/movies/movie",
           "value": "",
           "id": "c0be679f-0fd3-4fcf-8aa6-471e2fe5f5c9"
         },
@@ -473,7 +473,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/movies/movie",
+          "target": "http://frontend.cinemaroad/movies/movie",
           "value": "",
           "id": "66f66867-1371-4e08-83a9-6b53098954be"
         },
@@ -503,7 +503,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/movies/movie",
+          "target": "http://frontend.cinemaroad/movies/movie",
           "value": "",
           "id": "369f036d-996b-45ff-923f-22fd1b2693b1"
         },
@@ -533,7 +533,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/movies/movie",
+          "target": "http://frontend.cinemaroad/movies/movie",
           "value": "",
           "id": "97801191-ae99-4a71-991d-d74a834ffe25"
         },
@@ -563,7 +563,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/movies/movie",
+          "target": "http://frontend.cinemaroad/movies/movie",
           "value": "",
           "id": "c395b6f5-273c-447e-add5-594761f76e3f"
         },
@@ -594,7 +594,7 @@
         {
           "id": "10324cb6-f3a2-44ca-a8ca-80218328fd28",
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": ""
         },
         {
@@ -624,7 +624,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "376c758f-2e15-4127-9d77-3ad4ed9afc5a"
         },
@@ -654,7 +654,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "760ac719-025d-4d1f-b485-de1f08434d7e"
         },
@@ -684,7 +684,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "659a08cd-95f2-4bd1-b029-9fda71e9ffad"
         },
@@ -726,7 +726,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "799c0abb-4768-45c7-b5e2-50447e5159d2"
         },
@@ -758,7 +758,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "04a2e32b-dae2-4ca8-a13a-40499fd7a8a8"
         },
@@ -790,7 +790,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "78ae19ca-6d44-4354-8f9f-3a2ea6c9e017"
         },
@@ -827,7 +827,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "7f1031cd-e8c3-4098-ae36-6c618b3335f7"
         },
@@ -852,7 +852,7 @@
         {
           "id": "bdf340e7-28a2-4c8e-94bc-95f353ecc758",
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": ""
         },
         {
@@ -882,7 +882,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "16148dc5-03d7-4371-92a0-1d9fc929bbc8"
         },
@@ -924,7 +924,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "a32b297d-fbdc-4230-b0ff-f4d61b6e4c08"
         },
@@ -954,7 +954,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "0ddb2e00-d730-4c01-b55d-875e00153159"
         },
@@ -984,7 +984,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "36e79e31-43bd-4006-99f0-2d84f60cb640"
         },
@@ -1027,7 +1027,7 @@
         {
           "id": "466922a4-81d4-4a93-a7cc-9812240dd167",
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": ""
         },
         {
@@ -1075,7 +1075,7 @@
         {
           "id": "f9b3005b-3771-4359-8719-79a58dc34cd4",
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": ""
         },
         {
@@ -1117,7 +1117,7 @@
         {
           "id": "42eb9cda-3669-4e05-a048-cc22a1464e8b",
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": ""
         },
         {
@@ -1141,7 +1141,7 @@
         {
           "id": "0bb04a75-b2ca-45bd-bf6b-716407731915",
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": ""
         },
         {
@@ -1164,7 +1164,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "443b4726-93cd-4ed7-915b-485cf00e2438"
         },
@@ -1197,7 +1197,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "b209b9cb-a8be-4f70-a3bd-7e888a002656"
         },
@@ -1230,7 +1230,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "09b5876c-ec1e-439e-a1ee-64d403f93fad"
         },
@@ -1256,7 +1256,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "25bc2fa3-10fe-4f50-a17a-0cee7f330b45"
         },
@@ -1283,7 +1283,7 @@
         {
           "id": "c5b589d3-4910-42f8-a94e-d8cee815198a",
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": ""
         },
         {
@@ -1312,7 +1312,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "6af8cdb1-a32e-4d38-9a71-33081f423f90"
         },
@@ -1342,7 +1342,7 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": "",
           "id": "6efd3322-5f62-4e16-abbb-5e5edb1159dc"
         },
@@ -1373,7 +1373,7 @@
         {
           "id": "ebb0d457-85f3-49da-8ce8-469aaecf7779",
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": ""
         },
         {
@@ -1403,7 +1403,7 @@
         {
           "id": "1897fad2-b94e-48c1-96b3-28859248987f",
           "command": "open",
-          "target": "http://frontend.vm1.test/",
+          "target": "http://frontend.cinemaroad/",
           "value": ""
         },
         {
@@ -1426,9 +1426,9 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/LocationChoose",
+          "target": "http://frontend.cinemaroad/LocationChoose",
           "value": "",
-          "comment": "A főoldal betöltésére kísérletet tesz a http://frontend.vm1.test/ címen. ",
+          "comment": "A főoldal betöltésére kísérletet tesz a http://frontend.cinemaroad/ címen. ",
           "id": "ee7f1d03-e2a9-4218-9df3-d65f50b3a047"
         },
         {
@@ -1473,9 +1473,9 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/LocationChoose",
+          "target": "http://frontend.cinemaroad/LocationChoose",
           "value": "",
-          "comment": "A főoldal betöltésére kísérletet tesz a http://frontend.vm1.test/ címen. ",
+          "comment": "A főoldal betöltésére kísérletet tesz a http://frontend.cinemaroad/ címen. ",
           "id": "f8b4d87c-07de-4cae-b303-3942e24d102a"
         },
         {
@@ -1531,9 +1531,9 @@
       "commands": [
         {
           "command": "open",
-          "target": "http://frontend.vm1.test/LocationChoose",
+          "target": "http://frontend.cinemaroad/LocationChoose",
           "value": "",
-          "comment": "A főoldal betöltésére kísérletet tesz a http://frontend.vm1.test/ címen. ",
+          "comment": "A főoldal betöltésére kísérletet tesz a http://frontend.cinemaroad/ címen. ",
           "id": "9513d689-b669-4154-a56c-9c8532c25116"
         },
         {

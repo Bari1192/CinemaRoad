@@ -106,4 +106,4 @@ docker compose down -v
 
 - [Cinema Road GitHub](https://github.com/Bari1192/CinemaRoad)
 - [Adatbázis diagram (draw.io)](https://tinyurl.com/CinemaRoadDraw)
-- Részletesebb üzemeltetési leírás: `03.Operational_Plan.md` a projektben
+- Részletesebb üzemeltetési leírás: [Operational_Plan](https://github.com/Bari1192/CinemaRoad/blob/main/docs/content/01.Program%20Documents/03.Operational_Plan.md) dokumentációban található.

@@ -75,15 +75,10 @@ export const useMovieStore = defineStore("movies", () => {
 
   function storeMovieToLocalStore(movieObj) {
     try {
-
       movieDetails.value = movieObj;
       localStorage.setItem('movieDetails', JSON.stringify(movieObj));
-      console.log("Film objektum sikeresen elmentve")
-
     } catch (error) {
-
      console.error("Hiba a film objektum tárolóba való elmentése során: ", error) 
-     
     }
   }
 

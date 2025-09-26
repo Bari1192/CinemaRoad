@@ -92,8 +92,6 @@ onMounted(async () => {
     );
 
     if (cinema.value) {
-        console.log("cinema ID: ", cinema.value.id)
-
         const response = await http.get("/screenings");
         screenings.value = response.data.data.filter(
             screening => screening.drive_in_cinema_id === cinema.value.id
@@ -101,10 +99,6 @@ onMounted(async () => {
 
         const moviesResponse = await http.get('/movies');
         movies.value = moviesResponse.data.data;
-
-
-        console.log("Screenings cucc: ", screenings.value)
-        console.log("distinctScreenings: ", distinctScreenings.value)
     }
 });
 

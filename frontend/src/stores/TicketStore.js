@@ -53,7 +53,6 @@ export const useTicketStore = defineStore("ticketstore", {
       try {
         const response = await http.get("/purchases");
         this.purchases = response.data.data;
-        console.log("Vásárlások lekérve.");
         return this.purchases;
       } catch (error) {
         console.error("Hiba a vásárlások lekérése közben: ", error);

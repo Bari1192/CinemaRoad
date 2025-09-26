@@ -59,7 +59,6 @@ const handleLogin = async () => {
     errorMessage.value = '';
 
     try {
-        console.log("Bejelentkezés megkezdése...");
         await userStore.logInUser({
             email: email.value,
             password: password.value

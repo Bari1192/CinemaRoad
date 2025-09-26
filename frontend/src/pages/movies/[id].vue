@@ -39,7 +39,6 @@ const selectScreening = async () => {
         ticketStore.setTime(screening);
         router.push("/ParkingSpotChooser")
     } catch (error) {
-        console.log("Hiba az időpont kiválasztása közben: ", error);
         ToastService.showError("Nincs időpont kiválasztva!");
     }
 }

@@ -37,8 +37,6 @@ const router = useRouter();
 
 const navigateToCinemaSite = (cinemaName) => {
     const slugName = slugify(cinemaName);
-    console.log('Navigálás ide: ', slugName);
-
     router.push(`/${slugName}`)
 };
 

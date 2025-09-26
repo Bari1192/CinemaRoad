@@ -77,7 +77,6 @@ const handleConfirmation = async () => {
             reserved_at: ticketStore.time.start_time,
             parkingspot: parkingSpots.join(',')
         };
-        console.log("Reservation bejelentkezett payload: ", payload);
         resultData = await ticketStore.postTicketReservation(payload);
     }
     else if ((bookingType.value === 'purchase' && userStore.userID)) {
@@ -88,7 +87,6 @@ const handleConfirmation = async () => {
             parkingspot: parkingSpots.join(','),
             user_id: userStore.userID
         };
-        console.log("Purchase bejelentkezett payload: ", payload);
         resultData = await ticketStore.postTicketPurchase(payload);
     }
 
@@ -100,7 +98,6 @@ const handleConfirmation = async () => {
             parkingspot: parkingSpots.join(','),
             guest_email: guestEmail.value
         };
-        console.log("Purchase guest payload: ", payload);
         resultData = await ticketStore.postTicketPurchase(payload);
     }
 

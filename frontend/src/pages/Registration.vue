@@ -82,11 +82,7 @@ const handleRegistration = async () => {
       phone: form.value.phone,
       password: form.value.password,
     });
-
-    console.log("Sikeres regisztráció:", user);
-
     router.push("/Login");
-
   } catch (error) {
     console.error("Hiba a regisztráció során:", error.response?.data || error);
   }

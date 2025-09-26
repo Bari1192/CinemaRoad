@@ -10,6 +10,7 @@ import { useMovieStore } from "@stores/MovieStore.mjs";
 import { useScreeningStore } from "@stores/ScreeningStore.mjs";
 import { onMounted, ref } from "vue";
 import { storage } from "@utils/http.mjs";
+import { ToastService } from "@stores/ToastService";
 
 const driveInCinemas = useDriveInCinemaStore();
 const screenings = useScreeningStore();
@@ -23,7 +24,7 @@ onMounted(async () => {
     await movies.getMovies();
     await driveInCinemas.getDriveInCinemas();
   } catch (error) {
-    console.log('Hiba a főoldalon -> adatok lekérésében', error.value);
+    ToastService.showError('Hiba a főoldalon -> adatok lekérésében');
   } finally {
     loading.value = false;
   }

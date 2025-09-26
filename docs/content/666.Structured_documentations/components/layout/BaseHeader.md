@@ -1,7 +1,7 @@
 # **Base Header (fejléc) komponens dokumentációja**
 
 ## **1. Komponens áttekintése**
-- **Célja és funkciója**: A Cinema Road navigációs sávját biztosítja, amely kapcsolódási lehetőségeket kínál a felhasználóknak a különböző film- és helyszínválasztó, bejelentkezési felülethez, oldalakhoz.
+- **Célja és funkciója**: A Cinema Road navigációs sávját biztosítja, amely kapcsolódási lehetőségeket kínál a felhasználóknak a különböző film- és helyszínválasztó, aktív foglalások, bejelentkezési felülethez, oldalakhoz.
 
 - **Fő felhasználói interakciók**:
   - Navigálás a különböző filmekhez

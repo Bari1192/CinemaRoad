@@ -6,6 +6,7 @@
 - **Fő felhasználói interakciók**:
   - Navigálás a különböző filmekhez
   - Jegyfoglalás és vásárlás
+  - "Jegyeim" menüpont, bejelentkezett felhasználó esetén
   - Bejelentkezés és kijelentkezés
 
 ## **2. Külső függőségek**
@@ -50,4 +51,4 @@
 | **Effektek**       | Színátmenetek és háttér-effektek              |
 
 ## **Tartalmi összefoglaló**
-A komponens célja, hogy a Cinema Road oldalon biztosítson egy navigációs sávot, amely lehetővé teszi a felhasználók számára a filmek és helyszínek közötti gyors és egyszerű navigálást, valamint a bejelentkezési és kijelentkezési funkciók biztosítását.
+A komponens célja, hogy a Cinema Road oldalon biztosítson egy navigációs sávot, amely lehetővé teszi a felhasználók számára a filmek és helyszínek közötti gyors és egyszerű navigálást, valamint az aktív jegyek, bejelentkezés és kijelentkezés funkciók biztosítását.
